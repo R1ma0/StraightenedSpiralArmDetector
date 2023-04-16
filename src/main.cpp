@@ -6,7 +6,6 @@ namespace dsg = detectorator_namespace;
 
 int main(int argc, char** argv)
 {
-	dsg::Detectorator detectorator;
 	std::string pathToImage {argv[1]};
 	
 	// Reading image
@@ -18,12 +17,13 @@ int main(int argc, char** argv)
 	}
 
 	// Processing image
-	
+	dsg::Detectorator detectorator;
+	cv::Mat changedImage {detectorator.execute(sourceImage)};
 
 	// Saving image
 	std::filesystem::path p(pathToImage);
 	std::string pathToSaveImg {p.filename()};
-	bool isImageWrite {cv::imwrite("changed_" + pathToSaveImg, sourceImage)};
+	bool isImageWrite {cv::imwrite("changed_" + pathToSaveImg, changedImage)};
 	if (!isImageWrite)
 	{
 		std::cout << "FAILED. The image was not saved : " << std::endl;

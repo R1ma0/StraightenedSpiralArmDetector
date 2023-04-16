@@ -3,9 +3,6 @@
 
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include "detectorator_utils.h"
-
-namespace dsgu = detectorator_utils_namespace;
 
 namespace detectorator_namespace
 {
@@ -13,6 +10,8 @@ namespace detectorator_namespace
 	{
 	public:
 		cv::Mat execute(cv::Mat);
+	private:
+		cv::Mat resizeImg(cv::Mat img, double crp);
 	};
 }
 
