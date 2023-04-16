@@ -1,2 +1,0 @@
-/usr/bin/ar qc libdetectorator_utils.a CMakeFiles/detectorator_utils.dir/detectorator_utils.cpp.o
-/usr/bin/ranlib libdetectorator_utils.a

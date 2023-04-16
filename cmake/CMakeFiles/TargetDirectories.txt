@@ -1,6 +1,0 @@
-/mnt/Windows/VolSU/Magistratura_1.2/NIR/DetectoratorOfStringsOfGalaxies/cmake/CMakeFiles/rebuild_cache.dir
-/mnt/Windows/VolSU/Magistratura_1.2/NIR/DetectoratorOfStringsOfGalaxies/cmake/CMakeFiles/DetectoratorOfStringsOfGalaxies.dir
-/mnt/Windows/VolSU/Magistratura_1.2/NIR/DetectoratorOfStringsOfGalaxies/cmake/CMakeFiles/edit_cache.dir
-/mnt/Windows/VolSU/Magistratura_1.2/NIR/DetectoratorOfStringsOfGalaxies/cmake/CMakeFiles/zhang_suen.dir
-/mnt/Windows/VolSU/Magistratura_1.2/NIR/DetectoratorOfStringsOfGalaxies/cmake/CMakeFiles/detectorator_utils.dir
-/mnt/Windows/VolSU/Magistratura_1.2/NIR/DetectoratorOfStringsOfGalaxies/cmake/CMakeFiles/detectorator.dir
