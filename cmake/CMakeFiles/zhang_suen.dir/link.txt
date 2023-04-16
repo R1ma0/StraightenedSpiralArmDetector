@@ -1,0 +1,2 @@
+/usr/bin/ar qc libzhang_suen.a CMakeFiles/zhang_suen.dir/skeletonization_zhang_suen.cpp.o
+/usr/bin/ranlib libzhang_suen.a
