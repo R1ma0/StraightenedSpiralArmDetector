@@ -4,9 +4,16 @@ namespace detectorator_namespace
 {
 	cv::Mat Detectorator::execute(cv::Mat image)
 	{
-		return resizeImg(image, 20.);
+		return resizeImg(image, imgCompressRatio);
 	}
 
+	void Detectorator::setCompressRatio(double value)
+	{
+		bool isValueValid = value > 0. && value < 100.;
+		imgCompressRatio = isValueValid ? value : -1.;
+	}
+
+	// crp - compress ratio percent
 	cv::Mat Detectorator::resizeImg(cv::Mat img, double crp)
 	{
 		cv::Mat scaledImg;

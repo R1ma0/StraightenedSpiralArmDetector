@@ -8,10 +8,12 @@ namespace detectorator_namespace
 {
 	class Detectorator
 	{
+	private:
+		double imgCompressRatio;
+		cv::Mat resizeImg(cv::Mat img, double crp);
 	public:
 		cv::Mat execute(cv::Mat);
-	private:
-		cv::Mat resizeImg(cv::Mat img, double crp);
+		void setCompressRatio(double value);
 	};
 }
 

@@ -18,6 +18,7 @@ int main(int argc, char** argv)
 
 	// Processing image
 	dsg::Detectorator detectorator;
+	detectorator.setCompressRatio(10.);
 	cv::Mat changedImage {detectorator.execute(sourceImage)};
 
 	// Saving image
