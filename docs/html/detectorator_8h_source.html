@@ -87,32 +87,42 @@ $(document).ready(function(){initNavTree('detectorator_8h_source.html',''); init
 <div class="title">detectorator.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="detectorator_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef DETECTORATOR_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define DETECTORATOR_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;opencv2/opencv.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacedetectorator__namespace.html">detectorator_namespace</a></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classdetectorator__namespace_1_1_detectorator.html">    9</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classdetectorator__namespace_1_1_detectorator.html">Detectorator</a></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classdetectorator__namespace_1_1_detectorator.html#a74f834d26cc26047f9f4e357451a0a2f">   12</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classdetectorator__namespace_1_1_detectorator.html#a74f834d26cc26047f9f4e357451a0a2f">imgCompressRatio</a>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        cv::Mat <a class="code" href="classdetectorator__namespace_1_1_detectorator.html#aa99de458456c6c2b2bfd24c2194f3c3d">resizeImg</a>(cv::Mat img, <span class="keywordtype">double</span> crp);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        cv::Mat <a class="code" href="classdetectorator__namespace_1_1_detectorator.html#a548ef1c67e85c8e4bae29bdaaf31f228">execute</a>(cv::Mat);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classdetectorator__namespace_1_1_detectorator.html#a3c6c29ae03cb83c997fa84ed791a1e28">setCompressRatio</a>(<span class="keywordtype">double</span> value);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    };</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html">detectorator_namespace::Detectorator</a></div><div class="ttdef"><b>Definition:</b> detectorator.h:10</div></div>
-<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html_a3c6c29ae03cb83c997fa84ed791a1e28"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html#a3c6c29ae03cb83c997fa84ed791a1e28">detectorator_namespace::Detectorator::setCompressRatio</a></div><div class="ttdeci">void setCompressRatio(double value)</div><div class="ttdef"><b>Definition:</b> detectorator.cpp:10</div></div>
-<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html_a548ef1c67e85c8e4bae29bdaaf31f228"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html#a548ef1c67e85c8e4bae29bdaaf31f228">detectorator_namespace::Detectorator::execute</a></div><div class="ttdeci">cv::Mat execute(cv::Mat)</div><div class="ttdef"><b>Definition:</b> detectorator.cpp:5</div></div>
-<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html_a74f834d26cc26047f9f4e357451a0a2f"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html#a74f834d26cc26047f9f4e357451a0a2f">detectorator_namespace::Detectorator::imgCompressRatio</a></div><div class="ttdeci">double imgCompressRatio</div><div class="ttdef"><b>Definition:</b> detectorator.h:12</div></div>
-<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html_aa99de458456c6c2b2bfd24c2194f3c3d"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html#aa99de458456c6c2b2bfd24c2194f3c3d">detectorator_namespace::Detectorator::resizeImg</a></div><div class="ttdeci">cv::Mat resizeImg(cv::Mat img, double crp)</div><div class="ttdef"><b>Definition:</b> detectorator.cpp:17</div></div>
-<div class="ttc" id="anamespacedetectorator__namespace_html"><div class="ttname"><a href="namespacedetectorator__namespace.html">detectorator_namespace</a></div><div class="ttdef"><b>Definition:</b> detectorator.cpp:4</div></div>
+<a href="detectorator_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* \file</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * \brief Contains the definition of core</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *        functions for string displaying</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * This file contains a definitions of a set of tools</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * for displaying of strings of galaxies</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef DETECTORATOR_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define DETECTORATOR_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;opencv2/opencv.hpp&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacedetectorator__namespace.html">detectorator_namespace</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classdetectorator__namespace_1_1_detectorator.html">   16</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classdetectorator__namespace_1_1_detectorator.html">Detectorator</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="comment">/* </span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">         * \details The size of the output image after compression as </span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">         *          a percentage of the original</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">         */</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classdetectorator__namespace_1_1_detectorator.html#a1ab5251d312036a0cfa52b77687db30e">   23</a></span>&#160;        <span class="keywordtype">double</span> <a class="code" href="classdetectorator__namespace_1_1_detectorator.html#a1ab5251d312036a0cfa52b77687db30e">imgCompressionPower</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        cv::Mat <a class="code" href="classdetectorator__namespace_1_1_detectorator.html#aa99de458456c6c2b2bfd24c2194f3c3d">resizeImg</a>(cv::Mat img, <span class="keywordtype">double</span> crp);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        cv::Mat <a class="code" href="classdetectorator__namespace_1_1_detectorator.html#a548ef1c67e85c8e4bae29bdaaf31f228">execute</a>(cv::Mat);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classdetectorator__namespace_1_1_detectorator.html#a65d588cd79016f56bc2de1a3053f5121">setImgCompressionPower</a>(<span class="keywordtype">double</span> value);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    };</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html">detectorator_namespace::Detectorator</a></div><div class="ttdoc">Processes the image and highlights the strings.</div><div class="ttdef"><b>Definition:</b> <a href="detectorator_8h_source.html#l00016">detectorator.h:17</a></div></div>
+<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html_a1ab5251d312036a0cfa52b77687db30e"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html#a1ab5251d312036a0cfa52b77687db30e">detectorator_namespace::Detectorator::imgCompressionPower</a></div><div class="ttdeci">double imgCompressionPower</div><div class="ttdef"><b>Definition:</b> <a href="detectorator_8h_source.html#l00023">detectorator.h:23</a></div></div>
+<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html_a548ef1c67e85c8e4bae29bdaaf31f228"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html#a548ef1c67e85c8e4bae29bdaaf31f228">detectorator_namespace::Detectorator::execute</a></div><div class="ttdeci">cv::Mat execute(cv::Mat)</div><div class="ttdef"><b>Definition:</b> <a href="detectorator_8cpp_source.html#l00011">detectorator.cpp:11</a></div></div>
+<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html_a65d588cd79016f56bc2de1a3053f5121"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html#a65d588cd79016f56bc2de1a3053f5121">detectorator_namespace::Detectorator::setImgCompressionPower</a></div><div class="ttdeci">void setImgCompressionPower(double value)</div><div class="ttdef"><b>Definition:</b> <a href="detectorator_8cpp_source.html#l00019">detectorator.cpp:19</a></div></div>
+<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html_aa99de458456c6c2b2bfd24c2194f3c3d"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html#aa99de458456c6c2b2bfd24c2194f3c3d">detectorator_namespace::Detectorator::resizeImg</a></div><div class="ttdeci">cv::Mat resizeImg(cv::Mat img, double crp)</div><div class="ttdef"><b>Definition:</b> <a href="detectorator_8cpp_source.html#l00031">detectorator.cpp:31</a></div></div>
+<div class="ttc" id="anamespacedetectorator__namespace_html"><div class="ttname"><a href="namespacedetectorator__namespace.html">detectorator_namespace</a></div><div class="ttdef"><b>Definition:</b> <a href="detectorator_8cpp_source.html#l00007">detectorator.cpp:8</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

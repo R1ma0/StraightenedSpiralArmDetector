@@ -1,15 +1,14 @@
 #include <opencv2/imgcodecs.hpp>
-#include <filesystem>
 #include "detectorator.h"
 
 namespace dsg = detectorator_namespace;
 
 int main(int argc, char** argv)
 {
-	std::string pathToImage {argv[1]};
+	std::filesystem::path pathToImage{argv[1]};
 	
 	// Reading image
-	cv::Mat sourceImage {cv::imread(pathToImage, cv::IMREAD_GRAYSCALE)};
+	cv::Mat sourceImage{cv::imread(pathToImage, cv::IMREAD_GRAYSCALE)};
 	if (sourceImage.empty())
 	{
 		std::cout << "FAILED. Could not read the image :" << pathToImage << std::endl;
@@ -18,8 +17,8 @@ int main(int argc, char** argv)
 
 	// Processing image
 	dsg::Detectorator detectorator;
-	detectorator.setCompressRatio(10.);
-	cv::Mat changedImage {detectorator.execute(sourceImage)};
+	cv::Mat changedImage; 
+	detectorator.execute(sourceImage, changedImage);
 
 	// Saving image
 	std::filesystem::path p(pathToImage);

@@ -1,26 +1,42 @@
+/* \file
+ * \brief Contains the implementation of core
+ *        functions for string displaying
+ */
 #include "detectorator.h"
 
 namespace detectorator_namespace
 {
-	cv::Mat Detectorator::execute(cv::Mat image)
+	/* \brief Performs operations to highlight strings
+	 */
+	void Detectorator::execute(cv::Mat inImg, cv::Mat& outImg)
 	{
-		return resizeImg(image, imgCompressRatio);
+		cv::adaptiveThreshold(
+			inImg, 
+			outImg, 
+			255, /// Max threshold 
+			cv::ADAPTIVE_THRESH_GAUSSIAN_C, 
+			cv::THRESH_BINARY,
+			3, /// blockSize
+			1 /// c
+		);
+		outImg = resizeImg(outImg, 20.);
 	}
 
-	void Detectorator::setCompressRatio(double value)
-	{
-		bool isValueValid = value > 0. && value < 100.;
-		imgCompressRatio = isValueValid ? value : -1.;
-	}
-
-	// crp - compress ratio percent
-	cv::Mat Detectorator::resizeImg(cv::Mat img, double crp)
+	/* In this function is used cv::INTER_LINEAR method
+	 *
+	 * \param img Image for resizing
+	 * \param cp Image compression power
+	 * \return Reduced image
+	 */
+	cv::Mat Detectorator::resizeImg(cv::Mat img, double cp)
 	{
 		cv::Mat scaledImg;
-		double scaleValue {crp / 100.};
+		double scaleValue {cp / 100.};
 		int width {(int)(img.cols * scaleValue)};
 		int height {(int)(img.rows * scaleValue)};
+		
 		cv::resize(img, scaledImg, cv::Size(width, height), cv::INTER_LINEAR);
+		
 		return scaledImg;
 	}
 }
