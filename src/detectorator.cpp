@@ -13,13 +13,14 @@ namespace detectorator_namespace
 		cv::adaptiveThreshold(
 			inImg, 
 			outImg, 
-			255, /// Max threshold 
+			gaussMaxThresh,
 			cv::ADAPTIVE_THRESH_GAUSSIAN_C, 
 			cv::THRESH_BINARY,
-			3, /// blockSize
-			1 /// c
+			gaussBlockSize,
+			gaussConst
 		);
-		outImg = resizeImg(outImg, 20.);
+
+		outImg = resizeImg(outImg, imgCompressPercentage);
 	}
 
 	/* In this function is used cv::INTER_LINEAR method
@@ -38,5 +39,59 @@ namespace detectorator_namespace
 		cv::resize(img, scaledImg, cv::Size(width, height), cv::INTER_LINEAR);
 		
 		return scaledImg;
+	}
+
+	void Detectorator::readImg(std::filesystem::path from, cv::Mat& to)
+	{
+		to = cv::imread(from, cv::IMREAD_GRAYSCALE);
+		
+		if (to.empty())
+		{
+			reportFailedOperation(
+				"Could not read the image : " + std::string(from), true
+			);
+		}
+	}
+
+	void Detectorator::writeImg(cv::Mat& from, std::filesystem::path to)
+	{
+		bool isImgWrite {cv::imwrite(to, from)};
+		if (!isImgWrite)
+		{
+			reportFailedOperation(
+				"The image was not saved : " + std::string(to), true
+			);
+		}
+	}
+
+	void Detectorator::setGaussMaxThresh(double value)
+	{
+		if (value < 0. || value > 255.)
+		{
+			reportFailedOperation(
+				"Max threshold value out of range ( 0. <= value <= 255. )", true
+			);
+		}
+
+		gaussMaxThresh = value;
+	}
+
+	void Detectorator::setImgCompressPercentage(double value)
+	{
+		if (value <= 0. || value > 100.)
+		{
+			reportFailedOperation(
+				"Compression value out of range ( 0. < value <= 100. )", true
+			);
+		}
+
+		imgCompressPercentage = value;
+	}
+
+	void Detectorator::reportFailedOperation(std::string msg, bool close)
+	{
+		std::cout << "FAILDED. " + msg << std::endl;
+		if (close)
+			exit(0);
 	}
 }

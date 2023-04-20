@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['resizeimg_8',['resizeImg',['../classdetectorator__namespace_1_1_detectorator.html#aa99de458456c6c2b2bfd24c2194f3c3d',1,'detectorator_namespace::Detectorator']]]
+  ['resizeimg_13',['resizeImg',['../classdetectorator__namespace_1_1_detectorator.html#a07d1f996620af699dc7ae5f0a49826fe',1,'detectorator_namespace::Detectorator']]]
 ];

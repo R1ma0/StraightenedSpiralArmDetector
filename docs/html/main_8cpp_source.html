@@ -88,49 +88,46 @@ $(document).ready(function(){initNavTree('main_8cpp_source.html',''); initResiza
 </div><!--header-->
 <div class="contents">
 <a href="main_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;opencv2/imgcodecs.hpp&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;filesystem&gt;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="detectorator_8h.html">detectorator.h</a>&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacedetectorator__namespace.html">dsg</a> = <a class="code" href="namespacedetectorator__namespace.html">detectorator_namespace</a>;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">    7</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    std::string pathToImage {argv[1]};</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="detectorator_8h.html">detectorator.h</a>&quot;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacedetectorator__namespace.html">dsg</a> = <a class="code" href="namespacedetectorator__namespace.html">detectorator_namespace</a>;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">    6</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    std::filesystem::path pathReadImg{argv[1]};</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    std::filesystem::path pathWriteImg{argv[2]};</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="comment">// Reading image</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    cv::Mat sourceImage {cv::imread(pathToImage, cv::IMREAD_GRAYSCALE)};</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordflow">if</span> (sourceImage.empty())</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;FAILED. Could not read the image :&quot;</span> &lt;&lt; pathToImage &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    }</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">// Processing image</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="classdetectorator__namespace_1_1_detectorator.html">dsg::Detectorator</a> detectorator;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    detectorator.<a class="code" href="classdetectorator__namespace_1_1_detectorator.html#a65d588cd79016f56bc2de1a3053f5121">setImgCompressionPower</a>(10.);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    cv::Mat changedImage {detectorator.<a class="code" href="classdetectorator__namespace_1_1_detectorator.html#a548ef1c67e85c8e4bae29bdaaf31f228">execute</a>(sourceImage)};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">// Saving image</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    std::filesystem::path p(pathToImage);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    std::string pathToSaveImg {p.filename()};</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">bool</span> isImageWrite {cv::imwrite(<span class="stringliteral">&quot;changed_&quot;</span> + pathToSaveImg, changedImage)};</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">if</span> (!isImageWrite)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;FAILED. The image was not saved : &quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;SUCCESSFULL image saved.&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
-<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html">detectorator_namespace::Detectorator</a></div><div class="ttdoc">Processes the image and highlights the strings.</div><div class="ttdef"><b>Definition:</b> <a href="detectorator_8h_source.html#l00016">detectorator.h:17</a></div></div>
-<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html_a548ef1c67e85c8e4bae29bdaaf31f228"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html#a548ef1c67e85c8e4bae29bdaaf31f228">detectorator_namespace::Detectorator::execute</a></div><div class="ttdeci">cv::Mat execute(cv::Mat)</div><div class="ttdef"><b>Definition:</b> <a href="detectorator_8cpp_source.html#l00011">detectorator.cpp:11</a></div></div>
-<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html_a65d588cd79016f56bc2de1a3053f5121"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html#a65d588cd79016f56bc2de1a3053f5121">detectorator_namespace::Detectorator::setImgCompressionPower</a></div><div class="ttdeci">void setImgCompressionPower(double value)</div><div class="ttdef"><b>Definition:</b> <a href="detectorator_8cpp_source.html#l00019">detectorator.cpp:19</a></div></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    cv::Mat sourceImg{cv::imread(pathReadImg, cv::IMREAD_GRAYSCALE)};</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordflow">if</span> (sourceImg.empty())</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;FAILED. Could not read the image :&quot;</span> &lt;&lt; pathReadImg &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    }</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">// Processing image</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="classdetectorator__namespace_1_1_detectorator.html">dsg::Detectorator</a> detectorator;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    cv::Mat changedImg; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    detectorator.<a class="code" href="classdetectorator__namespace_1_1_detectorator.html#a1a6e530e00bd8bdcff3318e198900907">execute</a>(sourceImg, changedImg);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">// Writing image</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">//std::filesystem::path p(pathToImg);</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="comment">//std::string pathToSaveImg { + p.filename()};</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">bool</span> isImageWrite {cv::imwrite(pathWriteImg, changedImg)};</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">if</span> (!isImageWrite)</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;FAILED. The image was not saved : &quot;</span> &lt;&lt; pathWriteImg &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
+<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html">detectorator_namespace::Detectorator</a></div><div class="ttdef"><b>Definition:</b> <a href="detectorator_8h_source.html#l00017">detectorator.h:18</a></div></div>
+<div class="ttc" id="aclassdetectorator__namespace_1_1_detectorator_html_a1a6e530e00bd8bdcff3318e198900907"><div class="ttname"><a href="classdetectorator__namespace_1_1_detectorator.html#a1a6e530e00bd8bdcff3318e198900907">detectorator_namespace::Detectorator::execute</a></div><div class="ttdeci">void execute(cv::Mat inImg, cv::Mat &amp;outImg)</div><div class="ttdef"><b>Definition:</b> <a href="detectorator_8cpp_source.html#l00011">detectorator.cpp:11</a></div></div>
 <div class="ttc" id="adetectorator_8h_html"><div class="ttname"><a href="detectorator_8h.html">detectorator.h</a></div></div>
-<div class="ttc" id="amain_8cpp_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00007">main.cpp:7</a></div></div>
+<div class="ttc" id="amain_8cpp_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00006">main.cpp:6</a></div></div>
 <div class="ttc" id="anamespacedetectorator__namespace_html"><div class="ttname"><a href="namespacedetectorator__namespace.html">detectorator_namespace</a></div><div class="ttdef"><b>Definition:</b> <a href="detectorator_8cpp_source.html#l00007">detectorator.cpp:8</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

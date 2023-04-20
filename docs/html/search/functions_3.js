@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['setimgcompressionpower_26',['setImgCompressionPower',['../classdetectorator__namespace_1_1_detectorator.html#a65d588cd79016f56bc2de1a3053f5121',1,'detectorator_namespace::Detectorator']]]
+  ['resizeimg_35',['resizeImg',['../classdetectorator__namespace_1_1_detectorator.html#a07d1f996620af699dc7ae5f0a49826fe',1,'detectorator_namespace::Detectorator']]]
 ];

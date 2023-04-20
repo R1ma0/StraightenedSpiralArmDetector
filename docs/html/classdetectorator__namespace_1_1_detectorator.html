@@ -93,64 +93,89 @@ $(document).ready(function(){initNavTree('classdetectorator__namespace_1_1_detec
 </div><!--header-->
 <div class="contents">
 
-<p>Processes the image and highlights the strings.  
- <a href="classdetectorator__namespace_1_1_detectorator.html#details">More...</a></p>
-
 <p><code>#include &quot;<a class="el" href="detectorator_8h_source.html">detectorator.h</a>&quot;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a548ef1c67e85c8e4bae29bdaaf31f228"><td class="memItemLeft" align="right" valign="top">cv::Mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#a548ef1c67e85c8e4bae29bdaaf31f228">execute</a> (cv::Mat)</td></tr>
-<tr class="separator:a548ef1c67e85c8e4bae29bdaaf31f228"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65d588cd79016f56bc2de1a3053f5121"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#a65d588cd79016f56bc2de1a3053f5121">setImgCompressionPower</a> (double value)</td></tr>
-<tr class="separator:a65d588cd79016f56bc2de1a3053f5121"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c448910290408384694f6220c066d55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#a8c448910290408384694f6220c066d55">setGaussMaxThresh</a> (double value)</td></tr>
+<tr class="memdesc:a8c448910290408384694f6220c066d55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of a pixel neighbourhood : 3, 5, 7, ...  <a href="classdetectorator__namespace_1_1_detectorator.html#a8c448910290408384694f6220c066d55">More...</a><br /></td></tr>
+<tr class="separator:a8c448910290408384694f6220c066d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34bd8af2dce6abe0e7330c02dd207748"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#a34bd8af2dce6abe0e7330c02dd207748">getGaussMaxThresh</a> ()</td></tr>
+<tr class="separator:a34bd8af2dce6abe0e7330c02dd207748"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf7d51a05a1d3bb5421c7c1bce608b48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#adf7d51a05a1d3bb5421c7c1bce608b48">setGaussConst</a> (double value)</td></tr>
+<tr class="separator:adf7d51a05a1d3bb5421c7c1bce608b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4258e4a49bed51a21715b54debd8a412"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#a4258e4a49bed51a21715b54debd8a412">getGaussConst</a> ()</td></tr>
+<tr class="separator:a4258e4a49bed51a21715b54debd8a412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97678d3ec4659bb3f3630d53f4380f3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#a97678d3ec4659bb3f3630d53f4380f3e">setGaussBlockSize</a> (int value)</td></tr>
+<tr class="separator:a97678d3ec4659bb3f3630d53f4380f3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff7f0301b80d3dcf0a8ff534de2a7223"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#aff7f0301b80d3dcf0a8ff534de2a7223">getGaussBlockSize</a> ()</td></tr>
+<tr class="separator:aff7f0301b80d3dcf0a8ff534de2a7223"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a6e530e00bd8bdcff3318e198900907"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#a1a6e530e00bd8bdcff3318e198900907">execute</a> (cv::Mat inImg, cv::Mat &amp;outImg)</td></tr>
+<tr class="separator:a1a6e530e00bd8bdcff3318e198900907"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:aa99de458456c6c2b2bfd24c2194f3c3d"><td class="memItemLeft" align="right" valign="top">cv::Mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#aa99de458456c6c2b2bfd24c2194f3c3d">resizeImg</a> (cv::Mat img, double crp)</td></tr>
-<tr class="separator:aa99de458456c6c2b2bfd24c2194f3c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07d1f996620af699dc7ae5f0a49826fe"><td class="memItemLeft" align="right" valign="top">cv::Mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#a07d1f996620af699dc7ae5f0a49826fe">resizeImg</a> (cv::Mat img, double cp)</td></tr>
+<tr class="separator:a07d1f996620af699dc7ae5f0a49826fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a1ab5251d312036a0cfa52b77687db30e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#a1ab5251d312036a0cfa52b77687db30e">imgCompressionPower</a></td></tr>
-<tr class="separator:a1ab5251d312036a0cfa52b77687db30e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46799d11ddd0ec53d1ef6a8d37e8cb02"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#a46799d11ddd0ec53d1ef6a8d37e8cb02">gaussMaxThresh</a></td></tr>
+<tr class="separator:a46799d11ddd0ec53d1ef6a8d37e8cb02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adafc7ba33b4c4165377102aa3ac2aaa9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#adafc7ba33b4c4165377102aa3ac2aaa9">gaussConst</a></td></tr>
+<tr class="separator:adafc7ba33b4c4165377102aa3ac2aaa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb994476234a22d99b68debd60335c7f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classdetectorator__namespace_1_1_detectorator.html#abb994476234a22d99b68debd60335c7f">gaussBlockSize</a></td></tr>
+<tr class="memdesc:abb994476234a22d99b68debd60335c7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constant subtracted from the mean of weighted mean.  <a href="classdetectorator__namespace_1_1_detectorator.html#abb994476234a22d99b68debd60335c7f">More...</a><br /></td></tr>
+<tr class="separator:abb994476234a22d99b68debd60335c7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Processes the image and highlights the strings. </p>
-
-<p class="definition">Definition at line <a class="el" href="detectorator_8h_source.html#l00016">16</a> of file <a class="el" href="detectorator_8h_source.html">detectorator.h</a>.</p>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="detectorator_8h_source.html#l00017">17</a> of file <a class="el" href="detectorator_8h_source.html">detectorator.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a548ef1c67e85c8e4bae29bdaaf31f228"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a548ef1c67e85c8e4bae29bdaaf31f228">&#9670;&nbsp;</a></span>execute()</h2>
+<a id="a1a6e530e00bd8bdcff3318e198900907"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a6e530e00bd8bdcff3318e198900907">&#9670;&nbsp;</a></span>execute()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">cv::Mat detectorator_namespace::Detectorator::execute </td>
+          <td class="memname">void detectorator_namespace::Detectorator::execute </td>
           <td>(</td>
           <td class="paramtype">cv::Mat&#160;</td>
-          <td class="paramname"><em>image</em></td><td>)</td>
+          <td class="paramname"><em>inImg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">cv::Mat &amp;&#160;</td>
+          <td class="paramname"><em>outImg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Max threshold</p>
+<p>blockSize</p>
+<p>c</p>
 
 <p class="definition">Definition at line <a class="el" href="detectorator_8cpp_source.html#l00011">11</a> of file <a class="el" href="detectorator_8cpp_source.html">detectorator.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classdetectorator__namespace_1_1_detectorator_a548ef1c67e85c8e4bae29bdaaf31f228_cgraph.png" border="0" usemap="#aclassdetectorator__namespace_1_1_detectorator_a548ef1c67e85c8e4bae29bdaaf31f228_cgraph" alt=""/></div>
-<map name="aclassdetectorator__namespace_1_1_detectorator_a548ef1c67e85c8e4bae29bdaaf31f228_cgraph" id="aclassdetectorator__namespace_1_1_detectorator_a548ef1c67e85c8e4bae29bdaaf31f228_cgraph">
+<div class="center"><img src="classdetectorator__namespace_1_1_detectorator_a1a6e530e00bd8bdcff3318e198900907_cgraph.png" border="0" usemap="#aclassdetectorator__namespace_1_1_detectorator_a1a6e530e00bd8bdcff3318e198900907_cgraph" alt=""/></div>
+<map name="aclassdetectorator__namespace_1_1_detectorator_a1a6e530e00bd8bdcff3318e198900907_cgraph" id="aclassdetectorator__namespace_1_1_detectorator_a1a6e530e00bd8bdcff3318e198900907_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,171,47"/>
-<area shape="rect" href="classdetectorator__namespace_1_1_detectorator.html#aa99de458456c6c2b2bfd24c2194f3c3d" title=" " alt="" coords="219,5,385,47"/>
+<area shape="rect" href="classdetectorator__namespace_1_1_detectorator.html#a07d1f996620af699dc7ae5f0a49826fe" title=" " alt="" coords="219,5,385,47"/>
 </map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classdetectorator__namespace_1_1_detectorator_a548ef1c67e85c8e4bae29bdaaf31f228_icgraph.png" border="0" usemap="#aclassdetectorator__namespace_1_1_detectorator_a548ef1c67e85c8e4bae29bdaaf31f228_icgraph" alt=""/></div>
-<map name="aclassdetectorator__namespace_1_1_detectorator_a548ef1c67e85c8e4bae29bdaaf31f228_icgraph" id="aclassdetectorator__namespace_1_1_detectorator_a548ef1c67e85c8e4bae29bdaaf31f228_icgraph">
+<div class="center"><img src="classdetectorator__namespace_1_1_detectorator_a1a6e530e00bd8bdcff3318e198900907_icgraph.png" border="0" usemap="#aclassdetectorator__namespace_1_1_detectorator_a1a6e530e00bd8bdcff3318e198900907_icgraph" alt=""/></div>
+<map name="aclassdetectorator__namespace_1_1_detectorator_a1a6e530e00bd8bdcff3318e198900907_icgraph" id="aclassdetectorator__namespace_1_1_detectorator_a1a6e530e00bd8bdcff3318e198900907_icgraph">
 <area shape="rect" title=" " alt="" coords="104,5,269,47"/>
 <area shape="rect" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,13,56,39"/>
 </map>
@@ -158,8 +183,89 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="aa99de458456c6c2b2bfd24c2194f3c3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa99de458456c6c2b2bfd24c2194f3c3d">&#9670;&nbsp;</a></span>resizeImg()</h2>
+<a id="aff7f0301b80d3dcf0a8ff534de2a7223"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff7f0301b80d3dcf0a8ff534de2a7223">&#9670;&nbsp;</a></span>getGaussBlockSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int detectorator_namespace::Detectorator::getGaussBlockSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="detectorator_8h_source.html#l00030">30</a> of file <a class="el" href="detectorator_8h_source.html">detectorator.h</a>.</p>
+
+</div>
+</div>
+<a id="a4258e4a49bed51a21715b54debd8a412"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4258e4a49bed51a21715b54debd8a412">&#9670;&nbsp;</a></span>getGaussConst()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double detectorator_namespace::Detectorator::getGaussConst </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="detectorator_8h_source.html#l00028">28</a> of file <a class="el" href="detectorator_8h_source.html">detectorator.h</a>.</p>
+
+</div>
+</div>
+<a id="a34bd8af2dce6abe0e7330c02dd207748"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34bd8af2dce6abe0e7330c02dd207748">&#9670;&nbsp;</a></span>getGaussMaxThresh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double detectorator_namespace::Detectorator::getGaussMaxThresh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="detectorator_8h_source.html#l00026">26</a> of file <a class="el" href="detectorator_8h_source.html">detectorator.h</a>.</p>
+
+</div>
+</div>
+<a id="a07d1f996620af699dc7ae5f0a49826fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07d1f996620af699dc7ae5f0a49826fe">&#9670;&nbsp;</a></span>resizeImg()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,7 +283,7 @@ Here is the caller graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>crp</em>&#160;</td>
+          <td class="paramname"><em>cp</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -196,48 +302,18 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classdetectorator__namespace_1_1_detectorator_aa99de458456c6c2b2bfd24c2194f3c3d_icgraph.png" border="0" usemap="#aclassdetectorator__namespace_1_1_detectorator_aa99de458456c6c2b2bfd24c2194f3c3d_icgraph" alt=""/></div>
-<map name="aclassdetectorator__namespace_1_1_detectorator_aa99de458456c6c2b2bfd24c2194f3c3d_icgraph" id="aclassdetectorator__namespace_1_1_detectorator_aa99de458456c6c2b2bfd24c2194f3c3d_icgraph">
+<div class="center"><img src="classdetectorator__namespace_1_1_detectorator_a07d1f996620af699dc7ae5f0a49826fe_icgraph.png" border="0" usemap="#aclassdetectorator__namespace_1_1_detectorator_a07d1f996620af699dc7ae5f0a49826fe_icgraph" alt=""/></div>
+<map name="aclassdetectorator__namespace_1_1_detectorator_a07d1f996620af699dc7ae5f0a49826fe_icgraph" id="aclassdetectorator__namespace_1_1_detectorator_a07d1f996620af699dc7ae5f0a49826fe_icgraph">
 <area shape="rect" title=" " alt="" coords="317,5,484,47"/>
-<area shape="rect" href="classdetectorator__namespace_1_1_detectorator.html#a548ef1c67e85c8e4bae29bdaaf31f228" title=" " alt="" coords="104,5,269,47"/>
+<area shape="rect" href="classdetectorator__namespace_1_1_detectorator.html#a1a6e530e00bd8bdcff3318e198900907" title=" " alt="" coords="104,5,269,47"/>
 <area shape="rect" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,13,56,39"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a65d588cd79016f56bc2de1a3053f5121"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65d588cd79016f56bc2de1a3053f5121">&#9670;&nbsp;</a></span>setImgCompressionPower()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void detectorator_namespace::Detectorator::setImgCompressionPower </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="detectorator_8cpp_source.html#l00019">19</a> of file <a class="el" href="detectorator_8cpp_source.html">detectorator.cpp</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classdetectorator__namespace_1_1_detectorator_a65d588cd79016f56bc2de1a3053f5121_icgraph.png" border="0" usemap="#aclassdetectorator__namespace_1_1_detectorator_a65d588cd79016f56bc2de1a3053f5121_icgraph" alt=""/></div>
-<map name="aclassdetectorator__namespace_1_1_detectorator_a65d588cd79016f56bc2de1a3053f5121_icgraph" id="aclassdetectorator__namespace_1_1_detectorator_a65d588cd79016f56bc2de1a3053f5121_icgraph">
-<area shape="rect" title=" " alt="" coords="104,5,368,47"/>
-<area shape="rect" href="main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,13,56,39"/>
-</map>
-</div>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a1ab5251d312036a0cfa52b77687db30e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ab5251d312036a0cfa52b77687db30e">&#9670;&nbsp;</a></span>imgCompressionPower</h2>
+<a id="a97678d3ec4659bb3f3630d53f4380f3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97678d3ec4659bb3f3630d53f4380f3e">&#9670;&nbsp;</a></span>setGaussBlockSize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -246,7 +322,86 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double detectorator_namespace::Detectorator::imgCompressionPower</td>
+          <td class="memname">void detectorator_namespace::Detectorator::setGaussBlockSize </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="detectorator_8h_source.html#l00029">29</a> of file <a class="el" href="detectorator_8h_source.html">detectorator.h</a>.</p>
+
+</div>
+</div>
+<a id="adf7d51a05a1d3bb5421c7c1bce608b48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf7d51a05a1d3bb5421c7c1bce608b48">&#9670;&nbsp;</a></span>setGaussConst()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void detectorator_namespace::Detectorator::setGaussConst </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="detectorator_8h_source.html#l00027">27</a> of file <a class="el" href="detectorator_8h_source.html">detectorator.h</a>.</p>
+
+</div>
+</div>
+<a id="a8c448910290408384694f6220c066d55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c448910290408384694f6220c066d55">&#9670;&nbsp;</a></span>setGaussMaxThresh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void detectorator_namespace::Detectorator::setGaussMaxThresh </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Size of a pixel neighbourhood : 3, 5, 7, ... </p>
+
+<p class="definition">Definition at line <a class="el" href="detectorator_8cpp_source.html#l00043">43</a> of file <a class="el" href="detectorator_8cpp_source.html">detectorator.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="abb994476234a22d99b68debd60335c7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb994476234a22d99b68debd60335c7f">&#9670;&nbsp;</a></span>gaussBlockSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int detectorator_namespace::Detectorator::gaussBlockSize</td>
         </tr>
       </table>
   </td>
@@ -256,7 +411,57 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
+<p>Constant subtracted from the mean of weighted mean. </p>
+
 <p class="definition">Definition at line <a class="el" href="detectorator_8h_source.html#l00023">23</a> of file <a class="el" href="detectorator_8h_source.html">detectorator.h</a>.</p>
+
+</div>
+</div>
+<a id="adafc7ba33b4c4165377102aa3ac2aaa9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adafc7ba33b4c4165377102aa3ac2aaa9">&#9670;&nbsp;</a></span>gaussConst</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double detectorator_namespace::Detectorator::gaussConst</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="detectorator_8h_source.html#l00022">22</a> of file <a class="el" href="detectorator_8h_source.html">detectorator.h</a>.</p>
+
+</div>
+</div>
+<a id="a46799d11ddd0ec53d1ef6a8d37e8cb02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46799d11ddd0ec53d1ef6a8d37e8cb02">&#9670;&nbsp;</a></span>gaussMaxThresh</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double detectorator_namespace::Detectorator::gaussMaxThresh</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="detectorator_8h_source.html#l00021">21</a> of file <a class="el" href="detectorator_8h_source.html">detectorator.h</a>.</p>
 
 </div>
 </div>
