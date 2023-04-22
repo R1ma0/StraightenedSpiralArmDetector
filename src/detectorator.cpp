@@ -20,7 +20,9 @@ namespace detectorator_namespace
 			gaussConst
 		);
 
-		resizeImg(outImg, outImg, imgCompressPercentage);
+		resizeImg(outImg, imgCompressPercentage);
+		zs::ZhangSuen zhangSuen;
+		zhangSuen.execute(outImg);
 	}
 
 	/* In this function is used cv::INTER_LINEAR method
@@ -29,19 +31,18 @@ namespace detectorator_namespace
 	 * \param cp Image compression power
 	 * \return Reduced image
 	 */
-	void Detectorator::resizeImg(cv::Mat inImg, cv::Mat & outImg, double cp)
+	void Detectorator::resizeImg(cv::Mat & outImg, double cp)
 	{
 		double scaleValue {cp / 100.};
-		int width {(int)(inImg.cols * scaleValue)};
-		int height {(int)(inImg.rows * scaleValue)};
+		int width {(int)(outImg.cols * scaleValue)};
+		int height {(int)(outImg.rows * scaleValue)};
 		
-		cv::resize(inImg, outImg, cv::Size(width, height), cv::INTER_LINEAR);
+		cv::resize(outImg, outImg, cv::Size(width, height), cv::INTER_LINEAR);
 	}
 
 	void Detectorator::readImg(std::filesystem::path from, cv::Mat & to)
 	{
-		// , cv::IMREAD_GRAYSCALE
-		to = cv::imread(from);
+		to = cv::imread(from, cv::IMREAD_GRAYSCALE);
 		
 		if (to.empty())
 		{

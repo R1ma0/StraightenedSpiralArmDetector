@@ -12,6 +12,9 @@
 #include <iostream>
 #include <filesystem>
 #include <cstdlib>
+#include "zhang_suen.h"
+
+namespace zs = zhang_suen_namespace;
 
 namespace detectorator_namespace
 {
@@ -23,22 +26,22 @@ namespace detectorator_namespace
 		double imgCompressPercentage;
 		double threshBinValue;
 		int gaussBlockSize; /// Size of a pixel neighbourhood : 3, 5, 7, ...
-		void resizeImg(cv::Mat inImg, cv::Mat & outImg, double cp);
-		void reportFailedOperation(std::string msg, bool close);
+		void resizeImg(cv::Mat &, double);
+		void reportFailedOperation(std::string, bool);
 	public:
-		void readImg(std::filesystem::path from, cv::Mat & to);
-		void writeImg(cv::Mat & from, std::filesystem::path to);
-		void setThreshBinValue(double value);
+		void execute(cv::Mat, cv::Mat &);
+		void readImg(std::filesystem::path, cv::Mat &);
+		void writeImg(cv::Mat &, std::filesystem::path);
+		void setThreshBinValue(double);
 		double getThreshBinValue() { return threshBinValue; };
-		void setImgCompressPercentage(double value);
+		void setImgCompressPercentage(double);
 		double getImgCompressPercentage() { return imgCompressPercentage; };
-		void setGaussMaxThresh(double value);
+		void setGaussMaxThresh(double);
 		double getGaussMaxThresh() { return gaussMaxThresh; };
 		void setGaussConst(double value) { gaussConst = value; };
 		double getGaussConst() { return gaussConst; };
 		void setGaussBlockSize(int value) { gaussBlockSize = value; };
 		int getGaussBlockSize() { return gaussBlockSize; };
-		void execute(cv::Mat inImg, cv::Mat & outImg);
 	};
 }
 
