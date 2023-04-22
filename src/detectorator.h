@@ -18,15 +18,18 @@ namespace detectorator_namespace
 	class Detectorator
 	{
 	private:
-		cv::Mat resizeImg(cv::Mat img, double cp);
-		void reportFailedOperation(std::string msg, bool close);
 		double gaussMaxThresh;
 		double gaussConst; /// Constant subtracted from the mean of weighted mean
 		double imgCompressPercentage;
+		double threshBinValue;
 		int gaussBlockSize; /// Size of a pixel neighbourhood : 3, 5, 7, ...
+		void resizeImg(cv::Mat inImg, cv::Mat & outImg, double cp);
+		void reportFailedOperation(std::string msg, bool close);
 	public:
-		void readImg(std::filesystem::path from, cv::Mat& to);
-		void writeImg(cv::Mat& from, std::filesystem::path to);
+		void readImg(std::filesystem::path from, cv::Mat & to);
+		void writeImg(cv::Mat & from, std::filesystem::path to);
+		void setThreshBinValue(double value);
+		double getThreshBinValue() { return threshBinValue; };
 		void setImgCompressPercentage(double value);
 		double getImgCompressPercentage() { return imgCompressPercentage; };
 		void setGaussMaxThresh(double value);
@@ -35,7 +38,7 @@ namespace detectorator_namespace
 		double getGaussConst() { return gaussConst; };
 		void setGaussBlockSize(int value) { gaussBlockSize = value; };
 		int getGaussBlockSize() { return gaussBlockSize; };
-		void execute(cv::Mat inImg, cv::Mat& outImg);
+		void execute(cv::Mat inImg, cv::Mat & outImg);
 	};
 }
 

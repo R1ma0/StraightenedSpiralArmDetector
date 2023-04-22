@@ -14,12 +14,13 @@ int main(int argc, char** argv)
 	detectorator.readImg(pathReadImg, sourceImg);
 
 	// Processing image
-	cv::Mat changedImg; 
+	cv::Mat changedImg = sourceImg.clone(); 
 
 	detectorator.setImgCompressPercentage(20.);
 	detectorator.setGaussMaxThresh(255.);
-	detectorator.setGaussConst(1.);
-	detectorator.setGaussBlockSize(3);
+	detectorator.setGaussConst(-9.);
+	detectorator.setGaussBlockSize(111);
+	detectorator.setThreshBinValue(128.);
 
 	detectorator.execute(sourceImg, changedImg);
 

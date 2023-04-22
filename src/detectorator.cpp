@@ -8,10 +8,10 @@ namespace detectorator_namespace
 {
 	/* \brief Performs operations to highlight strings
 	 */
-	void Detectorator::execute(cv::Mat inImg, cv::Mat& outImg)
+	void Detectorator::execute(cv::Mat inImg, cv::Mat & outImg)
 	{
 		cv::adaptiveThreshold(
-			inImg, 
+			inImg,
 			outImg, 
 			gaussMaxThresh,
 			cv::ADAPTIVE_THRESH_GAUSSIAN_C, 
@@ -20,7 +20,7 @@ namespace detectorator_namespace
 			gaussConst
 		);
 
-		outImg = resizeImg(outImg, imgCompressPercentage);
+		resizeImg(outImg, outImg, imgCompressPercentage);
 	}
 
 	/* In this function is used cv::INTER_LINEAR method
@@ -29,21 +29,19 @@ namespace detectorator_namespace
 	 * \param cp Image compression power
 	 * \return Reduced image
 	 */
-	cv::Mat Detectorator::resizeImg(cv::Mat img, double cp)
+	void Detectorator::resizeImg(cv::Mat inImg, cv::Mat & outImg, double cp)
 	{
-		cv::Mat scaledImg;
 		double scaleValue {cp / 100.};
-		int width {(int)(img.cols * scaleValue)};
-		int height {(int)(img.rows * scaleValue)};
+		int width {(int)(inImg.cols * scaleValue)};
+		int height {(int)(inImg.rows * scaleValue)};
 		
-		cv::resize(img, scaledImg, cv::Size(width, height), cv::INTER_LINEAR);
-		
-		return scaledImg;
+		cv::resize(inImg, outImg, cv::Size(width, height), cv::INTER_LINEAR);
 	}
 
-	void Detectorator::readImg(std::filesystem::path from, cv::Mat& to)
+	void Detectorator::readImg(std::filesystem::path from, cv::Mat & to)
 	{
-		to = cv::imread(from, cv::IMREAD_GRAYSCALE);
+		// , cv::IMREAD_GRAYSCALE
+		to = cv::imread(from);
 		
 		if (to.empty())
 		{
@@ -53,7 +51,7 @@ namespace detectorator_namespace
 		}
 	}
 
-	void Detectorator::writeImg(cv::Mat& from, std::filesystem::path to)
+	void Detectorator::writeImg(cv::Mat & from, std::filesystem::path to)
 	{
 		bool isImgWrite {cv::imwrite(to, from)};
 		if (!isImgWrite)
@@ -86,6 +84,18 @@ namespace detectorator_namespace
 		}
 
 		imgCompressPercentage = value;
+	}
+
+	void Detectorator::setThreshBinValue(double value)
+	{
+		if (value < 0. || value > 255.)
+		{
+			reportFailedOperation(
+				"Threshold binarization value out of range (0. <= value <= 255.)", true
+			);
+		}
+
+		threshBinValue = value;
 	}
 
 	void Detectorator::reportFailedOperation(std::string msg, bool close)
