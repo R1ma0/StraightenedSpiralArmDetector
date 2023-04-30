@@ -6,10 +6,38 @@ namespace zhang_suen_namespace
 	{
 		unsigned int neighboursSize {8};
 		int * neighbours {new int[neighboursSize]};
-		int sumOfTransitions;
-		int sumOfNeighbours;
 		bool isStepOneChangesComplete {false};
 		bool isStepTwoChangesComplete {false};
+		std::vector<int> stepOneNeighboursIdx {0, 2, 6, 0, 4, 6};
+		std::vector<int> stepTwoNeighboursIdx {0, 2, 4, 2, 4, 6};
+
+		replacePixelValue(inImg, 255, 1);
+
+		while (!isStepOneChangesComplete || !isStepTwoChangesComplete)
+		{
+			processPixels(
+				inImg, isStepOneChangesComplete, stepOneNeighboursIdx, neighbours, 
+				neighboursSize
+			);
+			processPixels(
+				inImg, isStepTwoChangesComplete, stepTwoNeighboursIdx, neighbours,
+				neighboursSize
+			);
+		}
+
+		delete [] neighbours;
+		neighbours = nullptr;
+		
+		replacePixelValue(inImg, 1, 255);
+	}
+
+	void ZhangSuen::processPixels(
+		cv::Mat & img, bool & isComplete, std::vector<int> & nIdx, int * neighbours,
+		unsigned int neighboursSize
+	)
+	{
+		int sumOfTransitions;
+		int sumOfNeighbours;
 		bool isFirstConditionMet;
 		bool isSecondConditionMet;
 		bool isThirdConditionMet;
@@ -17,97 +45,48 @@ namespace zhang_suen_namespace
 		bool isFifthConditionMet;
 		bool isSixthConditionMet;
 		bool isAllConditionsMet;
-		std::vector<cv::Point> stepOneChanges;
-		std::vector<cv::Point> stepTwoChanges;
-	
-		replacePixelValue(inImg, 255, 1);
+		std::vector<cv::Point> stepChanges;
 
-		while (!isStepOneChangesComplete || !isStepTwoChangesComplete)
+		for (int r = 1; r < img.rows - 1; r++)
 		{
-			stepOneChanges.clear();
-			stepTwoChanges.clear();
-
-			// Step one
-			for (int r = 1; r < inImg.rows - 1; r++)
+			for (int c = 1; c < img.cols - 1; c++)
 			{
-				for (int c = 1; c < inImg.cols - 1; c++)
+				extractPixelNeighbours(img, r, c, neighbours);
+				extractSumOfTransitions(sumOfTransitions, neighbours, neighboursSize);
+				sumOfNeighbours = getSumOfNeighbours(neighbours, neighboursSize);
+
+				isFirstConditionMet = img.at<uchar>(r, c) == 1;
+				isSecondConditionMet = sumOfNeighbours >= 2;
+				isThirdConditionMet = sumOfNeighbours <= 6;
+				isFourthConditionMet = sumOfTransitions == 1;
+				isFifthConditionMet = neighbours[nIdx[0]] * 
+									  neighbours[nIdx[1]] * 
+									  neighbours[nIdx[2]] == 0;
+				isSixthConditionMet = neighbours[nIdx[3]] * 
+									  neighbours[nIdx[4]] *
+									  neighbours[nIdx[5]] == 0;
+				isAllConditionsMet = isFirstConditionMet && isSecondConditionMet && 
+									 isThirdConditionMet && isFourthConditionMet &&
+									 isFifthConditionMet && isSixthConditionMet;
+
+				if (isAllConditionsMet)
 				{
-					extractPixelNeighbours(inImg, r, c, neighbours);
-					extractSumOfTransitions(sumOfTransitions, neighbours, neighboursSize);
-					sumOfNeighbours = getSumOfNeighbours(neighbours, neighboursSize);
-
-					isFirstConditionMet = inImg.at<uchar>(r, c) == 1;
-					isSecondConditionMet = sumOfNeighbours >= 2;
-					isThirdConditionMet = sumOfNeighbours <= 6;
-					isFourthConditionMet = sumOfTransitions == 1;
-					isFifthConditionMet = neighbours[0] * neighbours[2] * neighbours[4] == 0;
-					isSixthConditionMet = neighbours[2] * neighbours[4] * neighbours[6] == 0;
-					isAllConditionsMet = isFirstConditionMet && isSecondConditionMet && 
-										 isThirdConditionMet && isFourthConditionMet &&
-										 isFifthConditionMet && isSixthConditionMet;
-
-					if (isAllConditionsMet)
-					{
-						stepOneChanges.push_back(cv::Point(r, c));
-					}
-				}
-			}
-
-			if (stepOneChanges.empty())
-			{
-				isStepOneChangesComplete = true;
-			}
-			else
-			{
-				for (cv::Point p : stepOneChanges)
-				{
-					inImg.at<uchar>(p.x, p.y) = 0;
-				}
-			}
-
-			// Step two
-			for (int r = 1; r < inImg.rows - 1; r++)
-			{
-				for (int c = 1; c < inImg.cols - 1; c++)
-				{
-					extractPixelNeighbours(inImg, r, c, neighbours);
-					extractSumOfTransitions(sumOfTransitions, neighbours, neighboursSize);
-					sumOfNeighbours = getSumOfNeighbours(neighbours, neighboursSize);
-
-					isFirstConditionMet = inImg.at<uchar>(r, c) == 1;
-					isSecondConditionMet = sumOfNeighbours >= 2;
-					isThirdConditionMet = sumOfNeighbours <= 6;
-					isFourthConditionMet = sumOfTransitions == 1;
-					isFifthConditionMet = neighbours[0] * neighbours[2] * neighbours[6] == 0;
-					isSixthConditionMet = neighbours[0] * neighbours[4] * neighbours[6] == 0;
-					isAllConditionsMet = isFirstConditionMet && isSecondConditionMet && 
-										 isThirdConditionMet && isFourthConditionMet &&
-										 isFifthConditionMet && isSixthConditionMet;
-
-					if (isAllConditionsMet)
-					{
-						stepTwoChanges.push_back(cv::Point(r, c));
-					}
-				}
-			}
-
-			if (stepTwoChanges.empty())
-			{
-				isStepTwoChangesComplete = true;
-			}
-			else
-			{
-				for (cv::Point p : stepTwoChanges)
-				{
-					inImg.at<uchar>(p.x, p.y) = 0;
+					stepChanges.push_back(cv::Point(r, c));
 				}
 			}
 		}
-		
-		replacePixelValue(inImg, 1, 255);
-		
-		delete [] neighbours;
-		neighbours = nullptr;
+
+		if (stepChanges.empty())
+		{
+			isComplete = true;
+		}
+		else
+		{
+			for (cv::Point p : stepChanges)
+			{
+				img.at<uchar>(p.x, p.y) = 0;
+			}
+		}
 	}
 
 	int ZhangSuen::getSumOfNeighbours(int * n, int size)
