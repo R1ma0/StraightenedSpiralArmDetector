@@ -2,7 +2,8 @@
 #define ZHANG_SUEN_H
 
 #include <opencv2/opencv.hpp>
-#include <forward_list>
+#include <iostream>
+#include <vector>
 
 namespace zhang_suen_namespace
 {

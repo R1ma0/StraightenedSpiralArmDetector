@@ -17,6 +17,8 @@ int main(int argc, char** argv)
 	cv::Mat changedImg = sourceImg.clone(); 
 
 	detectorator.setImgCompressPercentage(20.);
+	detectorator.setBinaryThreshValue(127.);
+	detectorator.setBinaryThreshMaxThreshValue(255.);
 	detectorator.setGaussMaxThresh(255.);
 	detectorator.setGaussConst(-9.);
 	detectorator.setGaussBlockSize(111);

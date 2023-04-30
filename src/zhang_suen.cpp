@@ -10,9 +10,16 @@ namespace zhang_suen_namespace
 		int sumOfNeighbours;
 		bool isStepOneChangesComplete {false};
 		bool isStepTwoChangesComplete {false};
-		std::forward_list<cv::Point2i> stepOneChanges;
-		std::forward_list<cv::Point2i> stepTwoChanges;
-		
+		bool isFirstConditionMet;
+		bool isSecondConditionMet;
+		bool isThirdConditionMet;
+		bool isFourthConditionMet;
+		bool isFifthConditionMet;
+		bool isSixthConditionMet;
+		bool isAllConditionsMet;
+		std::vector<cv::Point> stepOneChanges;
+		std::vector<cv::Point> stepTwoChanges;
+	
 		replacePixelValue(inImg, 255, 1);
 
 		while (!isStepOneChangesComplete || !isStepTwoChangesComplete)
@@ -28,17 +35,20 @@ namespace zhang_suen_namespace
 					extractPixelNeighbours(inImg, r, c, neighbours);
 					extractSumOfTransitions(sumOfTransitions, neighbours, neighboursSize);
 					sumOfNeighbours = getSumOfNeighbours(neighbours, neighboursSize);
-					
-					if (
-						inImg.at<uchar>(r, c) == 1 &&
-						sumOfNeighbours >= 2 && 
-						sumOfNeighbours <= 6 &&
-						sumOfTransitions == 1 &&
-						neighbours[0] * neighbours[2] * neighbours[4] == 0 &&
-						neighbours[2] * neighbours[4] * neighbours[6] == 0
-					)
+
+					isFirstConditionMet = inImg.at<uchar>(r, c) == 1;
+					isSecondConditionMet = sumOfNeighbours >= 2;
+					isThirdConditionMet = sumOfNeighbours <= 6;
+					isFourthConditionMet = sumOfTransitions == 1;
+					isFifthConditionMet = neighbours[0] * neighbours[2] * neighbours[4] == 0;
+					isSixthConditionMet = neighbours[2] * neighbours[4] * neighbours[6] == 0;
+					isAllConditionsMet = isFirstConditionMet && isSecondConditionMet && 
+										 isThirdConditionMet && isFourthConditionMet &&
+										 isFifthConditionMet && isSixthConditionMet;
+
+					if (isAllConditionsMet)
 					{
-						stepOneChanges.insert_after(stepOneChanges.end(), cv::Point2i(r, c));
+						stepOneChanges.push_back(cv::Point(r, c));
 					}
 				}
 			}
@@ -49,9 +59,9 @@ namespace zhang_suen_namespace
 			}
 			else
 			{
-				for (cv::Point2i p : stepOneChanges)
+				for (cv::Point p : stepOneChanges)
 				{
-					inImg.at<uchar>(p) = 0;
+					inImg.at<uchar>(p.x, p.y) = 0;
 				}
 			}
 
@@ -64,16 +74,19 @@ namespace zhang_suen_namespace
 					extractSumOfTransitions(sumOfTransitions, neighbours, neighboursSize);
 					sumOfNeighbours = getSumOfNeighbours(neighbours, neighboursSize);
 
-					if (
-						inImg.at<uchar>(r, c) == 1 &&
-						sumOfNeighbours >= 2 && 
-						sumOfNeighbours <= 6 &&
-						sumOfTransitions == 1 &&
-						neighbours[0] * neighbours[2] * neighbours[6] == 0 &&
-						neighbours[0] * neighbours[4] * neighbours[6] == 0
-					)
+					isFirstConditionMet = inImg.at<uchar>(r, c) == 1;
+					isSecondConditionMet = sumOfNeighbours >= 2;
+					isThirdConditionMet = sumOfNeighbours <= 6;
+					isFourthConditionMet = sumOfTransitions == 1;
+					isFifthConditionMet = neighbours[0] * neighbours[2] * neighbours[6] == 0;
+					isSixthConditionMet = neighbours[0] * neighbours[4] * neighbours[6] == 0;
+					isAllConditionsMet = isFirstConditionMet && isSecondConditionMet && 
+										 isThirdConditionMet && isFourthConditionMet &&
+										 isFifthConditionMet && isSixthConditionMet;
+
+					if (isAllConditionsMet)
 					{
-						stepTwoChanges.insert_after(stepTwoChanges.end(), cv::Point2i(r, c));
+						stepTwoChanges.push_back(cv::Point(r, c));
 					}
 				}
 			}
@@ -84,9 +97,9 @@ namespace zhang_suen_namespace
 			}
 			else
 			{
-				for (cv::Point2i p : stepTwoChanges)
+				for (cv::Point p : stepTwoChanges)
 				{
-					inImg.at<uchar>(p) = 0;
+					inImg.at<uchar>(p.x, p.y) = 0;
 				}
 			}
 		}
@@ -135,13 +148,13 @@ namespace zhang_suen_namespace
 
 	void ZhangSuen::extractPixelNeighbours(cv::Mat & img, int r, int c, int * n)
 	{
-		n[0] = int(img.at<uchar>(r - 1, c    ));
-		n[1] = int(img.at<uchar>(r - 1, c + 1));
-		n[2] = int(img.at<uchar>(r    , c + 1));
-		n[3] = int(img.at<uchar>(r + 1, c + 1));
-		n[4] = int(img.at<uchar>(r + 1, c    ));
-		n[5] = int(img.at<uchar>(r + 1, c - 1));
-		n[6] = int(img.at<uchar>(r    , c - 1));
-		n[7] = int(img.at<uchar>(r - 1, c - 1));
+		n[0] = img.at<uchar>(r - 1, c    );
+		n[1] = img.at<uchar>(r - 1, c + 1);
+		n[2] = img.at<uchar>(r    , c + 1);
+		n[3] = img.at<uchar>(r + 1, c + 1);
+		n[4] = img.at<uchar>(r + 1, c    );
+		n[5] = img.at<uchar>(r + 1, c - 1);
+		n[6] = img.at<uchar>(r    , c - 1);
+		n[7] = img.at<uchar>(r - 1, c - 1);
 	}
 }

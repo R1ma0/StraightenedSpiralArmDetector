@@ -21,6 +21,8 @@ namespace detectorator_namespace
 	class Detectorator
 	{
 	private:
+		double binaryThreshMaxThreshValue;
+		double binaryThreshValue;
 		double gaussMaxThresh;
 		double gaussConst; /// Constant subtracted from the mean of weighted mean
 		double imgCompressPercentage;
@@ -32,6 +34,10 @@ namespace detectorator_namespace
 		void execute(cv::Mat, cv::Mat &);
 		void readImg(std::filesystem::path, cv::Mat &);
 		void writeImg(cv::Mat &, std::filesystem::path);
+		void setBinaryThreshValue(double);
+		double getBinaryThreshValue() { return binaryThreshValue; };
+		void setBinaryThreshMaxThreshValue(double);
+		double getBinaryThreshMaxThreshValue() { return binaryThreshMaxThreshValue; };
 		void setThreshBinValue(double);
 		double getThreshBinValue() { return threshBinValue; };
 		void setImgCompressPercentage(double);

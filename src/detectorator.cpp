@@ -21,6 +21,13 @@ namespace detectorator_namespace
 		);
 
 		resizeImg(outImg, imgCompressPercentage);
+		cv::threshold(
+			outImg, 
+			outImg, 
+			binaryThreshValue, 
+			binaryThreshMaxThreshValue, 
+			cv::THRESH_BINARY
+		);
 		zs::ZhangSuen zhangSuen;
 		zhangSuen.execute(outImg);
 	}
@@ -104,5 +111,29 @@ namespace detectorator_namespace
 		std::cout << "FAILDED. " + msg << std::endl;
 		if (close)
 			exit(0);
+	}
+
+	void Detectorator::setBinaryThreshValue(double value)
+	{
+		if (value < 0. || value > 255.)
+		{
+			reportFailedOperation(
+				"Binary threshold value out of range (0. <= value <= 255.)", true
+			);
+		}
+
+		binaryThreshValue = value;
+	}
+
+	void Detectorator::setBinaryThreshMaxThreshValue(double value)
+	{
+		if (value < 0. || value > 255.)
+		{
+			reportFailedOperation(
+				"Binary threshold max thresh value out of range (0. <= value <= 255.)", true
+			);
+		}
+
+		binaryThreshMaxThreshValue = value;
 	}
 }
