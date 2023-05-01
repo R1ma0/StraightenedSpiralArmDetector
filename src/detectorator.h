@@ -9,7 +9,6 @@
 #define DETECTORATOR_H
 
 #include <opencv2/opencv.hpp>
-#include <iostream>
 #include <filesystem>
 #include <cstdlib>
 #include "zhang_suen.h"
@@ -18,6 +17,8 @@ namespace zs = zhang_suen_namespace;
 
 namespace detectorator_namespace
 {
+	enum class PixelsOperation {Add, Remove};
+
 	class Detectorator
 	{
 	private:
@@ -30,6 +31,9 @@ namespace detectorator_namespace
 		int gaussBlockSize; /// Size of a pixel neighbourhood : 3, 5, 7, ...
 		void resizeImg(cv::Mat &, double);
 		void reportFailedOperation(std::string, bool);
+		void performAnOperationWithPixels(PixelsOperation, cv::Mat &);
+		bool isPixelCanBeRemoved(std::vector<int>);
+		bool isPixelCanBeAdded(std::vector<int>);
 	public:
 		void execute(cv::Mat, cv::Mat &);
 		void readImg(std::filesystem::path, cv::Mat &);

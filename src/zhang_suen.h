@@ -3,17 +3,18 @@
 
 #include <opencv2/opencv.hpp>
 #include <vector>
+#include "common_functions.h"
+
+namespace cf = common_functions_namespace;
 
 namespace zhang_suen_namespace
 {
 	class ZhangSuen
 	{
 	private:
-		int getSumOfNeighbours(int *, int);
 		void replacePixelValue(cv::Mat &, uchar, uchar);
-		void extractSumOfTransitions(int &, int *, int);
-		void extractPixelNeighbours(cv::Mat &, int, int, int *);
-		void processPixels(cv::Mat &, bool &, std::vector<int> &, int *, unsigned int);
+		void extractSumOfTransitions(int &, std::vector<int>);
+		void processPixels(cv::Mat &, bool &, std::vector<int> &, std::vector<int>);
 	public:
 		void execute(cv::Mat &);
 	};

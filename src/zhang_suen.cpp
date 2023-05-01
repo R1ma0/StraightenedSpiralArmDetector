@@ -4,38 +4,32 @@ namespace zhang_suen_namespace
 {
 	void ZhangSuen::execute(cv::Mat & inImg)
 	{
-		unsigned int neighboursSize {8};
-		int * neighbours {new int[neighboursSize]};
 		bool isStepOneChangesComplete {false};
 		bool isStepTwoChangesComplete {false};
 		std::vector<int> stepOneNeighboursIdx {0, 2, 6, 0, 4, 6};
 		std::vector<int> stepTwoNeighboursIdx {0, 2, 4, 2, 4, 6};
+		std::vector<int> neighbours (8);
 
 		replacePixelValue(inImg, 255, 1);
 
 		while (!isStepOneChangesComplete || !isStepTwoChangesComplete)
 		{
 			processPixels(
-				inImg, isStepOneChangesComplete, stepOneNeighboursIdx, neighbours, 
-				neighboursSize
+				inImg, isStepOneChangesComplete, stepOneNeighboursIdx, neighbours
 			);
 			processPixels(
-				inImg, isStepTwoChangesComplete, stepTwoNeighboursIdx, neighbours,
-				neighboursSize
+				inImg, isStepTwoChangesComplete, stepTwoNeighboursIdx, neighbours
 			);
 		}
-
-		delete [] neighbours;
-		neighbours = nullptr;
 		
 		replacePixelValue(inImg, 1, 255);
 	}
 
 	void ZhangSuen::processPixels(
-		cv::Mat & img, bool & isComplete, std::vector<int> & nIdx, int * neighbours,
-		unsigned int neighboursSize
+		cv::Mat & img, bool & isComplete, std::vector<int> & nIdx, std::vector<int> neighbours
 	)
 	{
+		cf::CommonFunctions commonFunc;
 		int sumOfTransitions;
 		int sumOfNeighbours;
 		bool isFirstConditionMet;
@@ -51,9 +45,9 @@ namespace zhang_suen_namespace
 		{
 			for (int c = 1; c < img.cols - 1; c++)
 			{
-				extractPixelNeighbours(img, r, c, neighbours);
-				extractSumOfTransitions(sumOfTransitions, neighbours, neighboursSize);
-				sumOfNeighbours = getSumOfNeighbours(neighbours, neighboursSize);
+				commonFunc.extractPixelNeighbours(img, r, c, neighbours);
+				extractSumOfTransitions(sumOfTransitions, neighbours);
+				sumOfNeighbours = commonFunc.getSumOfNeighbours(neighbours);
 
 				isFirstConditionMet = img.at<uchar>(r, c) == 1;
 				isSecondConditionMet = sumOfNeighbours >= 2;
@@ -89,18 +83,6 @@ namespace zhang_suen_namespace
 		}
 	}
 
-	int ZhangSuen::getSumOfNeighbours(int * n, int size)
-	{
-		int sum = 0;
-
-		for (int i = 0; i < size; i++)
-		{
-			sum += n[i];
-		}
-
-		return sum;
-	}
-
 	void ZhangSuen::replacePixelValue(cv::Mat & inImg, uchar from, uchar to)
 	{
 		for (int r = 0; r < inImg.rows; r++)
@@ -113,27 +95,15 @@ namespace zhang_suen_namespace
 		}
 	}
 
-	void ZhangSuen::extractSumOfTransitions(int & sum, int * n, int size)
+	void ZhangSuen::extractSumOfTransitions(int & sum, std::vector<int> n)
 	{
 		sum = 0;
 
-		for (int i = 0; i < size - 1; i++)
+		for (int i = 0; i < n.size() - 1; i++)
 		{
 			sum += (n[i] == 0 && n[i + 1] == 1) ? 1 : 0;
 		}
 
-		sum += (n[size - 1] == 0 && n[0] == 1) ? 1 : 0;
-	}
-
-	void ZhangSuen::extractPixelNeighbours(cv::Mat & img, int r, int c, int * n)
-	{
-		n[0] = img.at<uchar>(r - 1, c    );
-		n[1] = img.at<uchar>(r - 1, c + 1);
-		n[2] = img.at<uchar>(r    , c + 1);
-		n[3] = img.at<uchar>(r + 1, c + 1);
-		n[4] = img.at<uchar>(r + 1, c    );
-		n[5] = img.at<uchar>(r + 1, c - 1);
-		n[6] = img.at<uchar>(r    , c - 1);
-		n[7] = img.at<uchar>(r - 1, c - 1);
+		sum += (n[n.size() - 1] == 0 && n[0] == 1) ? 1 : 0;
 	}
 }

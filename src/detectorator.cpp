@@ -19,7 +19,6 @@ namespace detectorator_namespace
 			gaussBlockSize,
 			gaussConst
 		);
-
 		resizeImg(outImg, imgCompressPercentage);
 		cv::threshold(
 			outImg, 
@@ -135,5 +134,43 @@ namespace detectorator_namespace
 		}
 
 		binaryThreshMaxThreshValue = value;
+	}
+
+	void Detectorator::performAnOperationWithPixels(PixelsOperation op, cv::Mat & inImg)
+	{
+		switch (op)
+		{
+			case PixelsOperation::Add:
+				break;
+			case PixelsOperation::Remove:
+				break;
+		}
+	}
+
+	bool Detectorator::isPixelCanBeRemoved(std::vector<int> n)
+	{
+		cf::CommonFunctions commonFunc;
+		bool statementOne;
+		bool statementTwo;
+
+		statementOne = commonFunc.getSumOfNeighbours(n) == 0;
+		if (statementOne) return true;
+
+		// 2, 6 - background; other - image:
+		statementOne = commonFunc.getSumOfNeighbours(n, std::vector<int> {2, 6}) == 6;
+		statementTwo = (n[2] + n[6]) == 0;
+		if (statementOne && statementTwo) return true;
+
+		//// 0, 4 - background; other - image
+		//statementOne = (n[0] + n[1] + n[3] + n[4] + n[5] + n[7]) == 6;
+		//statementTwo = (n[0] + n[4]) == 0;
+		//if (statementOne && statementTwo) return true;
+
+		return true;
+	}
+
+	bool Detectorator::isPixelCanBeAdded(std::vector<int> neighbours)
+	{
+		return true;
 	}
 }
