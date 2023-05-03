@@ -2,15 +2,16 @@
 
 namespace zhang_suen_namespace
 {
-	void ZhangSuen::execute(cv::Mat & inImg)
+	void ZhangSuen::execute(cv::Mat & inImg, bool replace)
 	{
 		bool isStepOneChangesComplete {false};
 		bool isStepTwoChangesComplete {false};
-		std::vector<int> stepOneNeighboursIdx {0, 2, 6, 0, 4, 6};
-		std::vector<int> stepTwoNeighboursIdx {0, 2, 4, 2, 4, 6};
-		std::vector<int> neighbours (8);
+		vInt stepOneNeighboursIdx {0, 2, 6, 0, 4, 6};
+		vInt stepTwoNeighboursIdx {0, 2, 4, 2, 4, 6};
+		vInt neighbours (8);
 
-		replacePixelValue(inImg, 255, 1);
+		if (replace)
+			replacePixelValue(inImg, 255, 1);
 
 		while (!isStepOneChangesComplete || !isStepTwoChangesComplete)
 		{
@@ -22,11 +23,12 @@ namespace zhang_suen_namespace
 			);
 		}
 		
-		replacePixelValue(inImg, 1, 255);
+		if (replace)
+			replacePixelValue(inImg, 1, 255);
 	}
 
 	void ZhangSuen::processPixels(
-		cv::Mat & img, bool & isComplete, std::vector<int> & nIdx, std::vector<int> neighbours
+		cv::Mat & img, bool & isComplete, vInt & nIdx, vInt neighbours
 	)
 	{
 		cf::CommonFunctions commonFunc;
@@ -39,7 +41,7 @@ namespace zhang_suen_namespace
 		bool isFifthConditionMet;
 		bool isSixthConditionMet;
 		bool isAllConditionsMet;
-		std::vector<cv::Point> stepChanges;
+		vPoint stepChanges;
 
 		for (int r = 1; r < img.rows - 1; r++)
 		{
@@ -47,7 +49,7 @@ namespace zhang_suen_namespace
 			{
 				commonFunc.extractPixelNeighbours(img, r, c, neighbours);
 				extractSumOfTransitions(sumOfTransitions, neighbours);
-				sumOfNeighbours = commonFunc.getSumOfNeighbours(neighbours);
+				sumOfNeighbours = commonFunc.getSumOfVector(neighbours);
 
 				isFirstConditionMet = img.at<uchar>(r, c) == 1;
 				isSecondConditionMet = sumOfNeighbours >= 2;
@@ -95,7 +97,7 @@ namespace zhang_suen_namespace
 		}
 	}
 
-	void ZhangSuen::extractSumOfTransitions(int & sum, std::vector<int> n)
+	void ZhangSuen::extractSumOfTransitions(int & sum, vInt n)
 	{
 		sum = 0;
 

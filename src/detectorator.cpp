@@ -28,7 +28,11 @@ namespace detectorator_namespace
 			cv::THRESH_BINARY
 		);
 		zs::ZhangSuen zhangSuen;
-		zhangSuen.execute(outImg);
+		zhangSuen.replacePixelValue(outImg, 255, 1);
+		performAnOperationWithPixels(PixelsOperation::Remove, outImg);
+		performAnOperationWithPixels(PixelsOperation::Add, outImg);
+		zhangSuen.execute(outImg, false);
+		zhangSuen.replacePixelValue(outImg, 1, 255);
 	}
 
 	/* In this function is used cv::INTER_LINEAR method
@@ -67,6 +71,103 @@ namespace detectorator_namespace
 				"The image was not saved : " + std::string(to), true
 			);
 		}
+	}
+
+	void Detectorator::performAnOperationWithPixels(PixelsOperation op, cv::Mat & inImg)
+	{
+		cf::CommonFunctions cf;
+		vPoint pixelsToChange;
+		vInt neighbours (8);
+		bool isNotAllPixelsChanged = true;
+
+		PixelPatterns patternsToRemove;
+		patternsToRemove.composite = {
+			{2, 6},	{0, 4}, {7, 0, 1}, {7, 6, 5}, {3, 4, 5}, {1, 2, 3}, {1, 3, 5, 7},
+			{7, 0, 1, 3, 5}, {7, 6, 1, 3, 5}, {7, 1, 3, 4, 5}, {1, 2, 3, 5, 7}
+		};
+		patternsToRemove.compositeSum = {6, 6, 3, 3, 3, 3, 4, 5, 5, 5, 5};
+		patternsToRemove.simple = {0};
+
+		PixelPatterns patternsToAdd;
+		patternsToAdd.composite = {
+			{1, 3, 5, 7}, {0, 1, 7}, {3, 4, 5}, {5, 6, 7}, {1, 2, 3}, {3, 7}, 
+			{1, 5}, {0, 7}, {4, 5}, {0, 1}, {3, 4}, {3, 5, 7}, {1, 3, 5}, 
+			{1, 3, 7}, {1, 5, 7}
+		};
+		patternsToAdd.compositeSum = {4, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5};
+		patternsToAdd.simple = {8, 7};
+
+		while (isNotAllPixelsChanged)
+		{
+			for (int r = 1; r < inImg.rows - 1; r++)
+			{
+				for (int c = 1; c < inImg.cols - 1; c++)
+				{		
+					cf.extractPixelNeighbours(inImg, r, c, neighbours);
+
+					switch (op)
+					{
+						case PixelsOperation::Add:
+							if (inImg.at<uchar>(r, c) == 0)
+							{
+								if (isPixelMatchesPatterns(neighbours, patternsToAdd, cf))
+								{
+									pixelsToChange.push_back(cv::Point(r, c));
+								}
+							}
+							break;
+						case PixelsOperation::Remove:
+							if (inImg.at<uchar>(r, c) == 1)
+							{
+								if (isPixelMatchesPatterns(neighbours, patternsToRemove, cf))
+								{
+									pixelsToChange.push_back(cv::Point(r, c));
+								}
+							}
+							break;
+					}
+				}
+			}
+
+			if (pixelsToChange.empty())
+			{
+				isNotAllPixelsChanged = false;
+			}
+			else
+			{
+				for (cv::Point pixel: pixelsToChange)
+				{
+					inImg.at<uchar>(pixel.x, pixel.y) = (op == PixelsOperation::Remove) ? 0 : 1;
+				}
+
+				pixelsToChange.clear();
+			}
+		}
+	}
+
+	bool Detectorator::isPixelMatchesPatterns(
+		vInt & n, PixelPatterns & patterns, cf::CommonFunctions & cf
+	)
+	{
+		bool statementOne;
+		bool statementTwo;
+
+		for (auto spv : patterns.simple)
+		{
+			if (cf.getSumOfVector(n) == spv) return true;
+		}
+
+		for (int idx = 0; idx < patterns.composite.size(); idx++)
+		{
+			statementOne = cf.getSumOfVectorExclude(
+				n, patterns.composite[idx]
+			) == patterns.compositeSum[idx];
+			statementTwo = cf.getSumOfVectorInclude(n, patterns.composite[idx]) == 0;
+
+			if (statementOne && statementTwo) return true;
+		}
+
+		return false;
 	}
 
 	void Detectorator::setGaussMaxThresh(double value)
@@ -134,43 +235,5 @@ namespace detectorator_namespace
 		}
 
 		binaryThreshMaxThreshValue = value;
-	}
-
-	void Detectorator::performAnOperationWithPixels(PixelsOperation op, cv::Mat & inImg)
-	{
-		switch (op)
-		{
-			case PixelsOperation::Add:
-				break;
-			case PixelsOperation::Remove:
-				break;
-		}
-	}
-
-	bool Detectorator::isPixelCanBeRemoved(std::vector<int> n)
-	{
-		cf::CommonFunctions commonFunc;
-		bool statementOne;
-		bool statementTwo;
-
-		statementOne = commonFunc.getSumOfNeighbours(n) == 0;
-		if (statementOne) return true;
-
-		// 2, 6 - background; other - image:
-		statementOne = commonFunc.getSumOfNeighbours(n, std::vector<int> {2, 6}) == 6;
-		statementTwo = (n[2] + n[6]) == 0;
-		if (statementOne && statementTwo) return true;
-
-		//// 0, 4 - background; other - image
-		//statementOne = (n[0] + n[1] + n[3] + n[4] + n[5] + n[7]) == 6;
-		//statementTwo = (n[0] + n[4]) == 0;
-		//if (statementOne && statementTwo) return true;
-
-		return true;
-	}
-
-	bool Detectorator::isPixelCanBeAdded(std::vector<int> neighbours)
-	{
-		return true;
 	}
 }

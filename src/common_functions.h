@@ -3,15 +3,17 @@
 
 #include <opencv2/opencv.hpp>
 #include <vector>
+#include "aliases.h"
 
 namespace common_functions_namespace
 {
 	class CommonFunctions
 	{
 	public:
-		int getSumOfNeighbours(std::vector<int>, std::vector<int>);
-		int getSumOfNeighbours(std::vector<int>);
-		void extractPixelNeighbours(cv::Mat &, int, int, std::vector<int> &);
+		int getSumOfVector(vInt);
+		int getSumOfVectorExclude(vInt, vInt &);
+		int getSumOfVectorInclude(vInt, vInt &);
+		void extractPixelNeighbours(cv::Mat &, int, int, vInt &);
 	};
 }
 

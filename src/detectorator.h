@@ -12,12 +12,19 @@
 #include <filesystem>
 #include <cstdlib>
 #include "zhang_suen.h"
+#include "aliases.h"
 
 namespace zs = zhang_suen_namespace;
 
 namespace detectorator_namespace
 {
 	enum class PixelsOperation {Add, Remove};
+	struct PixelPatterns
+	{
+		std::vector<vInt> composite;
+		vInt compositeSum;
+		vInt simple;
+	};
 
 	class Detectorator
 	{
@@ -32,8 +39,7 @@ namespace detectorator_namespace
 		void resizeImg(cv::Mat &, double);
 		void reportFailedOperation(std::string, bool);
 		void performAnOperationWithPixels(PixelsOperation, cv::Mat &);
-		bool isPixelCanBeRemoved(std::vector<int>);
-		bool isPixelCanBeAdded(std::vector<int>);
+		bool isPixelMatchesPatterns(vInt &, PixelPatterns &, cf::CommonFunctions &);
 	public:
 		void execute(cv::Mat, cv::Mat &);
 		void readImg(std::filesystem::path, cv::Mat &);

@@ -1,10 +1,17 @@
 #include <opencv2/imgcodecs.hpp>
+#include <iostream>
 #include "detectorator.h"
+#include "aliases.h"
 
 namespace dsg = detectorator_namespace;
 
 int main(int argc, char** argv)
 {
+	if (argc < 3)
+	{
+		std::cout << "Error : argc < 3" << std::endl;
+		return 1;
+	}
 	std::filesystem::path pathReadImg {argv[1]};
 	std::filesystem::path pathWriteImg {argv[2]};
 	dsg::Detectorator detectorator;

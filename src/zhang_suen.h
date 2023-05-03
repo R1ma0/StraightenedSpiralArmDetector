@@ -4,6 +4,7 @@
 #include <opencv2/opencv.hpp>
 #include <vector>
 #include "common_functions.h"
+#include "aliases.h"
 
 namespace cf = common_functions_namespace;
 
@@ -12,11 +13,11 @@ namespace zhang_suen_namespace
 	class ZhangSuen
 	{
 	private:
-		void replacePixelValue(cv::Mat &, uchar, uchar);
-		void extractSumOfTransitions(int &, std::vector<int>);
-		void processPixels(cv::Mat &, bool &, std::vector<int> &, std::vector<int>);
+		void extractSumOfTransitions(int &, vInt);
+		void processPixels(cv::Mat &, bool &, vInt &, vInt);
 	public:
-		void execute(cv::Mat &);
+		void replacePixelValue(cv::Mat &, uchar, uchar);
+		void execute(cv::Mat &, bool);
 	};
 }
 

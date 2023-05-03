@@ -2,7 +2,7 @@
 
 namespace common_functions_namespace
 {
-	int CommonFunctions::getSumOfNeighbours(std::vector<int> n)
+	int CommonFunctions::getSumOfVector(vInt n)
 	{
 		int sum = 0;
 
@@ -14,27 +14,42 @@ namespace common_functions_namespace
 		return sum;
 	}
 
-	int CommonFunctions::getSumOfNeighbours(std::vector<int> n, std::vector<int> exclude)
+	int CommonFunctions::getSumOfVectorExclude(vInt n, vInt & exclude)
 	{
 		int sum = 0;
 
 		if (!exclude.empty())
 		{
-			for (int item : exclude)
+			for (auto item : exclude)
 			{
 				n[item] = 0;
 			}
 		}
 	
-		for (int value : n)
+		for (auto value : n)
 		{
 			sum += value;
 		}
 	
 		return sum;
 	}
+
+	int CommonFunctions::getSumOfVectorInclude(vInt n, vInt & include)
+	{
+		int sum = 0;
+
+		if (!include.empty())
+		{
+			for (auto value : include)
+			{
+				sum += n[value];
+			}
+		}
+
+		return sum;
+	}
 	
-	void CommonFunctions::extractPixelNeighbours(cv::Mat & img, int r, int c, std::vector<int> & n)
+	void CommonFunctions::extractPixelNeighbours(cv::Mat & img, int r, int c, vInt & n)
 	{
 		n[0] = img.at<uchar>(r - 1, c    );
 		n[1] = img.at<uchar>(r - 1, c + 1);
