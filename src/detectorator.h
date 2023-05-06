@@ -11,10 +11,12 @@
 #include <opencv2/opencv.hpp>
 #include <filesystem>
 #include <cstdlib>
+#include <fstream>
 #include "zhang_suen.h"
 #include "aliases.h"
 
 namespace zs = zhang_suen_namespace;
+namespace fs = std::filesystem;
 
 namespace detectorator_namespace
 {
@@ -29,35 +31,67 @@ namespace detectorator_namespace
 	class Detectorator
 	{
 	private:
-		double binaryThreshMaxThreshValue;
+		void resizeImg(cv::Mat &, double);
+		void reportFailedOperation(std::string, bool);
+		void performAnOperationWithPixels(PixelsOperation, cv::Mat &);
 		double binaryThreshValue;
-		double gaussMaxThresh;
 		double gaussConst; /// Constant subtracted from the mean of weighted mean
 		double imgCompressPercentage;
 		double threshBinValue;
 		int gaussBlockSize; /// Size of a pixel neighbourhood : 3, 5, 7, ...
-		void resizeImg(cv::Mat &, double);
-		void reportFailedOperation(std::string, bool);
-		void performAnOperationWithPixels(PixelsOperation, cv::Mat &);
 		bool isPixelMatchesPatterns(vInt &, PixelPatterns &, cf::CommonFunctions &);
 	public:
 		void execute(cv::Mat, cv::Mat &);
-		void readImg(std::filesystem::path, cv::Mat &);
-		void writeImg(cv::Mat &, std::filesystem::path);
+		void readImg(fs::path, cv::Mat &);
+		void writeImg(cv::Mat &, fs::path);
 		void setBinaryThreshValue(double);
-		double getBinaryThreshValue() { return binaryThreshValue; };
-		void setBinaryThreshMaxThreshValue(double);
-		double getBinaryThreshMaxThreshValue() { return binaryThreshMaxThreshValue; };
 		void setThreshBinValue(double);
-		double getThreshBinValue() { return threshBinValue; };
 		void setImgCompressPercentage(double);
-		double getImgCompressPercentage() { return imgCompressPercentage; };
-		void setGaussMaxThresh(double);
-		double getGaussMaxThresh() { return gaussMaxThresh; };
 		void setGaussConst(double value) { gaussConst = value; };
-		double getGaussConst() { return gaussConst; };
 		void setGaussBlockSize(int value) { gaussBlockSize = value; };
+		double getBinaryThreshValue() { return binaryThreshValue; };
+		double getThreshBinValue() { return threshBinValue; };
+		double getImgCompressPercentage() { return imgCompressPercentage; };
+		double getGaussConst() { return gaussConst; };
 		int getGaussBlockSize() { return gaussBlockSize; };
+	};
+
+	class Config
+	{
+	private:
+		void parseConfigFile(fs::path);
+		double minBinaryThreshValue;
+		double maxBinaryThreshValue;
+		double stepBinaryThreshValue;
+		double minGaussConst;
+		double maxGaussConst;
+		double stepGaussConst;
+		double minImgCompressPercentage;
+		double maxImgCompressPercentage;
+		double stepImgCompressPercentage;
+		double minThreshBinValue;
+		double maxThreshBinValue;
+		double stepThreshBinValue;
+		int minGaussBlockSize;
+		int maxGaussBlockSize;
+		int stepGaussBlockSize;
+	public:
+		Config(fs::path);
+		double getMinBinaryThreshValue() { return minBinaryThreshValue; }
+		double getMaxBinaryThreshValue() { return maxBinaryThreshValue; }
+		double getStepBinaryThreshValue() { return stepBinaryThreshValue; }
+		double getMinGaussConst() { return minGaussConst; };
+		double getMaxGaussConst() { return maxGaussConst; };
+		double getStepGaussConst() { return stepGaussConst; };
+		double getMinImgCompressPercentage() { return minImgCompressPercentage; };
+		double getMaxImgCompressPercentage() { return maxImgCompressPercentage; };
+		double getStepImgCompressPercentage() { return stepImgCompressPercentage; };
+		double getMinThreshBinValue() { return minThreshBinValue; };
+		double getMaxThreshBinValue() { return maxThreshBinValue; };
+		double getStepThreshBinValue() { return stepThreshBinValue; };
+		int getMinGaussBlockSize() { return minGaussBlockSize; };
+		int getMaxGaussBlockSize() { return maxGaussBlockSize; };
+		int getStepGaussBlockSize() { return stepGaussBlockSize; };
 	};
 }
 

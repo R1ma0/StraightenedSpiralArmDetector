@@ -8,12 +8,12 @@ namespace detectorator_namespace
 {
 	/* \brief Performs operations to highlight strings
 	 */
-	void Detectorator::execute(cv::Mat inImg, cv::Mat & outImg)
+	void Detectorator::execute(cv::Mat inImg, cv::Mat &outImg)
 	{
 		cv::adaptiveThreshold(
 			inImg,
 			outImg, 
-			gaussMaxThresh,
+			255.,
 			cv::ADAPTIVE_THRESH_GAUSSIAN_C, 
 			cv::THRESH_BINARY,
 			gaussBlockSize,
@@ -24,13 +24,13 @@ namespace detectorator_namespace
 			outImg, 
 			outImg, 
 			binaryThreshValue, 
-			binaryThreshMaxThreshValue, 
+			255., 
 			cv::THRESH_BINARY
 		);
 		zs::ZhangSuen zhangSuen;
 		zhangSuen.replacePixelValue(outImg, 255, 1);
-		performAnOperationWithPixels(PixelsOperation::Remove, outImg);
 		performAnOperationWithPixels(PixelsOperation::Add, outImg);
+		performAnOperationWithPixels(PixelsOperation::Remove, outImg);
 		zhangSuen.execute(outImg, false);
 		zhangSuen.replacePixelValue(outImg, 1, 255);
 	}
@@ -41,7 +41,7 @@ namespace detectorator_namespace
 	 * \param cp Image compression power
 	 * \return Reduced image
 	 */
-	void Detectorator::resizeImg(cv::Mat & outImg, double cp)
+	void Detectorator::resizeImg(cv::Mat &outImg, double cp)
 	{
 		double scaleValue {cp / 100.};
 		int width {(int)(outImg.cols * scaleValue)};
@@ -50,7 +50,7 @@ namespace detectorator_namespace
 		cv::resize(outImg, outImg, cv::Size(width, height), cv::INTER_LINEAR);
 	}
 
-	void Detectorator::readImg(std::filesystem::path from, cv::Mat & to)
+	void Detectorator::readImg(fs::path from, cv::Mat &to)
 	{
 		to = cv::imread(from, cv::IMREAD_GRAYSCALE);
 		
@@ -62,9 +62,10 @@ namespace detectorator_namespace
 		}
 	}
 
-	void Detectorator::writeImg(cv::Mat & from, std::filesystem::path to)
+	void Detectorator::writeImg(cv::Mat &from, fs::path to)
 	{
 		bool isImgWrite {cv::imwrite(to, from)};
+
 		if (!isImgWrite)
 		{
 			reportFailedOperation(
@@ -73,7 +74,7 @@ namespace detectorator_namespace
 		}
 	}
 
-	void Detectorator::performAnOperationWithPixels(PixelsOperation op, cv::Mat & inImg)
+	void Detectorator::performAnOperationWithPixels(PixelsOperation op, cv::Mat &inImg)
 	{
 		cf::CommonFunctions cf;
 		vPoint pixelsToChange;
@@ -129,10 +130,7 @@ namespace detectorator_namespace
 				}
 			}
 
-			if (pixelsToChange.empty())
-			{
-				isNotAllPixelsChanged = false;
-			}
+			if (pixelsToChange.empty()) isNotAllPixelsChanged = false;
 			else
 			{
 				for (cv::Point pixel: pixelsToChange)
@@ -146,7 +144,7 @@ namespace detectorator_namespace
 	}
 
 	bool Detectorator::isPixelMatchesPatterns(
-		vInt & n, PixelPatterns & patterns, cf::CommonFunctions & cf
+		vInt &n, PixelPatterns &patterns, cf::CommonFunctions &cf
 	)
 	{
 		bool statementOne;
@@ -168,18 +166,6 @@ namespace detectorator_namespace
 		}
 
 		return false;
-	}
-
-	void Detectorator::setGaussMaxThresh(double value)
-	{
-		if (value < 0. || value > 255.)
-		{
-			reportFailedOperation(
-				"Max threshold value out of range ( 0. <= value <= 255. )", true
-			);
-		}
-
-		gaussMaxThresh = value;
 	}
 
 	void Detectorator::setImgCompressPercentage(double value)
@@ -225,15 +211,55 @@ namespace detectorator_namespace
 		binaryThreshValue = value;
 	}
 
-	void Detectorator::setBinaryThreshMaxThreshValue(double value)
+	Config::Config(fs::path configFile)
 	{
-		if (value < 0. || value > 255.)
+		parseConfigFile(configFile);
+	}
+
+	void Config::parseConfigFile(fs::path pathToFile)
+	{
+		std::string skip;
+		std::ifstream file(pathToFile);
+
+		if (file.is_open())
 		{
-			reportFailedOperation(
-				"Binary threshold max thresh value out of range (0. <= value <= 255.)", true
-			);
+			std::getline(file, skip, ':');
+			file >> minBinaryThreshValue;
+			std::getline(file, skip, ':');
+			file >> maxBinaryThreshValue;
+			std::getline(file, skip, ':');
+			file >> stepBinaryThreshValue;
+			std::getline(file, skip, '$');
+			std::getline(file, skip, ':');
+			file >> minGaussConst;
+			std::getline(file, skip, ':');
+			file >> maxGaussConst;
+			std::getline(file, skip, ':');
+			file >> stepGaussConst;
+			std::getline(file, skip, '$');
+			std::getline(file, skip, ':');
+			file >> minImgCompressPercentage;
+			std::getline(file, skip, ':');
+			file >> maxImgCompressPercentage;
+			std::getline(file, skip, ':');
+			file >> stepImgCompressPercentage;
+			std::getline(file, skip, '$');
+			std::getline(file, skip, ':');
+			file >> minThreshBinValue;
+			std::getline(file, skip, ':');
+			file >> maxThreshBinValue;
+			std::getline(file, skip, ':');
+			file >> stepThreshBinValue;
+			std::getline(file, skip, '$');
+			std::getline(file, skip, ':');
+			file >> minGaussBlockSize;
+			std::getline(file, skip, ':');
+			file >> maxGaussBlockSize;
+			std::getline(file, skip, ':');
+			file >> stepGaussBlockSize;
+			std::getline(file, skip, '$');
 		}
 
-		binaryThreshMaxThreshValue = value;
+		file.close();
 	}
 }

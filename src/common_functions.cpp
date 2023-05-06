@@ -14,7 +14,7 @@ namespace common_functions_namespace
 		return sum;
 	}
 
-	int CommonFunctions::getSumOfVectorExclude(vInt n, vInt & exclude)
+	int CommonFunctions::getSumOfVectorExclude(vInt n, vInt &exclude)
 	{
 		int sum = 0;
 
@@ -34,7 +34,7 @@ namespace common_functions_namespace
 		return sum;
 	}
 
-	int CommonFunctions::getSumOfVectorInclude(vInt n, vInt & include)
+	int CommonFunctions::getSumOfVectorInclude(vInt n, vInt &include)
 	{
 		int sum = 0;
 
@@ -49,7 +49,7 @@ namespace common_functions_namespace
 		return sum;
 	}
 	
-	void CommonFunctions::extractPixelNeighbours(cv::Mat & img, int r, int c, vInt & n)
+	void CommonFunctions::extractPixelNeighbours(cv::Mat &img, int r, int c, vInt &n)
 	{
 		n[0] = img.at<uchar>(r - 1, c    );
 		n[1] = img.at<uchar>(r - 1, c + 1);
