@@ -11,7 +11,6 @@
 #include <opencv2/opencv.hpp>
 #include <filesystem>
 #include <cstdlib>
-#include <fstream>
 #include "zhang_suen.h"
 #include "aliases.h"
 
@@ -54,44 +53,6 @@ namespace detectorator_namespace
 		double getImgCompressPercentage() { return imgCompressPercentage; };
 		double getGaussConst() { return gaussConst; };
 		int getGaussBlockSize() { return gaussBlockSize; };
-	};
-
-	class Config
-	{
-	private:
-		void parseConfigFile(fs::path);
-		double minBinaryThreshValue;
-		double maxBinaryThreshValue;
-		double stepBinaryThreshValue;
-		double minGaussConst;
-		double maxGaussConst;
-		double stepGaussConst;
-		double minImgCompressPercentage;
-		double maxImgCompressPercentage;
-		double stepImgCompressPercentage;
-		double minThreshBinValue;
-		double maxThreshBinValue;
-		double stepThreshBinValue;
-		int minGaussBlockSize;
-		int maxGaussBlockSize;
-		int stepGaussBlockSize;
-	public:
-		Config(fs::path);
-		double getMinBinaryThreshValue() { return minBinaryThreshValue; }
-		double getMaxBinaryThreshValue() { return maxBinaryThreshValue; }
-		double getStepBinaryThreshValue() { return stepBinaryThreshValue; }
-		double getMinGaussConst() { return minGaussConst; };
-		double getMaxGaussConst() { return maxGaussConst; };
-		double getStepGaussConst() { return stepGaussConst; };
-		double getMinImgCompressPercentage() { return minImgCompressPercentage; };
-		double getMaxImgCompressPercentage() { return maxImgCompressPercentage; };
-		double getStepImgCompressPercentage() { return stepImgCompressPercentage; };
-		double getMinThreshBinValue() { return minThreshBinValue; };
-		double getMaxThreshBinValue() { return maxThreshBinValue; };
-		double getStepThreshBinValue() { return stepThreshBinValue; };
-		int getMinGaussBlockSize() { return minGaussBlockSize; };
-		int getMaxGaussBlockSize() { return maxGaussBlockSize; };
-		int getStepGaussBlockSize() { return stepGaussBlockSize; };
 	};
 }
 

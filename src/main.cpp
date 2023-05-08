@@ -2,14 +2,13 @@
 #include <iostream>
 #include "detectorator.h"
 #include "aliases.h"
+#include "config.h"
 
 namespace dsg = detectorator_namespace;
 namespace fs = std::filesystem;
+namespace cfgn = config_namespace;
 
-void pMsg(std::string msg, std::string type="")
-{
-	std::cout << type << msg << std::endl;
-}
+unsigned int getDirFilesCount(fs::path);
 
 int main(int argc, char** argv)
 {
@@ -24,15 +23,20 @@ int main(int argc, char** argv)
 	fs::path pathToConfig {argv[3]};
 	fs::path pathWriteImg;
 	dsg::Detectorator detectorator;
-	dsg::Config config {dsg::Config(pathToConfig)};
+	cfgn::Config config {cfgn::Config(pathToConfig)};
+	unsigned int totalDirFiles = getDirFilesCount(pathReadFolder);
+	unsigned int currentDirFile = 0;
 
 	for (const auto &file : fs::directory_iterator(pathReadFolder))
 	{
 		std::string pathToFile {std::string(file.path())};
 		cv::Mat sourceImg;
 
+		std::cout << "+ [" << ++currentDirFile << "/" << totalDirFiles << "] ";
+		std::cout << "processing: ";
+		std::cout << pathToFile << std::endl;
+
 		// Reading image
-		pMsg(pathToFile, " + Reading a file : ");
 		detectorator.readImg(file.path(), sourceImg);
 	
 		// Processing image
@@ -44,17 +48,19 @@ int main(int argc, char** argv)
 		detectorator.setGaussBlockSize(111);
 		detectorator.setThreshBinValue(128.);
 		
-		pMsg(pathToFile, " + Starting file processing : ");
 		detectorator.execute(sourceImg, changedImg);
-		pMsg(pathToFile, " + Finishing file processing : ");
 	
 		// Writing image
 		fs::path p(file.path().filename());
 		std::string filename {"changed_" + std::string(p)};
 		fs::path saveTo {pathWriteFolder / filename};
-		pMsg(pathToFile, " + Writing a file : ");
 		detectorator.writeImg(changedImg, saveTo);
 	}
 
 	return 0;
+}
+
+unsigned int getDirFilesCount(fs::path dir)
+{
+	return std::distance(fs::directory_iterator(dir), fs::directory_iterator{});
 }
