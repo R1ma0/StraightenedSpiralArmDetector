@@ -56,36 +56,36 @@ namespace processed_data_namespace
 			   gaussBlockSize.getIterRange();
 	}
 
-	std::vector<double> ProcessedData::getBinaryThreshValueParams()
+	std::vector<float> ProcessedData::getBinaryThreshValueParams()
 	{
-		return std::vector<double> 
+		return std::vector<float> 
 		{
 			binaryThreshValue.min,
 			binaryThreshValue.max,
 			binaryThreshValue.step
 		};
 	}
-	std::vector<double> ProcessedData::getGaussConstParams()
+	std::vector<float> ProcessedData::getGaussConstParams()
 	{
-		return std::vector<double> 
+		return std::vector<float> 
 		{
 			gaussConst.min,
 			gaussConst.max,
 			gaussConst.step
 		};
 	}
-	std::vector<double> ProcessedData::getImgCompressPercentageParams()
+	std::vector<float> ProcessedData::getImgCompressPercentageParams()
 	{
-		return std::vector<double>
+		return std::vector<float>
 		{
 			imgCompressPercentage.min,
 			imgCompressPercentage.max,
 			imgCompressPercentage.step
 		};
 	}
-	std::vector<double> ProcessedData::getGaussBlockSizeParams()
+	std::vector<float> ProcessedData::getGaussBlockSizeParams()
 	{
-		return std::vector<double>
+		return std::vector<float>
 		{
 			gaussBlockSize.min,
 			gaussBlockSize.max,

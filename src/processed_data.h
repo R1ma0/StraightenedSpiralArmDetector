@@ -10,11 +10,11 @@ namespace fs = std::filesystem;
 
 namespace processed_data_namespace
 {
-	struct _ProcessedParameter
+	struct _ProcessedParameters
 	{
-		double min;
-		double max;
-		double step;
+		float min;
+		float max;
+		float step;
 		unsigned int getIterRange()
 		{
 			return (max - min) / step;
@@ -24,18 +24,18 @@ namespace processed_data_namespace
 	class ProcessedData 
 	{
 	private:
-		_ProcessedParameter binaryThreshValue;
-		_ProcessedParameter gaussConst;
-		_ProcessedParameter imgCompressPercentage;
-		_ProcessedParameter gaussBlockSize;
+		_ProcessedParameters binaryThreshValue;
+		_ProcessedParameters gaussConst;
+		_ProcessedParameters imgCompressPercentage;
+		_ProcessedParameters gaussBlockSize;
 		void readConfigFile(fs::path);
 	public:
 		ProcessedData(fs::path);
 		unsigned int calcTotalOutputPerFile();
-		std::vector<double> getBinaryThreshValueParams();
-		std::vector<double> getGaussConstParams();
-		std::vector<double> getImgCompressPercentageParams();
-		std::vector<double> getGaussBlockSizeParams();
+		std::vector<float> getBinaryThreshValueParams();
+		std::vector<float> getGaussConstParams();
+		std::vector<float> getImgCompressPercentageParams();
+		std::vector<float> getGaussBlockSizeParams();
 	};
 }
 

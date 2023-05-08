@@ -41,9 +41,9 @@ namespace detectorator_namespace
 	 * \param cp Image compression power
 	 * \return Reduced image
 	 */
-	void Detectorator::resizeImg(double cp)
+	void Detectorator::resizeImg(float cp)
 	{
-		double scaleValue {cp / 100.};
+		float scaleValue {cp / 100.};
 		int width {(int)(this->img.cols * scaleValue)};
 		int height {(int)(this->img.rows * scaleValue)};
 		

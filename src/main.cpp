@@ -26,10 +26,10 @@ int main(int argc, char** argv)
 	dsg::Detectorator detectorator;
 
 	pd::ProcessedData procData {pd::ProcessedData(pathToConfig)};
-	std::vector<double> BTVParams = procData.getBinaryThreshValueParams();
-	std::vector<double> GCParams = procData.getGaussConstParams();
-	std::vector<double> ICPParams = procData.getImgCompressPercentageParams();
-	std::vector<double> GBSParams = procData.getGaussBlockSizeParams();
+	std::vector<float> BTVParams = procData.getBinaryThreshValueParams();
+	std::vector<float> GCParams = procData.getGaussConstParams();
+	std::vector<float> ICPParams = procData.getImgCompressPercentageParams();
+	std::vector<float> GBSParams = procData.getGaussBlockSizeParams();
 
 	unsigned int totalDirFiles {getDirFilesCount(pathReadFolder)};
 	unsigned int currentDirFile = 1;
@@ -50,13 +50,13 @@ int main(int argc, char** argv)
 		std::string pathToFile {std::string(file.path())};
 		currentOutputPerFile = 0;
 
-		for (double i = GBSParams[0]; i < GBSParams[1]; i += GBSParams[2])
+		for (float i = GBSParams[0]; i < GBSParams[1]; i += GBSParams[2])
 		{
-			for (double j = GCParams[0]; j < GCParams[1]; j += GCParams[2])
+			for (float j = GCParams[0]; j < GCParams[1]; j += GCParams[2])
 			{
-				for (double k = ICPParams[0]; k < ICPParams[1]; k += ICPParams[2])
+				for (float k = ICPParams[0]; k < ICPParams[1]; k += ICPParams[2])
 				{
-					for (double q = BTVParams[0]; q < BTVParams[1]; q += BTVParams[2])
+					for (float q = BTVParams[0]; q < BTVParams[1]; q += BTVParams[2])
 					{
 						std::cout << "+ [" << currentDirFile << "/" << totalDirFiles << "] ";
 						std::cout << "[" << ++currentOutputPerFile << "/" << totalOutputPerFile << "] " ;
