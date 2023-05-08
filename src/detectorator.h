@@ -30,29 +30,23 @@ namespace detectorator_namespace
 	class Detectorator
 	{
 	private:
-		void resizeImg(cv::Mat &, double);
+		cv::Mat img;
+		void resizeImg(double);
 		void reportFailedOperation(std::string, bool);
-		void performAnOperationWithPixels(PixelsOperation, cv::Mat &);
+		void performAnOperationWithPixels(PixelsOperation);
 		double binaryThreshValue;
 		double gaussConst; /// Constant subtracted from the mean of weighted mean
 		double imgCompressPercentage;
-		double threshBinValue;
 		int gaussBlockSize; /// Size of a pixel neighbourhood : 3, 5, 7, ...
 		bool isPixelMatchesPatterns(vInt &, PixelPatterns &, cf::CommonFunctions &);
 	public:
-		void execute(cv::Mat, cv::Mat &);
-		void readImg(fs::path, cv::Mat &);
-		void writeImg(cv::Mat &, fs::path);
-		void setBinaryThreshValue(double);
-		void setThreshBinValue(double);
-		void setImgCompressPercentage(double);
+		void execute();
+		void readImg(fs::path);
+		void writeImg(fs::path);
+		void setBinaryThreshValue(double value) { binaryThreshValue = value; };
+		void setImgCompressPercentage(double value) { imgCompressPercentage = value; };
 		void setGaussConst(double value) { gaussConst = value; };
 		void setGaussBlockSize(int value) { gaussBlockSize = value; };
-		double getBinaryThreshValue() { return binaryThreshValue; };
-		double getThreshBinValue() { return threshBinValue; };
-		double getImgCompressPercentage() { return imgCompressPercentage; };
-		double getGaussConst() { return gaussConst; };
-		int getGaussBlockSize() { return gaussBlockSize; };
 	};
 }
 

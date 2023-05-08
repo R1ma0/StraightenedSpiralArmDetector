@@ -1,5 +1,4 @@
-min : 1			max : 2			step : 0.5			$ BinaryThreshValue
-min : 5			max : 10		step : 1			$ GaussConst
-min : -0.4		max : -0.01		step : 0.1			$ imgCompressPercentage
-min : 1			max : 2			step : 3			$ threshBinValue
-min : 1			max : 2			step : 3			$ gaussBlockSize
+min : 135.0		max : 140.0		step : 1.0			$ BinaryThreshValue
+min : -1.0		max : 1.0		step : 1.0			$ GaussConst
+min : 15.0		max : 16.0		step : 1.0			$ imgCompressPercentage
+min : 3.0		max : 5.0		step : 2.0			$ gaussBlockSize
