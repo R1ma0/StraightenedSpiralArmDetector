@@ -15,6 +15,7 @@
 #include "aliases.h"
 
 namespace zs = zhang_suen_namespace;
+namespace fs = std::filesystem;
 
 namespace detectorator_namespace
 {
@@ -29,35 +30,23 @@ namespace detectorator_namespace
 	class Detectorator
 	{
 	private:
-		double binaryThreshMaxThreshValue;
-		double binaryThreshValue;
-		double gaussMaxThresh;
-		double gaussConst; /// Constant subtracted from the mean of weighted mean
-		double imgCompressPercentage;
-		double threshBinValue;
-		int gaussBlockSize; /// Size of a pixel neighbourhood : 3, 5, 7, ...
-		void resizeImg(cv::Mat &, double);
+		cv::Mat img;
+		void resizeImg(float);
 		void reportFailedOperation(std::string, bool);
-		void performAnOperationWithPixels(PixelsOperation, cv::Mat &);
+		void performAnOperationWithPixels(PixelsOperation);
+		float binaryThreshValue;
+		float gaussConst; /// Constant subtracted from the mean of weighted mean
+		float imgCompressPercentage;
+		int gaussBlockSize; /// Size of a pixel neighbourhood : 3, 5, 7, ...
 		bool isPixelMatchesPatterns(vInt &, PixelPatterns &, cf::CommonFunctions &);
 	public:
-		void execute(cv::Mat, cv::Mat &);
-		void readImg(std::filesystem::path, cv::Mat &);
-		void writeImg(cv::Mat &, std::filesystem::path);
-		void setBinaryThreshValue(double);
-		double getBinaryThreshValue() { return binaryThreshValue; };
-		void setBinaryThreshMaxThreshValue(double);
-		double getBinaryThreshMaxThreshValue() { return binaryThreshMaxThreshValue; };
-		void setThreshBinValue(double);
-		double getThreshBinValue() { return threshBinValue; };
-		void setImgCompressPercentage(double);
-		double getImgCompressPercentage() { return imgCompressPercentage; };
-		void setGaussMaxThresh(double);
-		double getGaussMaxThresh() { return gaussMaxThresh; };
-		void setGaussConst(double value) { gaussConst = value; };
-		double getGaussConst() { return gaussConst; };
+		void execute();
+		void readImg(fs::path);
+		void writeImg(fs::path);
+		void setBinaryThreshValue(float value) { binaryThreshValue = value; };
+		void setImgCompressPercentage(float value) { imgCompressPercentage = value; };
+		void setGaussConst(float value) { gaussConst = value; };
 		void setGaussBlockSize(int value) { gaussBlockSize = value; };
-		int getGaussBlockSize() { return gaussBlockSize; };
 	};
 }
 

@@ -5,6 +5,7 @@ docs/latex
 
 # Files
 DetectoratorOfStringsOfGalaxies*
+*.xml
 
 # Images
 *.png

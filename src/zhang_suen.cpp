@@ -2,7 +2,7 @@
 
 namespace zhang_suen_namespace
 {
-	void ZhangSuen::execute(cv::Mat & inImg, bool replace)
+	void ZhangSuen::execute(cv::Mat &inImg, bool replace)
 	{
 		bool isStepOneChangesComplete {false};
 		bool isStepTwoChangesComplete {false};
@@ -28,7 +28,7 @@ namespace zhang_suen_namespace
 	}
 
 	void ZhangSuen::processPixels(
-		cv::Mat & img, bool & isComplete, vInt & nIdx, vInt neighbours
+		cv::Mat &img, bool &isComplete, vInt &nIdx, vInt neighbours
 	)
 	{
 		cf::CommonFunctions commonFunc;
@@ -65,17 +65,11 @@ namespace zhang_suen_namespace
 									 isThirdConditionMet && isFourthConditionMet &&
 									 isFifthConditionMet && isSixthConditionMet;
 
-				if (isAllConditionsMet)
-				{
-					stepChanges.push_back(cv::Point(r, c));
-				}
+				if (isAllConditionsMet) stepChanges.push_back(cv::Point(r, c));
 			}
 		}
 
-		if (stepChanges.empty())
-		{
-			isComplete = true;
-		}
+		if (stepChanges.empty()) isComplete = true;
 		else
 		{
 			for (cv::Point p : stepChanges)
@@ -85,7 +79,7 @@ namespace zhang_suen_namespace
 		}
 	}
 
-	void ZhangSuen::replacePixelValue(cv::Mat & inImg, uchar from, uchar to)
+	void ZhangSuen::replacePixelValue(cv::Mat &inImg, uchar from, uchar to)
 	{
 		for (int r = 0; r < inImg.rows; r++)
 		{
@@ -97,7 +91,7 @@ namespace zhang_suen_namespace
 		}
 	}
 
-	void ZhangSuen::extractSumOfTransitions(int & sum, vInt n)
+	void ZhangSuen::extractSumOfTransitions(int &sum, vInt n)
 	{
 		sum = 0;
 

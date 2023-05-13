@@ -8,31 +8,31 @@ namespace detectorator_namespace
 {
 	/* \brief Performs operations to highlight strings
 	 */
-	void Detectorator::execute(cv::Mat inImg, cv::Mat & outImg)
+	void Detectorator::execute()
 	{
 		cv::adaptiveThreshold(
-			inImg,
-			outImg, 
-			gaussMaxThresh,
+			this->img,
+			this->img, 
+			255.,
 			cv::ADAPTIVE_THRESH_GAUSSIAN_C, 
 			cv::THRESH_BINARY,
-			gaussBlockSize,
-			gaussConst
+			this->gaussBlockSize,
+			this->gaussConst
 		);
-		resizeImg(outImg, imgCompressPercentage);
+		resizeImg(this->imgCompressPercentage);
 		cv::threshold(
-			outImg, 
-			outImg, 
-			binaryThreshValue, 
-			binaryThreshMaxThreshValue, 
+			this->img, 
+			this->img, 
+			this->binaryThreshValue, 
+			255., 
 			cv::THRESH_BINARY
 		);
 		zs::ZhangSuen zhangSuen;
-		zhangSuen.replacePixelValue(outImg, 255, 1);
-		performAnOperationWithPixels(PixelsOperation::Remove, outImg);
-		performAnOperationWithPixels(PixelsOperation::Add, outImg);
-		zhangSuen.execute(outImg, false);
-		zhangSuen.replacePixelValue(outImg, 1, 255);
+		zhangSuen.replacePixelValue(this->img, 255, 1);
+		performAnOperationWithPixels(PixelsOperation::Add);
+		performAnOperationWithPixels(PixelsOperation::Remove);
+		zhangSuen.execute(this->img, false);
+		zhangSuen.replacePixelValue(this->img, 1, 255);
 	}
 
 	/* In this function is used cv::INTER_LINEAR method
@@ -41,20 +41,20 @@ namespace detectorator_namespace
 	 * \param cp Image compression power
 	 * \return Reduced image
 	 */
-	void Detectorator::resizeImg(cv::Mat & outImg, double cp)
+	void Detectorator::resizeImg(float cp)
 	{
-		double scaleValue {cp / 100.};
-		int width {(int)(outImg.cols * scaleValue)};
-		int height {(int)(outImg.rows * scaleValue)};
+		float scaleValue {cp / 100.};
+		int width {(int)(this->img.cols * scaleValue)};
+		int height {(int)(this->img.rows * scaleValue)};
 		
-		cv::resize(outImg, outImg, cv::Size(width, height), cv::INTER_LINEAR);
+		cv::resize(this->img, this->img, cv::Size(width, height), cv::INTER_LINEAR);
 	}
 
-	void Detectorator::readImg(std::filesystem::path from, cv::Mat & to)
+	void Detectorator::readImg(fs::path from)
 	{
-		to = cv::imread(from, cv::IMREAD_GRAYSCALE);
+		this->img = cv::imread(from, cv::IMREAD_GRAYSCALE);
 		
-		if (to.empty())
+		if (this->img.empty())
 		{
 			reportFailedOperation(
 				"Could not read the image : " + std::string(from), true
@@ -62,9 +62,10 @@ namespace detectorator_namespace
 		}
 	}
 
-	void Detectorator::writeImg(cv::Mat & from, std::filesystem::path to)
+	void Detectorator::writeImg(fs::path to)
 	{
-		bool isImgWrite {cv::imwrite(to, from)};
+		bool isImgWrite {cv::imwrite(to, this->img)};
+
 		if (!isImgWrite)
 		{
 			reportFailedOperation(
@@ -73,7 +74,7 @@ namespace detectorator_namespace
 		}
 	}
 
-	void Detectorator::performAnOperationWithPixels(PixelsOperation op, cv::Mat & inImg)
+	void Detectorator::performAnOperationWithPixels(PixelsOperation op)
 	{
 		cf::CommonFunctions cf;
 		vPoint pixelsToChange;
@@ -99,16 +100,16 @@ namespace detectorator_namespace
 
 		while (isNotAllPixelsChanged)
 		{
-			for (int r = 1; r < inImg.rows - 1; r++)
+			for (int r = 1; r < this->img.rows - 1; r++)
 			{
-				for (int c = 1; c < inImg.cols - 1; c++)
+				for (int c = 1; c < this->img.cols - 1; c++)
 				{		
-					cf.extractPixelNeighbours(inImg, r, c, neighbours);
+					cf.extractPixelNeighbours(this->img, r, c, neighbours);
 
 					switch (op)
 					{
 						case PixelsOperation::Add:
-							if (inImg.at<uchar>(r, c) == 0)
+							if (this->img.at<uchar>(r, c) == 0)
 							{
 								if (isPixelMatchesPatterns(neighbours, patternsToAdd, cf))
 								{
@@ -117,7 +118,7 @@ namespace detectorator_namespace
 							}
 							break;
 						case PixelsOperation::Remove:
-							if (inImg.at<uchar>(r, c) == 1)
+							if (this->img.at<uchar>(r, c) == 1)
 							{
 								if (isPixelMatchesPatterns(neighbours, patternsToRemove, cf))
 								{
@@ -129,15 +130,12 @@ namespace detectorator_namespace
 				}
 			}
 
-			if (pixelsToChange.empty())
-			{
-				isNotAllPixelsChanged = false;
-			}
+			if (pixelsToChange.empty()) isNotAllPixelsChanged = false;
 			else
 			{
 				for (cv::Point pixel: pixelsToChange)
 				{
-					inImg.at<uchar>(pixel.x, pixel.y) = (op == PixelsOperation::Remove) ? 0 : 1;
+					this->img.at<uchar>(pixel.x, pixel.y) = (op == PixelsOperation::Remove) ? 0 : 1;
 				}
 
 				pixelsToChange.clear();
@@ -146,7 +144,7 @@ namespace detectorator_namespace
 	}
 
 	bool Detectorator::isPixelMatchesPatterns(
-		vInt & n, PixelPatterns & patterns, cf::CommonFunctions & cf
+		vInt &n, PixelPatterns &patterns, cf::CommonFunctions &cf
 	)
 	{
 		bool statementOne;
@@ -170,70 +168,10 @@ namespace detectorator_namespace
 		return false;
 	}
 
-	void Detectorator::setGaussMaxThresh(double value)
-	{
-		if (value < 0. || value > 255.)
-		{
-			reportFailedOperation(
-				"Max threshold value out of range ( 0. <= value <= 255. )", true
-			);
-		}
-
-		gaussMaxThresh = value;
-	}
-
-	void Detectorator::setImgCompressPercentage(double value)
-	{
-		if (value <= 0. || value > 100.)
-		{
-			reportFailedOperation(
-				"Compression value out of range ( 0. < value <= 100. )", true
-			);
-		}
-
-		imgCompressPercentage = value;
-	}
-
-	void Detectorator::setThreshBinValue(double value)
-	{
-		if (value < 0. || value > 255.)
-		{
-			reportFailedOperation(
-				"Threshold binarization value out of range (0. <= value <= 255.)", true
-			);
-		}
-
-		threshBinValue = value;
-	}
-
 	void Detectorator::reportFailedOperation(std::string msg, bool close)
 	{
 		std::cout << "FAILDED. " + msg << std::endl;
 		if (close)
 			exit(0);
-	}
-
-	void Detectorator::setBinaryThreshValue(double value)
-	{
-		if (value < 0. || value > 255.)
-		{
-			reportFailedOperation(
-				"Binary threshold value out of range (0. <= value <= 255.)", true
-			);
-		}
-
-		binaryThreshValue = value;
-	}
-
-	void Detectorator::setBinaryThreshMaxThreshValue(double value)
-	{
-		if (value < 0. || value > 255.)
-		{
-			reportFailedOperation(
-				"Binary threshold max thresh value out of range (0. <= value <= 255.)", true
-			);
-		}
-
-		binaryThreshMaxThreshValue = value;
 	}
 }
