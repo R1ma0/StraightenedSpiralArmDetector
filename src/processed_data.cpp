@@ -1,95 +1,156 @@
 #include "processed_data.h"
-#include <iostream>
 
 namespace processed_data_namespace
 {
-	ProcessedData::ProcessedData(fs::path cfg)
+	ProcessedData::ProcessedData(fs::path cfg, uint filesCount)
 	{
 		readConfigFile(cfg);
+		calcTotalOutputPerFile();
+		calcTotalOutput(filesCount);
 	}
 
 	void ProcessedData::readConfigFile(fs::path pathToFile)
 	{
+		float min;
+		float max;
+		float step;
 		std::string skip;
 		std::ifstream file(pathToFile);
 
 		if (file.is_open())
 		{
 			std::getline(file, skip, ':');
-			file >> binaryThreshValue.min;
+			file >> min; 
+			binaryThreshValue.setMin(min);
 			std::getline(file, skip, ':');
-			file >> binaryThreshValue.max;
+			file >> max;
+			binaryThreshValue.setMax(max);
 			std::getline(file, skip, ':');
-			file >> binaryThreshValue.step;
+			file >> step;
+			binaryThreshValue.setStep(step);
 			std::getline(file, skip, '$');
+			
 			std::getline(file, skip, ':');
-			file >> gaussConst.min;
+			file >> min;
+			gaussConst.setMin(min);
 			std::getline(file, skip, ':');
-			file >> gaussConst.max;
+			file >> max;
+			gaussConst.setMax(max);
 			std::getline(file, skip, ':');
-			file >> gaussConst.step;
+			file >> step;
+			gaussConst.setStep(max);
 			std::getline(file, skip, '$');
+			
 			std::getline(file, skip, ':');
-			file >> imgCompressPercentage.min;
+			file >> min;
+			imgCompressPercentage.setMin(min);
 			std::getline(file, skip, ':');
-			file >> imgCompressPercentage.max;
+			file >> max;
+			imgCompressPercentage.setMax(max);
 			std::getline(file, skip, ':');
-			file >> imgCompressPercentage.step;
+			file >> step;
+			imgCompressPercentage.setStep(step);
 			std::getline(file, skip, '$');
+			
 			std::getline(file, skip, ':');
-			file >> gaussBlockSize.min;
+			file >> min;
+			gaussBlockSize.setMin(min);
 			std::getline(file, skip, ':');
-			file >> gaussBlockSize.max;
+			file >> max;
+			gaussBlockSize.setMax(max);
 			std::getline(file, skip, ':');
-			file >> gaussBlockSize.step;
+			file >> step;
+			gaussBlockSize.setStep(step);
 			std::getline(file, skip, '$');
 		}
 
 		file.close();
 	}
 
-	unsigned int ProcessedData::calcTotalOutputPerFile()
+	void ProcessedData::calcTotalOutputPerFile()
 	{
-		return binaryThreshValue.getIterRange() * 
-			   gaussConst.getIterRange() *
-			   imgCompressPercentage.getIterRange() *
-			   gaussBlockSize.getIterRange();
+		totalOutputPerFile = binaryThreshValue.getIterRange() * 
+							 gaussConst.getIterRange() *
+							 imgCompressPercentage.getIterRange() *
+							 gaussBlockSize.getIterRange();
 	}
 
-	std::vector<float> ProcessedData::getBinaryThreshValueParams()
+	void ProcessedData::calcTotalOutput(uint filesCount)
 	{
-		return std::vector<float> 
-		{
-			binaryThreshValue.min,
-			binaryThreshValue.max,
-			binaryThreshValue.step
-		};
+		totalOutput = filesCount * totalOutputPerFile;
 	}
-	std::vector<float> ProcessedData::getGaussConstParams()
+
+	void ProcessedData::saveProcessedParameters(
+		float gaussBlockSize, float gaussConstant, float imgCompressPercentage,
+		float binaryThreshValue, std::string srcPath, std::string outPath
+	)
 	{
-		return std::vector<float> 
-		{
-			gaussConst.min,
-			gaussConst.max,
-			gaussConst.step
-		};
+		imgProcParams.push_back(
+			ImgProcessingParameters{
+				gaussBlockSize, gaussConstant, imgCompressPercentage,
+				binaryThreshValue, srcPath, outPath
+			}
+		);
 	}
-	std::vector<float> ProcessedData::getImgCompressPercentageParams()
+
+	void ProcessedData::writeProcessedParametersToXML(fs::path pathToXML)
 	{
-		return std::vector<float>
+		tinyxml2::XMLDocument xmlDoc;
+
+		tinyxml2::XMLNode *root = xmlDoc.NewElement("processing_results");
+		xmlDoc.InsertFirstChild(root);
+
+		for (auto i : imgProcParams)
 		{
-			imgCompressPercentage.min,
-			imgCompressPercentage.max,
-			imgCompressPercentage.step
-		};
+			tinyxml2::XMLElement *element = xmlDoc.NewElement("result");
+			
+			tinyxml2::XMLElement *content = xmlDoc.NewElement("src_path");
+			content->SetText((i.srcPath).c_str());
+			element->InsertEndChild(content);
+
+			content = xmlDoc.NewElement("out_path");
+			content->SetText((i.outPath).c_str());
+			element->InsertEndChild(content);
+
+			content = xmlDoc.NewElement("binary_thresh_value");
+			content->SetText(i.binaryThreshValue);
+			element->InsertEndChild(content);
+
+			content = xmlDoc.NewElement("gauss_const");
+			content->SetText(i.gaussConst);
+			element->InsertEndChild(content);
+
+			content = xmlDoc.NewElement("img_compress_percentage");
+			content->SetText(i.imgCompressPercentage);
+			element->InsertEndChild(content);
+
+			content = xmlDoc.NewElement("gauss_block_size");
+			content->SetText(i.gaussBlockSize);
+			element->InsertEndChild(content);
+
+			root->InsertEndChild(element);
+		}
+
+		xmlDoc.SaveFile(pathToXML.c_str());
 	}
-	std::vector<float> ProcessedData::getGaussBlockSizeParams()
+
+	pp::ProcessedParameters ProcessedData::getBinaryThreshValueParams()
 	{
-		return std::vector<float>
-		{
-			gaussBlockSize.min,
-			gaussBlockSize.max,
-			gaussBlockSize.step
-		};
+		return binaryThreshValue;
+	}
+
+	pp::ProcessedParameters ProcessedData::getGaussConstParams()
+	{
+		return gaussConst;
+	}
+
+	pp::ProcessedParameters ProcessedData::getImgCompressPercentageParams()
+	{
+		return imgCompressPercentage;
+	}
+
+	pp::ProcessedParameters ProcessedData::getGaussBlockSizeParams()
+	{
+		return gaussBlockSize;
 	}
 }

@@ -10,6 +10,7 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 add_library(tinyxml2 STATIC tinyxml2.cpp)
 add_library(common_functions STATIC common_functions.cpp)
 add_library(processed_data STATIC processed_data.cpp)
+add_library(processed_parameters STATIC processed_parameters.cpp)
 add_library(detectorator STATIC detectorator.cpp)
 add_library(zhang_suen STATIC zhang_suen.cpp)
 add_executable(DetectoratorOfStringsOfGalaxies main.cpp)
@@ -20,6 +21,7 @@ target_link_libraries(
 	zhang_suen 
 	common_functions
 	processed_data
+	processed_parameters
 	tinyxml2
 	${OpenCV_LIBS} 
 )

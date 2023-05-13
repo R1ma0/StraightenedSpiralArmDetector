@@ -6,5 +6,6 @@
 
 typedef std::vector<int> vInt;
 typedef std::vector<cv::Point> vPoint;
+typedef unsigned int uint;
 
 #endif

@@ -4,38 +4,49 @@
 #include <filesystem>
 #include <fstream>
 #include <vector>
+#include <iostream>
+#include "aliases.h"
 #include "tinyxml2.h"
+#include "processed_parameters.h"
 
 namespace fs = std::filesystem;
+namespace pp = processed_parameters_namespace;
 
 namespace processed_data_namespace
 {
-	struct _ProcessedParameters
+	struct ImgProcessingParameters
 	{
-		float min;
-		float max;
-		float step;
-		unsigned int getIterRange()
-		{
-			return (max - min) / step;
-		}
+		float binaryThreshValue;
+		float gaussConst;
+		float imgCompressPercentage;
+		float gaussBlockSize;
+		std::string srcPath;
+		std::string outPath;
 	};
 
 	class ProcessedData 
 	{
 	private:
-		_ProcessedParameters binaryThreshValue;
-		_ProcessedParameters gaussConst;
-		_ProcessedParameters imgCompressPercentage;
-		_ProcessedParameters gaussBlockSize;
+		pp::ProcessedParameters binaryThreshValue;
+		pp::ProcessedParameters gaussConst;
+		pp::ProcessedParameters imgCompressPercentage;
+		pp::ProcessedParameters gaussBlockSize;
+		std::vector<ImgProcessingParameters> imgProcParams;
+		uint totalOutputPerFile;
+		uint totalOutput;
+		void calcTotalOutputPerFile();
+		void calcTotalOutput(uint);
 		void readConfigFile(fs::path);
 	public:
-		ProcessedData(fs::path);
-		unsigned int calcTotalOutputPerFile();
-		std::vector<float> getBinaryThreshValueParams();
-		std::vector<float> getGaussConstParams();
-		std::vector<float> getImgCompressPercentageParams();
-		std::vector<float> getGaussBlockSizeParams();
+		ProcessedData(fs::path, uint);
+		pp::ProcessedParameters getBinaryThreshValueParams();
+		pp::ProcessedParameters getGaussConstParams();
+		pp::ProcessedParameters getImgCompressPercentageParams();
+		pp::ProcessedParameters getGaussBlockSizeParams();
+		uint getTotalOutputPerFile() { return totalOutputPerFile; };
+		uint getTotalOutput() { return totalOutput; };
+		void saveProcessedParameters(float, float, float, float, std::string, std::string);
+		void writeProcessedParametersToXML(fs::path);
 	};
 }
 
