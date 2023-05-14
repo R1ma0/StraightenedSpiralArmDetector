@@ -34,6 +34,10 @@ int main(int argc, char** argv)
 
 	uint totalDirFiles {getDirFilesCount(pathReadFolder)};
 	uint currentDirFile = 1;
+	std::string readedFilename;
+	std::string filenameToSave;
+	std::string saveFileTo;
+	cv::Mat procImg;
 
 	pd::ProcessedData procData {pd::ProcessedData(pathToConfig, totalDirFiles)};
 	pp::ProcessedParameters BTV = procData.getBinaryThreshValueParams();
@@ -57,7 +61,11 @@ int main(int argc, char** argv)
 	for (const auto &file : fs::directory_iterator(pathReadFolder))
 	{
 		std::string pathToFile {std::string(file.path())};
+		readedFilename = std::string(file.path().filename());
 		currentOutputPerFile = 0;
+		
+		// Reading image
+		detectorator.readImg(file.path());
 
 		for (float i = GBS.getMin(); i < GBS.getMax(); i += GBS.getStep())
 		{
@@ -67,23 +75,15 @@ int main(int argc, char** argv)
 				{
 					for (float q = BTV.getMin(); q < BTV.getMax(); q += BTV.getStep())
 					{
-						// Path to save and filename
-						fs::path p(file.path().filename());
-						std::string number {
-							std::to_string(currentDirFile) + "_" + 
-							std::to_string(currentOutputPerFile + 1) + "_"
-						};
-						std::string filename {number + "changed_" + std::string(p)};
-						fs::path saveTo {pathWriteFolder / filename};
+						currentOutput++;
+						filenameToSave = std::to_string(currentOutput) + "_" + readedFilename;
+						saveFileTo = pathWriteFolder / filenameToSave;
 
 						displayInfo(
 							currentDirFile, totalDirFiles, ++currentOutputPerFile,
-							totalOutputPerFile, ++currentOutput, totalOutput,
-							i, j, k, q, filename
+							totalOutputPerFile, currentOutput, totalOutput,
+							i, j, k, q, filenameToSave
 						);
-
-						// Reading image
-						detectorator.readImg(file.path());
 					
 						// Processing image
 						detectorator.setImgCompressPercentage(k);
@@ -91,13 +91,13 @@ int main(int argc, char** argv)
 						detectorator.setGaussConst(j);
 						detectorator.setGaussBlockSize(i);
 						
-						detectorator.execute();
+						procImg = detectorator.execute();
 					
 						// Writing image
-						detectorator.writeImg(saveTo);
+						detectorator.writeImg(procImg, saveFileTo);
 
 						procData.saveProcessedParameters(
-							i, j, k, q, pathToFile, std::string(saveTo)
+							i, j, k, q, pathToFile, saveFileTo
 						);
 					}
 				}

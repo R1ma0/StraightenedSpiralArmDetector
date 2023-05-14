@@ -31,18 +31,18 @@ namespace detectorator_namespace
 	{
 	private:
 		cv::Mat img;
-		void resizeImg(float);
+		void resizeImg(cv::Mat &, float);
 		void reportFailedOperation(std::string, bool);
-		void performAnOperationWithPixels(PixelsOperation);
+		void performAnOperationWithPixels(cv::Mat &, PixelsOperation);
 		float binaryThreshValue;
 		float gaussConst; /// Constant subtracted from the mean of weighted mean
 		float imgCompressPercentage;
 		int gaussBlockSize; /// Size of a pixel neighbourhood : 3, 5, 7, ...
 		bool isPixelMatchesPatterns(vInt &, PixelPatterns &, cf::CommonFunctions &);
 	public:
-		void execute();
+		cv::Mat execute();
 		void readImg(fs::path);
-		void writeImg(fs::path);
+		void writeImg(cv::Mat, fs::path);
 		void setBinaryThreshValue(float value) { binaryThreshValue = value; };
 		void setImgCompressPercentage(float value) { imgCompressPercentage = value; };
 		void setGaussConst(float value) { gaussConst = value; };

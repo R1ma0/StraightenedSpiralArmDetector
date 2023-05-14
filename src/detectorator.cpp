@@ -8,31 +8,35 @@ namespace detectorator_namespace
 {
 	/* \brief Performs operations to highlight strings
 	 */
-	void Detectorator::execute()
+	cv::Mat Detectorator::execute()
 	{
+		cv::Mat procImg = (this->img).clone();
+
 		cv::adaptiveThreshold(
-			this->img,
-			this->img, 
+			procImg,
+			procImg, 
 			255.,
 			cv::ADAPTIVE_THRESH_GAUSSIAN_C, 
 			cv::THRESH_BINARY,
 			this->gaussBlockSize,
 			this->gaussConst
 		);
-		resizeImg(this->imgCompressPercentage);
+		resizeImg(procImg, this->imgCompressPercentage);
 		cv::threshold(
-			this->img, 
-			this->img, 
+			procImg, 
+			procImg, 
 			this->binaryThreshValue, 
 			255., 
 			cv::THRESH_BINARY
 		);
 		zs::ZhangSuen zhangSuen;
-		zhangSuen.replacePixelValue(this->img, 255, 1);
-		performAnOperationWithPixels(PixelsOperation::Add);
-		performAnOperationWithPixels(PixelsOperation::Remove);
-		zhangSuen.execute(this->img, false);
-		zhangSuen.replacePixelValue(this->img, 1, 255);
+		zhangSuen.replacePixelValue(procImg, 255, 1);
+		performAnOperationWithPixels(procImg, PixelsOperation::Add);
+		performAnOperationWithPixels(procImg, PixelsOperation::Remove);
+		zhangSuen.execute(procImg, false);
+		zhangSuen.replacePixelValue(procImg, 1, 255);
+
+		return procImg;
 	}
 
 	/* In this function is used cv::INTER_LINEAR method
@@ -41,13 +45,13 @@ namespace detectorator_namespace
 	 * \param cp Image compression power
 	 * \return Reduced image
 	 */
-	void Detectorator::resizeImg(float cp)
+	void Detectorator::resizeImg(cv::Mat &img, float cp)
 	{
-		float scaleValue {cp / 100.};
-		int width {(int)(this->img.cols * scaleValue)};
-		int height {(int)(this->img.rows * scaleValue)};
+		float scaleValue {cp / (float)100.};
+		int width {(int)(img.cols * scaleValue)};
+		int height {(int)(img.rows * scaleValue)};
 		
-		cv::resize(this->img, this->img, cv::Size(width, height), cv::INTER_LINEAR);
+		cv::resize(img, img, cv::Size(width, height), cv::INTER_LINEAR);
 	}
 
 	void Detectorator::readImg(fs::path from)
@@ -62,9 +66,9 @@ namespace detectorator_namespace
 		}
 	}
 
-	void Detectorator::writeImg(fs::path to)
+	void Detectorator::writeImg(cv::Mat img, fs::path to)
 	{
-		bool isImgWrite {cv::imwrite(to, this->img)};
+		bool isImgWrite {cv::imwrite(to, img)};
 
 		if (!isImgWrite)
 		{
@@ -74,7 +78,7 @@ namespace detectorator_namespace
 		}
 	}
 
-	void Detectorator::performAnOperationWithPixels(PixelsOperation op)
+	void Detectorator::performAnOperationWithPixels(cv::Mat &img, PixelsOperation op)
 	{
 		cf::CommonFunctions cf;
 		vPoint pixelsToChange;
@@ -100,16 +104,16 @@ namespace detectorator_namespace
 
 		while (isNotAllPixelsChanged)
 		{
-			for (int r = 1; r < this->img.rows - 1; r++)
+			for (int r = 1; r < img.rows - 1; r++)
 			{
-				for (int c = 1; c < this->img.cols - 1; c++)
+				for (int c = 1; c < img.cols - 1; c++)
 				{		
-					cf.extractPixelNeighbours(this->img, r, c, neighbours);
+					cf.extractPixelNeighbours(img, r, c, neighbours);
 
 					switch (op)
 					{
 						case PixelsOperation::Add:
-							if (this->img.at<uchar>(r, c) == 0)
+							if (img.at<uchar>(r, c) == 0)
 							{
 								if (isPixelMatchesPatterns(neighbours, patternsToAdd, cf))
 								{
@@ -118,7 +122,7 @@ namespace detectorator_namespace
 							}
 							break;
 						case PixelsOperation::Remove:
-							if (this->img.at<uchar>(r, c) == 1)
+							if (img.at<uchar>(r, c) == 1)
 							{
 								if (isPixelMatchesPatterns(neighbours, patternsToRemove, cf))
 								{
@@ -135,7 +139,7 @@ namespace detectorator_namespace
 			{
 				for (cv::Point pixel: pixelsToChange)
 				{
-					this->img.at<uchar>(pixel.x, pixel.y) = (op == PixelsOperation::Remove) ? 0 : 1;
+					img.at<uchar>(pixel.x, pixel.y) = (op == PixelsOperation::Remove) ? 0 : 1;
 				}
 
 				pixelsToChange.clear();
