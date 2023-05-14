@@ -1,6 +1,7 @@
 #include <opencv2/imgcodecs.hpp>
 #include <iostream>
 #include <vector>
+#include <time.h>
 #include "detectorator.h"
 #include "aliases.h"
 #include "processed_data.h"
@@ -13,7 +14,9 @@ namespace pp = processed_parameters_namespace;
 
 uint getDirFilesCount(fs::path);
 bool displayInfoHeader(uint, uint, uint);
-void displayInfo(uint, uint, uint, uint, uint, uint, std::string, fs::path);
+void displayInfo(
+	uint, uint, uint, uint, uint, uint, float &, float &, float &, float &, std::string
+);
 
 int main(int argc, char** argv)
 {
@@ -49,6 +52,8 @@ int main(int argc, char** argv)
 
 	std::cout << "=== PROCESSING BEGIN ===" << std::endl;
 
+	clock_t tStart = clock();
+
 	for (const auto &file : fs::directory_iterator(pathReadFolder))
 	{
 		std::string pathToFile {std::string(file.path())};
@@ -74,7 +79,7 @@ int main(int argc, char** argv)
 						displayInfo(
 							currentDirFile, totalDirFiles, ++currentOutputPerFile,
 							totalOutputPerFile, ++currentOutput, totalOutput,
-							file.path(), saveTo
+							i, j, k, q, filename
 						);
 
 						// Reading image
@@ -101,6 +106,8 @@ int main(int argc, char** argv)
 
 		currentDirFile++;
 	}
+
+	std::cout << "Time remain : " << (double)(clock() - tStart)/CLOCKS_PER_SEC << " sec" << std::endl;
 	
 	procData.writeProcessedParametersToXML("processed_params.xml");
 	std::cout << "=== PROCESSING COMPLETED ===" << std::endl;
@@ -134,12 +141,13 @@ bool displayInfoHeader(uint totalDirFiles, uint totalOutputPerFile, uint totalOu
 void displayInfo(
 	uint currentDirFile, uint totalDirFiles, uint currentOutputPerFile, 
 	uint totalOutputPerFile, uint currentOutput, uint totalOutput, 
-	std::string pathToFile, fs::path saveTo
+	float &GBS, float &GC, float &ICP, float &BTV, std::string outFilename
 )
 {
 	std::cout << "+ [" << currentDirFile << "/" << totalDirFiles << "] ";
 	std::cout << "[" << currentOutputPerFile << "/" << totalOutputPerFile << "] " ;
 	std::cout << "[" << currentOutput << "/" << totalOutput << "] ";
-	std::cout << "processing: ";
-	std::cout << pathToFile << " => " << saveTo << std::endl;
+	std::cout << "Parameters: " << "GBS=" << GBS << "; GC=" << GC;
+	std::cout << "; ICP=" << ICP << "; BTV=" << BTV << " => ";
+	std::cout << outFilename << std::endl;;
 }
