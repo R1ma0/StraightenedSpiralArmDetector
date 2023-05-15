@@ -5,7 +5,12 @@ namespace processed_parameters_namespace
 {
 	uint ProcessedParameters::getIterRange()
 	{
-		return (max - min) / step;
+		if (max == min)
+		{
+			return 1;
+		}
+
+		return ((max - min) / step) + 1;
 	}
 
 	float ProcessedParameters::getMin()

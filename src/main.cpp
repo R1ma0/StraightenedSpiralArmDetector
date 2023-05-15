@@ -13,9 +13,14 @@ namespace pd = processed_data_namespace;
 namespace pp = processed_parameters_namespace;
 
 uint getDirFilesCount(fs::path);
-bool displayInfoHeader(uint, uint, uint);
+bool displayInfoHeader(
+	uint, uint, uint, 
+	pp::ProcessedParameters &, pp::ProcessedParameters &,
+	pp::ProcessedParameters &, pp::ProcessedParameters &
+);
 void displayInfo(
-	uint, uint, uint, uint, uint, uint, float &, float &, float &, float &, std::string
+	uint, uint, uint, uint, uint, uint, 
+	float &, float &, float &, float &, std::string
 );
 
 int main(int argc, char** argv)
@@ -50,7 +55,9 @@ int main(int argc, char** argv)
 	uint totalOutput {procData.getTotalOutput()};
 	uint currentOutput = 0;
 
-	bool startProc = displayInfoHeader(totalDirFiles, totalOutputPerFile, totalOutput);
+	bool startProc = displayInfoHeader(
+		totalDirFiles, totalOutputPerFile, totalOutput, BTV, GC, ICP, GBS
+	);
 	if (!startProc)
 		return 0;
 
@@ -67,13 +74,13 @@ int main(int argc, char** argv)
 		// Reading image
 		detectorator.readImg(file.path());
 
-		for (float i = GBS.getMin(); i < GBS.getMax(); i += GBS.getStep())
+		for (float i = GBS.getMin(); i <= GBS.getMax(); i += GBS.getStep())
 		{
-			for (float j = GC.getMin(); j < GC.getMax(); j += GC.getStep())
+			for (float j = GC.getMin(); j <= GC.getMax(); j += GC.getStep())
 			{
-				for (float k = ICP.getMin(); k < ICP.getMax(); k += ICP.getStep())
+				for (float k = ICP.getMin(); k <= ICP.getMax(); k += ICP.getStep())
 				{
-					for (float q = BTV.getMin(); q < BTV.getMax(); q += BTV.getStep())
+					for (float q = BTV.getMin(); q <= BTV.getMax(); q += BTV.getStep())
 					{
 						currentOutput++;
 						filenameToSave = std::to_string(currentOutput) + "_" + readedFilename;
@@ -120,7 +127,11 @@ uint getDirFilesCount(fs::path dir)
 	return std::distance(fs::directory_iterator(dir), fs::directory_iterator{});
 }
 
-bool displayInfoHeader(uint totalDirFiles, uint totalOutputPerFile, uint totalOutput)
+bool displayInfoHeader(
+	uint totalDirFiles, uint totalOutputPerFile, uint totalOutput, 
+	pp::ProcessedParameters &BTV, pp::ProcessedParameters &GC,
+	pp::ProcessedParameters &ICP, pp::ProcessedParameters &GBS
+)
 {
 	bool status = false;
 	std::string userInput = "";
@@ -130,6 +141,29 @@ bool displayInfoHeader(uint totalDirFiles, uint totalOutputPerFile, uint totalOu
 	std::cout << "+ " << totalOutputPerFile;
 	std::cout << " processed copies will be created for each image" << std::endl;
 	std::cout << "+ " << totalOutput << " processed " << "images will be created" << std::endl;
+	
+	std::cout << "Processed data:" << std::endl;
+	std::cout << "+ Gauss Block Size: ";
+	std::cout << "min = "   << GBS.getMin()       << "; ";
+	std::cout << "max = "   << GBS.getMax()       << "; ";
+	std::cout << "step = "  << GBS.getStep()      << "; ";
+	std::cout << "range = " << GBS.getIterRange() << std::endl;
+	std::cout << "+ Binary Thresh Value: ";
+	std::cout << "min = "   << BTV.getMin()		  << "; ";
+	std::cout << "max = "   << BTV.getMax()		  << "; ";
+	std::cout << "step = "  << BTV.getStep()	  << "; ";
+	std::cout << "range = " << BTV.getIterRange() << std::endl;
+	std::cout << "+ Image Compress Percentage: ";
+	std::cout << "min = "   << ICP.getMin()		  << "; ";
+	std::cout << "max = "   << ICP.getMax()		  << "; ";
+	std::cout << "step = "  << ICP.getStep()	  << "; ";
+	std::cout << "range = " << ICP.getIterRange() << std::endl;
+	std::cout << "+ Gauss Constant: ";
+	std::cout << "min = "   << GC.getMin()		  << "; ";
+	std::cout << "max = "   << GC.getMax()		  << "; ";
+	std::cout << "step = "  << GC.getStep()		  << "; ";
+	std::cout << "range = " << GC.getIterRange()  << std::endl;
+	
 	std::cout << "Start image processing? [Y/N]" << std::endl;
 	std::cin >> userInput;
 	if (!userInput.compare("y") || !userInput.compare("Y"))

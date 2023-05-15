@@ -38,7 +38,7 @@ namespace processed_data_namespace
 			gaussConst.setMax(max);
 			std::getline(file, skip, ':');
 			file >> step;
-			gaussConst.setStep(max);
+			gaussConst.setStep(step);
 			std::getline(file, skip, '$');
 			
 			std::getline(file, skip, ':');
