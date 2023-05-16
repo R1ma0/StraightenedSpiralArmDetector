@@ -16,10 +16,10 @@ namespace processed_data_namespace
 {
 	struct ImgProcessingParameters
 	{
-		float binaryThreshValue;
+		float gaussBlockSize;
 		float gaussConst;
 		float imgCompressPercentage;
-		float gaussBlockSize;
+		float binaryThreshValue;
 		std::string srcPath;
 		std::string outPath;
 	};
