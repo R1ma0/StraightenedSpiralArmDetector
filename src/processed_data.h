@@ -20,6 +20,7 @@ namespace processed_data_namespace
 		float gaussConst;
 		float imgCompressPercentage;
 		float binaryThreshValue;
+		float processingTime;
 		std::string srcPath;
 		std::string outPath;
 	};
@@ -45,7 +46,7 @@ namespace processed_data_namespace
 		pp::ProcessedParameters getGaussBlockSizeParams();
 		uint getTotalOutputPerFile() { return totalOutputPerFile; };
 		uint getTotalOutput() { return totalOutput; };
-		void saveProcessedParameters(float, float, float, float, std::string, std::string);
+		void saveProcessedParameters(float, float, float, float, float, std::string, std::string);
 		void writeProcessedParametersToXML(fs::path);
 	};
 }

@@ -12,6 +12,7 @@ namespace fs = std::filesystem;
 namespace pd = processed_data_namespace;
 namespace pp = processed_parameters_namespace;
 
+float calcDeltaTimeSec(clock_t &, clock_t &);
 uint getDirFilesCount(fs::path);
 bool displayInfoHeader(
 	uint, uint, uint, 
@@ -44,6 +45,12 @@ int main(int argc, char** argv)
 	std::string saveFileTo;
 	cv::Mat procImg;
 
+	clock_t tStartProc;
+	clock_t tEndProc;
+	clock_t processingTimeStart;
+	clock_t processingTimeEnd;
+	float processingDeltaTime;
+
 	pd::ProcessedData procData {pd::ProcessedData(pathToConfig, totalDirFiles)};
 	pp::ProcessedParameters BTV = procData.getBinaryThreshValueParams();
 	pp::ProcessedParameters GC = procData.getGaussConstParams();
@@ -63,7 +70,7 @@ int main(int argc, char** argv)
 
 	std::cout << "=== PROCESSING BEGIN ===" << std::endl;
 
-	clock_t tStart = clock();
+	tStartProc = clock();
 
 	for (const auto &file : fs::directory_iterator(pathReadFolder))
 	{
@@ -91,20 +98,28 @@ int main(int argc, char** argv)
 							totalOutputPerFile, currentOutput, totalOutput,
 							i, j, k, q, filenameToSave
 						);
-					
+
 						// Processing image
 						detectorator.setImgCompressPercentage(k);
 						detectorator.setBinaryThreshValue(q);
 						detectorator.setGaussConst(j);
 						detectorator.setGaussBlockSize(i);
 						
+						processingTimeStart = clock();
 						procImg = detectorator.execute();
-					
+						processingTimeEnd = clock();	
+
+						processingDeltaTime = calcDeltaTimeSec(
+							processingTimeStart, processingTimeEnd
+						);
+						std::cout << " Time : " << processingDeltaTime;
+						std::cout << " sec." << std::endl;
+
 						// Writing image
 						detectorator.writeImg(procImg, saveFileTo);
 
 						procData.saveProcessedParameters(
-							i, j, k, q, pathToFile, saveFileTo
+							i, j, k, q, processingDeltaTime, pathToFile, saveFileTo
 						);
 					}
 				}
@@ -114,12 +129,19 @@ int main(int argc, char** argv)
 		currentDirFile++;
 	}
 
-	std::cout << "Time remain : " << (double)(clock() - tStart)/CLOCKS_PER_SEC << " sec" << std::endl;
+	tEndProc = clock();
+	std::cout << "Time remain : " << calcDeltaTimeSec(tStartProc, tEndProc)/60.0;
+	std::cout << " min." << std::endl;
 	
 	procData.writeProcessedParametersToXML("processed_params.xml");
 	std::cout << "=== PROCESSING COMPLETED ===" << std::endl;
 
 	return 0;
+}
+
+float calcDeltaTimeSec(clock_t &start, clock_t &end)
+{
+	return (float)(end - start) / CLOCKS_PER_SEC;
 }
 
 uint getDirFilesCount(fs::path dir)
@@ -183,5 +205,5 @@ void displayInfo(
 	std::cout << "[" << currentOutput << "/" << totalOutput << "] ";
 	std::cout << "Parameters: " << "GBS=" << GBS << "; GC=" << GC;
 	std::cout << "; ICP=" << ICP << "; BTV=" << BTV << " => ";
-	std::cout << outFilename << std::endl;;
+	std::cout << outFilename << ";";
 }
