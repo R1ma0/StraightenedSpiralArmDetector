@@ -1,0 +1,4 @@
+						GBS		GC		ICP		BTV
+NGC7678_SDSS9		  : 337		-10		20		240
+M101_SDSS             : 157		-3		20		205
+*_hubble_screensize	  : 477		-3		10		240

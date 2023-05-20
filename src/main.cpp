@@ -133,7 +133,7 @@ int main(int argc, char** argv)
 	std::cout << "Time remain : " << calcDeltaTimeSec(tStartProc, tEndProc)/60.0;
 	std::cout << " min." << std::endl;
 	
-	procData.writeProcessedParametersToXML("processed_params.xml");
+	procData.writeProcessedParametersToXML(pathWriteFolder / "processed_params.xml");
 	std::cout << "=== PROCESSING COMPLETED ===" << std::endl;
 
 	return 0;
