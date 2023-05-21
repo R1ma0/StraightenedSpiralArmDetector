@@ -1,4 +1,4 @@
-min : 240.0		max : 240.0		step : 10.0	$ BinaryThreshValue
-min : -3.0		max : -3.0		step : 5.0	$ GaussConst 
-min : 10.0		max : 10.0		step : 5.0	$ imgCompressPercentage
-min : 477.0		max : 477.0		step : 10.0	$ gaussBlockSize (step must be 2, 4, ...; bu value 3, 5, ...)
+min : 200.0		max : 250.0		step : 20.0		$ BinaryThreshValue
+min : -8.0		max : -2.0		step : 2.0		$ GaussConst 
+min : 20.0		max : 20.0		step : 3.0		$ imgCompressPercentage
+min : 157.0		max : 357.0		step : 100.0	$ gaussBlockSize (step must be 2, 4, ...; bu value 3, 5, ...)

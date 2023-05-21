@@ -76,7 +76,7 @@ int main(int argc, char** argv)
 	{
 		std::string pathToFile {std::string(file.path())};
 		readedFilename = std::string(file.path().filename());
-		currentOutputPerFile = 0;
+		currentOutputPerFile = 1;
 		
 		// Reading image
 		detectorator.readImg(file.path());
@@ -90,11 +90,11 @@ int main(int argc, char** argv)
 					for (float q = BTV.getMin(); q <= BTV.getMax(); q += BTV.getStep())
 					{
 						currentOutput++;
-						filenameToSave = std::to_string(currentOutput) + "_" + readedFilename;
+						filenameToSave = std::to_string(currentOutputPerFile) + "_" + readedFilename;
 						saveFileTo = pathWriteFolder / filenameToSave;
 
 						displayInfo(
-							currentDirFile, totalDirFiles, ++currentOutputPerFile,
+							currentDirFile, totalDirFiles, currentOutputPerFile,
 							totalOutputPerFile, currentOutput, totalOutput,
 							i, j, k, q, filenameToSave
 						);
@@ -121,6 +121,8 @@ int main(int argc, char** argv)
 						procData.saveProcessedParameters(
 							i, j, k, q, processingDeltaTime, pathToFile, saveFileTo
 						);
+
+						currentOutputPerFile++;
 					}
 				}
 			}
@@ -200,9 +202,9 @@ void displayInfo(
 	float &GBS, float &GC, float &ICP, float &BTV, std::string outFilename
 )
 {
-	std::cout << "+ [" << currentDirFile << "/" << totalDirFiles << "] ";
-	std::cout << "[" << currentOutputPerFile << "/" << totalOutputPerFile << "] " ;
-	std::cout << "[" << currentOutput << "/" << totalOutput << "] ";
+	std::cout << "+ [" << currentDirFile << "/" << totalDirFiles << "]";
+	std::cout << "[" << currentOutputPerFile << "/" << totalOutputPerFile << "]" ;
+	std::cout << "[" << currentOutput << "/" << totalOutput << "]";
 	std::cout << "Parameters: " << "GBS=" << GBS << "; GC=" << GC;
 	std::cout << "; ICP=" << ICP << "; BTV=" << BTV << " => ";
 	std::cout << outFilename << ";";
