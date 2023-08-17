@@ -38,7 +38,7 @@ namespace processed_data_namespace
 			gaussConst.setMax(max);
 			std::getline(file, skip, ':');
 			file >> step;
-			gaussConst.setStep(max);
+			gaussConst.setStep(step);
 			std::getline(file, skip, '$');
 			
 			std::getline(file, skip, ':');
@@ -82,13 +82,13 @@ namespace processed_data_namespace
 
 	void ProcessedData::saveProcessedParameters(
 		float gaussBlockSize, float gaussConstant, float imgCompressPercentage,
-		float binaryThreshValue, std::string srcPath, std::string outPath
+		float binaryThreshValue, float procTime, std::string srcPath, std::string outPath
 	)
 	{
 		imgProcParams.push_back(
 			ImgProcessingParameters{
 				gaussBlockSize, gaussConstant, imgCompressPercentage,
-				binaryThreshValue, srcPath, outPath
+				binaryThreshValue, procTime, srcPath, outPath
 			}
 		);
 	}
@@ -126,6 +126,10 @@ namespace processed_data_namespace
 
 			content = xmlDoc.NewElement("gauss_block_size");
 			content->SetText(i.gaussBlockSize);
+			element->InsertEndChild(content);
+
+			content = xmlDoc.NewElement("processing_time");
+			content->SetText(i.processingTime);
 			element->InsertEndChild(content);
 
 			root->InsertEndChild(element);
