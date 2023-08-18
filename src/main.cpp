@@ -11,18 +11,18 @@ int main(int argc, char** argv)
 {
 	dsg::Detectorator detectorator;
 
-	//detectorator.readImg("../../m51.png");
+	detectorator.readImg(argv[1]);
 					
 	// Processing image
 	detectorator.setImgCompressPercentage(20);
 	detectorator.setBinaryThreshValue(190);
 	detectorator.setGaussConst(-3);
-	detectorator.setGaussBlockSize(250);
+	detectorator.setGaussBlockSize(251);
 			
 	detectorator.execute();
 					
 	// Writing image
-	//detectorator.writeImg("../../m51_proc.png");					
+	detectorator.writeImg(argv[2]);					
 
 	return 0;
 }
