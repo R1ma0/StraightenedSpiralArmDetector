@@ -52,7 +52,7 @@ namespace detectorator_namespace
 
 	void Detectorator::readImg(fs::path from)
 	{
-		this->img = cv::imread(from, cv::IMREAD_GRAYSCALE);
+		this->img = cv::imread(std::string(from), cv::IMREAD_GRAYSCALE);
 		
 		if (this->img.empty())
 		{

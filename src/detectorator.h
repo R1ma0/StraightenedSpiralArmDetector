@@ -11,6 +11,7 @@
 #include <opencv2/opencv.hpp>
 #include <filesystem>
 #include <cstdlib>
+#include <string>
 #include "zhang_suen.h"
 #include "aliases.h"
 
