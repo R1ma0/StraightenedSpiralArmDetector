@@ -4,7 +4,8 @@ ______
 
 # Requirements
 1. OpenCV
-2. C++ compiler
+2. wxWidgets
+3. C++ compiler
 ______
 
 # Using CMake
