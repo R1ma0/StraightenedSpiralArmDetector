@@ -1,4 +1,9 @@
+#include <wx/wxprec.h>
+#ifndef WX_PRECOMP
 #include <wx/wx.h>
+#endif
+
+#include "detectorator.h"
 
 class MyApp : public wxApp
 {
