@@ -10,9 +10,9 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 find_package(wxWidgets REQUIRED COMPONENTS net core base)
 include(${wxWidgets_USE_FILE})
 
-add_library(common_functions STATIC src/common_functions.cpp)
-add_library(detectorator STATIC src/detectorator.cpp)
-add_library(zhang_suen STATIC src/zhang_suen.cpp)
+add_library(common_functions STATIC src/detectorator/common_functions.cpp)
+add_library(detectorator STATIC src/detectorator/detectorator.cpp)
+add_library(zhang_suen STATIC src/detectorator/zhang_suen.cpp)
 add_executable(DSG src/app.cpp)
 
 target_link_libraries(

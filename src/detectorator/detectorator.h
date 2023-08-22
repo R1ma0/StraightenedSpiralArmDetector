@@ -25,7 +25,7 @@ namespace detectorator_namespace
 	{
 	private:
 		cv::Mat img;
-		void resizeImg(float);
+		void resizeImg(double);
 		void reportFailedOperation(std::string, bool);
 		void performAnOperationWithPixels(PixelsOperation);
 		float binaryThreshValue;

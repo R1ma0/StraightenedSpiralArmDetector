@@ -3,8 +3,6 @@
 #include <wx/wx.h>
 #endif
 
-#include "detectorator.h"
-
 class MyApp : public wxApp
 {
 	public:
@@ -15,10 +13,10 @@ wxIMPLEMENT_APP(MyApp);
 
 class MyFrame : public wxFrame
 {
-	public:
-		MyFrame();
-	private:
-		void OnExit(wxCommandEvent &event);
+public:
+	MyFrame();
+private:
+	void OnExit(wxCommandEvent &event);
 };
 
 bool MyApp::OnInit()
