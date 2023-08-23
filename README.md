@@ -6,9 +6,5 @@ ______
 1. OpenCV
 2. wxWidgets
 3. C++ compiler
+4. VS Code
 ______
-
-# Using CMake
-1. Create directory for temporary files (***cmake*** for example).
-2. Execute **"cmake ../src/"** in **cmake** folder.
-3. Execute **make** in **cmake** folder.

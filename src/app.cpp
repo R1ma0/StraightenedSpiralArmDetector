@@ -2,47 +2,19 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+#include "frames/AppMainWindow.h"
 
-class MyApp : public wxApp
-{
-	public:
-		bool OnInit() override;
-};
-
-wxIMPLEMENT_APP(MyApp);
-
-class MyFrame : public wxFrame
+class App : public wxApp
 {
 public:
-	MyFrame();
-private:
-	void OnExit(wxCommandEvent &event);
+	bool OnInit() override;
 };
 
-bool MyApp::OnInit()
+wxIMPLEMENT_APP(App);
+
+bool App::OnInit()
 {
-	MyFrame *frame = new MyFrame();
-	frame->Show(true);
+	AppMainWindow *mainWindow = new AppMainWindow();
+	mainWindow->Show(true);
 	return true;
-}
-
-MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "Hello world!")
-{
-	wxMenu *menuFile = new wxMenu;
-	menuFile->Append(wxID_EXIT);
-
-	wxMenuBar *menuBar = new wxMenuBar;
-	menuBar->Append(menuFile, "&File");
-
-	SetMenuBar(menuBar);
-
-	CreateStatusBar();
-	SetStatusText("Hello world!!!");
-
-	Bind(wxEVT_MENU, &MyFrame::OnExit, this, wxID_EXIT);
-}
-
-void MyFrame::OnExit(wxCommandEvent &event)
-{
-	Close(true);
 }
