@@ -1,19 +1,30 @@
 #include "AppMainWindow.h"
 
-AppMainWindow::AppMainWindow() : wxFrame(nullptr, wxID_ANY, "Detectorator of strings of galaxies")
+AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(nullptr, wxID_ANY, title)
 {
-    wxMenu *menuFile = new wxMenu();
-    menuFile->Append(ID_LOAD_IMG, wxT("Load image\tCtrl-O"), "Opening and loading an image for processing");
+    CreateControls();
+    BindEventHandlers();
+}
+
+void AppMainWindow::CreateControls()
+{
+    menuFile = new wxMenu();
+    loadImg = new wxMenuItem(
+        menuFile, ID_LOAD_IMG, wxT("Load image\tCtrl-O"), 
+        "Opening and loading an image for processing"
+    );
+    menuFile->Append(loadImg);
     menuFile->Append(wxID_EXIT);
 
-    wxMenuBar *menuBar = new wxMenuBar();
+    menuBar = new wxMenuBar();
     menuBar->Append(menuFile, "File");
-
     SetMenuBar(menuBar);
-
+    
     CreateStatusBar();
-    SetStatusText("App loaded");
+}
 
+void AppMainWindow::BindEventHandlers()
+{
     Bind(wxEVT_MENU, &AppMainWindow::OnLoadImg, this, ID_LOAD_IMG);
     Bind(wxEVT_MENU, &AppMainWindow::OnExit, this, wxID_EXIT);
 }
@@ -27,7 +38,8 @@ void AppMainWindow::OnLoadImg(wxCommandEvent &event)
 {
     wxFileDialog openFileDialog(
         this, 
-        "Load image file", "", "", ("PNG files (*.png)|*.png|JPG files (*.jpg)|*.jpg"), 
+        "Load image file", "", "", 
+        ("PNG files (*.png)|*.png|JPG files (*.jpg)|*.jpg"), 
         wxFD_OPEN | wxFD_FILE_MUST_EXIST
     );
     
@@ -40,12 +52,12 @@ void AppMainWindow::OnLoadImg(wxCommandEvent &event)
 
     if (!inputStream.IsOk())
     {
-        SetStatusText(wxT("Could not open the file " + openFileDialog.GetPath()));
+        wxLogStatus(wxT("Could not open the file " + openFileDialog.GetPath()));
         return;
     }
     else
     {
-        SetStatusText(wxT("The " + openFileDialog.GetPath() + " is open"));
+        wxLogStatus(wxT("The " + openFileDialog.GetPath() + " is open"));
         return;
     }
 }

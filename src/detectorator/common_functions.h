@@ -5,16 +5,13 @@
 #include <vector>
 #include "aliases.h"
 
-namespace common_functions_namespace
+class CommonFunctions
 {
-	class CommonFunctions
-	{
-	public:
-		int getSumOfVector(vInt);
-		int getSumOfVectorExclude(vInt, vInt &);
-		int getSumOfVectorInclude(vInt, vInt &);
-		void extractPixelNeighbours(cv::Mat &, int, int, vInt &);
-	};
-}
+public:
+	int getSumOfVector(vInt);
+	int getSumOfVectorExclude(vInt, vInt &);
+	int getSumOfVectorInclude(vInt, vInt &);
+	void extractPixelNeighbours(cv::Mat &, int, int, vInt &);
+};
 
 #endif
