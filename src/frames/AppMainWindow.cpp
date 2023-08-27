@@ -37,16 +37,6 @@ void AppMainWindow::OnExit(wxCommandEvent &event)
     Close(true);
 }
 
-void AppMainWindow::LoadImage(wxFileInputStream &stream, wxBitmapType type)
-{
-    loadedImg = wxImage(stream, type);
-}
-
-void AppMainWindow::DisplayImageAsBitmap(wxWindow *parent, wxImage &img)
-{
-    wxStaticBitmap *bitmap = new wxStaticBitmap(parent, wxID_ANY, wxBitmap(img));
-}
-
 void AppMainWindow::OnLoadImg(wxCommandEvent &event)
 {
     wxFileDialog openFileDialog(
@@ -68,8 +58,8 @@ void AppMainWindow::OnLoadImg(wxCommandEvent &event)
     }
     else
     {
-        LoadImage(inputStream, wxBITMAP_TYPE_ANY);
-        DisplayImageAsBitmap(this, loadedImg);
+        loadedImg = new wxImage(inputStream, wxBITMAP_TYPE_ANY);
+        bitmapToDisplay = new wxStaticBitmap(this, wxID_ANY, wxBitmap(*loadedImg));
 
         wxLogStatus(wxT("File '" + openFileDialog.GetFilename() + "' open"));
 

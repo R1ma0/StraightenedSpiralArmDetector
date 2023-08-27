@@ -17,13 +17,12 @@ private:
     wxMenuItem *loadImg;
     wxMenuBar *menuBar;
     wxStatusBar *statusBar;
-    wxImage loadedImg;
+    wxStaticBitmap *bitmapToDisplay;
+    wxImage *loadedImg;
     void OnExit(wxCommandEvent &);
     void OnLoadImg(wxCommandEvent &);
     void CreateControls();
     void BindEventHandlers();
-    void LoadImage(wxFileInputStream &, wxBitmapType);
-    void DisplayImageAsBitmap(wxWindow *, wxImage &);
 public:
     AppMainWindow(const wxString &);
 };
