@@ -15,6 +15,7 @@ wxIMPLEMENT_APP(App);
 bool App::OnInit()
 {
 	AppMainWindow *mainWindow = new AppMainWindow("Detectorator of strings of galaxies");
+	mainWindow->SetSize(1024, 768);
 	mainWindow->Show(true);
 	return true;
 }

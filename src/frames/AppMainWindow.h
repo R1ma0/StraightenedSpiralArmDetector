@@ -7,7 +7,7 @@
 
 enum IDs
 {
-    ID_LOAD_IMG = 2
+    ID_LOAD_IMG = 2,
 };
 
 class AppMainWindow : public wxFrame
@@ -17,10 +17,13 @@ private:
     wxMenuItem *loadImg;
     wxMenuBar *menuBar;
     wxStatusBar *statusBar;
-    void OnExit(wxCommandEvent &event);
-    void OnLoadImg(wxCommandEvent &event);
+    wxImage loadedImg;
+    void OnExit(wxCommandEvent &);
+    void OnLoadImg(wxCommandEvent &);
     void CreateControls();
     void BindEventHandlers();
+    void LoadImage(wxFileInputStream &, wxBitmapType);
+    void DisplayImageAsBitmap(wxWindow *, wxImage &);
 public:
     AppMainWindow(const wxString &);
 };
