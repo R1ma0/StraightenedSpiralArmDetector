@@ -1,4 +1,4 @@
-#include "AppMainWindow.h"
+#include "appMainWindow.hpp"
 
 AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(nullptr, wxID_ANY, title)
 {

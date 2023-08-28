@@ -13,7 +13,7 @@ include(${wxWidgets_USE_FILE})
 add_library(common_functions STATIC src/detectorator/common_functions.cpp)
 add_library(detectorator STATIC src/detectorator/detectorator.cpp)
 add_library(zhang_suen STATIC src/detectorator/zhang_suen.cpp)
-add_library(main_window STATIC src/frames/AppMainWindow.cpp)
+add_library(main_window STATIC src/view/appMainWindow.cpp)
 add_executable(DSG src/app.cpp)
 
 target_link_libraries(

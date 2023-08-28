@@ -3,7 +3,7 @@
 
 #include <opencv2/opencv.hpp>
 #include <vector>
-#include "aliases.h"
+#include "aliases.hpp"
 
 class CommonFunctions
 {

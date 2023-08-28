@@ -5,8 +5,8 @@
 #include <filesystem>
 #include <cstdlib>
 #include <string>
-#include "zhang_suen.h"
-#include "aliases.h"
+#include "zhang_suen.hpp"
+#include "aliases.hpp"
 
 namespace fs = std::filesystem;
 

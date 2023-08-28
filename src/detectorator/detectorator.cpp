@@ -1,4 +1,4 @@
-#include "detectorator.h"
+#include "detectorator.hpp"
 
 void Detectorator::execute()
 {

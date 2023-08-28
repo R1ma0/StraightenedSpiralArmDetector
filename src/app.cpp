@@ -2,7 +2,7 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
-#include "frames/AppMainWindow.h"
+#include "view/appMainWindow.hpp"
 
 class App : public wxApp
 {
