@@ -1,4 +1,4 @@
-#include "common_functions.hpp"
+#include "commonFunctions.hpp"
 
 int CommonFunctions::getSumOfVector(vInt n)
 {

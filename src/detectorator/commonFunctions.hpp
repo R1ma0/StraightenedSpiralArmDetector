@@ -1,5 +1,5 @@
-#ifndef COMMON_FUNCTIONS_H
-#define COMMON_FUNCTION_H
+#ifndef COMMON_FUNCTIONS_HPP
+#define COMMON_FUNCTIONS_HPP
 
 #include <opencv2/opencv.hpp>
 #include <vector>

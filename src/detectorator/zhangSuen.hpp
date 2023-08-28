@@ -1,9 +1,9 @@
-#ifndef ZHANG_SUEN_H
-#define ZHANG_SUEN_H
+#ifndef ZHANG_SUEN_HPP
+#define ZHANG_SUEN_HPP
 
 #include <opencv2/opencv.hpp>
 #include <vector>
-#include "common_functions.hpp"
+#include "commonFunctions.hpp"
 #include "aliases.hpp"
 
 const vInt STEP_ONE_NEIGHBOURS_IDX {0, 2, 6, 0, 4, 6};

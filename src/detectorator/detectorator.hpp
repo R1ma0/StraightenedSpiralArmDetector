@@ -1,11 +1,11 @@
-#ifndef DETECTORATOR_H
-#define DETECTORATOR_H
+#ifndef DETECTORATOR_HPP
+#define DETECTORATOR_HPP
 
 #include <opencv2/opencv.hpp>
 #include <filesystem>
 #include <cstdlib>
 #include <string>
-#include "zhang_suen.hpp"
+#include "zhangSuen.hpp"
 #include "aliases.hpp"
 
 namespace fs = std::filesystem;

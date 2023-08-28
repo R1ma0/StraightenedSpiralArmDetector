@@ -1,5 +1,5 @@
-#ifndef ALIASES_H
-#define ALIASES_H
+#ifndef ALIASES_HPP
+#define ALIASES_HPP
 
 #include <opencv2/opencv.hpp>
 #include <vector>

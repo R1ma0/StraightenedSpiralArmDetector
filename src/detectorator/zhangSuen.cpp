@@ -1,4 +1,4 @@
-#include "zhang_suen.hpp"
+#include "zhangSuen.hpp"
 
 void ZhangSuen::execute(cv::Mat &inImg, bool replace)
 {
