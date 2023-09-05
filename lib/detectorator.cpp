@@ -48,7 +48,7 @@ void Detectorator::resizeImg(double cp)
 
 void Detectorator::performAnOperationWithPixels(PixelsOperation op)
 {
-	CommonFunctions cf;
+	Utils utils;
 	vPoint pixelsToChange;
 	vInt neighbours (8);
 	bool isNotAllPixelsChanged = true;
@@ -76,14 +76,14 @@ void Detectorator::performAnOperationWithPixels(PixelsOperation op)
 		{
 			for (int c = 1; c < this->img.cols - 1; c++)
 			{		
-				cf.extractPixelNeighbours(this->img, r, c, neighbours);
+				utils.extractPixelNeighbours(this->img, r, c, neighbours);
 
 				switch (op)
 				{
 					case PixelsOperation::Add:
 						if (this->img.at<uchar>(r, c) == 0)
 						{
-							if (isPixelMatchesPatterns(neighbours, patternsToAdd, cf))
+							if (isPixelMatchesPatterns(neighbours, patternsToAdd, utils))
 							{
 								pixelsToChange.push_back(cv::Point(r, c));
 							}
@@ -92,7 +92,7 @@ void Detectorator::performAnOperationWithPixels(PixelsOperation op)
 					case PixelsOperation::Remove:
 						if (this->img.at<uchar>(r, c) == 1)
 						{
-							if (isPixelMatchesPatterns(neighbours, patternsToRemove, cf))
+							if (isPixelMatchesPatterns(neighbours, patternsToRemove, utils))
 							{
 								pixelsToChange.push_back(cv::Point(r, c));
 							}
@@ -116,7 +116,7 @@ void Detectorator::performAnOperationWithPixels(PixelsOperation op)
 }
 
 bool Detectorator::isPixelMatchesPatterns(
-	vInt &n, PixelPatterns &patterns, CommonFunctions &cf
+	vInt &n, PixelPatterns &patterns, Utils &utils
 )
 {
 	bool statementOne;
@@ -124,15 +124,15 @@ bool Detectorator::isPixelMatchesPatterns(
 
 	for (auto spv : patterns.simple)
 	{
-		if (cf.getSumOfVector(n) == spv) return true;
+		if (utils.getSumOfVector(n) == spv) return true;
 	}
 
 	for (int idx = 0; idx < patterns.composite.size(); idx++)
 	{
-		statementOne = cf.getSumOfVectorExclude(
+		statementOne = utils.getSumOfVectorExclude(
 			n, patterns.composite[idx]
 		) == patterns.compositeSum[idx];
-		statementTwo = cf.getSumOfVectorInclude(n, patterns.composite[idx]) == 0;
+		statementTwo = utils.getSumOfVectorInclude(n, patterns.composite[idx]) == 0;
 
 		if (statementOne && statementTwo) return true;
 	}

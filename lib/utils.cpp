@@ -1,6 +1,6 @@
-#include "commonFunctions.hpp"
+#include "utils.hpp"
 
-int CommonFunctions::getSumOfVector(vInt n)
+int Utils::getSumOfVector(vInt n)
 {
 	int sum = 0;
 
@@ -12,7 +12,7 @@ int CommonFunctions::getSumOfVector(vInt n)
 	return sum;
 }
 
-int CommonFunctions::getSumOfVectorExclude(vInt n, vInt &exclude)
+int Utils::getSumOfVectorExclude(vInt n, vInt &exclude)
 {
 	int sum = 0;
 
@@ -32,7 +32,7 @@ int CommonFunctions::getSumOfVectorExclude(vInt n, vInt &exclude)
 	return sum;
 }
 
-int CommonFunctions::getSumOfVectorInclude(vInt n, vInt &include)
+int Utils::getSumOfVectorInclude(vInt n, vInt &include)
 {
 	int sum = 0;
 
@@ -47,7 +47,7 @@ int CommonFunctions::getSumOfVectorInclude(vInt n, vInt &include)
 	return sum;
 }
 
-void CommonFunctions::extractPixelNeighbours(cv::Mat &img, int r, int c, vInt &n)
+void Utils::extractPixelNeighbours(cv::Mat &img, int r, int c, vInt &n)
 {
 	n[0] = img.at<uchar>(r - 1, c    );
 	n[1] = img.at<uchar>(r - 1, c + 1);

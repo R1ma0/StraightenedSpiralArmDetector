@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <string>
 #include "zhangSuen.hpp"
-#include "aliases.hpp"
+#include "utils.hpp"
 
 enum class PixelsOperation {Add, Remove};
 
@@ -26,7 +26,7 @@ private:
 	float gaussConst; /// Constant subtracted from the mean of weighted mean
 	float imgCompressPercentage;
 	int gaussBlockSize; /// Size of a pixel neighbourhood : 3, 5, 7, ...
-	bool isPixelMatchesPatterns(vInt &, PixelPatterns &, CommonFunctions &);
+	bool isPixelMatchesPatterns(vInt &, PixelPatterns &, Utils &);
 public:
 	void execute();
     void setImage(cv::Mat);

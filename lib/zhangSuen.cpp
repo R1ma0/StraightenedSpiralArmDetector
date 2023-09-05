@@ -27,7 +27,7 @@ void ZhangSuen::processPixels(
 	cv::Mat &img, bool &isComplete, vInt nIdx, vInt neighbours
 )
 {
-	CommonFunctions commonFunc;
+	Utils utils;
 	int sumOfTransitions;
 	int sumOfNeighbours;
 	bool isFirstConditionMet;
@@ -43,9 +43,9 @@ void ZhangSuen::processPixels(
 	{
 		for (int c = 1; c < img.cols - 1; c++)
 		{
-			commonFunc.extractPixelNeighbours(img, r, c, neighbours);
+			utils.extractPixelNeighbours(img, r, c, neighbours);
 			extractSumOfTransitions(sumOfTransitions, neighbours);
-			sumOfNeighbours = commonFunc.getSumOfVector(neighbours);
+			sumOfNeighbours = utils.getSumOfVector(neighbours);
 
 			isFirstConditionMet = img.at<uchar>(r, c) == 1;
 			isSecondConditionMet = sumOfNeighbours >= 2;

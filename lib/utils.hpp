@@ -1,11 +1,14 @@
-#ifndef COMMON_FUNCTIONS_HPP
-#define COMMON_FUNCTIONS_HPP
+#ifndef UTILS_HPP
+#define UTILS_HPP
 
 #include <opencv2/opencv.hpp>
 #include <vector>
-#include "aliases.hpp"
 
-class CommonFunctions
+typedef std::vector<int> vInt;
+typedef std::vector<cv::Point> vPoint;
+typedef unsigned int uint;
+
+class Utils
 {
 public:
 	int getSumOfVector(vInt);

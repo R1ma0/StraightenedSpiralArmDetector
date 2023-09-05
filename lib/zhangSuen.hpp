@@ -3,8 +3,7 @@
 
 #include <opencv2/opencv.hpp>
 #include <vector>
-#include "commonFunctions.hpp"
-#include "aliases.hpp"
+#include "utils.hpp"
 
 const vInt STEP_ONE_NEIGHBOURS_IDX {0, 2, 6, 0, 4, 6};
 const vInt STEP_TWO_NEIGHBOURS_IDX {0, 2, 4, 2, 4, 6};
