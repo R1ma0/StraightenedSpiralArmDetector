@@ -27,6 +27,16 @@ void Detectorator::execute()
 	zhangSuen.replacePixelValue(this->img, 1, 255);
 }
 
+void Detectorator::setImage(cv::Mat image)
+{
+    this->img = image;
+}
+
+cv::Mat Detectorator::getImage()
+{
+    return this->img;
+}
+
 void Detectorator::resizeImg(double cp)
 {
 	double scaleValue {cp / 100.};
@@ -34,30 +44,6 @@ void Detectorator::resizeImg(double cp)
 	int height {(int)(this->img.rows * scaleValue)};
 	
 	cv::resize(this->img, this->img, cv::Size(width, height), cv::INTER_LINEAR);
-}
-
-void Detectorator::readImg(fs::path from)
-{
-	this->img = cv::imread(std::string(from), cv::IMREAD_GRAYSCALE);
-	
-	if (this->img.empty())
-	{
-		reportFailedOperation(
-			"Could not read the image : " + std::string(from), true
-		);
-	}
-}
-
-void Detectorator::writeImg(fs::path to)
-{
-	bool isImgWrite {cv::imwrite(to, this->img)};
-
-	if (!isImgWrite)
-	{
-		reportFailedOperation(
-			"The image was not saved : " + std::string(to), true
-		);
-	}
 }
 
 void Detectorator::performAnOperationWithPixels(PixelsOperation op)
@@ -152,11 +138,4 @@ bool Detectorator::isPixelMatchesPatterns(
 	}
 
 	return false;
-}
-
-void Detectorator::reportFailedOperation(std::string msg, bool close)
-{
-	std::cout << "FAILDED. " + msg << std::endl;
-	if (close)
-		exit(0);
 }

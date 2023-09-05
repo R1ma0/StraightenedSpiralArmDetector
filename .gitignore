@@ -1,9 +1,5 @@
-# Folders
 build/
-
-# Files
-DSG*
-*.xml
+StraightSpiralArmsDetector
 
 # Images
 *.png
