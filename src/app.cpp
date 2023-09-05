@@ -14,8 +14,10 @@ wxIMPLEMENT_APP(App);
 
 bool App::OnInit()
 {
-	AppMainWindow *mainWindow = new AppMainWindow("Detectorator of strings of galaxies");
+	AppMainWindow *mainWindow = new AppMainWindow("Straight Spiral Arms Detector");
+
 	mainWindow->SetSize(1024, 768);
 	mainWindow->Show(true);
+
 	return true;
 }
