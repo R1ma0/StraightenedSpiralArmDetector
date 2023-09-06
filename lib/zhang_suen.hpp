@@ -1,3 +1,5 @@
+// Implementation of the method of skeletonization of Zhang Suen
+
 #ifndef ZHANG_SUEN_HPP
 #define ZHANG_SUEN_HPP
 
@@ -11,11 +13,13 @@ const vInt STEP_TWO_NEIGHBOURS_IDX {0, 2, 4, 2, 4, 6};
 class ZhangSuen
 {
 private:
+    Utils *utils;
 	void extractSumOfTransitions(int &, vInt);
 	void processPixels(cv::Mat &, bool &, vInt, vInt);
 public:
-	void replacePixelValue(cv::Mat &, uchar, uchar);
-	void execute(cv::Mat &, bool);
+    ZhangSuen();
+    ~ZhangSuen();
+	cv::Mat execute(cv::Mat, bool);
 };
 
 #endif

@@ -19,13 +19,11 @@ int main(int argc, char **argv)
     }
 
     // Processing file
-    detectorator.setImage(image);
     detectorator.setBinaryThreshValue(190.f);
     detectorator.setImgCompressPercentage(20.f);
     detectorator.setGaussConst(-5.f);
     detectorator.setGaussBlockSize(201.f);
-    detectorator.execute();
-    image = detectorator.getImage();
+    image = detectorator.useAdaptiveZhangSuen(image);
 
     // Writing file
     if (!cv::imwrite(argv[2], image))

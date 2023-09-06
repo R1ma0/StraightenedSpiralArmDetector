@@ -1,54 +1,47 @@
 #include "detectorator.hpp"
 
-void Detectorator::execute()
+Detectorator::Detectorator()
 {
-	cv::adaptiveThreshold(
-		this->img,
-		this->img, 
+    utils = new Utils();
+}
+
+Detectorator::~Detectorator()
+{
+    free(utils);
+}
+
+cv::Mat Detectorator::useAdaptiveZhangSuen(cv::Mat img)
+{
+    ZhangSuen zhangSuen = ZhangSuen();
+
+    cv::adaptiveThreshold(
+		img,
+		img, 
 		255.,
 		cv::ADAPTIVE_THRESH_GAUSSIAN_C, 
 		cv::THRESH_BINARY,
 		this->gaussBlockSize,
 		this->gaussConst
 	);
-	resizeImg(this->imgCompressPercentage);
+	img = utils->resizeImage(img, this->imgCompressPercentage);
 	cv::threshold(
-		this->img, 
-		this->img, 
+		img, 
+		img, 
 		this->binaryThreshValue, 
 		255., 
 		cv::THRESH_BINARY
 	);
-	ZhangSuen zhangSuen;
-	zhangSuen.replacePixelValue(this->img, 255, 1);
-	performAnOperationWithPixels(PixelsOperation::Add);
-	performAnOperationWithPixels(PixelsOperation::Remove);
-	zhangSuen.execute(this->img, false);
-	zhangSuen.replacePixelValue(this->img, 1, 255);
+	utils->replacePixelValue(img, 255, 1);
+	performAnOperationWithPixels(PixelsOperation::Add, img);
+	performAnOperationWithPixels(PixelsOperation::Remove, img);
+	img = zhangSuen.execute(img, false);
+	utils->replacePixelValue(img, 1, 255);
+
+    return img;
 }
 
-void Detectorator::setImage(cv::Mat image)
+void Detectorator::performAnOperationWithPixels(PixelsOperation op, cv::Mat img)
 {
-    this->img = image;
-}
-
-cv::Mat Detectorator::getImage()
-{
-    return this->img;
-}
-
-void Detectorator::resizeImg(double cp)
-{
-	double scaleValue {cp / 100.};
-	int width {(int)(this->img.cols * scaleValue)};
-	int height {(int)(this->img.rows * scaleValue)};
-	
-	cv::resize(this->img, this->img, cv::Size(width, height), cv::INTER_LINEAR);
-}
-
-void Detectorator::performAnOperationWithPixels(PixelsOperation op)
-{
-	Utils utils;
 	vPoint pixelsToChange;
 	vInt neighbours (8);
 	bool isNotAllPixelsChanged = true;
@@ -72,27 +65,27 @@ void Detectorator::performAnOperationWithPixels(PixelsOperation op)
 
 	while (isNotAllPixelsChanged)
 	{
-		for (int r = 1; r < this->img.rows - 1; r++)
+		for (int r = 1; r < img.rows - 1; r++)
 		{
-			for (int c = 1; c < this->img.cols - 1; c++)
+			for (int c = 1; c < img.cols - 1; c++)
 			{		
-				utils.extractPixelNeighbours(this->img, r, c, neighbours);
+				utils->extractPixelNeighbours(img, r, c, neighbours);
 
 				switch (op)
 				{
 					case PixelsOperation::Add:
-						if (this->img.at<uchar>(r, c) == 0)
+						if (img.at<uchar>(r, c) == 0)
 						{
-							if (isPixelMatchesPatterns(neighbours, patternsToAdd, utils))
+							if (isPixelMatchesPatterns(neighbours, patternsToAdd))
 							{
 								pixelsToChange.push_back(cv::Point(r, c));
 							}
 						}
 						break;
 					case PixelsOperation::Remove:
-						if (this->img.at<uchar>(r, c) == 1)
+						if (img.at<uchar>(r, c) == 1)
 						{
-							if (isPixelMatchesPatterns(neighbours, patternsToRemove, utils))
+							if (isPixelMatchesPatterns(neighbours, patternsToRemove))
 							{
 								pixelsToChange.push_back(cv::Point(r, c));
 							}
@@ -107,7 +100,7 @@ void Detectorator::performAnOperationWithPixels(PixelsOperation op)
 		{
 			for (cv::Point pixel: pixelsToChange)
 			{
-				this->img.at<uchar>(pixel.x, pixel.y) = (op == PixelsOperation::Remove) ? 0 : 1;
+				img.at<uchar>(pixel.x, pixel.y) = (op == PixelsOperation::Remove) ? 0 : 1;
 			}
 
 			pixelsToChange.clear();
@@ -116,7 +109,7 @@ void Detectorator::performAnOperationWithPixels(PixelsOperation op)
 }
 
 bool Detectorator::isPixelMatchesPatterns(
-	vInt &n, PixelPatterns &patterns, Utils &utils
+	vInt &n, PixelPatterns &patterns
 )
 {
 	bool statementOne;
@@ -124,15 +117,15 @@ bool Detectorator::isPixelMatchesPatterns(
 
 	for (auto spv : patterns.simple)
 	{
-		if (utils.getSumOfVector(n) == spv) return true;
+		if (utils->getSumOfVector(n) == spv) return true;
 	}
 
 	for (int idx = 0; idx < patterns.composite.size(); idx++)
 	{
-		statementOne = utils.getSumOfVectorExclude(
+		statementOne = utils->getSumOfVectorExclude(
 			n, patterns.composite[idx]
 		) == patterns.compositeSum[idx];
-		statementTwo = utils.getSumOfVectorInclude(n, patterns.composite[idx]) == 0;
+		statementTwo = utils->getSumOfVectorInclude(n, patterns.composite[idx]) == 0;
 
 		if (statementOne && statementTwo) return true;
 	}

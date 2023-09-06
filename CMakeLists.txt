@@ -10,7 +10,7 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 
 add_library(utils STATIC lib/utils.cpp)
 add_library(detectorator STATIC lib/detectorator.cpp)
-add_library(zhang_suen STATIC lib/zhangSuen.cpp)
+add_library(zhang_suen STATIC lib/zhang_suen.cpp)
 add_executable(${PROJECT_NAME} test.cpp)
 
 target_link_libraries(
