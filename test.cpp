@@ -1,10 +1,10 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
 #include "lib/detectorator.hpp"
+#include "lib/adaptive_zhang_suen.hpp"
 
 int main(int argc, char **argv)
 {
-    Detectorator detectorator = Detectorator();
     cv::Mat image;
 
     // Reading file
@@ -19,11 +19,11 @@ int main(int argc, char **argv)
     }
 
     // Processing file
-    detectorator.setBinaryThreshValue(190.f);
-    detectorator.setImgCompressPercentage(20.f);
-    detectorator.setGaussConst(-5.f);
-    detectorator.setGaussBlockSize(201.f);
-    image = detectorator.useAdaptiveZhangSuen(image);
+    AdaptiveZhangSuenMethod azs = AdaptiveZhangSuenMethod();
+    AdaptiveZhangSuenParameters azsParams{
+        190.f, -5.f, 20.f, 201,
+    };
+    image = azs.execute(image, azsParams);
 
     // Writing file
     if (!cv::imwrite(argv[2], image))
