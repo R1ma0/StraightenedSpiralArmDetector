@@ -1,6 +1,8 @@
 #include "appMainWindow.hpp"
 
-AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(nullptr, wxID_ANY, title)
+AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(
+    nullptr, wxID_ANY, title
+)
 {
     wxImage::AddHandler(new wxPNGHandler);
     wxImage::AddHandler(new wxJPEGHandler);
@@ -52,14 +54,18 @@ void AppMainWindow::OnLoadImg(wxCommandEvent &event)
 
     if (!inputStream.IsOk())
     {
-        wxLogStatus(wxT("Could not open the file '" + openFileDialog.GetFilename() + "'"));
+        wxLogStatus(wxT(
+            "Could not open the file '" + openFileDialog.GetFilename() + "'"
+        ));
 
         return;
     }
     else
     {
         loadedImg = new wxImage(inputStream, wxBITMAP_TYPE_ANY);
-        bitmapToDisplay = new wxStaticBitmap(this, wxID_ANY, wxBitmap(*loadedImg));
+        bitmapToDisplay = new wxStaticBitmap(
+            this, wxID_ANY, wxBitmap(*loadedImg)
+        );
 
         wxLogStatus(wxT("File '" + openFileDialog.GetFilename() + "' open"));
 
