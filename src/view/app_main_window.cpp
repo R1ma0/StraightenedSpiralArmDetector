@@ -1,4 +1,4 @@
-#include "appMainWindow.hpp"
+#include "app_main_window.hpp"
 
 AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(
     nullptr, wxID_ANY, title
@@ -9,6 +9,11 @@ AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(
 
     CreateControls();
     BindEventHandlers();
+}
+
+AppMainWindow::~AppMainWindow()
+{
+    
 }
 
 void AppMainWindow::CreateControls()

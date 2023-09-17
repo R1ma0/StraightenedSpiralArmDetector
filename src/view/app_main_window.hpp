@@ -25,6 +25,7 @@ private:
     void BindEventHandlers();
 public:
     AppMainWindow(const wxString &);
+    ~AppMainWindow();
 };
 
 #endif

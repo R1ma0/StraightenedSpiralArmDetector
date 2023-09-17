@@ -2,7 +2,7 @@
 
 Detectorator::Detectorator()
 {
-
+ 
 }
 
 Detectorator::~Detectorator()
