@@ -3,7 +3,6 @@
 #include <wx/wx.h>
 #endif
 #include "view/app_main_window.hpp"
-#include "model/test.hpp"
 
 class App : public wxApp
 {
@@ -15,8 +14,6 @@ wxIMPLEMENT_APP(App);
 
 bool App::OnInit()
 {
-    HelloWorld();
-
 	AppMainWindow *mainWindow = new AppMainWindow(
 	    "Straight Spiral Arms Detector"
 	);

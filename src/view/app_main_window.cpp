@@ -11,10 +11,7 @@ AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(
     BindEventHandlers();
 }
 
-AppMainWindow::~AppMainWindow()
-{
-    
-}
+AppMainWindow::~AppMainWindow() {}
 
 void AppMainWindow::CreateControls()
 {
@@ -39,12 +36,12 @@ void AppMainWindow::BindEventHandlers()
     Bind(wxEVT_MENU, &AppMainWindow::OnExit, this, wxID_EXIT);
 }
 
-void AppMainWindow::OnExit(wxCommandEvent &event)
+void AppMainWindow::OnExit([[maybe_unused]] wxCommandEvent &event)
 {
     Close(true);
 }
 
-void AppMainWindow::OnLoadImg(wxCommandEvent &event)
+void AppMainWindow::OnLoadImg([[maybe_unused]] wxCommandEvent &event)
 {
     wxFileDialog openFileDialog(
         this, 

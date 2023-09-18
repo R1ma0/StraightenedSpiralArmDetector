@@ -134,7 +134,7 @@ bool AdaptiveZhangSuenMethod::isPixelMatchesPatterns(
 		if (utils->getSumOfVector(n) == spv) return true;
 	}
 
-	for (int idx = 0; idx < patterns->composite.size(); idx++)
+	for (long unsigned int idx = 0; idx < patterns->composite.size(); idx++)
 	{
 		statementOne = utils->getSumOfVectorExclude(
 			n, patterns->composite[idx]

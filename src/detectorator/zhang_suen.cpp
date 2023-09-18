@@ -63,11 +63,11 @@ void ZhangSuen::processPixels(
 			isThirdConditionMet = sumOfNeighbours <= 6;
 			isFourthConditionMet = sumOfTransitions == 1;
 			isFifthConditionMet = neighbours[nIdx[0]] * 
-									neighbours[nIdx[1]] * 
-									neighbours[nIdx[2]] == 0;
+								  neighbours[nIdx[1]] * 
+								  neighbours[nIdx[2]] == 0;
 			isSixthConditionMet = neighbours[nIdx[3]] * 
-									neighbours[nIdx[4]] *
-									neighbours[nIdx[5]] == 0;
+								  neighbours[nIdx[4]] *
+								  neighbours[nIdx[5]] == 0;
 			isAllConditionsMet = isFirstConditionMet && isSecondConditionMet && 
 								 isThirdConditionMet && isFourthConditionMet &&
 								 isFifthConditionMet && isSixthConditionMet;
@@ -90,7 +90,7 @@ void ZhangSuen::extractSumOfTransitions(int &sum, vInt n)
 {
 	sum = 0;
 
-	for (int i = 0; i < n.size() - 1; i++)
+	for (long unsigned int i = 0; i < n.size() - 1; i++)
 	{
 		sum += (n[i] == 0 && n[i + 1] == 1) ? 1 : 0;
 	}

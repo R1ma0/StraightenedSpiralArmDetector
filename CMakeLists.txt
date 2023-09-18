@@ -14,13 +14,13 @@ find_package(wxWidgets COMPONENTS net core base REQUIRED)
 include(${wxWidgets_USE_FILE})
 
 include_directories(src/detectorator)
-include_directories(src/model)
+#include_directories(src/model)
 include_directories(src/view)
 
 add_executable(${PROJECT_NAME} src/app.cpp)
 
 add_subdirectory(src/detectorator)
-add_subdirectory(src/model)
+#add_subdirectory(src/model)
 add_subdirectory(src/view)
 
 target_link_libraries(
@@ -28,7 +28,7 @@ target_link_libraries(
 	${wxWidgets_LIBRARIES}
 	${OpenCV_LIBS} 
     detectorator
-    model
+#    model
 	view
 )
 target_include_directories(${PROJECT_NAME} PRIVATE ${wxWidgets_INCLUDE_DIRS})
