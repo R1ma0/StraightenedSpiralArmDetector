@@ -4,6 +4,7 @@
 #include <wx/wx.h>
 #include <wx/wfstream.h>
 #include <wx/log.h>
+#include <iostream>
 #include "../model/buffered_bitmap.hpp"
 
 enum IDs
@@ -19,7 +20,9 @@ private:
     wxMenuItem *loadImg;
     wxMenuBar *menuBar;
     wxStatusBar *statusBar;
-    wxImage *loadedImg;
+    wxBoxSizer *sizer;
+    wxImage loadedImg;
+    void UpdateBitmapImage(const wxImage &);
     void OnExit(wxCommandEvent &);
     void OnLoadImg(wxCommandEvent &);
     void CreateControls();

@@ -4,8 +4,6 @@ AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(
     nullptr, wxID_ANY, title
 )
 {
-    bitmap = new BufferedBitmap();
-
     wxImage::AddHandler(new wxPNGHandler);
     wxImage::AddHandler(new wxJPEGHandler);
 
@@ -33,6 +31,16 @@ void AppMainWindow::CreateControls()
     SetMenuBar(menuBar);
     
     CreateStatusBar();
+
+    bitmap = new BufferedBitmap(
+        this, wxID_ANY, wxBitmap(wxSize(1, 1)), wxDefaultPosition, 
+        FromDIP(wxSize(500, 200)), 0
+    );
+
+    sizer = new wxBoxSizer(wxVERTICAL);
+    sizer->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(10));
+
+    this->SetSizerAndFit(sizer);
 }
 
 void AppMainWindow::BindEventHandlers()
@@ -57,20 +65,16 @@ void AppMainWindow::OnLoadImg([[maybe_unused]] wxCommandEvent &event)
     
     if (openFileDialog.ShowModal() == wxID_CANCEL) { return; }
 
-    wxFileInputStream inputStream(openFileDialog.GetPath());
-
-    if (!inputStream.IsOk())
+    if (!loadedImg.LoadFile(openFileDialog.GetPath()))
     {
-        wxLogStatus(wxT(
-            "Could not open the file '" + openFileDialog.GetFilename() + "'"
-        ));
-
+        wxMessageBox("Failed to open image", "Error", wxOK | wxICON_ERROR);
         return;
     }
-    else
-    {
-        wxLogStatus(wxT("File '" + openFileDialog.GetFilename() + "' open"));
 
-        return;
-    }
+    UpdateBitmapImage(loadedImg);
+}
+void AppMainWindow::UpdateBitmapImage(const wxImage &img)
+{
+    bitmap->SetBitmap(wxBitmap(img));
+    this->Layout();
 }
