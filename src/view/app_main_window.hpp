@@ -4,6 +4,7 @@
 #include <wx/wx.h>
 #include <wx/wfstream.h>
 #include <wx/log.h>
+#include "../model/buffered_bitmap.hpp"
 
 enum IDs
 {
@@ -13,11 +14,11 @@ enum IDs
 class AppMainWindow : public wxFrame
 {
 private:
+    BufferedBitmap *bitmap;
     wxMenu *menuFile;
     wxMenuItem *loadImg;
     wxMenuBar *menuBar;
     wxStatusBar *statusBar;
-    wxStaticBitmap *bitmapToDisplay;
     wxImage *loadedImg;
     void OnExit(wxCommandEvent &);
     void OnLoadImg(wxCommandEvent &);

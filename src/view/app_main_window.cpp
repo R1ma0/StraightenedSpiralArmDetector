@@ -4,6 +4,8 @@ AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(
     nullptr, wxID_ANY, title
 )
 {
+    bitmap = new BufferedBitmap();
+
     wxImage::AddHandler(new wxPNGHandler);
     wxImage::AddHandler(new wxJPEGHandler);
 
@@ -11,7 +13,10 @@ AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(
     BindEventHandlers();
 }
 
-AppMainWindow::~AppMainWindow() {}
+AppMainWindow::~AppMainWindow() 
+{
+    free(bitmap);
+}
 
 void AppMainWindow::CreateControls()
 {
@@ -64,11 +69,6 @@ void AppMainWindow::OnLoadImg([[maybe_unused]] wxCommandEvent &event)
     }
     else
     {
-        loadedImg = new wxImage(inputStream, wxBITMAP_TYPE_ANY);
-        bitmapToDisplay = new wxStaticBitmap(
-            this, wxID_ANY, wxBitmap(*loadedImg)
-        );
-
         wxLogStatus(wxT("File '" + openFileDialog.GetFilename() + "' open"));
 
         return;

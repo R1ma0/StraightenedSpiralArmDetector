@@ -13,22 +13,19 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 find_package(wxWidgets COMPONENTS net core base REQUIRED)
 include(${wxWidgets_USE_FILE})
 
-include_directories(src/detectorator)
-#include_directories(src/model)
-include_directories(src/view)
-
-add_executable(${PROJECT_NAME} src/app.cpp)
-
-add_subdirectory(src/detectorator)
-#add_subdirectory(src/model)
-add_subdirectory(src/view)
+add_executable(
+    ${PROJECT_NAME} 
+    src/app.cpp 
+    src/view/app_main_window.cpp
+    src/model/buffered_bitmap.cpp
+    src/detectorator/adaptive_zhang_suen.cpp
+    src/detectorator/utils.cpp
+    src/detectorator/zhang_suen.cpp
+)
 
 target_link_libraries(
 	${PROJECT_NAME}
 	${wxWidgets_LIBRARIES}
 	${OpenCV_LIBS} 
-    detectorator
-#    model
-	view
 )
 target_include_directories(${PROJECT_NAME} PRIVATE ${wxWidgets_INCLUDE_DIRS})
