@@ -29,8 +29,8 @@ void BufferedBitmap::OnPaint([[maybe_unused]] wxPaintEvent &event)
         double w = bmpSize.GetWidth();
         double h = bmpSize.GetHeight();
 
-        double x = (drawSize.GetWidth() - w) / 2;
-        double y = (drawSize.GetHeight() - h) / 2;
+        double x = (drawSize.GetWidth() - w) / 2.0;
+        double y = (drawSize.GetHeight() - h) / 2.0;
 
         gc->DrawBitmap(
             bitmap,
@@ -62,4 +62,49 @@ wxSize BufferedBitmap::GetScaledBitmapSize() const
 double BufferedBitmap::GetZoomMultiplier() const
 {
     return pow(ZOOM_FACTOR, zoomLevel);
+}
+
+void BufferedBitmap::ZoomInBitmap()
+{
+    auto centerPos = CalcUnscrolledPosition(
+        wxPoint(
+            GetClientSize().GetWidth() / 2,
+            GetClientSize().GetHeight() / 2
+        )
+    );
+    zoomLevel++;
+
+    CenterAfterZoom(centerPos, centerPos * ZOOM_FACTOR);
+    SetVirtualSize(FromDIP(GetScaledBitmapSize()));
+
+    this->Refresh();
+}
+
+void BufferedBitmap::ZoomOutBitmap()
+{
+    auto centerPos = CalcUnscrolledPosition(
+        wxPoint(
+            GetClientSize().GetWidth() / 2,
+            GetClientSize().GetHeight() / 2
+        )
+    );
+    zoomLevel--;
+
+    CenterAfterZoom(centerPos, centerPos * (1.0 / ZOOM_FACTOR));
+    SetVirtualSize(FromDIP(GetScaledBitmapSize()));
+
+    this->Refresh();
+}
+
+void BufferedBitmap::CenterAfterZoom(wxPoint prevCenter, wxPoint currCenter)
+{
+    wxPoint pixelsPerUnit;
+    
+    GetScrollPixelsPerUnit(&pixelsPerUnit.x, &pixelsPerUnit.y);
+    auto delta = currCenter - prevCenter;
+
+    auto destX = GetViewStart().x + delta.x / pixelsPerUnit.x;
+    auto destY = GetViewStart().y + delta.y / pixelsPerUnit.y;
+
+    Scroll(destX, destY);
 }

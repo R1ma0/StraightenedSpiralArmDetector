@@ -18,7 +18,7 @@ bool App::OnInit()
 	    "Straight Spiral Arms Detector"
 	);
 
-	mainWindow->SetSize(1024, 768);
+	mainWindow->SetSize(mainWindow->FromDIP(wxSize(1024, 768)));
 	mainWindow->Show(true);
 
 	return true;

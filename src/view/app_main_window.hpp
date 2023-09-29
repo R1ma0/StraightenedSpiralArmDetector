@@ -10,6 +10,8 @@
 enum IDs
 {
     ID_LOAD_IMG = 2,
+    ID_ZOOM_IN,
+    ID_ZOOM_OUT,
 };
 
 class AppMainWindow : public wxFrame
@@ -17,16 +19,27 @@ class AppMainWindow : public wxFrame
 private:
     BufferedBitmap *bitmap;
     wxMenu *menuFile;
+    wxMenu *menuImage;
     wxMenuItem *loadImg;
+    wxMenuItem *zoomIn;
+    wxMenuItem *zoomOut;
     wxMenuBar *menuBar;
     wxStatusBar *statusBar;
     wxBoxSizer *sizer;
+    wxBoxSizer *zoomControls;
+    wxButton *zoomInBtn;
+    wxButton *zoomOutBtn;
     wxImage loadedImg;
+    wxStaticText *zoomValue;
     void UpdateBitmapImage(const wxImage &);
     void OnExit(wxCommandEvent &);
     void OnLoadImg(wxCommandEvent &);
+    void OnZoomIn(wxCommandEvent &);
+    void OnZoomOut(wxCommandEvent &);
     void CreateControls();
     void BindEventHandlers();
+    void UpdateZoomValue();
+    void EnableZoomControls(bool);
 public:
     AppMainWindow(const wxString &);
     ~AppMainWindow();

@@ -9,17 +9,20 @@ class BufferedBitmap : public wxScrolled<wxWindow>
 {
 private:
     wxBitmap bitmap;
-    const double ZOOM_FACTOR = 1.1;
+    const double ZOOM_FACTOR = 2.0;
     int zoomLevel = 0;
-    double GetZoomMultiplier() const;
+    wxSize GetScaledBitmapSize() const;
+    void CenterAfterZoom(wxPoint, wxPoint);
 public:
     BufferedBitmap(
         wxWindow *, wxWindowID, const wxBitmap &, const wxPoint &, 
         const wxSize &, long
     );
-    wxSize GetScaledBitmapSize() const;
+    double GetZoomMultiplier() const;
     void SetBitmap(const wxBitmap &);
     void OnPaint(wxPaintEvent &);
+    void ZoomInBitmap();
+    void ZoomOutBitmap();
 };
 
 #endif // BUFFERED_BITMAP_HPP
