@@ -4,7 +4,7 @@
 #include <wx/wx.h>
 #include <wx/wfstream.h>
 #include <wx/log.h>
-#include <iostream>
+#include <wx/numdlg.h>
 #include "../model/buffered_bitmap.hpp"
 
 enum IDs
@@ -12,6 +12,7 @@ enum IDs
     ID_LOAD_IMG = 2,
     ID_ZOOM_IN,
     ID_ZOOM_OUT,
+    ID_ANGLE_CHANGE,
 };
 
 class AppMainWindow : public wxFrame
@@ -26,15 +27,17 @@ private:
     wxMenuBar *menuBar;
     wxStatusBar *statusBar;
     wxBoxSizer *sizer;
-    wxBoxSizer *zoomControls;
+    wxBoxSizer *imgControlPanel;
     wxButton *zoomInBtn;
     wxButton *zoomOutBtn;
+    wxButton *askAngleBtn;
     wxImage loadedImg;
     void UpdateBitmapImage(const wxImage &);
     void OnExit(wxCommandEvent &);
     void OnLoadImg(wxCommandEvent &);
     void OnZoomIn(wxCommandEvent &);
     void OnZoomOut(wxCommandEvent &);
+    void OnAngle(wxCommandEvent &);
     void CreateControls();
     void BindEventHandlers();
     void EnableZoomControls(bool);

@@ -9,10 +9,12 @@ class BufferedBitmap : public wxScrolled<wxWindow>
 {
 private:
     wxBitmap bitmap;
-    const double ZOOM_FACTOR = 2.0;
-    int zoomLevel = 0;
+    wxGraphicsContext *gc;
     wxSize GetScaledBitmapSize() const;
     wxPoint GetBitmapCenterPosition() const;
+    const double ZOOM_FACTOR = 2.0;
+    double angleRotationRadians = 0.0;
+    int zoomLevel = 0;
     void CenterAfterZoom(wxPoint, wxPoint);
     void CenterAndSetSize(const double);
 public:
@@ -21,6 +23,8 @@ public:
         const wxSize &, long
     );
     double GetZoomMultiplier() const;
+    double GetAngleRotationRadians() const;
+    void SetAngleRotationRadians(double);
     void SetBitmap(const wxBitmap &);
     void OnPaint(wxPaintEvent &);
     void ZoomInBitmap();

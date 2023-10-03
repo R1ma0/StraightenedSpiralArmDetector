@@ -19,7 +19,7 @@ void BufferedBitmap::OnPaint([[maybe_unused]] wxPaintEvent &event)
     wxAutoBufferedPaintDC dc(this);
     dc.Clear();
     DoPrepareDC(dc);
-    wxGraphicsContext *gc = wxGraphicsContext::Create(dc);
+    gc = wxGraphicsContext::Create(dc);
 
     if (gc)
     {
@@ -105,4 +105,14 @@ void BufferedBitmap::CenterAfterZoom(wxPoint prevCenter, wxPoint currCenter)
     const auto destY = GetViewStart().y + delta.y / pixelsPerUnit.y;
 
     Scroll(destX, destY);
+}
+
+double BufferedBitmap::GetAngleRotationRadians() const
+{
+    return angleRotationRadians;
+}
+
+void BufferedBitmap::SetAngleRotationRadians(double value)
+{
+    angleRotationRadians = value;
 }

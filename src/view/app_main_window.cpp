@@ -37,18 +37,23 @@ void AppMainWindow::CreateControls()
         FromDIP(wxSize(500, 200)), 0
     );
 
-    zoomControls = new wxBoxSizer(wxHORIZONTAL);
+    imgControlPanel = new wxBoxSizer(wxHORIZONTAL);
     zoomInBtn = new wxButton(this, ID_ZOOM_IN, wxT("Zoom +"));
     zoomOutBtn = new wxButton(this, ID_ZOOM_OUT, wxT("Zoom -"));
 
-    zoomControls->Add(zoomInBtn, 0, wxALIGN_CENTER_VERTICAL, FromDIP(5));
-    zoomControls->Add(zoomOutBtn, 0, wxALIGN_CENTER_VERTICAL, FromDIP(5));
+    askAngleBtn = new wxButton(this, ID_ANGLE_CHANGE, wxT("Rotate"));
+
+    imgControlPanel->Add(zoomInBtn, 0, wxALIGN_CENTER_VERTICAL, FromDIP(5));
+    imgControlPanel->Add(zoomOutBtn, 0, wxALIGN_CENTER_VERTICAL, FromDIP(5));
+    imgControlPanel->Add(askAngleBtn, 0, wxALIGN_CENTER_VERTICAL, FromDIP(5));
 
     EnableZoomControls(false);
 
     sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(10));
-    sizer->Add(zoomControls, 0, wxALIGN_LEFT | wxLEFT | wxBOTTOM, FromDIP(10));
+    sizer->Add(
+        imgControlPanel, 0, wxALIGN_LEFT | wxLEFT | wxBOTTOM, FromDIP(10)
+    );
 
     this->SetSizerAndFit(sizer);
 }
@@ -59,6 +64,7 @@ void AppMainWindow::BindEventHandlers()
     Bind(wxEVT_MENU, &AppMainWindow::OnExit, this, wxID_EXIT);
     Bind(wxEVT_BUTTON, &AppMainWindow::OnZoomIn, this, ID_ZOOM_IN);
     Bind(wxEVT_BUTTON, &AppMainWindow::OnZoomOut, this, ID_ZOOM_OUT);
+    Bind(wxEVT_BUTTON, &AppMainWindow::OnAngle, this, ID_ANGLE_CHANGE);
 }
 
 void AppMainWindow::OnExit([[maybe_unused]] wxCommandEvent &event)
@@ -106,4 +112,26 @@ void AppMainWindow::EnableZoomControls(bool condition)
 {
     zoomInBtn->Enable(condition);
     zoomOutBtn->Enable(condition);
+    askAngleBtn->Enable(condition);
+}
+
+void AppMainWindow::OnAngle([[maybe_unused]] wxCommandEvent &event)
+{
+    long degrees = (long)(
+        (180 * bitmap->GetAngleRotationRadians()) / M_PI
+    );
+    
+    degrees = wxGetNumberFromUser(
+        wxT("Change the image rotation angle"),
+        wxT("Angle in degrees:"),
+        wxT("Rotate image"),
+        degrees,
+        -180, +180,
+        this
+    );
+    
+    if (degrees != -1)
+    {
+        bitmap->SetAngleRotationRadians((degrees * M_PI) / 180.0);
+    }
 }
