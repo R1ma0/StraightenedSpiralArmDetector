@@ -12,7 +12,9 @@ private:
     const double ZOOM_FACTOR = 2.0;
     int zoomLevel = 0;
     wxSize GetScaledBitmapSize() const;
+    wxPoint GetBitmapCenterPosition() const;
     void CenterAfterZoom(wxPoint, wxPoint);
+    void CenterAndSetSize(const double);
 public:
     BufferedBitmap(
         wxWindow *, wxWindowID, const wxBitmap &, const wxPoint &, 

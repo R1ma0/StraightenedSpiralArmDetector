@@ -38,17 +38,13 @@ void AppMainWindow::CreateControls()
     );
 
     zoomControls = new wxBoxSizer(wxHORIZONTAL);
-    zoomInBtn = new wxButton(this, ID_ZOOM_IN, wxT("+"));
-    zoomOutBtn = new wxButton(this, ID_ZOOM_OUT, wxT("-"));
-    zoomValue = new wxStaticText(this, wxID_ANY, "");
-
+    zoomInBtn = new wxButton(this, ID_ZOOM_IN, wxT("Zoom +"));
+    zoomOutBtn = new wxButton(this, ID_ZOOM_OUT, wxT("Zoom -"));
 
     zoomControls->Add(zoomInBtn, 0, wxALIGN_CENTER_VERTICAL, FromDIP(5));
-    zoomControls->Add(zoomValue, 0, wxALIGN_CENTER_VERTICAL, FromDIP(5));
     zoomControls->Add(zoomOutBtn, 0, wxALIGN_CENTER_VERTICAL, FromDIP(5));
 
     EnableZoomControls(false);
-    UpdateZoomValue();
 
     sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(10));
@@ -99,23 +95,15 @@ void AppMainWindow::UpdateBitmapImage(const wxImage &img)
 void AppMainWindow::OnZoomIn([[maybe_unused]] wxCommandEvent &event)
 {
     bitmap->ZoomInBitmap();
-    UpdateZoomValue();
 }
 
 void AppMainWindow::OnZoomOut([[maybe_unused]] wxCommandEvent &event)
 {
     bitmap->ZoomOutBitmap();
-    UpdateZoomValue();
-}
-
-void AppMainWindow::UpdateZoomValue()
-{
-    zoomValue->SetLabel(std::to_string(bitmap->GetZoomMultiplier()));
 }
 
 void AppMainWindow::EnableZoomControls(bool condition)
 {
     zoomInBtn->Enable(condition);
     zoomOutBtn->Enable(condition);
-    zoomValue->Enable(condition);
 }

@@ -26,11 +26,11 @@ void BufferedBitmap::OnPaint([[maybe_unused]] wxPaintEvent &event)
         const wxSize drawSize = ToDIP(GetVirtualSize());
         const wxSize bmpSize = GetScaledBitmapSize();
 
-        double w = bmpSize.GetWidth();
-        double h = bmpSize.GetHeight();
+        const double w = bmpSize.GetWidth();
+        const double h = bmpSize.GetHeight();
 
-        double x = (drawSize.GetWidth() - w) / 2.0;
-        double y = (drawSize.GetHeight() - h) / 2.0;
+        const double x = (drawSize.GetWidth() - w) / 2.0;
+        const double y = (drawSize.GetHeight() - h) / 2.0;
 
         gc->DrawBitmap(
             bitmap,
@@ -56,6 +56,7 @@ wxSize BufferedBitmap::GetScaledBitmapSize() const
 {
     const wxSize bmpSize = bitmap.GetSize();
     const double zoom = GetZoomMultiplier();
+
     return wxSize(bmpSize.GetWidth() * zoom, bmpSize.GetHeight() * zoom);
 }
 
@@ -64,47 +65,44 @@ double BufferedBitmap::GetZoomMultiplier() const
     return pow(ZOOM_FACTOR, zoomLevel);
 }
 
-void BufferedBitmap::ZoomInBitmap()
+wxPoint BufferedBitmap::GetBitmapCenterPosition() const
 {
-    auto centerPos = CalcUnscrolledPosition(
+    return CalcUnscrolledPosition(
         wxPoint(
             GetClientSize().GetWidth() / 2,
             GetClientSize().GetHeight() / 2
         )
     );
-    zoomLevel++;
+}
 
-    CenterAfterZoom(centerPos, centerPos * ZOOM_FACTOR);
+void BufferedBitmap::CenterAndSetSize(const double zoomFactor)
+{
+    auto centerPos = GetBitmapCenterPosition();
+    CenterAfterZoom(centerPos, centerPos * zoomFactor);
     SetVirtualSize(FromDIP(GetScaledBitmapSize()));
-
     this->Refresh();
+}
+
+void BufferedBitmap::ZoomInBitmap()
+{
+    zoomLevel++;
+    CenterAndSetSize(ZOOM_FACTOR);
 }
 
 void BufferedBitmap::ZoomOutBitmap()
 {
-    auto centerPos = CalcUnscrolledPosition(
-        wxPoint(
-            GetClientSize().GetWidth() / 2,
-            GetClientSize().GetHeight() / 2
-        )
-    );
     zoomLevel--;
-
-    CenterAfterZoom(centerPos, centerPos * (1.0 / ZOOM_FACTOR));
-    SetVirtualSize(FromDIP(GetScaledBitmapSize()));
-
-    this->Refresh();
+    CenterAndSetSize(1.0 / ZOOM_FACTOR);
 }
 
 void BufferedBitmap::CenterAfterZoom(wxPoint prevCenter, wxPoint currCenter)
 {
     wxPoint pixelsPerUnit;
-    
-    GetScrollPixelsPerUnit(&pixelsPerUnit.x, &pixelsPerUnit.y);
-    auto delta = currCenter - prevCenter;
 
-    auto destX = GetViewStart().x + delta.x / pixelsPerUnit.x;
-    auto destY = GetViewStart().y + delta.y / pixelsPerUnit.y;
+    GetScrollPixelsPerUnit(&pixelsPerUnit.x, &pixelsPerUnit.y);
+    const auto delta = currCenter - prevCenter;
+    const auto destX = GetViewStart().x + delta.x / pixelsPerUnit.x;
+    const auto destY = GetViewStart().y + delta.y / pixelsPerUnit.y;
 
     Scroll(destX, destY);
 }

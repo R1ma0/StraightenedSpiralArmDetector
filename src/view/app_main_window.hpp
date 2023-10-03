@@ -30,7 +30,6 @@ private:
     wxButton *zoomInBtn;
     wxButton *zoomOutBtn;
     wxImage loadedImg;
-    wxStaticText *zoomValue;
     void UpdateBitmapImage(const wxImage &);
     void OnExit(wxCommandEvent &);
     void OnLoadImg(wxCommandEvent &);
@@ -38,7 +37,6 @@ private:
     void OnZoomOut(wxCommandEvent &);
     void CreateControls();
     void BindEventHandlers();
-    void UpdateZoomValue();
     void EnableZoomControls(bool);
 public:
     AppMainWindow(const wxString &);
