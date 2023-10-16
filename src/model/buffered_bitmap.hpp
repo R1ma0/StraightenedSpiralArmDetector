@@ -4,6 +4,7 @@
 #include <wx/wx.h>
 #include <wx/graphics.h>
 #include <wx/dcbuffer.h>
+#include <wx/affinematrix2d.h>
 
 class BufferedBitmap : public wxScrolled<wxWindow>
 {

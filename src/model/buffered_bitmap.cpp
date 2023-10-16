@@ -32,6 +32,14 @@ void BufferedBitmap::OnPaint([[maybe_unused]] wxPaintEvent &event)
         const double x = (drawSize.GetWidth() - w) / 2.0;
         const double y = (drawSize.GetHeight() - h) / 2.0;
 
+        wxAffineMatrix2D transform{};
+        
+        transform.Translate(x, y);
+        transform.Rotate(angleRotationRadians);
+        transform.Translate(-x, -y);
+ 
+        gc->SetTransform(gc->CreateMatrix(transform));
+
         gc->DrawBitmap(
             bitmap,
             gc->FromDIP(x), gc->FromDIP(y), 
