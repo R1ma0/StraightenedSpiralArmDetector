@@ -115,12 +115,12 @@ void BufferedBitmap::CenterAfterZoom(wxPoint prevCenter, wxPoint currCenter)
     Scroll(destX, destY);
 }
 
-double BufferedBitmap::GetAngleRotationRadians() const
+long BufferedBitmap::GetAngleRotationRadians() const
 {
     return angleRotationRadians;
 }
 
-void BufferedBitmap::SetAngleRotationRadians(double value)
+void BufferedBitmap::SetAngleRotationRadians(long value)
 {
     angleRotationRadians = value;
 }

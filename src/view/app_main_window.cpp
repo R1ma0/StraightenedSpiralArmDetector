@@ -4,6 +4,8 @@ AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(
     nullptr, wxID_ANY, title
 )
 {
+    mainPanel = new wxPanel(this, wxID_ANY);
+
     wxImage::AddHandler(new wxPNGHandler);
     wxImage::AddHandler(new wxJPEGHandler);
 
@@ -16,17 +18,22 @@ AppMainWindow::~AppMainWindow()
     free(bitmap);
 }
 
+wxPanel *AppMainWindow::GetMainPanel()
+{
+    return mainPanel;
+}
+
 void AppMainWindow::CreateControls()
 {
-    menuFile = new wxMenu();
-    loadImg = new wxMenuItem(
+    auto menuFile = new wxMenu();
+    auto loadImg = new wxMenuItem(
         menuFile, ID_LOAD_IMG, wxT("Load image\tCtrl-O"), 
         wxT("Opening and loading an image for processing")
     );
     menuFile->Append(loadImg);
     menuFile->Append(wxID_EXIT);
 
-    menuBar = new wxMenuBar();
+    auto menuBar = new wxMenuBar();
     menuBar->Append(menuFile, wxT("File"));
     SetMenuBar(menuBar);
     
@@ -37,43 +44,15 @@ void AppMainWindow::CreateControls()
         FromDIP(wxSize(500, 200)), 0
     );
 
-    imgControlPanel = new wxBoxSizer(wxHORIZONTAL);
-
-    zoomInBtn = new wxButton(this, ID_ZOOM_IN, wxT("Zoom +"));
-    zoomOutBtn = new wxButton(this, ID_ZOOM_OUT, wxT("Zoom -"));
-    askAngleBtn = new wxButton(this, ID_ANGLE_CHANGE, wxT("Rotate"));
-    imgRotationSlider = new wxSlider(
-        this, ID_ANGLE_CHANGE_SLIDER, 0, 0, 360, wxDefaultPosition, 
-        wxDefaultSize, wxSL_LABELS 
-    );
-
-    imgControlPanel->Add(
-        zoomInBtn, 0, wxALIGN_CENTER_VERTICAL | wxLEFT | wxRIGHT, FromDIP(5)
-    );
-    imgControlPanel->Add(
-        zoomOutBtn, 0, wxALIGN_CENTER_VERTICAL, FromDIP(5)
-    );
-    imgControlPanel->Add(
-        askAngleBtn, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, FromDIP(15)
-    );
-    imgControlPanel->Add(
-        imgRotationSlider, 0, wxALIGN_CENTER_VERTICAL | wxLEFT | wxRIGHT, 
-        FromDIP(5)    
-    );
-
-    EnableControls(false);
-
-    sizerLeft = new wxBoxSizer(wxVERTICAL);
+    auto bcp = new BitmapControlPanel(this, GetMainPanel());
+    auto sizerLeft = new wxBoxSizer(wxVERTICAL);
     sizerLeft->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(10));
-    sizerLeft->Add(imgControlPanel, 0, wxALIGN_LEFT | wxALL, FromDIP(10));
+    sizerLeft->Add(bcp, 0, wxALIGN_LEFT | wxALL, FromDIP(10));
 
-    sizerRight = new wxBoxSizer(wxVERTICAL);
-    wxButton *btn = new wxButton(this, wxID_ANY, wxT("BTNsadaswqe"));
-    sizerRight->Add(btn, 0, wxALIGN_RIGHT | wxRIGHT | wxTOP, FromDIP(10));
-
-    sizerMain = new wxBoxSizer(wxHORIZONTAL);
+    auto dcp = new DetectoratorControlPanel(this, GetMainPanel());
+    auto sizerMain = new wxBoxSizer(wxHORIZONTAL);
     sizerMain->Add(sizerLeft, 1, wxEXPAND);
-    sizerMain->Add(sizerRight, 0, wxEXPAND);
+    sizerMain->Add(dcp, 0, wxEXPAND);
 
     this->SetSizerAndFit(sizerMain);
 }
@@ -82,13 +61,6 @@ void AppMainWindow::BindEventHandlers()
 {
     Bind(wxEVT_MENU, &AppMainWindow::OnLoadImg, this, ID_LOAD_IMG);
     Bind(wxEVT_MENU, &AppMainWindow::OnExit, this, wxID_EXIT);
-    Bind(wxEVT_BUTTON, &AppMainWindow::OnZoomIn, this, ID_ZOOM_IN);
-    Bind(wxEVT_BUTTON, &AppMainWindow::OnZoomOut, this, ID_ZOOM_OUT);
-    Bind(wxEVT_BUTTON, &AppMainWindow::OnAngleChangeBtn, this, ID_ANGLE_CHANGE);
-    Bind(
-        wxEVT_SLIDER, &AppMainWindow::OnAngleChangeSlider, this, 
-        ID_ANGLE_CHANGE_SLIDER
-    );
 }
 
 void AppMainWindow::OnExit([[maybe_unused]] wxCommandEvent &event)
@@ -114,58 +86,30 @@ void AppMainWindow::OnLoadImg([[maybe_unused]] wxCommandEvent &event)
     }
 
     UpdateBitmapImage(loadedImg);
-    EnableControls(true);
 }
+
 void AppMainWindow::UpdateBitmapImage(const wxImage &img)
 {
     bitmap->SetBitmap(wxBitmap(img));
     this->Layout();
 }
 
-void AppMainWindow::OnZoomIn([[maybe_unused]] wxCommandEvent &event)
+void AppMainWindow::BitmapZoomIn()
 {
     bitmap->ZoomInBitmap();
 }
 
-void AppMainWindow::OnZoomOut([[maybe_unused]] wxCommandEvent &event)
+void AppMainWindow::BitmapZoomOut()
 {
     bitmap->ZoomOutBitmap();
 }
 
-void AppMainWindow::EnableControls(bool condition)
+void AppMainWindow::BitmapRotate(long degrees)
 {
-    zoomInBtn->Enable(condition);
-    zoomOutBtn->Enable(condition);
-    askAngleBtn->Enable(condition);
-    imgRotationSlider->Enable(condition);
+    bitmap->SetAngleRotationRadians(degrees);
 }
 
-void AppMainWindow::OnAngleChangeBtn([[maybe_unused]] wxCommandEvent &event)
+long AppMainWindow::GetBitmapRotationRadians()
 {
-    long degrees = (long)(
-        (180 * bitmap->GetAngleRotationRadians()) / M_PI
-    );
-    
-    degrees = wxGetNumberFromUser(
-        wxT("Change the image rotation angle"),
-        wxT("Angle in degrees:"),
-        wxT("Rotate image"),
-        degrees,
-        0, +360,
-        this
-    );
-    
-    if (degrees != -1)
-    {
-        bitmap->SetAngleRotationRadians((degrees * M_PI) / 180.0);
-    }
-}
-
-void AppMainWindow::OnAngleChangeSlider([[maybe_unused]] wxCommandEvent &event)
-{
-    unsigned int sliderValue = imgRotationSlider->GetValue();
-
-    bitmap->SetAngleRotationRadians((sliderValue * M_PI) / 180.0);
-    bitmap->ZoomInBitmap();
-    bitmap->ZoomOutBitmap();
+    return bitmap->GetAngleRotationRadians();
 }
