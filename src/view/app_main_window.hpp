@@ -31,10 +31,10 @@ public:
     ~AppMainWindow();
     wxPanel *GetMainPanel();
     BufferedBitmap *GetBitmap();
-    long GetBitmapRotationRadians();
+    wxDouble GetBitmapRotationRadians();
     void BitmapZoomIn();
     void BitmapZoomOut();
-    void BitmapRotate(long);
+    void BitmapRotate(wxDouble);
 };
 
 #endif

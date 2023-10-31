@@ -15,7 +15,7 @@ AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(
 
 AppMainWindow::~AppMainWindow() 
 {
-    free(bitmap);
+    delete bitmap;
 }
 
 wxPanel *AppMainWindow::GetMainPanel()
@@ -104,12 +104,12 @@ void AppMainWindow::BitmapZoomOut()
     bitmap->ZoomOutBitmap();
 }
 
-void AppMainWindow::BitmapRotate(long degrees)
+void AppMainWindow::BitmapRotate(wxDouble radians)
 {
-    bitmap->SetAngleRotationRadians(degrees);
+    bitmap->SetAngleRotationRadians(radians);
 }
 
-long AppMainWindow::GetBitmapRotationRadians()
+wxDouble AppMainWindow::GetBitmapRotationRadians()
 {
     return bitmap->GetAngleRotationRadians();
 }

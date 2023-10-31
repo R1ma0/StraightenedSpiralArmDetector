@@ -36,7 +36,12 @@ void BitmapControlPanel::BindEventHandlers()
 {
     Bind(wxEVT_BUTTON, &BitmapControlPanel::OnZoomIn, this, ID_ZOOM_IN);
     Bind(wxEVT_BUTTON, &BitmapControlPanel::OnZoomOut, this, ID_ZOOM_OUT);
-    Bind(wxEVT_BUTTON, &BitmapControlPanel::OnAngleChangeBtn, this, ID_ANGLE_CHANGE);
+    Bind(
+        wxEVT_BUTTON, 
+        &BitmapControlPanel::OnAngleChangeBtn, 
+        this, 
+        ID_ANGLE_CHANGE
+    );
 }
 
 void BitmapControlPanel::OnZoomIn([[maybe_unused]] wxCommandEvent &event)
@@ -56,8 +61,7 @@ void BitmapControlPanel::OnAngleChangeBtn(
 )
 {
     AppMainWindow *parentWin = (AppMainWindow *)parentPanel->GetParent();
-
-    long degrees = (180 * parentWin->GetBitmapRotationRadians()) / M_PI;
+    wxDouble degrees = (180.0 * parentWin->GetBitmapRotationRadians()) / M_PI;
     
     degrees = wxGetNumberFromUser(
         wxT("Change the image rotation angle"),
@@ -68,5 +72,5 @@ void BitmapControlPanel::OnAngleChangeBtn(
         this
     );
     
-    parentWin->BitmapRotate(degrees);
+    parentWin->BitmapRotate((degrees * M_PI) / 180.0);
 }
