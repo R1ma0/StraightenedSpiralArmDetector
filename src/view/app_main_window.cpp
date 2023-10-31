@@ -11,6 +11,7 @@ AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(
 
     CreateControls();
     BindEventHandlers();
+    AllowSavingImage(false);
 }
 
 AppMainWindow::~AppMainWindow() 
@@ -30,7 +31,12 @@ void AppMainWindow::CreateControls()
         menuFile, ID_LOAD_IMG, wxT("Load image\tCtrl-O"), 
         wxT("Opening and loading an image for processing")
     );
+    saveImg = new wxMenuItem(
+        menuFile, ID_SAVE_IMG, wxT("Save image\tCtrl-S"),        
+        wxT("Saving processed image")
+    );
     menuFile->Append(loadImg);
+    menuFile->Append(saveImg);
     menuFile->Append(wxID_EXIT);
 
     auto menuBar = new wxMenuBar();
@@ -60,6 +66,7 @@ void AppMainWindow::CreateControls()
 void AppMainWindow::BindEventHandlers()
 {
     Bind(wxEVT_MENU, &AppMainWindow::OnLoadImg, this, ID_LOAD_IMG);
+    Bind(wxEVT_MENU, &AppMainWindow::OnSaveImg, this, ID_SAVE_IMG);
     Bind(wxEVT_MENU, &AppMainWindow::OnExit, this, wxID_EXIT);
 }
 
@@ -86,6 +93,26 @@ void AppMainWindow::OnLoadImg([[maybe_unused]] wxCommandEvent &event)
     }
 
     UpdateBitmapImage(loadedImg);
+    AllowSavingImage(true);
+}
+
+void AppMainWindow::AllowSavingImage(bool state)
+{
+    saveImg->Enable(state);
+}
+
+void AppMainWindow::OnSaveImg([[maybe_unused]] wxCommandEvent &event)
+{
+    wxFileDialog saveFileDialog(
+        this,
+        "Save image", "", "",
+        ("PNG & JPG files (*.png;*.jpg)|*.png;*.jpg"), 
+        wxFD_SAVE | wxFD_OVERWRITE_PROMPT        
+    );
+
+    if (saveFileDialog.ShowModal() == wxID_CANCEL) { return; }
+
+    bitmap->Save(saveFileDialog.GetPath());
 }
 
 void AppMainWindow::UpdateBitmapImage(const wxImage &img)

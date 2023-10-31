@@ -23,27 +23,21 @@ void BufferedBitmap::OnPaint([[maybe_unused]] wxPaintEvent &event)
 
     if (gc)
     {
-        const wxSize drawSize = ToDIP(GetVirtualSize());
         const wxSize bmpSize = GetScaledBitmapSize();
-
-        const double w = bmpSize.GetWidth();
-        const double h = bmpSize.GetHeight();
-
-        const double x = (drawSize.GetWidth() - w) / 2.0;
-        const double y = (drawSize.GetHeight() - h) / 2.0;
+        const wxPoint bmpCenter = GetScaledBitmapCenter();
 
         wxAffineMatrix2D transform{};
         
-        transform.Translate(x, y);
+        transform.Translate(bmpCenter.x, bmpCenter.y);
         transform.Rotate(angleRotationRadians);
-        transform.Translate(-x, -y);
+        transform.Translate(-bmpCenter.x, -bmpCenter.y);
  
         gc->SetTransform(gc->CreateMatrix(transform));
 
         gc->DrawBitmap(
             bitmap,
-            gc->FromDIP(x), gc->FromDIP(y), 
-            gc->FromDIP(w), gc->FromDIP(h)
+            gc->FromDIP(bmpCenter.x), gc->FromDIP(bmpCenter.y), 
+            gc->FromDIP(bmpSize.GetWidth()), gc->FromDIP(bmpSize.GetHeight())
         );
 
         delete gc;
@@ -66,6 +60,17 @@ wxSize BufferedBitmap::GetScaledBitmapSize() const
     const double zoom = GetZoomMultiplier();
 
     return wxSize(bmpSize.GetWidth() * zoom, bmpSize.GetHeight() * zoom);
+}
+
+wxPoint BufferedBitmap::GetScaledBitmapCenter() const
+{
+    const wxSize drawSize = ToDIP(GetVirtualSize());
+    const wxSize bmpSize = GetScaledBitmapSize();
+
+    const double x = (drawSize.GetWidth() - bmpSize.GetWidth()) / 2.0;
+    const double y = (drawSize.GetHeight() - bmpSize.GetHeight()) / 2.0;
+
+    return wxPoint(x, y);
 }
 
 double BufferedBitmap::GetZoomMultiplier() const
@@ -123,4 +128,18 @@ wxDouble BufferedBitmap::GetAngleRotationRadians() const
 void BufferedBitmap::SetAngleRotationRadians(wxDouble value)
 {
     angleRotationRadians = value;
+}
+
+bool BufferedBitmap::Save(wxString name)
+{
+    const wxPoint center = GetScaledBitmapCenter();
+
+    wxImage img = bitmap.ConvertToImage();
+    img = img.Rotate(
+        -angleRotationRadians, 
+        wxPoint(center.x, center.y), 
+        true
+    );
+
+    return img.SaveFile(name, wxBITMAP_TYPE_PNG);
 }
