@@ -15,7 +15,6 @@ private:
     wxPoint GetScaledBitmapCenter() const;
     wxPoint GetBitmapCenterPosition() const;
     const double ZOOM_FACTOR = 2.0;
-    wxDouble angleRotationRadians = 0.0;
     int zoomLevel = 0;
     void CenterAfterZoom(wxPoint, wxPoint);
     void CenterAndSetSize(const double);
@@ -25,9 +24,6 @@ public:
         const wxSize &, long
     );
     double GetZoomMultiplier() const;
-    wxDouble GetAngleRotationRadians() const;
-    bool Save(wxString);
-    void SetAngleRotationRadians(wxDouble);
     void SetBitmap(const wxBitmap &);
     void OnPaint(wxPaintEvent &);
     void ZoomInBitmap();

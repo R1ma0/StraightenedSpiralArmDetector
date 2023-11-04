@@ -46,31 +46,31 @@ void BitmapControlPanel::BindEventHandlers()
 
 void BitmapControlPanel::OnZoomIn([[maybe_unused]] wxCommandEvent &event)
 {
-    AppMainWindow *parentWin = (AppMainWindow *)parentPanel->GetParent();
-    parentWin->BitmapZoomIn();
+    //AppMainWindow *parentWin = (AppMainWindow *)parentPanel->GetParent();
+    //parentWin->BitmapZoomIn();
 }
 
 void BitmapControlPanel::OnZoomOut([[maybe_unused]] wxCommandEvent &event)
 {
-    AppMainWindow *parentWin = (AppMainWindow *)parentPanel->GetParent();
-    parentWin->BitmapZoomOut();
+    //AppMainWindow *parentWin = (AppMainWindow *)parentPanel->GetParent();
+    //parentWin->BitmapZoomOut();
 }
 
 void BitmapControlPanel::OnAngleChangeBtn(
     [[maybe_unused]] wxCommandEvent &event
 )
 {
-    AppMainWindow *parentWin = (AppMainWindow *)parentPanel->GetParent();
-    wxDouble degrees = (180.0 * parentWin->GetBitmapRotationRadians()) / M_PI;
+    //AppMainWindow *parentWin = (AppMainWindow *)parentPanel->GetParent();
+    //wxDouble degrees = (180.0 * parentWin->GetBitmapRotationRadians()) / M_PI;
     
-    degrees = wxGetNumberFromUser(
-        wxT("Change the image rotation angle"),
-        wxT("Angle in degrees:"),
-        wxT("Rotate image"),
-        degrees,
-        0, +360,
-        this
-    );
+    //degrees = wxGetNumberFromUser(
+    //    wxT("Change the image rotation angle"),
+    //    wxT("Angle in degrees:"),
+    //    wxT("Rotate image"),
+    //    degrees,
+    //    0, +360,
+    //    this
+    //);
     
-    parentWin->BitmapRotate((degrees * M_PI) / 180.0);
+    //parentWin->BitmapRotate((degrees * M_PI) / 180.0);
 }

@@ -3,5 +3,6 @@ project(view)
 set(SOURCE app_main_window.cpp
            detectorator_control_panel.cpp
            bitmap_control_panel.cpp
+           buffered_bitmap.cpp
 )
 add_library(view STATIC ${SOURCE})

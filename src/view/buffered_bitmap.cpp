@@ -26,14 +26,6 @@ void BufferedBitmap::OnPaint([[maybe_unused]] wxPaintEvent &event)
         const wxSize bmpSize = GetScaledBitmapSize();
         const wxPoint bmpCenter = GetScaledBitmapCenter();
 
-        wxAffineMatrix2D transform{};
-        
-        transform.Translate(bmpCenter.x, bmpCenter.y);
-        transform.Rotate(angleRotationRadians);
-        transform.Translate(-bmpCenter.x, -bmpCenter.y);
- 
-        gc->SetTransform(gc->CreateMatrix(transform));
-
         gc->DrawBitmap(
             bitmap,
             gc->FromDIP(bmpCenter.x), gc->FromDIP(bmpCenter.y), 
@@ -118,28 +110,4 @@ void BufferedBitmap::CenterAfterZoom(wxPoint prevCenter, wxPoint currCenter)
     const auto destY = GetViewStart().y + delta.y / pixelsPerUnit.y;
 
     Scroll(destX, destY);
-}
-
-wxDouble BufferedBitmap::GetAngleRotationRadians() const
-{
-    return angleRotationRadians;
-}
-
-void BufferedBitmap::SetAngleRotationRadians(wxDouble value)
-{
-    angleRotationRadians = value;
-}
-
-bool BufferedBitmap::Save(wxString name)
-{
-    const wxPoint center = GetScaledBitmapCenter();
-
-    wxImage img = bitmap.ConvertToImage();
-    img = img.Rotate(
-        -angleRotationRadians, 
-        wxPoint(center.x, center.y), 
-        true
-    );
-
-    return img.SaveFile(name, wxBITMAP_TYPE_PNG);
 }

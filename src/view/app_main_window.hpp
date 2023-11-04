@@ -10,19 +10,22 @@
 #include <wx/numdlg.h>
 #include <wx/slider.h>
 #include <wx/event.h>
+#include <opencv2/opencv.hpp>
 #include "ids_of_controls.hpp"
-#include "../model/buffered_bitmap.hpp"
+#include "buffered_bitmap.hpp"
 #include "detectorator_control_panel.hpp"
 #include "bitmap_control_panel.hpp"
+#include "../model/processed_image.hpp"
 
 class AppMainWindow : public wxFrame
 {
 private:
     BufferedBitmap *bitmap;
+    ProcessedImage *procImage;
     wxPanel *mainPanel;
     wxMenuItem *saveImg;
-    wxImage loadedImg;
-    void UpdateBitmapImage(const wxImage &);
+    wxImage MatToWxImage(cv::Mat);
+    void UpdateBitmapImage();
     void OnExit(wxCommandEvent &);
     void OnLoadImg(wxCommandEvent &);
     void OnSaveImg(wxCommandEvent &);
@@ -33,11 +36,6 @@ public:
     AppMainWindow(const wxString &);
     ~AppMainWindow();
     wxPanel *GetMainPanel();
-    BufferedBitmap *GetBitmap();
-    wxDouble GetBitmapRotationRadians();
-    void BitmapZoomIn();
-    void BitmapZoomOut();
-    void BitmapRotate(wxDouble);
 };
 
 #endif

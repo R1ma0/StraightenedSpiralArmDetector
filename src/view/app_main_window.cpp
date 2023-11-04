@@ -5,6 +5,7 @@ AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(
 )
 {
     mainPanel = new wxPanel(this, wxID_ANY);
+    procImage = new ProcessedImage();
 
     wxImage::AddHandler(new wxPNGHandler);
     wxImage::AddHandler(new wxJPEGHandler);
@@ -47,7 +48,7 @@ void AppMainWindow::CreateControls()
 
     bitmap = new BufferedBitmap(
         this, wxID_ANY, wxBitmap(wxSize(1, 1)), wxDefaultPosition, 
-        FromDIP(wxSize(500, 200)), 0
+        FromDIP(wxSize(1, 1)), 0
     );
 
     auto bcp = new BitmapControlPanel(this, GetMainPanel());
@@ -86,19 +87,18 @@ void AppMainWindow::OnLoadImg([[maybe_unused]] wxCommandEvent &event)
     
     if (openFileDialog.ShowModal() == wxID_CANCEL) { return; }
 
-    if (!loadedImg.LoadFile(openFileDialog.GetPath()))
+    bool isImageNotLoaded = procImage->LoadImage(
+        openFileDialog.GetPath().ToStdString()
+    );
+
+    if (isImageNotLoaded)
     {
         wxMessageBox("Failed to open image", "Error", wxOK | wxICON_ERROR);
         return;
     }
 
-    UpdateBitmapImage(loadedImg);
+    UpdateBitmapImage();
     AllowSavingImage(true);
-}
-
-void AppMainWindow::AllowSavingImage(bool state)
-{
-    saveImg->Enable(state);
 }
 
 void AppMainWindow::OnSaveImg([[maybe_unused]] wxCommandEvent &event)
@@ -111,32 +111,33 @@ void AppMainWindow::OnSaveImg([[maybe_unused]] wxCommandEvent &event)
     );
 
     if (saveFileDialog.ShowModal() == wxID_CANCEL) { return; }
-
-    bitmap->Save(saveFileDialog.GetPath());
 }
 
-void AppMainWindow::UpdateBitmapImage(const wxImage &img)
+void AppMainWindow::AllowSavingImage(bool state)
 {
-    bitmap->SetBitmap(wxBitmap(img));
+    saveImg->Enable(state);
+}
+
+void AppMainWindow::UpdateBitmapImage()
+{
+    cv::Mat img = procImage->GetProcessedImage();
+    bitmap->SetBitmap(wxBitmap(MatToWxImage(img)));
     this->Layout();
 }
 
-void AppMainWindow::BitmapZoomIn()
+wxImage AppMainWindow::MatToWxImage(cv::Mat img)
 {
-    bitmap->ZoomInBitmap();
-}
+    if (img.channels() == 1) { cv::cvtColor(img, img, cv::COLOR_GRAY2RGB); }
+    else if (img.channels() == 4) { cv::cvtColor(img, img, cv::COLOR_BGRA2RGB); }
+    else { cv::cvtColor(img, img, cv::COLOR_BGR2RGB); }
 
-void AppMainWindow::BitmapZoomOut()
-{
-    bitmap->ZoomOutBitmap();
-}
+    long imageSize = img.rows * img.cols * img.channels();
 
-void AppMainWindow::BitmapRotate(wxDouble radians)
-{
-    bitmap->SetAngleRotationRadians(radians);
-}
+    wxImage image(img.cols, img.rows, (unsigned char *)malloc(imageSize), false);
+    unsigned char *matData = img.data;
+    unsigned char *wxData = image.GetData();
 
-wxDouble AppMainWindow::GetBitmapRotationRadians()
-{
-    return bitmap->GetAngleRotationRadians();
+    for (long i = 0; i < imageSize; i++) { wxData[i] = matData[i]; }
+
+    return image;
 }

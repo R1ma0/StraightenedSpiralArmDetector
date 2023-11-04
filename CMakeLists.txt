@@ -19,7 +19,8 @@ add_executable(
     src/view/app_main_window.cpp
     src/view/detectorator_control_panel.cpp
     src/view/bitmap_control_panel.cpp
-    src/model/buffered_bitmap.cpp
+    src/view/buffered_bitmap.cpp
+    src/model/processed_image.cpp
     src/detectorator/adaptive_zhang_suen.cpp
     src/detectorator/utils.cpp
     src/detectorator/zhang_suen.cpp
