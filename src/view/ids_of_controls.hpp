@@ -1,5 +1,5 @@
 #ifndef IDS_OF_CONTROLS_H
-#define IDS_OF_CONTROLS_h
+#define IDS_OF_CONTROLS_H
 
 enum IDs
 {
@@ -8,7 +8,6 @@ enum IDs
     ID_ZOOM_IN,
     ID_ZOOM_OUT,
     ID_ANGLE_CHANGE,
-    ID_ANGLE_CHANGE_SLIDER,
 };
 
 #endif

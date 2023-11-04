@@ -7,3 +7,10 @@ bool ProcessedImage::LoadImage(const std::string path)
     if (image.empty()) return 1;
     else return 0;
 }
+
+void ProcessedImage::SetRotationAngleDegrees(double degrees)
+{
+    if (degrees < 0 || degrees > 360) return;
+
+    rotationAngleDegrees = degrees;
+}

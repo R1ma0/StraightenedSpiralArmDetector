@@ -1,10 +1,10 @@
 #include "app_main_window.hpp"
 
-AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(
+AppMainWindow::AppMainWindow(const wxString &title) : wxFrame
+(
     nullptr, wxID_ANY, title
 )
 {
-    mainPanel = new wxPanel(this, wxID_ANY);
     procImage = new ProcessedImage();
 
     wxImage::AddHandler(new wxPNGHandler);
@@ -18,11 +18,7 @@ AppMainWindow::AppMainWindow(const wxString &title) : wxFrame(
 AppMainWindow::~AppMainWindow() 
 {
     delete bitmap;
-}
-
-wxPanel *AppMainWindow::GetMainPanel()
-{
-    return mainPanel;
+    delete procImage;
 }
 
 void AppMainWindow::CreateControls()
@@ -51,15 +47,17 @@ void AppMainWindow::CreateControls()
         FromDIP(wxSize(1, 1)), 0
     );
 
-    auto bcp = new BitmapControlPanel(this, GetMainPanel());
+    bcp = new BitmapControlPanel(this, bitmap, procImage);
     auto sizerLeft = new wxBoxSizer(wxVERTICAL);
     sizerLeft->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(10));
     sizerLeft->Add(bcp, 0, wxALIGN_LEFT | wxALL, FromDIP(10));
 
-    auto dcp = new DetectoratorControlPanel(this, GetMainPanel());
+    dcp = new DetectoratorControlPanel(this, bitmap, procImage);
     auto sizerMain = new wxBoxSizer(wxHORIZONTAL);
     sizerMain->Add(sizerLeft, 1, wxEXPAND);
     sizerMain->Add(dcp, 0, wxEXPAND);
+
+    EnablePanels(false);
 
     this->SetSizerAndFit(sizerMain);
 }
@@ -69,6 +67,12 @@ void AppMainWindow::BindEventHandlers()
     Bind(wxEVT_MENU, &AppMainWindow::OnLoadImg, this, ID_LOAD_IMG);
     Bind(wxEVT_MENU, &AppMainWindow::OnSaveImg, this, ID_SAVE_IMG);
     Bind(wxEVT_MENU, &AppMainWindow::OnExit, this, wxID_EXIT);
+}
+
+void AppMainWindow::EnablePanels(bool state)
+{
+    bcp->Enable(state);
+    dcp->Enable(state);
 }
 
 void AppMainWindow::OnExit([[maybe_unused]] wxCommandEvent &event)
@@ -99,6 +103,7 @@ void AppMainWindow::OnLoadImg([[maybe_unused]] wxCommandEvent &event)
 
     UpdateBitmapImage();
     AllowSavingImage(true);
+    EnablePanels(true);
 }
 
 void AppMainWindow::OnSaveImg([[maybe_unused]] wxCommandEvent &event)

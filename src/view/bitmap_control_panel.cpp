@@ -1,16 +1,18 @@
 #include "bitmap_control_panel.hpp"
 
-BitmapControlPanel::BitmapControlPanel(
-    wxFrame *parentWindow, wxPanel *parentWinPanel        
+BitmapControlPanel::BitmapControlPanel
+(
+    wxFrame *parentWindow, 
+    BufferedBitmap *bitmap, 
+    ProcessedImage *procImage
 ) : wxPanel(parentWindow)
 {
-    parentPanel = parentWinPanel;
+    this->bitmap = bitmap;
+    this->procImage = procImage;
 
     CreateControls();
     BindEventHandlers();
 }
-
-BitmapControlPanel::~BitmapControlPanel() {}
 
 void BitmapControlPanel::CreateControls()
 {
@@ -46,31 +48,29 @@ void BitmapControlPanel::BindEventHandlers()
 
 void BitmapControlPanel::OnZoomIn([[maybe_unused]] wxCommandEvent &event)
 {
-    //AppMainWindow *parentWin = (AppMainWindow *)parentPanel->GetParent();
-    //parentWin->BitmapZoomIn();
+    bitmap->ZoomInBitmap();
 }
 
 void BitmapControlPanel::OnZoomOut([[maybe_unused]] wxCommandEvent &event)
 {
-    //AppMainWindow *parentWin = (AppMainWindow *)parentPanel->GetParent();
-    //parentWin->BitmapZoomOut();
+    bitmap->ZoomOutBitmap();
 }
 
-void BitmapControlPanel::OnAngleChangeBtn(
+void BitmapControlPanel::OnAngleChangeBtn
+(
     [[maybe_unused]] wxCommandEvent &event
 )
 {
-    //AppMainWindow *parentWin = (AppMainWindow *)parentPanel->GetParent();
-    //wxDouble degrees = (180.0 * parentWin->GetBitmapRotationRadians()) / M_PI;
+    wxDouble degrees = procImage->GetRotationAngleDegrees();
     
-    //degrees = wxGetNumberFromUser(
-    //    wxT("Change the image rotation angle"),
-    //    wxT("Angle in degrees:"),
-    //    wxT("Rotate image"),
-    //    degrees,
-    //    0, +360,
-    //    this
-    //);
+    degrees = wxGetNumberFromUser(
+        wxT("Change the image rotation angle"),
+        wxT("Angle in degrees:"),
+        wxT("Rotate image"),
+        degrees,
+        0, +360,
+        this
+    );
     
-    //parentWin->BitmapRotate((degrees * M_PI) / 180.0);
+    procImage->SetRotationAngleDegrees(degrees);
 }

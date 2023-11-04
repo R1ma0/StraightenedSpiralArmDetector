@@ -5,15 +5,16 @@
 #ifndef WX_PRECOMP
     #include <wx/wx.h>
 #endif
-#include "app_main_window.hpp"
+#include "buffered_bitmap.hpp"
+#include "../model/processed_image.hpp"
 
 class DetectoratorControlPanel : public wxPanel
 {
 private:
-    wxPanel *parentPanel; 
+    BufferedBitmap *bitmap;
+    ProcessedImage *procImage;
 public:
-    DetectoratorControlPanel(wxFrame *, wxPanel *);
-    ~DetectoratorControlPanel();
+    DetectoratorControlPanel(wxFrame *, BufferedBitmap *, ProcessedImage *);
 };
 
 #endif

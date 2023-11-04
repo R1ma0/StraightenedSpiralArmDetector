@@ -22,9 +22,11 @@ class AppMainWindow : public wxFrame
 private:
     BufferedBitmap *bitmap;
     ProcessedImage *procImage;
-    wxPanel *mainPanel;
     wxMenuItem *saveImg;
     wxImage MatToWxImage(cv::Mat);
+    BitmapControlPanel *bcp;
+    DetectoratorControlPanel *dcp;
+    void EnablePanels(bool);
     void UpdateBitmapImage();
     void OnExit(wxCommandEvent &);
     void OnLoadImg(wxCommandEvent &);
@@ -35,7 +37,6 @@ private:
 public:
     AppMainWindow(const wxString &);
     ~AppMainWindow();
-    wxPanel *GetMainPanel();
 };
 
 #endif

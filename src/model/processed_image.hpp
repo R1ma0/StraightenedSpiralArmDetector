@@ -7,9 +7,12 @@ class ProcessedImage
 {
 private:
     cv::Mat image;
+    double rotationAngleDegrees = 0.0;
 public:
     cv::Mat GetProcessedImage() { return image; };
+    double GetRotationAngleDegrees() { return rotationAngleDegrees; }
     bool LoadImage(const std::string);
+    void SetRotationAngleDegrees(double);
 };
 
 #endif
