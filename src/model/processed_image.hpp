@@ -12,6 +12,7 @@ public:
     cv::Mat GetProcessedImage() { return image; };
     double GetRotationAngleDegrees() { return rotationAngleDegrees; }
     bool LoadImage(const std::string);
+    bool SaveImage(const std::string);
     void SetRotationAngleDegrees(double);
 };
 

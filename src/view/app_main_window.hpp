@@ -25,6 +25,7 @@ private:
     wxMenuItem *saveImg;
     BitmapControlPanel *bcp;
     DetectoratorControlPanel *dcp;
+    wxString *fileFilters;
     void EnablePanels(bool);
     void UpdateBitmapImage();
     void OnExit(wxCommandEvent &);

@@ -10,6 +10,10 @@ AppMainWindow::AppMainWindow(const wxString &title) : wxFrame
     wxImage::AddHandler(new wxPNGHandler);
     wxImage::AddHandler(new wxJPEGHandler);
 
+    fileFilters = new wxString(
+        "Images (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg"
+    );
+
     CreateControls();
     BindEventHandlers();
     AllowSavingImage(false);
@@ -85,7 +89,7 @@ void AppMainWindow::OnLoadImg([[maybe_unused]] wxCommandEvent &event)
     wxFileDialog openFileDialog(
         this, 
         "Select image", "", "", 
-        ("PNG & JPG files (*.png;*.jpg)|*.png;*.jpg"), 
+        *fileFilters, 
         wxFD_OPEN | wxFD_FILE_MUST_EXIST
     );
     
@@ -110,12 +114,22 @@ void AppMainWindow::OnSaveImg([[maybe_unused]] wxCommandEvent &event)
 {
     wxFileDialog saveFileDialog(
         this,
-        "Save image", "", "",
-        ("PNG & JPG files (*.png;*.jpg)|*.png;*.jpg"), 
+        "Save image", "", "", 
+        *fileFilters, 
         wxFD_SAVE | wxFD_OVERWRITE_PROMPT        
     );
 
     if (saveFileDialog.ShowModal() == wxID_CANCEL) { return; }
+
+    bool isImageSaved = procImage->SaveImage(
+        saveFileDialog.GetPath().ToStdString()        
+    );
+
+    if (!isImageSaved)
+    {
+        wxMessageBox("Failed to save image", "Error", wxOK | wxICON_ERROR);
+        return;
+    }
 }
 
 void AppMainWindow::AllowSavingImage(bool state)
