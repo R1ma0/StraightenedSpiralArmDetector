@@ -10,12 +10,12 @@
 #include <wx/numdlg.h>
 #include <wx/slider.h>
 #include <wx/event.h>
-#include <opencv2/opencv.hpp>
 #include "ids_of_controls.hpp"
 #include "buffered_bitmap.hpp"
 #include "detectorator_control_panel.hpp"
 #include "bitmap_control_panel.hpp"
 #include "../model/processed_image.hpp"
+#include "../model/converters.hpp"
 
 class AppMainWindow : public wxFrame
 {
@@ -23,7 +23,6 @@ private:
     BufferedBitmap *bitmap;
     ProcessedImage *procImage;
     wxMenuItem *saveImg;
-    wxImage MatToWxImage(cv::Mat);
     BitmapControlPanel *bcp;
     DetectoratorControlPanel *dcp;
     void EnablePanels(bool);
