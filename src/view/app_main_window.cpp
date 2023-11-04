@@ -22,7 +22,10 @@ AppMainWindow::AppMainWindow(const wxString &title) : wxFrame
 AppMainWindow::~AppMainWindow() 
 {
     delete bitmap;
+    delete saveImg;
     delete procImage;
+    //delete bcp;
+    delete dcp;
 }
 
 void AppMainWindow::CreateControls()
@@ -51,7 +54,7 @@ void AppMainWindow::CreateControls()
         FromDIP(wxSize(1, 1)), 0
     );
 
-    bcp = new BitmapControlPanel(this, bitmap, procImage);
+    auto bcp = new BitmapControlPanel(this, bitmap, procImage);
     auto sizerLeft = new wxBoxSizer(wxVERTICAL);
     sizerLeft->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(10));
     sizerLeft->Add(bcp, 0, wxALIGN_LEFT | wxALL, FromDIP(10));
@@ -61,7 +64,7 @@ void AppMainWindow::CreateControls()
     sizerMain->Add(sizerLeft, 1, wxEXPAND);
     sizerMain->Add(dcp, 0, wxEXPAND);
 
-    EnablePanels(false);
+    //EnablePanels(false);
 
     this->SetSizerAndFit(sizerMain);
 }
@@ -75,8 +78,8 @@ void AppMainWindow::BindEventHandlers()
 
 void AppMainWindow::EnablePanels(bool state)
 {
-    bcp->Enable(state);
-    dcp->Enable(state);
+    //bcp->Enable(state);
+    //dcp->Enable(state);
 }
 
 void AppMainWindow::OnExit([[maybe_unused]] wxCommandEvent &event)

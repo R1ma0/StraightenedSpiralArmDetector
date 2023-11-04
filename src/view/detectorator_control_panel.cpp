@@ -2,10 +2,10 @@
 
 DetectoratorControlPanel::DetectoratorControlPanel
 (
-    wxFrame *parentWindow, 
+    wxFrame *parentFrame, 
     BufferedBitmap *bitmap,
     ProcessedImage *procImage
-) : wxPanel(parentWindow)
+) : wxPanel(parentFrame)
 {
     this->bitmap = bitmap;
     this->procImage = procImage;

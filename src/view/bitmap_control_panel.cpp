@@ -2,10 +2,10 @@
 
 BitmapControlPanel::BitmapControlPanel
 (
-    wxFrame *parentWindow, 
+    wxFrame *parentFrame, 
     BufferedBitmap *bitmap, 
     ProcessedImage *procImage
-) : wxPanel(parentWindow)
+) : wxPanel(parentFrame)
 {
     this->bitmap = bitmap;
     this->procImage = procImage;
@@ -62,8 +62,7 @@ void BitmapControlPanel::OnAngleChangeBtn
 )
 {
     wxDouble degrees = procImage->GetRotationAngleDegrees();
-    
-    degrees = wxGetNumberFromUser(
+    wxDouble newDegrees = wxGetNumberFromUser(
         wxT("Change the image rotation angle"),
         wxT("Angle in degrees:"),
         wxT("Rotate image"),
@@ -72,5 +71,10 @@ void BitmapControlPanel::OnAngleChangeBtn
         this
     );
     
-    procImage->SetRotationAngleDegrees(degrees);
+    if (degrees != newDegrees)
+    {
+        procImage->RotateImage(newDegrees);
+        cv::Mat img = procImage->GetProcessedImage();
+        bitmap->SetBitmap(wxBitmap(MatToWxImage(img)));
+    }
 }

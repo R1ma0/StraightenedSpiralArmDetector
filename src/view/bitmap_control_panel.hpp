@@ -8,7 +8,9 @@
 #include <wx/numdlg.h>
 #include "ids_of_controls.hpp"
 #include "buffered_bitmap.hpp"
+#include "app_main_window.hpp"
 #include "../model/processed_image.hpp"
+#include "../model/converters.hpp"
 
 class BitmapControlPanel : public wxPanel
 {
