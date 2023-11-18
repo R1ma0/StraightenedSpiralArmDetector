@@ -22,9 +22,9 @@ add_executable(
     src/view/buffered_bitmap.cpp
     src/model/processed_image.cpp
     src/model/converters.cpp
-    src/detectorator/adaptive_zhang_suen.cpp
-    src/detectorator/utils.cpp
-    src/detectorator/zhang_suen.cpp
+    src/model/detectorator/adaptive_zhang_suen.cpp
+    src/model/detectorator/utils.cpp
+    src/model/detectorator/zhang_suen.cpp
 )
 
 target_link_libraries(

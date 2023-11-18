@@ -20,20 +20,17 @@
 class AppMainWindow : public wxFrame
 {
 private:
-    //BitmapControlPanel *bcp;
-    DetectoratorControlPanel *dcp;
     BufferedBitmap *bitmap;
     ProcessedImage *procImage;
     wxMenuItem *saveImg;
     wxString *fileFilters;
-    void EnablePanels(bool);
     void OnExit(wxCommandEvent &);
     void OnLoadImg(wxCommandEvent &);
     void OnSaveImg(wxCommandEvent &);
     void CreateControls();
     void BindEventHandlers();
-    void AllowSavingImage(bool);
     void UpdateBitmapImage();
+    void AllowSavingImage(bool);
 public:
     AppMainWindow(const wxString &);
     ~AppMainWindow();

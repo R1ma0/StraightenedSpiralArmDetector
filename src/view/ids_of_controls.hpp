@@ -8,6 +8,7 @@ enum IDs
     ID_ZOOM_IN,
     ID_ZOOM_OUT,
     ID_ANGLE_CHANGE,
+    ID_RUN_DETECTORATOR,
 };
 
 #endif

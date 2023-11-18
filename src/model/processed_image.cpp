@@ -1,5 +1,15 @@
 #include "processed_image.hpp"
 
+cv::Mat ProcessedImage::GetProcessedImage()
+{
+    return image;
+}
+
+double ProcessedImage::GetRotationAngleDegrees()
+{
+    return rotationAngleDegrees;
+}
+
 bool ProcessedImage::LoadImage(const std::string path)
 {
     image = cv::imread(path);
@@ -30,22 +40,25 @@ bool ProcessedImage::SaveImage(const std::string path)
     else return 0;
 }
 
-void ProcessedImage::RotateImage(double degrees)
+cv::Mat ProcessedImage::RotateImage(cv::Mat image, double angle)
 {
-    if (degrees < 0 || degrees > 360) return;
-
-    rotationAngleDegrees = degrees;
-
-    cv::Point2f imageCenter((image.cols - 1) / 2.0, (image.rows - 1) / 2.0);
+    cv::Point2f imageCenter(
+        (image.size().width) / 2.0, 
+        (image.size().height) / 2.0
+    );
     cv::Mat matrix = cv::getRotationMatrix2D(
-        imageCenter, rotationAngleDegrees, 1.0
+        imageCenter, angle, 1.0
     );
     cv::Rect2f bbox = cv::RotatedRect(
-        cv::Point2f(), image.size(), rotationAngleDegrees
+        cv::Point2f(), image.size(), angle
     ).boundingRect2f();
 
     matrix.at<double>(0, 2) += bbox.width / 2.0 - image.cols / 2.0;
     matrix.at<double>(1, 2) += bbox.height / 2.0 - image.rows / 2.0;
 
     cv::warpAffine(image, image, matrix, bbox.size());
+
+    rotationAngleDegrees = angle;
+
+    return image;
 }

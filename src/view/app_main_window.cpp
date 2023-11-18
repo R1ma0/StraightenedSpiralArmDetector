@@ -24,19 +24,17 @@ AppMainWindow::~AppMainWindow()
     delete bitmap;
     delete saveImg;
     delete procImage;
-    //delete bcp;
-    delete dcp;
 }
 
 void AppMainWindow::CreateControls()
 {
     auto menuFile = new wxMenu();
     auto loadImg = new wxMenuItem(
-        menuFile, ID_LOAD_IMG, wxT("Load image\tCtrl-O"), 
+        menuFile, ID_LOAD_IMG, wxT("Load Image\tCtrl-O"), 
         wxT("Opening and loading an image for processing")
     );
     saveImg = new wxMenuItem(
-        menuFile, ID_SAVE_IMG, wxT("Save image\tCtrl-S"),        
+        menuFile, ID_SAVE_IMG, wxT("Save Image\tCtrl-S"),        
         wxT("Saving processed image")
     );
     menuFile->Append(loadImg);
@@ -59,12 +57,10 @@ void AppMainWindow::CreateControls()
     sizerLeft->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(10));
     sizerLeft->Add(bcp, 0, wxALIGN_LEFT | wxALL, FromDIP(10));
 
-    dcp = new DetectoratorControlPanel(this, bitmap, procImage);
+    auto dcp = new DetectoratorControlPanel(this, bitmap, procImage);
     auto sizerMain = new wxBoxSizer(wxHORIZONTAL);
     sizerMain->Add(sizerLeft, 1, wxEXPAND);
     sizerMain->Add(dcp, 0, wxEXPAND);
-
-    //EnablePanels(false);
 
     this->SetSizerAndFit(sizerMain);
 }
@@ -74,12 +70,6 @@ void AppMainWindow::BindEventHandlers()
     Bind(wxEVT_MENU, &AppMainWindow::OnLoadImg, this, ID_LOAD_IMG);
     Bind(wxEVT_MENU, &AppMainWindow::OnSaveImg, this, ID_SAVE_IMG);
     Bind(wxEVT_MENU, &AppMainWindow::OnExit, this, wxID_EXIT);
-}
-
-void AppMainWindow::EnablePanels(bool state)
-{
-    //bcp->Enable(state);
-    //dcp->Enable(state);
 }
 
 void AppMainWindow::OnExit([[maybe_unused]] wxCommandEvent &event)
@@ -110,7 +100,6 @@ void AppMainWindow::OnLoadImg([[maybe_unused]] wxCommandEvent &event)
 
     UpdateBitmapImage();
     AllowSavingImage(true);
-    EnablePanels(true);
 }
 
 void AppMainWindow::OnSaveImg([[maybe_unused]] wxCommandEvent &event)

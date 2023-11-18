@@ -22,10 +22,10 @@ void BitmapControlPanel::CreateControls()
     auto askAngleBtn = new wxButton(this, ID_ANGLE_CHANGE, wxT("Rotate"));
 
     hSizer->Add(
-        zoomInBtn, 0, wxALIGN_CENTER_VERTICAL | wxLEFT | wxRIGHT, FromDIP(5)
+        zoomInBtn, 0, wxALIGN_CENTER_VERTICAL
     );
     hSizer->Add(
-        zoomOutBtn, 0, wxALIGN_CENTER_VERTICAL, FromDIP(5)        
+        zoomOutBtn, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, FromDIP(5)        
     );
     hSizer->Add(
         askAngleBtn, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, FromDIP(15)
@@ -61,20 +61,22 @@ void BitmapControlPanel::OnAngleChangeBtn
     [[maybe_unused]] wxCommandEvent &event
 )
 {
-    wxDouble degrees = procImage->GetRotationAngleDegrees();
-    wxDouble newDegrees = wxGetNumberFromUser(
+    wxDouble currentAngle = procImage->GetRotationAngleDegrees();
+    wxDouble newAngle = wxGetNumberFromUser(
         wxT("Change the image rotation angle"),
         wxT("Angle in degrees:"),
         wxT("Rotate image"),
-        degrees,
-        0, +360,
+        currentAngle,
+        -360, +360,
         this
     );
     
-    if (degrees != newDegrees)
+    if (currentAngle!= newAngle)
     {
-        procImage->RotateImage(newDegrees);
-        cv::Mat img = procImage->GetProcessedImage();
+        cv::Mat img = procImage->RotateImage(
+            procImage->GetProcessedImage(),
+            newAngle
+        );
         bitmap->SetBitmap(wxBitmap(MatToWxImage(img)));
     }
 }

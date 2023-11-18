@@ -2,6 +2,7 @@
 #define PROCESSED_IMAGE_H
 
 #include <opencv2/opencv.hpp>
+#include <vector>
 
 class ProcessedImage
 {
@@ -9,11 +10,11 @@ private:
     cv::Mat image;
     double rotationAngleDegrees = 0.0;
 public:
-    cv::Mat GetProcessedImage() { return image; };
-    double GetRotationAngleDegrees() { return rotationAngleDegrees; }
+    cv::Mat GetProcessedImage();
+    double GetRotationAngleDegrees();
     bool LoadImage(const std::string);
     bool SaveImage(const std::string);
-    void RotateImage(double);
+    cv::Mat RotateImage(cv::Mat, double);
 };
 
 #endif
