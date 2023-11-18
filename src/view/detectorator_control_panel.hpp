@@ -17,8 +17,7 @@ private:
     ProcessedImage *procImage;
     void CreateControls();
     void BindEventHandlers();
-    void OnResizeImg(wxCommandEvent &);
-    void OnUseThreshBin(wxCommandEvent &);
+    void OnRunDetectorator(wxCommandEvent &);
 public:
     DetectoratorControlPanel(wxFrame *, BufferedBitmap *, ProcessedImage *);
 };
