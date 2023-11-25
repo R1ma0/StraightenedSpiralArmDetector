@@ -2,13 +2,13 @@
 
 AppMainWindow::AppMainWindow(
     const wxString &title,
-    IController *view
+    IController *controller
 ) : wxFrame
 (
     nullptr, wxID_ANY, title
 )
 {
-    mainController = view;
+    mainController = controller;
     procImage = new ProcessedImage();
 
     wxImage::AddHandler(new wxPNGHandler);
@@ -21,6 +21,8 @@ AppMainWindow::AppMainWindow(
     CreateControls();
     BindEventHandlers();
     AllowSavingImage(false);
+
+    dynamic_cast<AppMainWindowController *>(mainController)->Display();
 }
 
 AppMainWindow::~AppMainWindow() 

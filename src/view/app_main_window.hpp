@@ -15,6 +15,7 @@
 #include "detectorator_control_panel.hpp"
 #include "bitmap_control_panel.hpp"
 #include "../controller/i_controller.hpp"
+#include "../controller/app_main_window_controller.hpp"
 #include "../model/processed_image.hpp"
 #include "../model/converters.hpp"
 

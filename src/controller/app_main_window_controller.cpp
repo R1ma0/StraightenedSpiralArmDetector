@@ -2,13 +2,15 @@
 
 AppMainWindowController::AppMainWindowController()
 {
-    std::cout << "Created controller" << std::endl;;
 }
 
 void AppMainWindowController::SetView(wxFrame *view)
 {
     uncastedView = view;
-    std::cout << "View is set" << std::endl;
-    castedView = dynamic_cast<AppMainWindow *>(view);
-    castedView->AllowSavingImage(true);
+    dynamic_cast<AppMainWindow *>(uncastedView)->AllowSavingImage(true);
+}
+
+void AppMainWindowController::Display()
+{
+    std::cout << "123" << std::endl;
 }
