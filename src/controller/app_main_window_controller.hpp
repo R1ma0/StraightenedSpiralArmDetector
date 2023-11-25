@@ -7,16 +7,21 @@
 #endif
 #include "i_controller.hpp"
 #include "../view/app_main_window.hpp"
-#include <iostream>
+#include "../model/processed_image.hpp"
+#include "../model/converters.hpp"
 
 class AppMainWindowController : public IController
 {
 private:
-    wxFrame *uncastedView;
+    wxFrame *view;
+    ProcessedImage *procImage;
 public:
     AppMainWindowController();
+    ~AppMainWindowController();
+    wxBitmap GetBitmapImage();
+    bool LoadImage(const std::string path);
+    bool SaveImage(const std::string path);
     void SetView(wxFrame *);
-    void Display();
 };
 
 #endif

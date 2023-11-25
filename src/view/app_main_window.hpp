@@ -16,15 +16,12 @@
 #include "bitmap_control_panel.hpp"
 #include "../controller/i_controller.hpp"
 #include "../controller/app_main_window_controller.hpp"
-#include "../model/processed_image.hpp"
-#include "../model/converters.hpp"
 
 class AppMainWindow : public wxFrame
 {
 private:
     IController *mainController;
     BufferedBitmap *bitmap;
-    ProcessedImage *procImage;
     wxMenuItem *saveImg;
     wxString *fileFilters;
     void OnExit(wxCommandEvent &);
@@ -32,11 +29,11 @@ private:
     void OnSaveImg(wxCommandEvent &);
     void CreateControls();
     void BindEventHandlers();
-    void UpdateBitmapImage();
+    void AllowSavingImage(bool);
 public:
     AppMainWindow(const wxString &, IController *);
     ~AppMainWindow();
-    void AllowSavingImage(bool);
+    void UpdateBitmap(wxBitmap);
 };
 
 #endif

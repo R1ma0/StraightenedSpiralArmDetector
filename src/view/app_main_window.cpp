@@ -9,7 +9,6 @@ AppMainWindow::AppMainWindow(
 )
 {
     mainController = controller;
-    procImage = new ProcessedImage();
 
     wxImage::AddHandler(new wxPNGHandler);
     wxImage::AddHandler(new wxJPEGHandler);
@@ -21,15 +20,12 @@ AppMainWindow::AppMainWindow(
     CreateControls();
     BindEventHandlers();
     AllowSavingImage(false);
-
-    dynamic_cast<AppMainWindowController *>(mainController)->Display();
 }
 
 AppMainWindow::~AppMainWindow() 
 {
     delete bitmap;
     delete saveImg;
-    delete procImage;
 }
 
 void AppMainWindow::CreateControls()
@@ -58,15 +54,15 @@ void AppMainWindow::CreateControls()
         FromDIP(wxSize(1, 1)), 0
     );
 
-    auto bcp = new BitmapControlPanel(this, bitmap, procImage);
+    //auto bcp = new BitmapControlPanel(this, bitmap, procImage);
     auto sizerLeft = new wxBoxSizer(wxVERTICAL);
     sizerLeft->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(10));
-    sizerLeft->Add(bcp, 0, wxALIGN_LEFT | wxALL, FromDIP(10));
+    //sizerLeft->Add(bcp, 0, wxALIGN_LEFT | wxALL, FromDIP(10));
 
-    auto dcp = new DetectoratorControlPanel(this, bitmap, procImage);
+    //auto dcp = new DetectoratorControlPanel(this, bitmap, procImage);
     auto sizerMain = new wxBoxSizer(wxHORIZONTAL);
     sizerMain->Add(sizerLeft, 1, wxEXPAND);
-    sizerMain->Add(dcp, 0, wxEXPAND);
+    //sizerMain->Add(dcp, 0, wxEXPAND);
 
     this->SetSizerAndFit(sizerMain);
 }
@@ -94,9 +90,10 @@ void AppMainWindow::OnLoadImg([[maybe_unused]] wxCommandEvent &event)
     
     if (openFileDialog.ShowModal() == wxID_CANCEL) { return; }
 
-    bool isImageNotLoaded = procImage->LoadImage(
-        openFileDialog.GetPath().ToStdString()
-    );
+    std::string pathToFile = openFileDialog.GetPath().ToStdString();
+    bool isImageNotLoaded = dynamic_cast<
+        AppMainWindowController *
+    >(mainController)->LoadImage(pathToFile);
 
     if (isImageNotLoaded)
     {
@@ -104,7 +101,6 @@ void AppMainWindow::OnLoadImg([[maybe_unused]] wxCommandEvent &event)
         return;
     }
 
-    UpdateBitmapImage();
     AllowSavingImage(true);
 }
 
@@ -119,9 +115,10 @@ void AppMainWindow::OnSaveImg([[maybe_unused]] wxCommandEvent &event)
 
     if (saveFileDialog.ShowModal() == wxID_CANCEL) { return; }
 
-    bool isImageSaved = procImage->SaveImage(
-        saveFileDialog.GetPath().ToStdString()        
-    );
+    std::string pathToFile = saveFileDialog.GetPath().ToStdString();
+    bool isImageSaved = dynamic_cast<
+        AppMainWindowController *    
+    >(mainController)->SaveImage(pathToFile);
 
     if (!isImageSaved)
     {
@@ -135,9 +132,8 @@ void AppMainWindow::AllowSavingImage(bool state)
     saveImg->Enable(state);
 }
 
-void AppMainWindow::UpdateBitmapImage()
+void AppMainWindow::UpdateBitmap(wxBitmap bmp)
 {
-    cv::Mat img = procImage->GetProcessedImage();
-    bitmap->SetBitmap(wxBitmap(MatToWxImage(img)));
+    bitmap->SetBitmap(bmp);
     this->Layout();
 }
