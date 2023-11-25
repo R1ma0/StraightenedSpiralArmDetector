@@ -1,10 +1,14 @@
 #include "app_main_window.hpp"
 
-AppMainWindow::AppMainWindow(const wxString &title) : wxFrame
+AppMainWindow::AppMainWindow(
+    const wxString &title,
+    IController *view
+) : wxFrame
 (
     nullptr, wxID_ANY, title
 )
 {
+    mainController = view;
     procImage = new ProcessedImage();
 
     wxImage::AddHandler(new wxPNGHandler);

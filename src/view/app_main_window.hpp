@@ -14,12 +14,14 @@
 #include "buffered_bitmap.hpp"
 #include "detectorator_control_panel.hpp"
 #include "bitmap_control_panel.hpp"
+#include "../controller/i_controller.hpp"
 #include "../model/processed_image.hpp"
 #include "../model/converters.hpp"
 
 class AppMainWindow : public wxFrame
 {
 private:
+    IController *mainController;
     BufferedBitmap *bitmap;
     ProcessedImage *procImage;
     wxMenuItem *saveImg;
@@ -30,10 +32,10 @@ private:
     void CreateControls();
     void BindEventHandlers();
     void UpdateBitmapImage();
-    void AllowSavingImage(bool);
 public:
-    AppMainWindow(const wxString &);
+    AppMainWindow(const wxString &, IController *);
     ~AppMainWindow();
+    void AllowSavingImage(bool);
 };
 
 #endif
