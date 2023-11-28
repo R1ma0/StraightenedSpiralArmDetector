@@ -13,15 +13,16 @@
 class AppMainWindowController : public IController
 {
 private:
-    wxFrame *view;
+    wxWindow *view;
     ProcessedImage *procImage;
 public:
     AppMainWindowController();
     ~AppMainWindowController();
     wxBitmap GetBitmapImage();
+    ProcessedImage *GetProcessedImage();
     bool LoadImage(const std::string path);
     bool SaveImage(const std::string path);
-    void SetView(wxFrame *);
+    void SetView(wxWindow *) override;
 };
 
 #endif

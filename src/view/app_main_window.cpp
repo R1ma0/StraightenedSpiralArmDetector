@@ -3,8 +3,7 @@
 AppMainWindow::AppMainWindow(
     const wxString &title,
     IController *controller
-) : wxFrame
-(
+) : wxFrame(
     nullptr, wxID_ANY, title
 )
 {
@@ -54,17 +53,25 @@ void AppMainWindow::CreateControls()
         FromDIP(wxSize(1, 1)), 0
     );
 
-    //auto bcp = new BitmapControlPanel(this, bitmap, procImage);
-    auto sizerLeft = new wxBoxSizer(wxVERTICAL);
-    sizerLeft->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(10));
-    //sizerLeft->Add(bcp, 0, wxALIGN_LEFT | wxALL, FromDIP(10));
+    bitmapControlSizer = new wxBoxSizer(wxVERTICAL);
+    bitmapControlSizer->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(10));
 
     //auto dcp = new DetectoratorControlPanel(this, bitmap, procImage);
     auto sizerMain = new wxBoxSizer(wxHORIZONTAL);
-    sizerMain->Add(sizerLeft, 1, wxEXPAND);
+    sizerMain->Add(bitmapControlSizer, 1, wxEXPAND);
     //sizerMain->Add(dcp, 0, wxEXPAND);
 
     this->SetSizerAndFit(sizerMain);
+}
+
+void AppMainWindow::SetBitmapControlPanel(wxPanel *bcp)
+{
+    bitmapControlPanel = bcp;
+    bitmapControlSizer->Add(
+        dynamic_cast<BitmapControlPanel *>(bitmapControlPanel), 
+        0, 
+        wxALIGN_LEFT | wxALL, FromDIP(10)
+    );
 }
 
 void AppMainWindow::BindEventHandlers()
@@ -74,12 +81,12 @@ void AppMainWindow::BindEventHandlers()
     Bind(wxEVT_MENU, &AppMainWindow::OnExit, this, wxID_EXIT);
 }
 
-void AppMainWindow::OnExit([[maybe_unused]] wxCommandEvent &event)
+void AppMainWindow::OnExit(wxCommandEvent &WXUNUSED(event))
 {
     Close(true);
 }
 
-void AppMainWindow::OnLoadImg([[maybe_unused]] wxCommandEvent &event)
+void AppMainWindow::OnLoadImg(wxCommandEvent &WXUNUSED(event))
 {
     wxFileDialog openFileDialog(
         this, 
@@ -104,7 +111,7 @@ void AppMainWindow::OnLoadImg([[maybe_unused]] wxCommandEvent &event)
     AllowSavingImage(true);
 }
 
-void AppMainWindow::OnSaveImg([[maybe_unused]] wxCommandEvent &event)
+void AppMainWindow::OnSaveImg(wxCommandEvent &WXUNUSED(event))
 {
     wxFileDialog saveFileDialog(
         this,

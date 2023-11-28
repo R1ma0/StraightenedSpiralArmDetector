@@ -22,9 +22,7 @@ bool AppMainWindowController::LoadImage(const std::string path)
 
     if (uploadStatus == false)
     {
-        dynamic_cast<AppMainWindow *>(view)->UpdateBitmap(
-            GetBitmapImage()        
-        );
+        dynamic_cast<AppMainWindow *>(view)->UpdateBitmap(GetBitmapImage());
     }
 
     return uploadStatus;
@@ -35,7 +33,12 @@ bool AppMainWindowController::SaveImage(const std::string path)
     return procImage->SaveImage(path);
 }
 
-void AppMainWindowController::SetView(wxFrame *view)
+void AppMainWindowController::SetView(wxWindow *view)
 {
     this->view = view;
+}
+
+ProcessedImage *AppMainWindowController::GetProcessedImage()
+{
+    return procImage;
 }

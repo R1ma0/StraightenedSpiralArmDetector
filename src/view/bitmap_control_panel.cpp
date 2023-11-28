@@ -2,13 +2,12 @@
 
 BitmapControlPanel::BitmapControlPanel
 (
-    wxFrame *parentFrame, 
-    BufferedBitmap *bitmap, 
-    ProcessedImage *procImage
-) : wxPanel(parentFrame)
+    wxWindow *parent,
+    IController *controller
+) : wxPanel(parent)
 {
-    this->bitmap = bitmap;
-    this->procImage = procImage;
+    this->controller = controller;
+    this->parent = parent;
 
     CreateControls();
     BindEventHandlers();
@@ -21,15 +20,9 @@ void BitmapControlPanel::CreateControls()
     auto zoomOutBtn = new wxButton(this, ID_ZOOM_OUT, wxT("Zoom -"));
     auto askAngleBtn = new wxButton(this, ID_ANGLE_CHANGE, wxT("Rotate"));
 
-    hSizer->Add(
-        zoomInBtn, 0, wxALIGN_CENTER_VERTICAL
-    );
-    hSizer->Add(
-        zoomOutBtn, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, FromDIP(5)        
-    );
-    hSizer->Add(
-        askAngleBtn, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, FromDIP(15)
-    );
+    hSizer->Add(zoomInBtn, 0, wxALIGN_CENTER_VERTICAL);
+    hSizer->Add(zoomOutBtn, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, FromDIP(5));
+    hSizer->Add(askAngleBtn, 0, wxALIGN_CENTER_VERTICAL | wxLEFT, FromDIP(15));
 
     this->SetSizerAndFit(hSizer);
 }
@@ -46,37 +39,30 @@ void BitmapControlPanel::BindEventHandlers()
     );
 }
 
-void BitmapControlPanel::OnZoomIn([[maybe_unused]] wxCommandEvent &event)
+void BitmapControlPanel::OnZoomIn(wxCommandEvent &WXUNUSED(event))
 {
-    bitmap->ZoomInBitmap();
+    dynamic_cast<BCPC *>(controller)->OnZoomInBitmap();
 }
 
-void BitmapControlPanel::OnZoomOut([[maybe_unused]] wxCommandEvent &event)
+void BitmapControlPanel::OnZoomOut(wxCommandEvent &WXUNUSED(event))
 {
-    bitmap->ZoomOutBitmap();
+    dynamic_cast<BCPC *>(controller)->OnZoomOutBitmap();
 }
 
-void BitmapControlPanel::OnAngleChangeBtn
-(
-    [[maybe_unused]] wxCommandEvent &event
-)
+void BitmapControlPanel::OnAngleChangeBtn(wxCommandEvent &WXUNUSED(event))
 {
-    wxDouble currentAngle = procImage->GetRotationAngleDegrees();
+    wxDouble currentAngle = dynamic_cast<BCPC *>(controller)->GetCurrRotation();
     wxDouble newAngle = wxGetNumberFromUser(
         wxT("Change the image rotation angle"),
         wxT("Angle in degrees:"),
         wxT("Rotate image"),
         currentAngle,
-        -360, +360,
+        -180, +180,
         this
     );
-    
-    if (currentAngle!= newAngle)
+
+    if (currentAngle != newAngle)
     {
-        cv::Mat img = procImage->RotateImage(
-            procImage->GetProcessedImage(),
-            newAngle
-        );
-        bitmap->SetBitmap(wxBitmap(MatToWxImage(img)));
+        dynamic_cast<BCPC *>(controller)->OnRotateBitmap(newAngle);
     }
 }

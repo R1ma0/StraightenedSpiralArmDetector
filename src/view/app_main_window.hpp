@@ -24,6 +24,8 @@ private:
     BufferedBitmap *bitmap;
     wxMenuItem *saveImg;
     wxString *fileFilters;
+    wxPanel *bitmapControlPanel;
+    wxBoxSizer *bitmapControlSizer;
     void OnExit(wxCommandEvent &);
     void OnLoadImg(wxCommandEvent &);
     void OnSaveImg(wxCommandEvent &);
@@ -33,7 +35,9 @@ private:
 public:
     AppMainWindow(const wxString &, IController *);
     ~AppMainWindow();
+    BufferedBitmap *GetBufferedBitmap() { return bitmap; }
     void UpdateBitmap(wxBitmap);
+    void SetBitmapControlPanel(wxPanel *);
 };
 
 #endif

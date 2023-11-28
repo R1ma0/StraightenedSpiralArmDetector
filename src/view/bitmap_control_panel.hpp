@@ -11,20 +11,23 @@
 #include "app_main_window.hpp"
 #include "../model/processed_image.hpp"
 #include "../model/converters.hpp"
+#include "../controller/i_controller.hpp"
+#include "../controller/bitmap_control_panel_controller.hpp"
+
+#define BCPC BitmapControlPanelController 
 
 class BitmapControlPanel : public wxPanel
 {
 private:
-    BufferedBitmap *bitmap;
-    ProcessedImage *procImage;
+    wxWindow *parent;
+    IController *controller;
     void CreateControls();
     void BindEventHandlers();
     void OnZoomIn(wxCommandEvent &);
     void OnZoomOut(wxCommandEvent &);
     void OnAngleChangeBtn(wxCommandEvent &);
-    void OnAngleChangeSlider(wxCommandEvent &);
 public:
-    BitmapControlPanel(wxFrame *, BufferedBitmap *, ProcessedImage *);
+    BitmapControlPanel(wxWindow *, IController *);
 };
 
 #endif

@@ -9,7 +9,7 @@
 class IController
 {
 public:
-    virtual void SetView(wxFrame *) = 0;
+    virtual void SetView(wxWindow *) = 0;
 };
 
 #endif
