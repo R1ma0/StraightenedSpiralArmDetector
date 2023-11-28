@@ -13,6 +13,8 @@
 #include "../view/bitmap_control_panel.hpp"
 #include "../model/processed_image.hpp"
 
+#define BCPC BitmapControlPanelController
+
 class BitmapControlPanelController : public IController
 {
 private:
@@ -21,7 +23,6 @@ private:
     BufferedBitmap *bitmap;
 public:
     BitmapControlPanelController(BufferedBitmap *, ProcessedImage *);
-    ~BitmapControlPanelController();
     wxDouble GetCurrRotation();
     void SetView(wxWindow *) override;
     void OnZoomInBitmap();

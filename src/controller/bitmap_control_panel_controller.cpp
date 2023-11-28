@@ -1,35 +1,32 @@
 #include "bitmap_control_panel_controller.hpp"
 
-BitmapControlPanelController::BitmapControlPanelController(
-    BufferedBitmap *bitmap,
-    ProcessedImage *procImage    
-)
+BCPC::BCPC(BufferedBitmap *bitmap, ProcessedImage *procImage)
 {
     this->bitmap = bitmap;
     this->procImage = procImage;
 }
 
-void BitmapControlPanelController::SetView(wxWindow *view)
+void BCPC::SetView(wxWindow *view)
 {
     selfView = view;
 }
 
-void BitmapControlPanelController::OnZoomInBitmap()
+void BCPC::OnZoomInBitmap()
 {
     bitmap->ZoomInBitmap();
 }
 
-void BitmapControlPanelController::OnZoomOutBitmap()
+void BCPC::OnZoomOutBitmap()
 {
     bitmap->ZoomOutBitmap();
 }
 
-wxDouble BitmapControlPanelController::GetCurrRotation()
+wxDouble BCPC::GetCurrRotation()
 {
     return procImage->GetRotationAngleDegrees();
 }
 
-void BitmapControlPanelController::OnRotateBitmap(wxDouble angle)
+void BCPC::OnRotateBitmap(wxDouble angle)
 {
     cv::Mat img = procImage->RotateImage(
         procImage->GetProcessedImage(),

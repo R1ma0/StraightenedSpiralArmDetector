@@ -24,8 +24,9 @@ private:
     BufferedBitmap *bitmap;
     wxMenuItem *saveImg;
     wxString *fileFilters;
-    wxPanel *bitmapControlPanel;
+    wxBoxSizer *sizerMain;
     wxBoxSizer *bitmapControlSizer;
+    wxBoxSizer *detectoratorControlSizer;
     void OnExit(wxCommandEvent &);
     void OnLoadImg(wxCommandEvent &);
     void OnSaveImg(wxCommandEvent &);
@@ -38,6 +39,7 @@ public:
     BufferedBitmap *GetBufferedBitmap() { return bitmap; }
     void UpdateBitmap(wxBitmap);
     void SetBitmapControlPanel(wxPanel *);
+    void SetDetectoratorControlPanel(wxPanel *);
 };
 
 #endif

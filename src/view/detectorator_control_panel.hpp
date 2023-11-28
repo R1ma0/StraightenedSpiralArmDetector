@@ -9,17 +9,21 @@
 #include "ids_of_controls.hpp"
 #include "buffered_bitmap.hpp"
 #include "../model/processed_image.hpp"
+#include "../controller/i_controller.hpp"
+#include "../controller/detectorator_control_panel_controller.hpp"
+
+#define DCPC DetectoratorControlPanelController
 
 class DetectoratorControlPanel : public wxPanel
 {
 private:
-    BufferedBitmap *bitmap;
-    ProcessedImage *procImage;
+    wxWindow *parent;
+    IController *controller;
     void CreateControls();
     void BindEventHandlers();
     void OnRunDetectorator(wxCommandEvent &);
 public:
-    DetectoratorControlPanel(wxFrame *, BufferedBitmap *, ProcessedImage *);
+    DetectoratorControlPanel(wxWindow *, IController *);
 };
 
 #endif

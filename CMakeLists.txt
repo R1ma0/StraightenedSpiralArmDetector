@@ -23,6 +23,7 @@ add_executable(
     src/controller/i_controller.hpp
     src/controller/app_main_window_controller.cpp
     src/controller/bitmap_control_panel_controller.cpp
+    src/controller/detectorator_control_panel_controller.cpp
     src/model/processed_image.cpp
     src/model/converters.cpp
     src/model/detectorator/adaptive_zhang_suen.cpp

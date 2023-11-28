@@ -2,13 +2,12 @@
 
 DetectoratorControlPanel::DetectoratorControlPanel
 (
-    wxFrame *parentFrame, 
-    BufferedBitmap *bitmap,
-    ProcessedImage *procImage
-) : wxPanel(parentFrame)
+    wxWindow *parent, 
+    IController *controller
+) : wxPanel(parent)
 {
-    this->bitmap = bitmap;
-    this->procImage = procImage;
+    this->controller = controller;
+    this->parent = parent;
 
     CreateControls();
     BindEventHandlers();
@@ -82,16 +81,7 @@ void DetectoratorControlPanel::BindEventHandlers()
     );
 }
 
-void DetectoratorControlPanel::OnRunDetectorator
-(
-    [[maybe_unused]] wxCommandEvent &event
-)
+void DetectoratorControlPanel::OnRunDetectorator(wxCommandEvent &WXUNUSED(event))
 {
 
 }
-
-//void DetectoratorControlPanel::OnBtnClick([[maybe_unused]] wxCommandEvent &event)
-//{
-//    AppMainWindow *parentWin = (AppMainWindow *) parentPanel->GetParent();
-//    AppMainWindow *mv = dynamic_cast<AppMainWindow *>(GetParent());
-//}

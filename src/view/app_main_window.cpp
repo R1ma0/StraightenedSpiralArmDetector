@@ -56,21 +56,28 @@ void AppMainWindow::CreateControls()
     bitmapControlSizer = new wxBoxSizer(wxVERTICAL);
     bitmapControlSizer->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(10));
 
-    //auto dcp = new DetectoratorControlPanel(this, bitmap, procImage);
-    auto sizerMain = new wxBoxSizer(wxHORIZONTAL);
+    sizerMain = new wxBoxSizer(wxHORIZONTAL);
     sizerMain->Add(bitmapControlSizer, 1, wxEXPAND);
-    //sizerMain->Add(dcp, 0, wxEXPAND);
 
     this->SetSizerAndFit(sizerMain);
 }
 
 void AppMainWindow::SetBitmapControlPanel(wxPanel *bcp)
 {
-    bitmapControlPanel = bcp;
     bitmapControlSizer->Add(
-        dynamic_cast<BitmapControlPanel *>(bitmapControlPanel), 
+        dynamic_cast<BitmapControlPanel *>(bcp), 
         0, 
-        wxALIGN_LEFT | wxALL, FromDIP(10)
+        wxALIGN_LEFT | wxALL,
+        FromDIP(10)
+    );
+}
+
+void AppMainWindow::SetDetectoratorControlPanel(wxPanel *dcp)
+{
+    sizerMain->Add(
+        dynamic_cast<DetectoratorControlPanel *>(dcp),
+        0, 
+        wxEXPAND
     );
 }
 
