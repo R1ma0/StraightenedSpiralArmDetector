@@ -12,18 +12,24 @@
 #include "../controller/i_controller.hpp"
 #include "../controller/detectorator_control_panel_controller.hpp"
 
-#define DCPC DetectoratorControlPanelController
-
 class DetectoratorControlPanel : public wxPanel
 {
 private:
     wxWindow *parent;
     IController *controller;
+    wxSpinCtrl *binaryThreshValueSpin;
+    wxSpinCtrl *gaussConstSpin;
+    wxSpinCtrl *imgCompressPercentageSpin;
+    wxSpinCtrl *gaussBlockSizeSpin;
     void CreateControls();
     void BindEventHandlers();
     void OnRunDetectorator(wxCommandEvent &);
 public:
     DetectoratorControlPanel(wxWindow *, IController *);
+    int GetBinaryThresh() { return binaryThreshValueSpin->GetValue(); }
+    int GetGaussConst() { return gaussConstSpin->GetValue(); }
+    int GetCompressPercentage() { return imgCompressPercentageSpin->GetValue(); }
+    int GetGaussBlockSize() { return gaussBlockSizeSpin->GetValue(); }
 };
 
 #endif

@@ -1,22 +1,33 @@
 #include "detectorator_control_panel_controller.hpp"
-#include <iostream>
+
+#ifndef DCPC
+#define DCPC DetectoratorControlPanelController
+#endif
+#ifndef CastDCP
+#define CastDCP dynamic_cast<DetectoratorControlPanel *>(view)
+#endif
 
 DCPC::DCPC(BufferedBitmap *bitmap, ProcessedImage *procImage)
 {
     this->bitmap = bitmap;
     this->procImage = procImage;
+    azsm = new AdaptiveZhangSuenMethod();
 }
 
 void DCPC::SetView(wxWindow *view)
 {
-    selfView = view;
+    this->view = view;
 }
 
 void DCPC::RunDetectorator()
 {
-    auto azsm = new AdaptiveZhangSuenMethod();
+    float binaryThresh = (float)CastDCP->GetBinaryThresh();
+    float gaussConst = (float)CastDCP->GetGaussConst();
+    float compressPercentage = (float)CastDCP->GetCompressPercentage();
+    int gaussBlockSize = CastDCP->GetGaussBlockSize();
+
     AdaptiveZhangSuenParameters azsmParams{
-        190.f, -5.f, 20.f, 201
+        binaryThresh, gaussConst, compressPercentage, gaussBlockSize
     };
 
     cv::Mat img = procImage->GetProcessedImage();

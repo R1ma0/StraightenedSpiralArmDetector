@@ -14,18 +14,17 @@
 #include "../model/processed_image.hpp"
 #include "../model/detectorator/adaptive_zhang_suen.hpp"
 
-#define DCPC DetectoratorControlPanelController
-
 class DetectoratorControlPanelController : public IController
 {
 private:
-    wxWindow *selfView;
+    wxWindow *view;
     ProcessedImage *procImage;
     BufferedBitmap *bitmap;
+    AdaptiveZhangSuenMethod *azsm;
 public:
     DetectoratorControlPanelController(BufferedBitmap *, ProcessedImage *);
     void SetView(wxWindow *) override;
-    void  RunDetectorator();
+    void RunDetectorator();
 };
 
 #endif

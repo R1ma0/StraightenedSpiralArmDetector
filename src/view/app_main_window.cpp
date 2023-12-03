@@ -1,5 +1,15 @@
 #include "app_main_window.hpp"
 
+#ifndef CastAMWC
+#define CastAMWC dynamic_cast<AppMainWindowController *>(mainController)
+#endif
+#ifndef CastDCP
+#define CastDCP dynamic_cast<DetectoratorControlPanel *>(dcp)
+#endif
+#ifndef CastBCP
+#define CastBCP dynamic_cast<BitmapControlPanel *>(bcp)
+#endif
+
 AppMainWindow::AppMainWindow(
     const wxString &title,
     IController *controller
@@ -64,21 +74,12 @@ void AppMainWindow::CreateControls()
 
 void AppMainWindow::SetBitmapControlPanel(wxPanel *bcp)
 {
-    bitmapControlSizer->Add(
-        dynamic_cast<BitmapControlPanel *>(bcp), 
-        0, 
-        wxALIGN_LEFT | wxALL,
-        FromDIP(10)
-    );
+    bitmapControlSizer->Add(CastBCP, 0, wxALIGN_LEFT | wxALL, FromDIP(10));
 }
 
 void AppMainWindow::SetDetectoratorControlPanel(wxPanel *dcp)
 {
-    sizerMain->Add(
-        dynamic_cast<DetectoratorControlPanel *>(dcp),
-        0, 
-        wxEXPAND
-    );
+    sizerMain->Add(CastDCP, 0, wxEXPAND);
 }
 
 void AppMainWindow::BindEventHandlers()
@@ -96,18 +97,14 @@ void AppMainWindow::OnExit(wxCommandEvent &WXUNUSED(event))
 void AppMainWindow::OnLoadImg(wxCommandEvent &WXUNUSED(event))
 {
     wxFileDialog openFileDialog(
-        this, 
-        "Select image", "", "", 
-        *fileFilters, 
+        this, "Select image", "", "", *fileFilters, 
         wxFD_OPEN | wxFD_FILE_MUST_EXIST
     );
     
     if (openFileDialog.ShowModal() == wxID_CANCEL) { return; }
 
     std::string pathToFile = openFileDialog.GetPath().ToStdString();
-    bool isImageNotLoaded = dynamic_cast<
-        AppMainWindowController *
-    >(mainController)->LoadImage(pathToFile);
+    bool isImageNotLoaded = CastAMWC->LoadImage(pathToFile);
 
     if (isImageNotLoaded)
     {
@@ -130,9 +127,7 @@ void AppMainWindow::OnSaveImg(wxCommandEvent &WXUNUSED(event))
     if (saveFileDialog.ShowModal() == wxID_CANCEL) { return; }
 
     std::string pathToFile = saveFileDialog.GetPath().ToStdString();
-    bool isImageSaved = dynamic_cast<
-        AppMainWindowController *    
-    >(mainController)->SaveImage(pathToFile);
+    bool isImageSaved = CastAMWC->SaveImage(pathToFile);
 
     if (!isImageSaved)
     {

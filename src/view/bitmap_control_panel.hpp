@@ -14,8 +14,6 @@
 #include "../controller/i_controller.hpp"
 #include "../controller/bitmap_control_panel_controller.hpp"
 
-#define BCPC BitmapControlPanelController 
-
 class BitmapControlPanel : public wxPanel
 {
 private:

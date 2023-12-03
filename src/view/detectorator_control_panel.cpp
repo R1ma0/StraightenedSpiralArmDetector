@@ -1,5 +1,12 @@
 #include "detectorator_control_panel.hpp"
 
+#ifndef DCPC
+#define DCPC DetectoratorControlPanelController
+#endif
+#ifndef CastDCPC
+#define CastDCPC dynamic_cast<DCPC *>(controller)
+#endif
+
 DetectoratorControlPanel::DetectoratorControlPanel
 (
     wxWindow *parent, 
@@ -22,7 +29,7 @@ void DetectoratorControlPanel::CreateControls()
     );
     sizer->Add(binaryThreshValueLabel, 0, wxTOP | wxRIGHT, FromDIP(10));
 
-    auto binaryThreshValueSpin = new wxSpinCtrl(this);
+    binaryThreshValueSpin = new wxSpinCtrl(this);
     sizer->Add(
         binaryThreshValueSpin, 0, wxEXPAND | wxTOP | wxRIGHT, FromDIP(10)
     );
@@ -34,7 +41,7 @@ void DetectoratorControlPanel::CreateControls()
     );
     sizer->Add(gaussConstLabel, 0, wxTOP | wxRIGHT, FromDIP(10));
 
-    auto gaussConstSpin = new wxSpinCtrl(this);
+    gaussConstSpin = new wxSpinCtrl(this);
     sizer->Add(
         gaussConstSpin, 0, wxEXPAND |  wxTOP | wxRIGHT, FromDIP(10)
     );
@@ -46,7 +53,7 @@ void DetectoratorControlPanel::CreateControls()
     );
     sizer->Add(imgCompressPercentageLabel, 0, wxTOP | wxRIGHT, FromDIP(10));
 
-    auto imgCompressPercentageSpin = new wxSpinCtrl(this);
+    imgCompressPercentageSpin = new wxSpinCtrl(this);
     sizer->Add(
         imgCompressPercentageSpin, 0, wxEXPAND | wxTOP | wxRIGHT, FromDIP(10)
     );
@@ -54,11 +61,11 @@ void DetectoratorControlPanel::CreateControls()
     imgCompressPercentageSpin->SetValue(99);
 
     auto gaussBlockSizeLabel = new wxStaticText(
-        this, -1, wxT("Gauss Block Size Value: ")        
+        this, -1, wxT("Gauss Block Size Value (odd): ")        
     );
     sizer->Add(gaussBlockSizeLabel, 0, wxTOP | wxRIGHT, FromDIP(10));
 
-    auto gaussBlockSizeSpin = new wxSpinCtrl(this);
+    gaussBlockSizeSpin = new wxSpinCtrl(this);
     gaussBlockSizeSpin->SetRange(3, 1001);
     gaussBlockSizeSpin->SetValue(3);
     sizer->Add(gaussBlockSizeSpin, 0, wxEXPAND |  wxTOP | wxRIGHT, FromDIP(10));
@@ -83,5 +90,5 @@ void DetectoratorControlPanel::BindEventHandlers()
 
 void DetectoratorControlPanel::OnRunDetectorator(wxCommandEvent &WXUNUSED(event))
 {
-    dynamic_cast<DCPC *>(controller)->RunDetectorator();
+    CastDCPC->RunDetectorator();
 }

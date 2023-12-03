@@ -1,5 +1,9 @@
 #include "bitmap_control_panel_controller.hpp"
 
+#ifndef BCPC
+#define BCPC BitmapControlPanelController
+#endif
+
 BCPC::BCPC(BufferedBitmap *bitmap, ProcessedImage *procImage)
 {
     this->bitmap = bitmap;
@@ -8,7 +12,7 @@ BCPC::BCPC(BufferedBitmap *bitmap, ProcessedImage *procImage)
 
 void BCPC::SetView(wxWindow *view)
 {
-    selfView = view;
+    this->view = view;
 }
 
 void BCPC::OnZoomInBitmap()

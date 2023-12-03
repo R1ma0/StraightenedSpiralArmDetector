@@ -1,5 +1,12 @@
 #include "bitmap_control_panel.hpp"
 
+#ifndef BCPC
+#define BCPC BitmapControlPanelController 
+#endif
+#ifndef CastBCPC
+#define CastBCPC dynamic_cast<BCPC *>(controller)
+#endif
+
 BitmapControlPanel::BitmapControlPanel
 (
     wxWindow *parent,
@@ -41,17 +48,17 @@ void BitmapControlPanel::BindEventHandlers()
 
 void BitmapControlPanel::OnZoomIn(wxCommandEvent &WXUNUSED(event))
 {
-    dynamic_cast<BCPC *>(controller)->OnZoomInBitmap();
+    CastBCPC->OnZoomInBitmap();
 }
 
 void BitmapControlPanel::OnZoomOut(wxCommandEvent &WXUNUSED(event))
 {
-    dynamic_cast<BCPC *>(controller)->OnZoomOutBitmap();
+    CastBCPC->OnZoomOutBitmap();
 }
 
 void BitmapControlPanel::OnAngleChangeBtn(wxCommandEvent &WXUNUSED(event))
 {
-    wxDouble currentAngle = dynamic_cast<BCPC *>(controller)->GetCurrRotation();
+    wxDouble currentAngle = CastBCPC->GetCurrRotation();
     wxDouble newAngle = wxGetNumberFromUser(
         wxT("Change the image rotation angle"),
         wxT("Angle in degrees:"),
@@ -63,6 +70,6 @@ void BitmapControlPanel::OnAngleChangeBtn(wxCommandEvent &WXUNUSED(event))
 
     if (currentAngle != newAngle)
     {
-        dynamic_cast<BCPC *>(controller)->OnRotateBitmap(newAngle);
+        CastBCPC->OnRotateBitmap(newAngle);
     }
 }

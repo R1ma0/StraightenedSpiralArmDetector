@@ -1,5 +1,9 @@
 #include "app_main_window_controller.hpp"
 
+#ifndef CastAMW
+#define CastAMW dynamic_cast<AppMainWindow *>(view)
+#endif
+
 AppMainWindowController::AppMainWindowController()
 {
     procImage = new ProcessedImage();
@@ -22,7 +26,7 @@ bool AppMainWindowController::LoadImage(const std::string path)
 
     if (uploadStatus == false)
     {
-        dynamic_cast<AppMainWindow *>(view)->UpdateBitmap(GetBitmapImage());
+        CastAMW->UpdateBitmap(GetBitmapImage());
     }
 
     return uploadStatus;

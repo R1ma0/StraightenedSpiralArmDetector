@@ -13,12 +13,10 @@
 #include "../view/bitmap_control_panel.hpp"
 #include "../model/processed_image.hpp"
 
-#define BCPC BitmapControlPanelController
-
 class BitmapControlPanelController : public IController
 {
 private:
-    wxWindow *selfView;
+    wxWindow *view;
     ProcessedImage *procImage;
     BufferedBitmap *bitmap;
 public:
