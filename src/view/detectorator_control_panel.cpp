@@ -83,5 +83,5 @@ void DetectoratorControlPanel::BindEventHandlers()
 
 void DetectoratorControlPanel::OnRunDetectorator(wxCommandEvent &WXUNUSED(event))
 {
-
+    dynamic_cast<DCPC *>(controller)->RunDetectorator();
 }

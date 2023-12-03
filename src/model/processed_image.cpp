@@ -10,23 +10,28 @@ double ProcessedImage::GetRotationAngleDegrees()
     return rotationAngleDegrees;
 }
 
+void ProcessedImage::SetProcessedImage(cv::Mat img)
+{
+    image = img;
+}
+
 bool ProcessedImage::LoadImage(const std::string path)
 {
-    image = cv::imread(path);
+    cv::Mat img = cv::imread(path);
 
-    if (image.empty()) return true;
+    if (img.empty()) return true;
 
-    if (image.channels() == 1) 
+    if (img.channels() == 1) 
     {
-        cv::cvtColor(image, image, cv::COLOR_GRAY2RGB); 
+        cv::cvtColor(img, image, cv::COLOR_GRAY2RGB); 
     }
-    else if (image.channels() == 4) 
+    else if (img.channels() == 4) 
     {
-        cv::cvtColor(image, image, cv::COLOR_BGRA2RGB); 
+        cv::cvtColor(img, image, cv::COLOR_BGRA2RGB); 
     }
     else 
     {
-        cv::cvtColor(image, image, cv::COLOR_BGR2RGB); 
+        cv::cvtColor(img, image, cv::COLOR_BGR2RGB); 
     }
 
     return false;
