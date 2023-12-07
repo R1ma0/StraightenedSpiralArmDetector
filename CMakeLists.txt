@@ -20,10 +20,12 @@ add_executable(
     src/view/bitmap_control_panel.cpp
     src/view/detectorator_control_panel.cpp
     src/view/buffered_bitmap.cpp
+    src/view/image_rotate_scale_frame.cpp
     src/controller/i_controller.hpp
     src/controller/app_main_window_controller.cpp
     src/controller/bitmap_control_panel_controller.cpp
     src/controller/detectorator_control_panel_controller.cpp
+    src/controller/image_rotate_scale_frame_controller.cpp
     src/model/processed_image.cpp
     src/model/converters.cpp
     src/model/detectorator/adaptive_zhang_suen.cpp

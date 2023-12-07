@@ -30,11 +30,13 @@ wxDouble BCPC::GetCurrRotation()
     return procImage->GetRotationAngleDegrees();
 }
 
-void BCPC::OnRotateBitmap(wxDouble angle)
+void BCPC::OpenRotateScaleFrame()
 {
-    cv::Mat img = procImage->RotateImage(
-        procImage->GetProcessedImage(),
-        angle
+    auto rotateScaleController = new ImageRotateScaleFrameController(
+        bitmap, 
+        procImage
     );
-    bitmap->SetBitmap(wxBitmap(MatToWxImage(img)));
+    auto rotateScaleFrame = new ImageRotateScaleFrame(rotateScaleController);
+    rotateScaleController->SetView(rotateScaleFrame);
+    rotateScaleFrame->Show(true);
 }

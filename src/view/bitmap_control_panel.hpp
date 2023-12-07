@@ -23,7 +23,7 @@ private:
     void BindEventHandlers();
     void OnZoomIn(wxCommandEvent &);
     void OnZoomOut(wxCommandEvent &);
-    void OnAngleChangeBtn(wxCommandEvent &);
+    void OnRotateScaleBtn(wxCommandEvent &);
 public:
     BitmapControlPanel(wxWindow *, IController *);
 };

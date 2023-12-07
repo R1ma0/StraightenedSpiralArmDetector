@@ -7,7 +7,7 @@ enum IDs
     ID_SAVE_IMG,
     ID_ZOOM_IN,
     ID_ZOOM_OUT,
-    ID_ANGLE_CHANGE,
+    ID_ROTATE_SCALE,
     ID_RUN_DETECTORATOR,
 };
 

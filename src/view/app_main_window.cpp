@@ -10,11 +10,15 @@
 #define CastBCP dynamic_cast<BitmapControlPanel *>(bcp)
 #endif
 
-AppMainWindow::AppMainWindow(
+AppMainWindow::AppMainWindow
+(
     const wxString &title,
     IController *controller
-) : wxFrame(
-    nullptr, wxID_ANY, title
+) : wxFrame
+(
+    nullptr, 
+    wxID_ANY, 
+    title
 )
 {
     mainController = controller;
