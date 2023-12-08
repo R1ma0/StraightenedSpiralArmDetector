@@ -5,6 +5,7 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+#include <wx/spinctrl.h>
 #include "ids_of_controls.hpp"
 #include "../model/processed_image.hpp"
 #include "../controller/i_controller.hpp"
@@ -14,8 +15,18 @@ class ImageRotateScaleFrame : public wxFrame
 {
 private:
     IController *controller;
+    wxStaticText *rotateOldValue;
+    wxStaticText *scaleXOldValue;
+    wxStaticText *scaleYOldValue;
+    wxSpinCtrl *angleSpin;
+    wxSpinCtrl *scaleXNewSpin;
+    wxSpinCtrl *scaleYNewSpin;
+    unsigned int xScaleMult;
+    unsigned int yScaleMult;
     void CreateControls();
+    void SetValuesAndRanges();
     void BindEventHandlers();
+    void SetBoldFont(wxStaticText *);
 public:
     ImageRotateScaleFrame(IController *);
 };

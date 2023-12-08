@@ -38,5 +38,7 @@ void BCPC::OpenRotateScaleFrame()
     );
     auto rotateScaleFrame = new ImageRotateScaleFrame(rotateScaleController);
     rotateScaleController->SetView(rotateScaleFrame);
+    wxSize bestSize = rotateScaleFrame->GetBestSize();
+    rotateScaleFrame->SetSize(bestSize);
     rotateScaleFrame->Show(true);
 }
