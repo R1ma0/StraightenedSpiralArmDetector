@@ -27,6 +27,7 @@ private:
     void SetValuesAndRanges();
     void BindEventHandlers();
     void SetBoldFont(wxStaticText *);
+    void OnApplyRotateScale(wxCommandEvent &);
 public:
     ImageRotateScaleFrame(IController *);
 };

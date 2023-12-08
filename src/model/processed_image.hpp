@@ -9,11 +9,12 @@ class ProcessedImage
 {
 private:
     cv::Mat image;
-    double rotationAngleDegrees = 0.0;
+    int rotationAngleDegrees = 0;
 public:
     cv::Mat GetProcessedImage();
-    cv::Mat RotateImage(cv::Mat, double);
-    double GetRotationAngleDegrees();
+    cv::Mat RotateImage(cv::Mat, int);
+    cv::Size GetImageSize();
+    int GetRotationAngleDegrees();
     bool LoadImage(const std::string);
     bool SaveImage(const std::string);
     void SetProcessedImage(cv::Mat);

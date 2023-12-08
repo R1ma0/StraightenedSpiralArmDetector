@@ -3,6 +3,9 @@
 #ifndef IRSF
 #define IRSF ImageRotateScaleFrame
 #endif
+#ifndef IRSFC
+#define CastIRSF dynamic_cast<ImageRotateScaleFrameController *>(controller)
+#endif
 
 IRSF::IRSF(IController *controller) : wxFrame(NULL, wxID_ANY, "Rotate & Scale")
 {
@@ -96,7 +99,9 @@ void IRSF::CreateControls()
     );
 
     auto controlsSizer = new wxBoxSizer(wxHORIZONTAL);
-    auto applyChangesBtn = new wxButton(this, wxID_ANY, wxT("Apply"));
+    auto applyChangesBtn = new wxButton(
+        this, ID_APPLY_ROTATE_SCALE, wxT("Apply")
+    );
     controlsSizer->Add(applyChangesBtn, 0, wxTOP | wxBOTTOM, FromDIP(10));
 
     mainSizer->Add(rotateSizerV, 0, wxEXPAND | wxTOP, FromDIP(10));
@@ -108,10 +113,32 @@ void IRSF::CreateControls()
 
 void IRSF::SetValuesAndRanges()
 {
+    RotateScaleValues rsv = CastIRSF->GetRotateScaleValues();
+
     angleSpin->SetRange(-180, 180);
-    angleSpin->SetValue(0);
+    angleSpin->SetValue(rsv.angle);
+    rotateOldValue->SetLabel(std::to_string(rsv.angle));
+
+    scaleXNewSpin->SetRange(-(rsv.x * xScaleMult), rsv.x * xScaleMult);
+    scaleXNewSpin->SetValue(rsv.x);
+    scaleXOldValue->SetLabel(std::to_string(rsv.x));
+
+    scaleYNewSpin->SetRange(-(rsv.y * yScaleMult), rsv.y * yScaleMult);
+    scaleYNewSpin->SetValue(rsv.y);
+    scaleYOldValue->SetLabel(std::to_string(rsv.y));
 }
 
 void IRSF::BindEventHandlers()
 {
+    Bind(wxEVT_BUTTON, &IRSF::OnApplyRotateScale, this, ID_APPLY_ROTATE_SCALE);
+}
+
+void IRSF::OnApplyRotateScale(wxCommandEvent &WXUNUSED(event))
+{
+    RotateScaleValues rsv;
+    rsv.angle = angleSpin->GetValue(); 
+    rsv.x = scaleXNewSpin->GetValue(); 
+    rsv.y = scaleYNewSpin->GetValue();
+
+    CastIRSF->SetRotateScaleValues(rsv);
 }

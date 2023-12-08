@@ -5,7 +5,12 @@ cv::Mat ProcessedImage::GetProcessedImage()
     return image;
 }
 
-double ProcessedImage::GetRotationAngleDegrees()
+cv::Size ProcessedImage::GetImageSize()
+{
+    return image.size();
+}
+
+int ProcessedImage::GetRotationAngleDegrees()
 {
     return rotationAngleDegrees;
 }
@@ -45,7 +50,7 @@ bool ProcessedImage::SaveImage(const std::string path)
     else return 0;
 }
 
-cv::Mat ProcessedImage::RotateImage(cv::Mat image, double angle)
+cv::Mat ProcessedImage::RotateImage(cv::Mat image, int angle)
 {
     cv::Point2f imageCenter(
         (image.size().width) / 2.0, 

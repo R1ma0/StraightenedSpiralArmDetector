@@ -7,8 +7,16 @@
 #endif
 #include <opencv2/opencv.hpp>
 #include "i_controller.hpp"
+#include "../model/converters.hpp"
 #include "../view/buffered_bitmap.hpp"
 #include "../model/processed_image.hpp"
+
+struct RotateScaleValues
+{
+    int angle;
+    int x;
+    int y;
+};
 
 class ImageRotateScaleFrameController : public IController
 {
@@ -19,6 +27,8 @@ private:
 public:
     ImageRotateScaleFrameController(BufferedBitmap *, ProcessedImage *);
     void SetView(wxWindow *) override;
+    void SetRotateScaleValues(RotateScaleValues);
+    RotateScaleValues GetRotateScaleValues();
 };
 
 #endif

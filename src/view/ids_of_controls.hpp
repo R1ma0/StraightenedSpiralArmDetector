@@ -9,6 +9,7 @@ enum IDs
     ID_ZOOM_OUT,
     ID_ROTATE_SCALE,
     ID_RUN_DETECTORATOR,
+    ID_APPLY_ROTATE_SCALE,
 };
 
 #endif

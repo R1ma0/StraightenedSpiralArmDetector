@@ -11,7 +11,6 @@
 #include "../view/buffered_bitmap.hpp"
 #include "../view/bitmap_control_panel.hpp"
 #include "../view/image_rotate_scale_frame.hpp"
-#include "../model/converters.hpp"
 #include "../model/processed_image.hpp"
 #include "../controller/image_rotate_scale_frame_controller.hpp"
 

@@ -58,7 +58,7 @@ void DetectoratorControlPanel::CreateControls()
         imgCompressPercentageSpin, 0, wxEXPAND | wxTOP | wxRIGHT, FromDIP(10)
     );
     imgCompressPercentageSpin->SetRange(1, 99);
-    imgCompressPercentageSpin->SetValue(99);
+    imgCompressPercentageSpin->SetValue(20);
 
     auto gaussBlockSizeLabel = new wxStaticText(
         this, -1, wxT("Gauss Block Size Value (odd): ")        
