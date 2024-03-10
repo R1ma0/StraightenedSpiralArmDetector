@@ -3,12 +3,6 @@
 #ifndef CastAMWC
 #define CastAMWC dynamic_cast<AppMainWindowController *>(mainController)
 #endif
-#ifndef CastDCP
-#define CastDCP dynamic_cast<DetectoratorControlPanel *>(dcp)
-#endif
-#ifndef CastBCP
-#define CastBCP dynamic_cast<BitmapControlPanel *>(bcp)
-#endif
 
 AppMainWindow::AppMainWindow
 (
@@ -121,16 +115,6 @@ void AppMainWindow::CreateControls()
     sizerMain->Add(bitmapControlSizer, 1, wxEXPAND);
 
     this->SetSizerAndFit(sizerMain);
-}
-
-void AppMainWindow::SetBitmapControlPanel(wxPanel *bcp)
-{
-    bitmapControlSizer->Add(CastBCP, 0, wxALIGN_LEFT | wxALL, FromDIP(10));
-}
-
-void AppMainWindow::SetDetectoratorControlPanel(wxPanel *dcp)
-{
-    sizerMain->Add(CastDCP, 0, wxEXPAND);
 }
 
 void AppMainWindow::BindEventHandlers()

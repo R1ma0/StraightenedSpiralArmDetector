@@ -12,8 +12,6 @@
 #include <wx/event.h>
 #include "ids_of_controls.hpp"
 #include "buffered_bitmap.hpp"
-#include "detectorator_control_panel.hpp"
-#include "bitmap_control_panel.hpp"
 #include "../controller/i_controller.hpp"
 #include "../controller/app_main_window_controller.hpp"
 
@@ -41,8 +39,6 @@ public:
     ~AppMainWindow();
     BufferedBitmap *GetBufferedBitmap() { return bitmap; }
     void UpdateBitmap(wxBitmap);
-    void SetBitmapControlPanel(wxPanel *);
-    void SetDetectoratorControlPanel(wxPanel *);
 };
 
 #endif
