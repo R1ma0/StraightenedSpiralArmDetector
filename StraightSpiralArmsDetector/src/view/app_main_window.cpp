@@ -17,13 +17,6 @@ AppMainWindow::AppMainWindow
 {
     mainController = controller;
 
-    wxImage::AddHandler(new wxPNGHandler);
-    wxImage::AddHandler(new wxJPEGHandler);
-
-    fileFilters = new wxString(
-        "Images (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg"
-    );
-
     CreateControls();
     BindEventHandlers();
     AllowSavingImage(false);
@@ -108,11 +101,8 @@ void AppMainWindow::CreateControls()
         FromDIP(wxSize(1, 1)), 0
     );
 
-    bitmapControlSizer = new wxBoxSizer(wxVERTICAL);
-    bitmapControlSizer->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(10));
-
     sizerMain = new wxBoxSizer(wxHORIZONTAL);
-    sizerMain->Add(bitmapControlSizer, 1, wxEXPAND);
+    sizerMain->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(1));
 
     this->SetSizerAndFit(sizerMain);
 }
@@ -149,15 +139,7 @@ void AppMainWindow::OnExit(wxCommandEvent &WXUNUSED(event))
 
 void AppMainWindow::OnLoadImg(wxCommandEvent &WXUNUSED(event))
 {
-    wxFileDialog openFileDialog(
-        this, "Select image", "", "", *fileFilters, 
-        wxFD_OPEN | wxFD_FILE_MUST_EXIST
-    );
-    
-    if (openFileDialog.ShowModal() == wxID_CANCEL) { return; }
-
-    std::string pathToFile = openFileDialog.GetPath().ToStdString();
-    bool isImageNotLoaded = CastAMWC->LoadImage(pathToFile);
+    bool isImageNotLoaded = CastAMWC->LoadImage();
 
     if (isImageNotLoaded)
     {
@@ -170,19 +152,9 @@ void AppMainWindow::OnLoadImg(wxCommandEvent &WXUNUSED(event))
 
 void AppMainWindow::OnSaveImg(wxCommandEvent &WXUNUSED(event))
 {
-    wxFileDialog saveFileDialog(
-        this,
-        "Save image", "", "", 
-        *fileFilters, 
-        wxFD_SAVE | wxFD_OVERWRITE_PROMPT        
-    );
+    bool isImageNotSaved = CastAMWC->SaveImage();
 
-    if (saveFileDialog.ShowModal() == wxID_CANCEL) { return; }
-
-    std::string pathToFile = saveFileDialog.GetPath().ToStdString();
-    bool isImageSaved = CastAMWC->SaveImage(pathToFile);
-
-    if (!isImageSaved)
+    if (isImageNotSaved)
     {
         wxMessageBox("Failed to save image", "Error", wxOK | wxICON_ERROR);
         return;

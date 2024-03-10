@@ -7,6 +7,13 @@
 AppMainWindowController::AppMainWindowController()
 {
     procImage = new ProcessedImage();
+
+    wxImage::AddHandler(new wxPNGHandler);
+    wxImage::AddHandler(new wxJPEGHandler);
+
+    fileFilters = new wxString(
+        "Images (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg"
+    );
 }
 
 AppMainWindowController::~AppMainWindowController()
@@ -43,9 +50,24 @@ void AppMainWindowController::ZoomOutBitmap(BufferedBitmap *bitmap)
     bitmap->ZoomOutBitmap();
 }
 
-bool AppMainWindowController::LoadImage(const std::string path)
+bool AppMainWindowController::LoadImage()
 {
-    bool uploadStatus = procImage->LoadSrcImage(path);
+    wxFileDialog openFileDialog(
+        CastAMW, 
+        "Select image", 
+        "", 
+        "", 
+        *fileFilters,
+        wxFD_OPEN | wxFD_FILE_MUST_EXIST
+    );
+
+    if (openFileDialog.ShowModal() == wxID_CANCEL) 
+    { 
+        return true; 
+    }
+
+    std::string pathToFile = openFileDialog.GetPath().ToStdString();
+    bool uploadStatus = procImage->LoadSrcImage(pathToFile);
 
     if (uploadStatus == false)
     {
@@ -55,9 +77,25 @@ bool AppMainWindowController::LoadImage(const std::string path)
     return uploadStatus;
 }
 
-bool AppMainWindowController::SaveImage(const std::string path)
+bool AppMainWindowController::SaveImage()
 {
-    return procImage->SaveImage(path);
+    wxFileDialog saveFileDialog(
+        CastAMW,
+        "Save image", 
+        "", 
+        "",
+        *fileFilters,
+        wxFD_SAVE | wxFD_OVERWRITE_PROMPT
+    );
+
+    if (saveFileDialog.ShowModal() == wxID_CANCEL) 
+    { 
+        return true; 
+    }
+
+    std::string pathToFile = saveFileDialog.GetPath().ToStdString();
+
+    return procImage->SaveImage(pathToFile);
 }
 
 void AppMainWindowController::SetView(wxWindow *view)

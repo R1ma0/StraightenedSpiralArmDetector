@@ -3,7 +3,7 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-#include <wx/wx.h>
+    #include <wx/wx.h>
 #endif
 #include <wx/wfstream.h>
 #include <wx/log.h>
@@ -21,10 +21,7 @@ private:
     IController *mainController;
     BufferedBitmap *bitmap;
     wxMenuItem *saveImg;
-    wxString *fileFilters;
     wxBoxSizer *sizerMain;
-    wxBoxSizer *bitmapControlSizer;
-    wxBoxSizer *detectoratorControlSizer;
     void OnExit(wxCommandEvent &);
     void OnLoadImg(wxCommandEvent &);
     void OnSaveImg(wxCommandEvent &);
