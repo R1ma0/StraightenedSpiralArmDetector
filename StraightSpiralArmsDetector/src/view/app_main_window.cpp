@@ -123,21 +123,23 @@ void AppMainWindow::BindEventHandlers()
     Bind(wxEVT_MENU, &AppMainWindow::OnSaveImg, this, ID_SAVE_IMG);
     Bind(wxEVT_MENU, &AppMainWindow::OnExit, this, wxID_EXIT);
     Bind(wxEVT_MENU, &AppMainWindow::OnRotateScale, this, ID_ROTATE_SCALE);
+    Bind(wxEVT_MENU, &AppMainWindow::OnImageZoomIn, this, ID_ZOOM_IN);
+    Bind(wxEVT_MENU, &AppMainWindow::OnImageZoomOut, this, ID_ZOOM_OUT);
 }
 
 void AppMainWindow::OnRotateScale(wxCommandEvent &WXUNUSED(event))
 {
-
+    CastAMWC->OpenRotateScaleFrame(bitmap);
 }
 
 void AppMainWindow::OnImageZoomIn(wxCommandEvent &WXUNUSED(event))
 {
-
+    CastAMWC->ZoomInBitmap(bitmap);
 }
 
 void AppMainWindow::OnImageZoomOut(wxCommandEvent &WXUNUSED(event))
 {
-
+    CastAMWC->ZoomOutBitmap(bitmap);
 }
 
 void AppMainWindow::OnExit(wxCommandEvent &WXUNUSED(event))

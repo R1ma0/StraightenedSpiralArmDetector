@@ -20,6 +20,29 @@ wxBitmap AppMainWindowController::GetBitmapImage()
     return wxBitmap(MatToWxImage(img));   
 }
 
+void AppMainWindowController::OpenRotateScaleFrame(BufferedBitmap *bitmap)
+{
+    auto rotateScaleController = new ImageRotateScaleFrameController(
+        bitmap,
+        procImage
+    );
+    auto rotateScaleFrame = new ImageRotateScaleFrame(rotateScaleController);
+    rotateScaleController->SetView(rotateScaleFrame);
+    wxSize bestSize = rotateScaleFrame->GetBestSize();
+    rotateScaleFrame->SetSize(bestSize);
+    rotateScaleFrame->Show(true);
+}
+
+void AppMainWindowController::ZoomInBitmap(BufferedBitmap *bitmap)
+{
+    bitmap->ZoomInBitmap();
+}
+
+void AppMainWindowController::ZoomOutBitmap(BufferedBitmap *bitmap)
+{
+    bitmap->ZoomOutBitmap();
+}
+
 bool AppMainWindowController::LoadImage(const std::string path)
 {
     bool uploadStatus = procImage->LoadSrcImage(path);

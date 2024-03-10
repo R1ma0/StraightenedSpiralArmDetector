@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="src\app.cpp" />
     <ClCompile Include="src\controller\app_main_window_controller.cpp" />
-    <ClCompile Include="src\controller\bitmap_control_panel_controller.cpp" />
     <ClCompile Include="src\controller\detectorator_control_panel_controller.cpp" />
     <ClCompile Include="src\controller\image_rotate_scale_frame_controller.cpp" />
     <ClCompile Include="src\model\converters.cpp" />
@@ -30,14 +29,12 @@
     <ClCompile Include="src\model\detectorator\zhang_suen.cpp" />
     <ClCompile Include="src\model\processed_image.cpp" />
     <ClCompile Include="src\view\app_main_window.cpp" />
-    <ClCompile Include="src\view\bitmap_control_panel.cpp" />
     <ClCompile Include="src\view\buffered_bitmap.cpp" />
     <ClCompile Include="src\view\detectorator_control_panel.cpp" />
     <ClCompile Include="src\view\image_rotate_scale_frame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\controller\app_main_window_controller.hpp" />
-    <ClInclude Include="src\controller\bitmap_control_panel_controller.hpp" />
     <ClInclude Include="src\controller\detectorator_control_panel_controller.hpp" />
     <ClInclude Include="src\controller\image_rotate_scale_frame_controller.hpp" />
     <ClInclude Include="src\controller\i_controller.hpp" />
@@ -47,7 +44,6 @@
     <ClInclude Include="src\model\detectorator\zhang_suen.hpp" />
     <ClInclude Include="src\model\processed_image.hpp" />
     <ClInclude Include="src\view\app_main_window.hpp" />
-    <ClInclude Include="src\view\bitmap_control_panel.hpp" />
     <ClInclude Include="src\view\buffered_bitmap.hpp" />
     <ClInclude Include="src\view\detectorator_control_panel.hpp" />
     <ClInclude Include="src\view\ids_of_controls.hpp" />

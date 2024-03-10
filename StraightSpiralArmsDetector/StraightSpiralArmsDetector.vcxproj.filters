@@ -24,9 +24,6 @@
     <ClCompile Include="src\view\app_main_window.cpp">
       <Filter>src\view</Filter>
     </ClCompile>
-    <ClCompile Include="src\view\bitmap_control_panel.cpp">
-      <Filter>src\view</Filter>
-    </ClCompile>
     <ClCompile Include="src\view\buffered_bitmap.cpp">
       <Filter>src\view</Filter>
     </ClCompile>
@@ -54,9 +51,6 @@
     <ClCompile Include="src\controller\app_main_window_controller.cpp">
       <Filter>src\controller</Filter>
     </ClCompile>
-    <ClCompile Include="src\controller\bitmap_control_panel_controller.cpp">
-      <Filter>src\controller</Filter>
-    </ClCompile>
     <ClCompile Include="src\controller\detectorator_control_panel_controller.cpp">
       <Filter>src\controller</Filter>
     </ClCompile>
@@ -66,9 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\view\app_main_window.hpp">
-      <Filter>src\view</Filter>
-    </ClInclude>
-    <ClInclude Include="src\view\bitmap_control_panel.hpp">
       <Filter>src\view</Filter>
     </ClInclude>
     <ClInclude Include="src\view\buffered_bitmap.hpp">
@@ -99,9 +90,6 @@
       <Filter>src\model\detectorator</Filter>
     </ClInclude>
     <ClInclude Include="src\controller\app_main_window_controller.hpp">
-      <Filter>src\controller</Filter>
-    </ClInclude>
-    <ClInclude Include="src\controller\bitmap_control_panel_controller.hpp">
       <Filter>src\controller</Filter>
     </ClInclude>
     <ClInclude Include="src\controller\detectorator_control_panel_controller.hpp">
