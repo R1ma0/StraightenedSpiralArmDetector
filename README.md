@@ -5,6 +5,7 @@ ______
 # Requirements
 1. OpenCV
 2. wxWidgets
-3. C++ compiler
-4. VS Code
+3. Visual Studio
 ______
+
+To run the program, you must place `opencv_world490.dll` next to the executable file
