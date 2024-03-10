@@ -30,6 +30,9 @@ private:
     void OnExit(wxCommandEvent &);
     void OnLoadImg(wxCommandEvent &);
     void OnSaveImg(wxCommandEvent &);
+    void OnRotateScale(wxCommandEvent &);
+    void OnImageZoomIn(wxCommandEvent &);
+    void OnImageZoomOut(wxCommandEvent &);
     void CreateControls();
     void BindEventHandlers();
     void AllowSavingImage(bool);
