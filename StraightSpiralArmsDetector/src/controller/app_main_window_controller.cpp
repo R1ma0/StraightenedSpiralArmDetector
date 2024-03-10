@@ -22,7 +22,7 @@ wxBitmap AppMainWindowController::GetBitmapImage()
 
 bool AppMainWindowController::LoadImage(const std::string path)
 {
-    bool uploadStatus = procImage->LoadImage(path);
+    bool uploadStatus = procImage->LoadSrcImage(path);
 
     if (uploadStatus == false)
     {

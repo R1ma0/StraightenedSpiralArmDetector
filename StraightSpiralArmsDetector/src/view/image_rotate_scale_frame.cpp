@@ -119,11 +119,11 @@ void IRSF::SetValuesAndRanges()
     angleSpin->SetValue(rsv.angle);
     rotateOldValue->SetLabel(std::to_string(rsv.angle));
 
-    scaleXNewSpin->SetRange(-(rsv.x * xScaleMult), rsv.x * xScaleMult);
+    scaleXNewSpin->SetRange((rsv.x * xScaleMult), rsv.x * xScaleMult);
     scaleXNewSpin->SetValue(rsv.x);
     scaleXOldValue->SetLabel(std::to_string(rsv.x));
 
-    scaleYNewSpin->SetRange(-(rsv.y * yScaleMult), rsv.y * yScaleMult);
+    scaleYNewSpin->SetRange((rsv.y * yScaleMult), rsv.y * yScaleMult);
     scaleYNewSpin->SetValue(rsv.y);
     scaleYOldValue->SetLabel(std::to_string(rsv.y));
 }

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{df66e855-f607-4cbd-8f0d-4287c9895f49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\view">
+      <UniqueIdentifier>{a3f864c8-9622-4c0a-bee9-9de65799007b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\model">
+      <UniqueIdentifier>{f1c1d719-bb85-487c-b7a4-05d0b9b049d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\model\detectorator">
+      <UniqueIdentifier>{44987edd-ff4c-4c03-bef5-07c1b8c76832}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\controller">
+      <UniqueIdentifier>{af315163-4a25-4cf6-9829-1972fd1bb947}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\app.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\view\app_main_window.cpp">
+      <Filter>src\view</Filter>
+    </ClCompile>
+    <ClCompile Include="src\view\bitmap_control_panel.cpp">
+      <Filter>src\view</Filter>
+    </ClCompile>
+    <ClCompile Include="src\view\buffered_bitmap.cpp">
+      <Filter>src\view</Filter>
+    </ClCompile>
+    <ClCompile Include="src\view\detectorator_control_panel.cpp">
+      <Filter>src\view</Filter>
+    </ClCompile>
+    <ClCompile Include="src\view\image_rotate_scale_frame.cpp">
+      <Filter>src\view</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\converters.cpp">
+      <Filter>src\model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\processed_image.cpp">
+      <Filter>src\model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\detectorator\adaptive_zhang_suen.cpp">
+      <Filter>src\model\detectorator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\detectorator\utils.cpp">
+      <Filter>src\model\detectorator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\detectorator\zhang_suen.cpp">
+      <Filter>src\model\detectorator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controller\app_main_window_controller.cpp">
+      <Filter>src\controller</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controller\bitmap_control_panel_controller.cpp">
+      <Filter>src\controller</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controller\detectorator_control_panel_controller.cpp">
+      <Filter>src\controller</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controller\image_rotate_scale_frame_controller.cpp">
+      <Filter>src\controller</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\view\app_main_window.hpp">
+      <Filter>src\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\view\bitmap_control_panel.hpp">
+      <Filter>src\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\view\buffered_bitmap.hpp">
+      <Filter>src\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\view\detectorator_control_panel.hpp">
+      <Filter>src\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\view\ids_of_controls.hpp">
+      <Filter>src\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\view\image_rotate_scale_frame.hpp">
+      <Filter>src\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\converters.hpp">
+      <Filter>src\model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\processed_image.hpp">
+      <Filter>src\model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\detectorator\adaptive_zhang_suen.hpp">
+      <Filter>src\model\detectorator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\detectorator\utils.hpp">
+      <Filter>src\model\detectorator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\detectorator\zhang_suen.hpp">
+      <Filter>src\model\detectorator</Filter>
+    </ClInclude>
+    <ClInclude Include="src\controller\app_main_window_controller.hpp">
+      <Filter>src\controller</Filter>
+    </ClInclude>
+    <ClInclude Include="src\controller\bitmap_control_panel_controller.hpp">
+      <Filter>src\controller</Filter>
+    </ClInclude>
+    <ClInclude Include="src\controller\detectorator_control_panel_controller.hpp">
+      <Filter>src\controller</Filter>
+    </ClInclude>
+    <ClInclude Include="src\controller\i_controller.hpp">
+      <Filter>src\controller</Filter>
+    </ClInclude>
+    <ClInclude Include="src\controller\image_rotate_scale_frame_controller.hpp">
+      <Filter>src\controller</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

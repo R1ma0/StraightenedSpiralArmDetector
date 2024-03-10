@@ -14,7 +14,7 @@ class AppMainWindowController : public IController
 {
 private:
     wxWindow *view;
-    ProcessedImage *procImage;
+    ProcessedImage* procImage;
 public:
     AppMainWindowController();
     ~AppMainWindowController();
