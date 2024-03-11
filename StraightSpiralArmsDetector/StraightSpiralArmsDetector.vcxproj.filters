@@ -24,13 +24,10 @@
     <ClCompile Include="src\view\app_main_window.cpp">
       <Filter>src\view</Filter>
     </ClCompile>
-    <ClCompile Include="src\view\bitmap_control_panel.cpp">
-      <Filter>src\view</Filter>
-    </ClCompile>
     <ClCompile Include="src\view\buffered_bitmap.cpp">
       <Filter>src\view</Filter>
     </ClCompile>
-    <ClCompile Include="src\view\detectorator_control_panel.cpp">
+    <ClCompile Include="src\view\azsm_control_frame.cpp">
       <Filter>src\view</Filter>
     </ClCompile>
     <ClCompile Include="src\view\image_rotate_scale_frame.cpp">
@@ -42,22 +39,19 @@
     <ClCompile Include="src\model\processed_image.cpp">
       <Filter>src\model</Filter>
     </ClCompile>
-    <ClCompile Include="src\model\detectorator\adaptive_zhang_suen.cpp">
+    <ClCompile Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.cpp">
       <Filter>src\model\detectorator</Filter>
     </ClCompile>
-    <ClCompile Include="src\model\detectorator\utils.cpp">
+    <ClCompile Include="src\model\adaptive_zhang_suen_method\utils.cpp">
       <Filter>src\model\detectorator</Filter>
     </ClCompile>
-    <ClCompile Include="src\model\detectorator\zhang_suen.cpp">
+    <ClCompile Include="src\model\adaptive_zhang_suen_method\zhang_suen.cpp">
       <Filter>src\model\detectorator</Filter>
     </ClCompile>
     <ClCompile Include="src\controller\app_main_window_controller.cpp">
       <Filter>src\controller</Filter>
     </ClCompile>
-    <ClCompile Include="src\controller\bitmap_control_panel_controller.cpp">
-      <Filter>src\controller</Filter>
-    </ClCompile>
-    <ClCompile Include="src\controller\detectorator_control_panel_controller.cpp">
+    <ClCompile Include="src\controller\azsm_frame_controller.cpp">
       <Filter>src\controller</Filter>
     </ClCompile>
     <ClCompile Include="src\controller\image_rotate_scale_frame_controller.cpp">
@@ -68,13 +62,10 @@
     <ClInclude Include="src\view\app_main_window.hpp">
       <Filter>src\view</Filter>
     </ClInclude>
-    <ClInclude Include="src\view\bitmap_control_panel.hpp">
-      <Filter>src\view</Filter>
-    </ClInclude>
     <ClInclude Include="src\view\buffered_bitmap.hpp">
       <Filter>src\view</Filter>
     </ClInclude>
-    <ClInclude Include="src\view\detectorator_control_panel.hpp">
+    <ClInclude Include="src\view\azsm_control_frame.hpp">
       <Filter>src\view</Filter>
     </ClInclude>
     <ClInclude Include="src\view\ids_of_controls.hpp">
@@ -89,22 +80,19 @@
     <ClInclude Include="src\model\processed_image.hpp">
       <Filter>src\model</Filter>
     </ClInclude>
-    <ClInclude Include="src\model\detectorator\adaptive_zhang_suen.hpp">
+    <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.hpp">
       <Filter>src\model\detectorator</Filter>
     </ClInclude>
-    <ClInclude Include="src\model\detectorator\utils.hpp">
+    <ClInclude Include="src\model\adaptive_zhang_suen_method\utils.hpp">
       <Filter>src\model\detectorator</Filter>
     </ClInclude>
-    <ClInclude Include="src\model\detectorator\zhang_suen.hpp">
+    <ClInclude Include="src\model\adaptive_zhang_suen_method\zhang_suen.hpp">
       <Filter>src\model\detectorator</Filter>
     </ClInclude>
     <ClInclude Include="src\controller\app_main_window_controller.hpp">
       <Filter>src\controller</Filter>
     </ClInclude>
-    <ClInclude Include="src\controller\bitmap_control_panel_controller.hpp">
-      <Filter>src\controller</Filter>
-    </ClInclude>
-    <ClInclude Include="src\controller\detectorator_control_panel_controller.hpp">
+    <ClInclude Include="src\controller\azsm_frame_controller.hpp">
       <Filter>src\controller</Filter>
     </ClInclude>
     <ClInclude Include="src\controller\i_controller.hpp">

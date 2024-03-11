@@ -3,12 +3,6 @@
 #ifndef CastAMWC
 #define CastAMWC dynamic_cast<AppMainWindowController *>(mainController)
 #endif
-#ifndef CastDCP
-#define CastDCP dynamic_cast<DetectoratorControlPanel *>(dcp)
-#endif
-#ifndef CastBCP
-#define CastBCP dynamic_cast<BitmapControlPanel *>(bcp)
-#endif
 
 AppMainWindow::AppMainWindow
 (
@@ -22,13 +16,6 @@ AppMainWindow::AppMainWindow
 )
 {
     mainController = controller;
-
-    wxImage::AddHandler(new wxPNGHandler);
-    wxImage::AddHandler(new wxJPEGHandler);
-
-    fileFilters = new wxString(
-        "Images (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg"
-    );
 
     CreateControls();
     BindEventHandlers();
@@ -114,23 +101,10 @@ void AppMainWindow::CreateControls()
         FromDIP(wxSize(1, 1)), 0
     );
 
-    bitmapControlSizer = new wxBoxSizer(wxVERTICAL);
-    bitmapControlSizer->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(10));
-
     sizerMain = new wxBoxSizer(wxHORIZONTAL);
-    sizerMain->Add(bitmapControlSizer, 1, wxEXPAND);
+    sizerMain->Add(bitmap, 1, wxEXPAND | wxALL, FromDIP(1));
 
     this->SetSizerAndFit(sizerMain);
-}
-
-void AppMainWindow::SetBitmapControlPanel(wxPanel *bcp)
-{
-    bitmapControlSizer->Add(CastBCP, 0, wxALIGN_LEFT | wxALL, FromDIP(10));
-}
-
-void AppMainWindow::SetDetectoratorControlPanel(wxPanel *dcp)
-{
-    sizerMain->Add(CastDCP, 0, wxEXPAND);
 }
 
 void AppMainWindow::BindEventHandlers()
@@ -139,21 +113,34 @@ void AppMainWindow::BindEventHandlers()
     Bind(wxEVT_MENU, &AppMainWindow::OnSaveImg, this, ID_SAVE_IMG);
     Bind(wxEVT_MENU, &AppMainWindow::OnExit, this, wxID_EXIT);
     Bind(wxEVT_MENU, &AppMainWindow::OnRotateScale, this, ID_ROTATE_SCALE);
+    Bind(wxEVT_MENU, &AppMainWindow::OnImageZoomIn, this, ID_ZOOM_IN);
+    Bind(wxEVT_MENU, &AppMainWindow::OnImageZoomOut, this, ID_ZOOM_OUT);
+    Bind(
+        wxEVT_MENU, 
+        &AppMainWindow::OnUseAZSMethod, 
+        this, 
+        ID_OPEN_ADAPTIVE_ZHANG_SUEN
+    );
+}
+
+void AppMainWindow::OnUseAZSMethod(wxCommandEvent &WXUNUSED(event))
+{
+    CastAMWC->OpenAZSMethodFrame(bitmap);
 }
 
 void AppMainWindow::OnRotateScale(wxCommandEvent &WXUNUSED(event))
 {
-
+    CastAMWC->OpenRotateScaleFrame(bitmap);
 }
 
 void AppMainWindow::OnImageZoomIn(wxCommandEvent &WXUNUSED(event))
 {
-
+    CastAMWC->ZoomInBitmap(bitmap);
 }
 
 void AppMainWindow::OnImageZoomOut(wxCommandEvent &WXUNUSED(event))
 {
-
+    CastAMWC->ZoomOutBitmap(bitmap);
 }
 
 void AppMainWindow::OnExit(wxCommandEvent &WXUNUSED(event))
@@ -163,15 +150,7 @@ void AppMainWindow::OnExit(wxCommandEvent &WXUNUSED(event))
 
 void AppMainWindow::OnLoadImg(wxCommandEvent &WXUNUSED(event))
 {
-    wxFileDialog openFileDialog(
-        this, "Select image", "", "", *fileFilters, 
-        wxFD_OPEN | wxFD_FILE_MUST_EXIST
-    );
-    
-    if (openFileDialog.ShowModal() == wxID_CANCEL) { return; }
-
-    std::string pathToFile = openFileDialog.GetPath().ToStdString();
-    bool isImageNotLoaded = CastAMWC->LoadImage(pathToFile);
+    bool isImageNotLoaded = CastAMWC->LoadImage();
 
     if (isImageNotLoaded)
     {
@@ -184,19 +163,9 @@ void AppMainWindow::OnLoadImg(wxCommandEvent &WXUNUSED(event))
 
 void AppMainWindow::OnSaveImg(wxCommandEvent &WXUNUSED(event))
 {
-    wxFileDialog saveFileDialog(
-        this,
-        "Save image", "", "", 
-        *fileFilters, 
-        wxFD_SAVE | wxFD_OVERWRITE_PROMPT        
-    );
+    bool isImageNotSaved = CastAMWC->SaveImage();
 
-    if (saveFileDialog.ShowModal() == wxID_CANCEL) { return; }
-
-    std::string pathToFile = saveFileDialog.GetPath().ToStdString();
-    bool isImageSaved = CastAMWC->SaveImage(pathToFile);
-
-    if (!isImageSaved)
+    if (isImageNotSaved)
     {
         wxMessageBox("Failed to save image", "Error", wxOK | wxICON_ERROR);
         return;
