@@ -40,6 +40,16 @@ void AppMainWindowController::OpenRotateScaleFrame(BufferedBitmap *bitmap)
     rotateScaleFrame->Show(true);
 }
 
+void AppMainWindowController::OpenAZSMethodFrame(BufferedBitmap *bitmap)
+{
+    auto azsmController = new AZSMFrameController(bitmap, procImage);
+    auto azsmFrame = new AZSMControlFrame(azsmController);
+    azsmController->SetView(azsmFrame);
+    wxSize bestSize = azsmFrame->GetBestSize();
+    azsmFrame->SetSize(bestSize);
+    azsmFrame->Show(true);
+}
+
 void AppMainWindowController::ZoomInBitmap(BufferedBitmap *bitmap)
 {
     bitmap->ZoomInBitmap();

@@ -1,26 +1,24 @@
-#include "detectorator_control_panel.hpp"
+#include "azsm_control_frame.hpp"
 
-#ifndef DCPC
-#define DCPC DetectoratorControlPanelController
+#ifndef AZSMCF
+#define AZSMCF AZSMControlFrame
 #endif
-#ifndef CastDCPC
-#define CastDCPC dynamic_cast<DCPC *>(controller)
+#ifndef CastAZSMFC
+#define CastAZSMFC dynamic_cast<AZSMFrameController *>(controller)
 #endif
 
-DetectoratorControlPanel::DetectoratorControlPanel
+AZSMCF::AZSMCF
 (
-    wxWindow *parent, 
     IController *controller
-) : wxPanel(parent)
+) : wxFrame(NULL, wxID_ANY, "Zhang Suen method settings")
 {
     this->controller = controller;
-    this->parent = parent;
 
     CreateControls();
     BindEventHandlers();
 }
 
-void DetectoratorControlPanel::CreateControls()
+void AZSMCF::CreateControls()
 {
     auto sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -78,17 +76,17 @@ void DetectoratorControlPanel::CreateControls()
     this->SetSizerAndFit(sizer);
 }
 
-void DetectoratorControlPanel::BindEventHandlers()
+void AZSMCF::BindEventHandlers()
 {
     Bind(
         wxEVT_BUTTON, 
-        &DetectoratorControlPanel::OnRunDetectorator, 
+        &AZSMCF::OnRunDetectorator,
         this, 
         ID_RUN_DETECTORATOR
     );
 }
 
-void DetectoratorControlPanel::OnRunDetectorator(wxCommandEvent &WXUNUSED(event))
+void AZSMCF::OnRunDetectorator(wxCommandEvent &WXUNUSED(event))
 {
-    CastDCPC->RunDetectorator();
+    CastAZSMFC->RunDetectorator();
 }

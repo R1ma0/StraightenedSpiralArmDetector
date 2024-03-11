@@ -1,30 +1,30 @@
-#include "detectorator_control_panel_controller.hpp"
+#include "azsm_frame_controller.hpp"
 
-#ifndef DCPC
-#define DCPC DetectoratorControlPanelController
+#ifndef AZSMFC
+#define AZSMFC AZSMFrameController
 #endif
-#ifndef CastDCP
-#define CastDCP dynamic_cast<DetectoratorControlPanel *>(view)
+#ifndef CastAZSMCF
+#define CastAZSMCF dynamic_cast<AZSMControlFrame *>(view)
 #endif
 
-DCPC::DCPC(BufferedBitmap *bitmap, ProcessedImage *procImage)
+AZSMFC::AZSMFC(BufferedBitmap *bitmap, ProcessedImage *procImage)
 {
     this->bitmap = bitmap;
     this->procImage = procImage;
     azsm = new AdaptiveZhangSuenMethod();
 }
 
-void DCPC::SetView(wxWindow *view)
+void AZSMFC::SetView(wxWindow *view)
 {
     this->view = view;
 }
 
-void DCPC::RunDetectorator()
+void AZSMFC::RunDetectorator()
 {
-    float binaryThresh = (float)CastDCP->GetBinaryThresh();
-    float gaussConst = (float)CastDCP->GetGaussConst();
-    float compressPercentage = (float)CastDCP->GetCompressPercentage();
-    int gaussBlockSize = CastDCP->GetGaussBlockSize();
+    float binaryThresh = (float)CastAZSMCF->GetBinaryThresh();
+    float gaussConst = (float)CastAZSMCF->GetGaussConst();
+    float compressPercentage = (float)CastAZSMCF->GetCompressPercentage();
+    int gaussBlockSize = CastAZSMCF->GetGaussBlockSize();
 
     AdaptiveZhangSuenParameters azsmParams{
         binaryThresh, gaussConst, compressPercentage, gaussBlockSize

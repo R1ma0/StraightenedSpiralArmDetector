@@ -1,5 +1,5 @@
-#ifndef DETECTORATOR_CONTROL_PANEL_CONTROLLER
-#define DETECTORATOR_CONTROL_PANEL_CONTROLLER
+#ifndef AZSM_FRAME_CONTROLLER
+#define AZSM_FRAME_CONTROLLER
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
@@ -9,12 +9,12 @@
 #include "i_controller.hpp"
 #include "../view/app_main_window.hpp"
 #include "../view/buffered_bitmap.hpp"
-#include "../view/detectorator_control_panel.hpp"
+#include "../view/azsm_control_frame.hpp"
 #include "../model/converters.hpp"
 #include "../model/processed_image.hpp"
-#include "../model/detectorator/adaptive_zhang_suen.hpp"
+#include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen.hpp"
 
-class DetectoratorControlPanelController : public IController
+class AZSMFrameController : public IController
 {
 private:
     wxWindow *view;
@@ -22,7 +22,7 @@ private:
     BufferedBitmap *bitmap;
     AdaptiveZhangSuenMethod *azsm;
 public:
-    DetectoratorControlPanelController(BufferedBitmap *, ProcessedImage *);
+    AZSMFrameController(BufferedBitmap *, ProcessedImage *);
     void SetView(wxWindow *) override;
     void RunDetectorator();
 };

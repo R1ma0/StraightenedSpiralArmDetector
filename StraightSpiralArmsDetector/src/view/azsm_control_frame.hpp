@@ -1,5 +1,5 @@
-#ifndef DETECTORATOR_CONTROL_PANEL_H
-#define DETECTORATOR_CONTROL_PANEL_H
+#ifndef AZSM_CONTROL_FRAME_H
+#define AZSM_CONTROL_FRAME_H
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
@@ -10,12 +10,11 @@
 #include "buffered_bitmap.hpp"
 #include "../model/processed_image.hpp"
 #include "../controller/i_controller.hpp"
-#include "../controller/detectorator_control_panel_controller.hpp"
+#include "../controller/azsm_frame_controller.hpp"
 
-class DetectoratorControlPanel : public wxPanel
+class AZSMControlFrame : public wxFrame
 {
 private:
-    wxWindow *parent;
     IController *controller;
     wxSpinCtrl *binaryThreshValueSpin;
     wxSpinCtrl *gaussConstSpin;
@@ -25,7 +24,7 @@ private:
     void BindEventHandlers();
     void OnRunDetectorator(wxCommandEvent &);
 public:
-    DetectoratorControlPanel(wxWindow *, IController *);
+    AZSMControlFrame(IController *);
     int GetBinaryThresh() { return binaryThreshValueSpin->GetValue(); }
     int GetGaussConst() { return gaussConstSpin->GetValue(); }
     int GetCompressPercentage() { return imgCompressPercentageSpin->GetValue(); }

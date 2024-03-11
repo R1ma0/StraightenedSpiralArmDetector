@@ -28,6 +28,7 @@ private:
     void OnRotateScale(wxCommandEvent &);
     void OnImageZoomIn(wxCommandEvent &);
     void OnImageZoomOut(wxCommandEvent &);
+    void OnUseAZSMethod(wxCommandEvent &);
     void CreateControls();
     void BindEventHandlers();
     void AllowSavingImage(bool);

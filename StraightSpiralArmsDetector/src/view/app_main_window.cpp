@@ -115,6 +115,17 @@ void AppMainWindow::BindEventHandlers()
     Bind(wxEVT_MENU, &AppMainWindow::OnRotateScale, this, ID_ROTATE_SCALE);
     Bind(wxEVT_MENU, &AppMainWindow::OnImageZoomIn, this, ID_ZOOM_IN);
     Bind(wxEVT_MENU, &AppMainWindow::OnImageZoomOut, this, ID_ZOOM_OUT);
+    Bind(
+        wxEVT_MENU, 
+        &AppMainWindow::OnUseAZSMethod, 
+        this, 
+        ID_OPEN_ADAPTIVE_ZHANG_SUEN
+    );
+}
+
+void AppMainWindow::OnUseAZSMethod(wxCommandEvent &WXUNUSED(event))
+{
+    CastAMWC->OpenAZSMethodFrame(bitmap);
 }
 
 void AppMainWindow::OnRotateScale(wxCommandEvent &WXUNUSED(event))
