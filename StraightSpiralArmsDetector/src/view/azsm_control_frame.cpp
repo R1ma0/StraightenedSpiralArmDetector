@@ -20,60 +20,56 @@ AZSMCF::AZSMCF
 
 void AZSMCF::CreateControls()
 {
-    auto sizer = new wxBoxSizer(wxVERTICAL);
+    auto gridSizer = new wxGridSizer(0, 2, wxSize(50, 5));
+    auto& gridSizerFlags = wxSizerFlags().Expand().Border(wxALL, 10).CenterVertical();
 
     auto binaryThreshValueLabel = new wxStaticText(
         this, -1, wxT("Binary Thresh Value:")
     );
-    sizer->Add(binaryThreshValueLabel, 0, wxTOP | wxRIGHT, FromDIP(10));
+    gridSizer->Add(binaryThreshValueLabel, gridSizerFlags);
 
     binaryThreshValueSpin = new wxSpinCtrl(this);
-    sizer->Add(
-        binaryThreshValueSpin, 0, wxEXPAND | wxTOP | wxRIGHT, FromDIP(10)
-    );
     binaryThreshValueSpin->SetRange(0, 255);
     binaryThreshValueSpin->SetValue(125);
+    gridSizer->Add(binaryThreshValueSpin, gridSizerFlags);
 
     auto gaussConstLabel = new wxStaticText(
-        this, -1, wxT("Gauss Constant Value:")        
+        this, -1, wxT("Gauss Constant Value:")
     );
-    sizer->Add(gaussConstLabel, 0, wxTOP | wxRIGHT, FromDIP(10));
+    gridSizer->Add(gaussConstLabel, gridSizerFlags);
 
     gaussConstSpin = new wxSpinCtrl(this);
-    sizer->Add(
-        gaussConstSpin, 0, wxEXPAND |  wxTOP | wxRIGHT, FromDIP(10)
-    );
     gaussConstSpin->SetRange(-20, 20);
     gaussConstSpin->SetValue(0);
+    gridSizer->Add(gaussConstSpin, gridSizerFlags);
 
     auto imgCompressPercentageLabel = new wxStaticText(
         this, -1, wxT("Image Compress Percentage:")
     );
-    sizer->Add(imgCompressPercentageLabel, 0, wxTOP | wxRIGHT, FromDIP(10));
+    gridSizer->Add(imgCompressPercentageLabel, gridSizerFlags);
 
     imgCompressPercentageSpin = new wxSpinCtrl(this);
-    sizer->Add(
-        imgCompressPercentageSpin, 0, wxEXPAND | wxTOP | wxRIGHT, FromDIP(10)
-    );
     imgCompressPercentageSpin->SetRange(1, 99);
     imgCompressPercentageSpin->SetValue(20);
+    gridSizer->Add(imgCompressPercentageSpin, gridSizerFlags);
 
     auto gaussBlockSizeLabel = new wxStaticText(
         this, -1, wxT("Gauss Block Size Value (odd): ")        
     );
-    sizer->Add(gaussBlockSizeLabel, 0, wxTOP | wxRIGHT, FromDIP(10));
+    gridSizer->Add(gaussBlockSizeLabel, gridSizerFlags);
 
     gaussBlockSizeSpin = new wxSpinCtrl(this);
     gaussBlockSizeSpin->SetRange(3, 1001);
     gaussBlockSizeSpin->SetValue(3);
-    sizer->Add(gaussBlockSizeSpin, 0, wxEXPAND |  wxTOP | wxRIGHT, FromDIP(10));
+    gridSizer->Add(gaussBlockSizeSpin, gridSizerFlags);
 
     auto computeBtn = new wxButton(
         this, ID_RUN_DETECTORATOR, wxT("Start Processing")
     );
-    sizer->Add(computeBtn, 0, wxEXPAND | wxTOP | wxRIGHT, FromDIP(10));
+    gridSizer->Add(computeBtn, gridSizerFlags);
 
-    this->SetSizerAndFit(sizer);
+    this->SetSizer(gridSizer);
+    gridSizer->SetSizeHints(this);
 }
 
 void AZSMCF::BindEventHandlers()
