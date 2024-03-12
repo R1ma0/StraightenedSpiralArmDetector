@@ -63,6 +63,8 @@ void AZSMCF::CreateControls()
     gaussBlockSizeSpin->SetValue(3);
     gridSizer->Add(gaussBlockSizeSpin, gridSizerFlags);
 
+    gridSizer->Add(new wxStaticText(this, -1, wxT("")), gridSizerFlags);
+
     auto computeBtn = new wxButton(
         this, ID_RUN_DETECTORATOR, wxT("Start Processing")
     );
