@@ -10,7 +10,7 @@
 AZSMCF::AZSMCF
 (
     IController *controller
-) : wxFrame(NULL, wxID_ANY, "Zhang Suen method settings")
+) : wxDialog(NULL, wxID_ANY, "Zhang Suen method settings")
 {
     this->controller = controller;
 

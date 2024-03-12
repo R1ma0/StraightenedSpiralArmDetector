@@ -37,7 +37,8 @@ void AppMainWindowController::OpenRotateScaleFrame(BufferedBitmap *bitmap)
     rotateScaleController->SetView(rotateScaleFrame);
     wxSize bestSize = rotateScaleFrame->GetBestSize();
     rotateScaleFrame->SetSize(bestSize);
-    rotateScaleFrame->Show(true);
+    rotateScaleFrame->ShowModal();
+    rotateScaleFrame->Destroy();
 }
 
 void AppMainWindowController::OpenAZSMethodFrame(BufferedBitmap *bitmap)
@@ -47,7 +48,8 @@ void AppMainWindowController::OpenAZSMethodFrame(BufferedBitmap *bitmap)
     azsmController->SetView(azsmFrame);
     wxSize bestSize = azsmFrame->GetBestSize();
     azsmFrame->SetSize(bestSize);
-    azsmFrame->Show(true);
+    azsmFrame->ShowModal();
+    azsmFrame->Destroy();
 }
 
 void AppMainWindowController::ZoomInBitmap(BufferedBitmap *bitmap)

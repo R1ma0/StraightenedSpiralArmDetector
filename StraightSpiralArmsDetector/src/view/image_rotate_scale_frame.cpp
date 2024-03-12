@@ -7,7 +7,7 @@
 #define CastIRSF dynamic_cast<ImageRotateScaleFrameController *>(controller)
 #endif
 
-IRSF::IRSF(IController *controller) : wxFrame(NULL, wxID_ANY, "Rotate & Scale")
+IRSF::IRSF(IController *controller) : wxDialog(NULL, wxID_ANY, "Rotate & Scale")
 {
     this->controller = controller;
 
