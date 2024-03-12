@@ -23,6 +23,7 @@ private:
     wxSpinCtrl *scaleYNewSpin;
     unsigned int xScaleMult;
     unsigned int yScaleMult;
+    void AddEmptyCells(unsigned int, wxGridSizer &, wxSizerFlags &);
     void CreateControls();
     void SetValuesAndRanges();
     void BindEventHandlers();

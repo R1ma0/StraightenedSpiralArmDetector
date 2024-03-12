@@ -28,87 +28,73 @@ void IRSF::SetBoldFont(wxStaticText *text)
 
 void IRSF::CreateControls()
 {
-    auto mainSizer = new wxBoxSizer(wxVERTICAL);
+    auto gridSizer = new wxGridSizer(0, 5, wxSize(1, 1));
+    auto &gridSizerFlags = wxSizerFlags().Expand().Border(wxALL, 10).CenterVertical();
 
-    auto rotateSizerV = new wxBoxSizer(wxVERTICAL);
-    auto rotateTitle = new wxStaticText(this, -1, wxT("Rotate:"));
+    auto rotateTitle = new wxStaticText(this, -1, wxT("Rotate"));
     SetBoldFont(rotateTitle);
-    rotateSizerV->Add(rotateTitle, 0, wxLEFT | wxRIGHT, FromDIP(10));
-    auto rotateSizerH = new wxBoxSizer(wxHORIZONTAL);
+    gridSizer->Add(rotateTitle, gridSizerFlags);
+
+    AddEmptyCells(4, *gridSizer, gridSizerFlags);
+
     auto rotateOldText = new wxStaticText(this, -1, wxT("Current:"));
+    gridSizer->Add(rotateOldText, gridSizerFlags);
+
     rotateOldValue = new wxStaticText(this, -1, wxT("None"));
+    gridSizer->Add(rotateOldValue, gridSizerFlags);
+
     auto angleSpinNewText = new wxStaticText(this, -1, wxT("Set:"));
+    gridSizer->Add(angleSpinNewText, gridSizerFlags);
+
     angleSpin = new wxSpinCtrl(this);
+    gridSizer->Add(angleSpin, gridSizerFlags);
+
     auto angleSpinText = new wxStaticText(this, -1, wxT("degrees"));
-    rotateSizerH->Add(rotateOldText, 0, wxALIGN_CENTRE_VERTICAL);
-    rotateSizerH->Add(
-        rotateOldValue, 0, wxALIGN_CENTRE_VERTICAL | wxLEFT, FromDIP(10)
-    );
-    rotateSizerH->Add(
-        angleSpinNewText, 0, wxALIGN_CENTRE_VERTICAL | wxLEFT, FromDIP(50)
-    );
-    rotateSizerH->Add(angleSpin, 0, wxEXPAND);
-    rotateSizerH->Add(
-        angleSpinText, 0, wxALIGN_CENTRE_VERTICAL | wxLEFT, FromDIP(10)
-    );
-    rotateSizerV->Add(
-        rotateSizerH, 0, wxEXPAND | wxTOP | wxLEFT | wxRIGHT, FromDIP(10)
-    );
+    gridSizer->Add(angleSpinText, gridSizerFlags);
 
-    auto scaleSizerV = new wxBoxSizer(wxVERTICAL);
-    auto scaleTitle = new wxStaticText(this, -1, wxT("Scale:"));
+    auto scaleTitle = new wxStaticText(this, -1, wxT("Scale"));
     SetBoldFont(scaleTitle);
-    scaleSizerV->Add(
-        scaleTitle, 0, wxEXPAND | wxLEFT | wxRIGHT, FromDIP(10)
-    );
-    auto scaleXOldText = new wxStaticText(this, -1, wxT("Current X:"));
-    scaleXOldValue = new wxStaticText(this, -1, wxT("None"));
-    auto scaleXNewText = new wxStaticText(this, -1, wxT("Set X:"));
-    scaleXNewSpin = new wxSpinCtrl(this);
-    scaleXNewSpin->SetMinSize(wxSize(200, 35));
-    auto scaleXSizerH = new wxBoxSizer(wxHORIZONTAL);
-    scaleXSizerH->Add(scaleXOldText, 0, wxALIGN_CENTRE_VERTICAL);
-    scaleXSizerH->Add(
-        scaleXOldValue, 0, wxALIGN_CENTRE_VERTICAL | wxLEFT, FromDIP(10)
-    );
-    scaleXSizerH->Add(
-        scaleXNewText, 0, wxALIGN_CENTRE_VERTICAL | wxLEFT, FromDIP(50)
-    );
-    scaleXSizerH->Add(scaleXNewSpin, 0);
-    auto scaleYSizerH = new wxBoxSizer(wxHORIZONTAL);
-    auto scaleYOldText = new wxStaticText(this, -1, wxT("Current Y:"));
-    scaleYOldValue = new wxStaticText(this, -1, wxT("None"));
-    auto scaleYNewText = new wxStaticText(this, -1, wxT("Set Y:"));
-    scaleYNewSpin = new wxSpinCtrl(this);
-    scaleYNewSpin->SetMinSize(wxSize(200, 35));
-    scaleYSizerH->Add(
-        scaleYOldText, 0, wxALIGN_CENTRE_VERTICAL
-    );
-    scaleYSizerH->Add(
-        scaleYOldValue, 0, wxALIGN_CENTRE_VERTICAL | wxLEFT, FromDIP(10)
-    );
-    scaleYSizerH->Add(
-        scaleYNewText, 0, wxALIGN_CENTRE_VERTICAL | wxLEFT, FromDIP(50)
-    );
-    scaleYSizerH->Add(scaleYNewSpin, 0);
-    scaleSizerV->Add(
-        scaleXSizerH, 0, wxEXPAND | wxLEFT | wxRIGHT | wxTOP, FromDIP(10)
-    );
-    scaleSizerV->Add(
-        scaleYSizerH, 0, wxEXPAND | wxLEFT | wxRIGHT | wxTOP, FromDIP(10)
-    );
+    gridSizer->Add(scaleTitle, gridSizerFlags);
 
-    auto controlsSizer = new wxBoxSizer(wxHORIZONTAL);
+    AddEmptyCells(4, *gridSizer, gridSizerFlags);
+
+    auto scaleXOldText = new wxStaticText(this, -1, wxT("Current X:"));
+    gridSizer->Add(scaleXOldText, gridSizerFlags);
+
+    scaleXOldValue = new wxStaticText(this, -1, wxT("None"));
+    gridSizer->Add(scaleXOldValue, gridSizerFlags);
+
+    auto scaleXNewText = new wxStaticText(this, -1, wxT("Set X:"));
+    gridSizer->Add(scaleXNewText, gridSizerFlags);
+
+    scaleXNewSpin = new wxSpinCtrl(this);
+    gridSizer->Add(scaleXNewSpin, gridSizerFlags);
+
+    gridSizer->Add(new wxStaticText(this, -1, wxT("pixels")), gridSizerFlags);
+
+    auto scaleYOldText = new wxStaticText(this, -1, wxT("Current Y:"));
+    gridSizer->Add(scaleYOldText, gridSizerFlags);
+
+    scaleYOldValue = new wxStaticText(this, -1, wxT("None"));
+    gridSizer->Add(scaleYOldValue, gridSizerFlags);
+
+    auto scaleYNewText = new wxStaticText(this, -1, wxT("Set Y:"));
+    gridSizer->Add(scaleYNewText, gridSizerFlags);
+
+    scaleYNewSpin = new wxSpinCtrl(this);
+    gridSizer->Add(scaleYNewSpin, gridSizerFlags);
+
+    gridSizer->Add(new wxStaticText(this, -1, wxT("pixels")), gridSizerFlags);
+
+    AddEmptyCells(4, *gridSizer, gridSizerFlags);
+
     auto applyChangesBtn = new wxButton(
         this, ID_APPLY_ROTATE_SCALE, wxT("Apply")
     );
-    controlsSizer->Add(applyChangesBtn, 0, wxTOP | wxBOTTOM, FromDIP(10));
+    gridSizer->Add(applyChangesBtn, gridSizerFlags);
 
-    mainSizer->Add(rotateSizerV, 0, wxEXPAND | wxTOP, FromDIP(10));
-    mainSizer->Add(scaleSizerV, 0, wxEXPAND | wxTOP, FromDIP(10));
-    mainSizer->Add(controlsSizer, 0, wxALIGN_RIGHT | wxRIGHT, FromDIP(10));
-
-    this->SetSizerAndFit(mainSizer);
+    this->SetSizer(gridSizer);
+    gridSizer->SetSizeHints(this);
 }
 
 void IRSF::SetValuesAndRanges()
@@ -135,10 +121,18 @@ void IRSF::BindEventHandlers()
 
 void IRSF::OnApplyRotateScale(wxCommandEvent &WXUNUSED(event))
 {
-    RotateScaleValues rsv;
+    RotateScaleValues rsv{};
     rsv.angle = angleSpin->GetValue(); 
     rsv.x = scaleXNewSpin->GetValue(); 
     rsv.y = scaleYNewSpin->GetValue();
 
     CastIRSF->SetRotateScaleValues(rsv);
+}
+
+void IRSF::AddEmptyCells(unsigned int num_cells, wxGridSizer &grid, wxSizerFlags &flags)
+{
+    for (unsigned int i = 0; i < num_cells; i++)
+    {
+        grid.Add(new wxStaticText(this, -1, wxT("")), flags);
+    }
 }
