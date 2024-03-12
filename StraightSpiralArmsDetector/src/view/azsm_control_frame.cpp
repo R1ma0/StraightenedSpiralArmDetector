@@ -10,7 +10,7 @@
 AZSMCF::AZSMCF
 (
     IController *controller
-) : wxFrame(NULL, wxID_ANY, "Zhang Suen method settings")
+) : wxDialog(NULL, wxID_ANY, "Zhang Suen method settings")
 {
     this->controller = controller;
 
@@ -62,6 +62,8 @@ void AZSMCF::CreateControls()
     gaussBlockSizeSpin->SetRange(3, 1001);
     gaussBlockSizeSpin->SetValue(3);
     gridSizer->Add(gaussBlockSizeSpin, gridSizerFlags);
+
+    gridSizer->Add(new wxStaticText(this, -1, wxT("")), gridSizerFlags);
 
     auto computeBtn = new wxButton(
         this, ID_RUN_DETECTORATOR, wxT("Start Processing")

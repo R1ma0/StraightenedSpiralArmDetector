@@ -12,7 +12,7 @@
 #include "../controller/i_controller.hpp"
 #include "../controller/azsm_frame_controller.hpp"
 
-class AZSMControlFrame : public wxFrame
+class AZSMControlFrame : public wxDialog
 {
 private:
     IController *controller;

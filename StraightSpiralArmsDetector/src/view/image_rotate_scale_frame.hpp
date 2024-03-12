@@ -11,7 +11,7 @@
 #include "../controller/i_controller.hpp"
 #include "../controller/image_rotate_scale_frame_controller.hpp"
 
-class ImageRotateScaleFrame : public wxFrame
+class ImageRotateScaleFrame : public wxDialog
 {
 private:
     IController *controller;
@@ -23,6 +23,7 @@ private:
     wxSpinCtrl *scaleYNewSpin;
     unsigned int xScaleMult;
     unsigned int yScaleMult;
+    void AddEmptyCells(unsigned int, wxGridSizer &, wxSizerFlags &);
     void CreateControls();
     void SetValuesAndRanges();
     void BindEventHandlers();
