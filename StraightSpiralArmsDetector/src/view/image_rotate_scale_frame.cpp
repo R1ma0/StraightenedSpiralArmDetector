@@ -59,13 +59,13 @@ void IRSF::CreateControls()
 
     AddEmptyCells(4, *gridSizer, gridSizerFlags);
 
-    auto scaleXOldText = new wxStaticText(this, -1, wxT("Current X:"));
+    auto scaleXOldText = new wxStaticText(this, -1, wxT("Current width:"));
     gridSizer->Add(scaleXOldText, gridSizerFlags);
 
     scaleXOldValue = new wxStaticText(this, -1, wxT("None"));
     gridSizer->Add(scaleXOldValue, gridSizerFlags);
 
-    auto scaleXNewText = new wxStaticText(this, -1, wxT("Set X:"));
+    auto scaleXNewText = new wxStaticText(this, -1, wxT("Set width:"));
     gridSizer->Add(scaleXNewText, gridSizerFlags);
 
     scaleXNewSpin = new wxSpinCtrl(this);
@@ -73,13 +73,13 @@ void IRSF::CreateControls()
 
     gridSizer->Add(new wxStaticText(this, -1, wxT("pixels")), gridSizerFlags);
 
-    auto scaleYOldText = new wxStaticText(this, -1, wxT("Current Y:"));
+    auto scaleYOldText = new wxStaticText(this, -1, wxT("Current height:"));
     gridSizer->Add(scaleYOldText, gridSizerFlags);
 
     scaleYOldValue = new wxStaticText(this, -1, wxT("None"));
     gridSizer->Add(scaleYOldValue, gridSizerFlags);
 
-    auto scaleYNewText = new wxStaticText(this, -1, wxT("Set Y:"));
+    auto scaleYNewText = new wxStaticText(this, -1, wxT("Set height:"));
     gridSizer->Add(scaleYNewText, gridSizerFlags);
 
     scaleYNewSpin = new wxSpinCtrl(this);
@@ -106,11 +106,11 @@ void IRSF::SetValuesAndRanges()
     angleSpin->SetValue(rsv.angle);
     rotateOldValue->SetLabel(std::to_string(rsv.angle));
 
-    scaleXNewSpin->SetRange((rsv.x * xScaleMult), rsv.x * xScaleMult);
+    scaleXNewSpin->SetRange(-(int)(rsv.x * xScaleMult), rsv.x * xScaleMult);
     scaleXNewSpin->SetValue(rsv.x);
     scaleXOldValue->SetLabel(std::to_string(rsv.x));
 
-    scaleYNewSpin->SetRange((rsv.y * yScaleMult), rsv.y * yScaleMult);
+    scaleYNewSpin->SetRange(-(int)(rsv.y * yScaleMult), rsv.y * yScaleMult);
     scaleYNewSpin->SetValue(rsv.y);
     scaleYOldValue->SetLabel(std::to_string(rsv.y));
 }
@@ -123,11 +123,13 @@ void IRSF::BindEventHandlers()
 void IRSF::OnApplyRotateScale(wxCommandEvent& WXUNUSED(event))
 {
     RotateScaleValues rsv{};
+
     rsv.angle = angleSpin->GetValue(); 
     rsv.x = scaleXNewSpin->GetValue(); 
     rsv.y = scaleYNewSpin->GetValue();
 
     CastIRSF->SetRotateScaleValues(rsv);
+    SetValuesAndRanges();
 }
 
 void IRSF::AddEmptyCells
