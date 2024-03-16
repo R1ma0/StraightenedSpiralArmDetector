@@ -78,12 +78,20 @@ void AppMainWindow::CreateControls()
         wxT("Adaptive Zhang Suen"),
         wxT("Configure and use Adaptive Zhang Suen skeletonization method")
     );
+    auto useMuiltipleProcessing = new wxMenuItem(
+        menuProcessing,
+        ID_USE_MUILTIPLE_PROCESSING,
+        wxT("Multiple processing"),
+        wxT("Processing multiple images with specified parameters")
+    );
     skeletonizationMenu->Append(adaptiveZhangSuenMethod);
     menuProcessing->Append(openRotateScaleDialog);
     menuProcessing->AppendSubMenu(
         skeletonizationMenu, 
         wxT("Skeletonization Methods")
     );
+    menuProcessing->AppendSeparator();
+    menuProcessing->Append(useMuiltipleProcessing);
 
     auto menuBar = new wxMenuBar();
     menuBar->Append(menuFile, wxT("File"));
@@ -121,6 +129,17 @@ void AppMainWindow::BindEventHandlers()
         this, 
         ID_OPEN_ADAPTIVE_ZHANG_SUEN
     );
+    Bind(
+        wxEVT_MENU, 
+        &AppMainWindow::OnUseMultipleProcessing, 
+        this, 
+        ID_USE_MUILTIPLE_PROCESSING
+    );
+}
+
+void AppMainWindow::OnUseMultipleProcessing(wxCommandEvent &WXUNUSED(event))
+{
+    CastAMWC->OpenMultipleProcessingFrame();
 }
 
 void AppMainWindow::OnUseAZSMethod(wxCommandEvent &WXUNUSED(event))

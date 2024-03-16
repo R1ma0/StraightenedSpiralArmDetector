@@ -29,6 +29,7 @@ private:
     void OnImageZoomIn(wxCommandEvent &);
     void OnImageZoomOut(wxCommandEvent &);
     void OnUseAZSMethod(wxCommandEvent &);
+    void OnUseMultipleProcessing(wxCommandEvent &);
     void CreateControls();
     void BindEventHandlers();
     void AllowSavingImage(bool);
