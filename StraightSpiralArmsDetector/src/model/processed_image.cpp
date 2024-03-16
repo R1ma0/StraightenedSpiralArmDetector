@@ -10,7 +10,7 @@ cv::Size ProcessedImage::GetImageSize()
     return image.size();
 }
 
-int ProcessedImage::GetRotationAngleDegrees()
+int ProcessedImage::GetRotationAngleDegrees() const
 {
     return rotationAngleDegrees;
 }

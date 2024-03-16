@@ -165,9 +165,9 @@ void AWM::OnLoadImg(wxCommandEvent& WXUNUSED(event))
 
 void AWM::OnSaveImg(wxCommandEvent& WXUNUSED(event))
 {
-    bool isImageNotSaved = CastAMWC->SaveImage();
+    bool isImageSaved = CastAMWC->SaveImage();
 
-    if (isImageNotSaved)
+    if (!isImageSaved)
     {
         wxMessageBox("Failed to save image", "Error", wxOK | wxICON_ERROR);
         return;
