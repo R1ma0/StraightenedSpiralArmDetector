@@ -5,6 +5,7 @@ AZSMFC::AZSMFC(BufferedBitmap* bitmap, ProcessedImage* procImage)
     this->bitmap = bitmap;
     this->procImage = procImage;
     azsm = new AdaptiveZhangSuenMethod();
+    gbsOldValue = GBS_SPIN_DEFAULT_VALUE;
 }
 
 void AZSMFC::SetView(wxWindow* view)
@@ -32,4 +33,19 @@ void AZSMFC::RunDetectorator()
     procImage->SetProcessedImage(img);
     cv::cvtColor(img, dst, cv::COLOR_GRAY2RGB);
     bitmap->SetBitmap(wxBitmap(MatToWxImage(dst)));
+}
+
+int AZSMFC::CheckGBSValue(int value)
+{
+    int newValue = value;
+
+    if (value % 2 == 0)
+    {
+        if (value - gbsOldValue > 0) { newValue = value + 1; }
+        if (value - gbsOldValue < 0) { newValue = value - 1; }
+    }
+
+    gbsOldValue = newValue;
+
+    return newValue;
 }

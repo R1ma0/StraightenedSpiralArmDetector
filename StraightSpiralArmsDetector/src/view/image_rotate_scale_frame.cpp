@@ -130,7 +130,10 @@ void IRSF::OnApplyRotateScale(wxCommandEvent& WXUNUSED(event))
     CastIRSF->SetRotateScaleValues(rsv);
 }
 
-void IRSF::AddEmptyCells(unsigned int num_cells, wxGridSizer& grid, wxSizerFlags& flags)
+void IRSF::AddEmptyCells
+(
+    unsigned int num_cells, wxGridSizer& grid, wxSizerFlags& flags
+)
 {
     for (unsigned int i = 0; i < num_cells; i++)
     {

@@ -11,7 +11,8 @@ enum IDs
     ID_OPEN_AZSM,
     ID_RUN_DETECTORATOR,
     ID_APPLY_ROTATE_SCALE,
-    ID_USE_MULT_PROC
+    ID_USE_MULT_PROC,
+    ID_GBS_SPIN
 };
 
 #endif

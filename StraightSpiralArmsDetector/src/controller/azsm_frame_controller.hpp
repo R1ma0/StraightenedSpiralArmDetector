@@ -28,10 +28,13 @@ private:
     ProcessedImage* procImage;
     BufferedBitmap* bitmap;
     AdaptiveZhangSuenMethod* azsm;
+    int gbsOldValue;
 public:
     AZSMFC(BufferedBitmap*, ProcessedImage*);
+    const int GBS_SPIN_DEFAULT_VALUE{ 3 };
     void SetView(wxWindow*) override;
     void RunDetectorator();
+    int CheckGBSValue(int);
 };
 
 #endif

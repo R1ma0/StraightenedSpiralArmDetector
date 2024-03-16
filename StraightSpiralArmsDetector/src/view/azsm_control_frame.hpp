@@ -30,6 +30,7 @@ private:
     void CreateControls();
     void BindEventHandlers();
     void OnRunDetectorator(wxCommandEvent&);
+    void OnSetGaussBlockSize(wxCommandEvent&);
 public:
     AZSMCF(IController*);
     int GetBinaryThresh() { return binaryThreshValueSpin->GetValue(); }

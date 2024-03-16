@@ -16,7 +16,9 @@ AZSMCF::AZSMCF
 void AZSMCF::CreateControls()
 {
     auto gridSizer = new wxGridSizer(0, 2, wxSize(50, 5));
-    auto& gridSizerFlags = wxSizerFlags().Expand().Border(wxALL, 10).CenterVertical();
+    auto& gridSizerFlags = wxSizerFlags().Expand().Border(
+        wxALL, 10
+    ).CenterVertical();
 
     auto binaryThreshValueLabel = new wxStaticText(
         this, -1, wxT("Binary Thresh Value:")
@@ -53,9 +55,9 @@ void AZSMCF::CreateControls()
     );
     gridSizer->Add(gaussBlockSizeLabel, gridSizerFlags);
 
-    gaussBlockSizeSpin = new wxSpinCtrl(this);
-    gaussBlockSizeSpin->SetRange(3, 1001);
-    gaussBlockSizeSpin->SetValue(3);
+    gaussBlockSizeSpin = new wxSpinCtrl(this, ID_GBS_SPIN);
+    gaussBlockSizeSpin->SetRange(CastAZSMFC->GBS_SPIN_DEFAULT_VALUE, 1001);
+    gaussBlockSizeSpin->SetValue(CastAZSMFC->GBS_SPIN_DEFAULT_VALUE);
     gridSizer->Add(gaussBlockSizeSpin, gridSizerFlags);
 
     gridSizer->Add(new wxStaticText(this, -1, wxT("")), gridSizerFlags);
@@ -72,6 +74,14 @@ void AZSMCF::CreateControls()
 void AZSMCF::BindEventHandlers()
 {
     Bind(wxEVT_BUTTON, &AZSMCF::OnRunDetectorator, this, ID_RUN_DETECTORATOR);
+    Bind(wxEVT_SPINCTRL, &AZSMCF::OnSetGaussBlockSize, this, ID_GBS_SPIN);
+}
+
+void AZSMCF::OnSetGaussBlockSize(wxCommandEvent& WXUNUSED(event))
+{
+    gaussBlockSizeSpin->SetValue(
+        CastAZSMFC->CheckGBSValue(gaussBlockSizeSpin->GetValue())
+    );
 }
 
 void AZSMCF::OnRunDetectorator(wxCommandEvent& WXUNUSED(event))
