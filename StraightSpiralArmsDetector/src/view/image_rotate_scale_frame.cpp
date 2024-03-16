@@ -1,13 +1,12 @@
 #include "image_rotate_scale_frame.hpp"
 
-#ifndef IRSF
-#define IRSF ImageRotateScaleFrame
-#endif
-#ifndef IRSFC
-#define CastIRSF dynamic_cast<ImageRotateScaleFrameController *>(controller)
-#endif
-
-IRSF::IRSF(IController *controller) : wxDialog(NULL, wxID_ANY, "Rotate & Scale")
+IRSF::IRSF
+(
+    IController* controller
+) : wxDialog
+(
+    NULL, wxID_ANY, "Rotate & Scale"
+)
 {
     this->controller = controller;
 
@@ -19,7 +18,7 @@ IRSF::IRSF(IController *controller) : wxDialog(NULL, wxID_ANY, "Rotate & Scale")
     BindEventHandlers();
 }
 
-void IRSF::SetBoldFont(wxStaticText *text)
+void IRSF::SetBoldFont(wxStaticText* text)
 {
     wxFont boldFont = text->GetFont();
     boldFont.SetWeight(wxFONTWEIGHT_BOLD);
@@ -29,7 +28,9 @@ void IRSF::SetBoldFont(wxStaticText *text)
 void IRSF::CreateControls()
 {
     auto gridSizer = new wxGridSizer(0, 5, wxSize(1, 1));
-    auto &gridSizerFlags = wxSizerFlags().Expand().Border(wxALL, 10).CenterVertical();
+    auto& gridSizerFlags = wxSizerFlags().Expand().Border(
+        wxALL, 10
+    ).CenterVertical();
 
     auto rotateTitle = new wxStaticText(this, -1, wxT("Rotate"));
     SetBoldFont(rotateTitle);
@@ -119,7 +120,7 @@ void IRSF::BindEventHandlers()
     Bind(wxEVT_BUTTON, &IRSF::OnApplyRotateScale, this, ID_APPLY_ROTATE_SCALE);
 }
 
-void IRSF::OnApplyRotateScale(wxCommandEvent &WXUNUSED(event))
+void IRSF::OnApplyRotateScale(wxCommandEvent& WXUNUSED(event))
 {
     RotateScaleValues rsv{};
     rsv.angle = angleSpin->GetValue(); 
@@ -129,7 +130,7 @@ void IRSF::OnApplyRotateScale(wxCommandEvent &WXUNUSED(event))
     CastIRSF->SetRotateScaleValues(rsv);
 }
 
-void IRSF::AddEmptyCells(unsigned int num_cells, wxGridSizer &grid, wxSizerFlags &flags)
+void IRSF::AddEmptyCells(unsigned int num_cells, wxGridSizer& grid, wxSizerFlags& flags)
 {
     for (unsigned int i = 0; i < num_cells; i++)
     {

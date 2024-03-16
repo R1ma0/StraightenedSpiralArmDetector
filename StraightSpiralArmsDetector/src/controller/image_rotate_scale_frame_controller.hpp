@@ -3,13 +3,17 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 #include <opencv2/opencv.hpp>
 #include "i_controller.hpp"
 #include "../model/converters.hpp"
 #include "../view/buffered_bitmap.hpp"
 #include "../model/processed_image.hpp"
+
+#ifndef IRSFC
+#define IRSFC ImageRotateScaleFrameController
+#endif
 
 struct RotateScaleValues
 {
@@ -18,15 +22,15 @@ struct RotateScaleValues
     int y;
 };
 
-class ImageRotateScaleFrameController : public IController
+class IRSFC : public IController
 {
 private:
-    wxWindow *view;
-    ProcessedImage *procImage;
-    BufferedBitmap *bitmap;
+    wxWindow* view;
+    ProcessedImage* procImage;
+    BufferedBitmap* bitmap;
 public:
-    ImageRotateScaleFrameController(BufferedBitmap *, ProcessedImage *);
-    void SetView(wxWindow *) override;
+    IRSFC(BufferedBitmap*, ProcessedImage*);
+    void SetView(wxWindow*) override;
     void SetRotateScaleValues(RotateScaleValues);
     RotateScaleValues GetRotateScaleValues();
 };

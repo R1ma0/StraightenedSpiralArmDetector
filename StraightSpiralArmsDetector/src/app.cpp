@@ -16,11 +16,11 @@ wxIMPLEMENT_APP(App);
 
 bool App::OnInit()
 {
-    AppMainWindowController *mainController = new AppMainWindowController();
-	AppMainWindow *mainWindow = new AppMainWindow(
-	    "Straight Spiral Arms Detector", 
-        mainController
-    );
+	AppMainWindowController* mainController = new AppMainWindowController();
+	AppMainWindow* mainWindow = new AppMainWindow(
+		"Straight Spiral Arms Detector",
+		mainController
+	);
     mainController->SetView(mainWindow);
 	mainWindow->SetSize(mainWindow->FromDIP(wxSize(1024, 768)));
 	mainWindow->Show(true);

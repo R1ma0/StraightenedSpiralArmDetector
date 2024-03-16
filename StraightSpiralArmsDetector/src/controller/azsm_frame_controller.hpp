@@ -3,7 +3,7 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 #include <opencv2/opencv.hpp>
 #include "i_controller.hpp"
@@ -14,16 +14,23 @@
 #include "../model/processed_image.hpp"
 #include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen.hpp"
 
-class AZSMFrameController : public IController
+#ifndef AZSMFC
+#define AZSMFC AZSMFrameController
+#endif
+#ifndef CastAZSMCF
+#define CastAZSMCF dynamic_cast<AZSMControlFrame*>(view)
+#endif
+
+class AZSMFC : public IController
 {
 private:
-    wxWindow *view;
-    ProcessedImage *procImage;
-    BufferedBitmap *bitmap;
-    AdaptiveZhangSuenMethod *azsm;
+    wxWindow* view;
+    ProcessedImage* procImage;
+    BufferedBitmap* bitmap;
+    AdaptiveZhangSuenMethod* azsm;
 public:
-    AZSMFrameController(BufferedBitmap *, ProcessedImage *);
-    void SetView(wxWindow *) override;
+    AZSMFC(BufferedBitmap*, ProcessedImage*);
+    void SetView(wxWindow*) override;
     void RunDetectorator();
 };
 

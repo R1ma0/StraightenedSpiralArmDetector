@@ -11,26 +11,34 @@
 #include "../controller/i_controller.hpp"
 #include "../controller/image_rotate_scale_frame_controller.hpp"
 
-class ImageRotateScaleFrame : public wxDialog
+
+#ifndef IRSF
+#define IRSF ImageRotateScaleFrame
+#endif
+#ifndef CastIRSF
+#define CastIRSF dynamic_cast<ImageRotateScaleFrameController*>(controller)
+#endif
+
+class IRSF : public wxDialog
 {
 private:
-    IController *controller;
-    wxStaticText *rotateOldValue;
-    wxStaticText *scaleXOldValue;
-    wxStaticText *scaleYOldValue;
-    wxSpinCtrl *angleSpin;
-    wxSpinCtrl *scaleXNewSpin;
-    wxSpinCtrl *scaleYNewSpin;
+    IController* controller;
+    wxStaticText* rotateOldValue;
+    wxStaticText* scaleXOldValue;
+    wxStaticText* scaleYOldValue;
+    wxSpinCtrl* angleSpin;
+    wxSpinCtrl* scaleXNewSpin;
+    wxSpinCtrl* scaleYNewSpin;
     unsigned int xScaleMult;
     unsigned int yScaleMult;
-    void AddEmptyCells(unsigned int, wxGridSizer &, wxSizerFlags &);
+    void AddEmptyCells(unsigned int, wxGridSizer&, wxSizerFlags&);
     void CreateControls();
     void SetValuesAndRanges();
     void BindEventHandlers();
-    void SetBoldFont(wxStaticText *);
-    void OnApplyRotateScale(wxCommandEvent &);
+    void SetBoldFont(wxStaticText*);
+    void OnApplyRotateScale(wxCommandEvent&);
 public:
-    ImageRotateScaleFrame(IController *);
+    IRSF(IController*);
 };
 
 #endif

@@ -1,18 +1,11 @@
 #include "app_main_window.hpp"
 
-#ifndef CastAMWC
-#define CastAMWC dynamic_cast<AppMainWindowController *>(mainController)
-#endif
-
-AppMainWindow::AppMainWindow
+AWM::AWM
 (
-    const wxString &title,
-    IController *controller
+    const wxString& title, IController* controller
 ) : wxFrame
 (
-    nullptr, 
-    wxID_ANY, 
-    title
+    nullptr, wxID_ANY, title
 )
 {
     mainController = controller;
@@ -22,13 +15,13 @@ AppMainWindow::AppMainWindow
     AllowSavingImage(false);
 }
 
-AppMainWindow::~AppMainWindow() 
+AWM::~AWM()
 {
     delete bitmap;
     delete saveImg;
 }
 
-void AppMainWindow::CreateControls()
+void AWM::CreateControls()
 {
     auto menuFile = new wxMenu();
     auto loadImg = new wxMenuItem(
@@ -74,13 +67,13 @@ void AppMainWindow::CreateControls()
     auto skeletonizationMenu = new wxMenu();
     auto adaptiveZhangSuenMethod = new wxMenuItem(
         skeletonizationMenu, 
-        ID_OPEN_ADAPTIVE_ZHANG_SUEN, 
+        ID_OPEN_AZSM, 
         wxT("Adaptive Zhang Suen"),
         wxT("Configure and use Adaptive Zhang Suen skeletonization method")
     );
     auto useMuiltipleProcessing = new wxMenuItem(
         menuProcessing,
-        ID_USE_MUILTIPLE_PROCESSING,
+        ID_USE_MULT_PROC,
         wxT("Multiple processing"),
         wxT("Processing multiple images with specified parameters")
     );
@@ -115,59 +108,49 @@ void AppMainWindow::CreateControls()
     this->SetSizerAndFit(sizerMain);
 }
 
-void AppMainWindow::BindEventHandlers()
+void AWM::BindEventHandlers()
 {
-    Bind(wxEVT_MENU, &AppMainWindow::OnLoadImg, this, ID_LOAD_IMG);
-    Bind(wxEVT_MENU, &AppMainWindow::OnSaveImg, this, ID_SAVE_IMG);
-    Bind(wxEVT_MENU, &AppMainWindow::OnExit, this, wxID_EXIT);
-    Bind(wxEVT_MENU, &AppMainWindow::OnRotateScale, this, ID_ROTATE_SCALE);
-    Bind(wxEVT_MENU, &AppMainWindow::OnImageZoomIn, this, ID_ZOOM_IN);
-    Bind(wxEVT_MENU, &AppMainWindow::OnImageZoomOut, this, ID_ZOOM_OUT);
-    Bind(
-        wxEVT_MENU, 
-        &AppMainWindow::OnUseAZSMethod, 
-        this, 
-        ID_OPEN_ADAPTIVE_ZHANG_SUEN
-    );
-    Bind(
-        wxEVT_MENU, 
-        &AppMainWindow::OnUseMultipleProcessing, 
-        this, 
-        ID_USE_MUILTIPLE_PROCESSING
-    );
+    Bind(wxEVT_MENU, &AWM::OnLoadImg, this, ID_LOAD_IMG);
+    Bind(wxEVT_MENU, &AWM::OnSaveImg, this, ID_SAVE_IMG);
+    Bind(wxEVT_MENU, &AWM::OnExit, this, wxID_EXIT);
+    Bind(wxEVT_MENU, &AWM::OnRotateScale, this, ID_ROTATE_SCALE);
+    Bind(wxEVT_MENU, &AWM::OnImageZoomIn, this, ID_ZOOM_IN);
+    Bind(wxEVT_MENU, &AWM::OnImageZoomOut, this, ID_ZOOM_OUT);
+    Bind(wxEVT_MENU, &AWM::OnUseAZSMethod, this, ID_OPEN_AZSM);
+    Bind(wxEVT_MENU, &AWM::OnUseMultipleProcessing, this, ID_USE_MULT_PROC);
 }
 
-void AppMainWindow::OnUseMultipleProcessing(wxCommandEvent &WXUNUSED(event))
+void AWM::OnUseMultipleProcessing(wxCommandEvent& WXUNUSED(event))
 {
-    CastAMWC->OpenMultipleProcessingFrame();
+    
 }
 
-void AppMainWindow::OnUseAZSMethod(wxCommandEvent &WXUNUSED(event))
+void AWM::OnUseAZSMethod(wxCommandEvent& WXUNUSED(event))
 {
     CastAMWC->OpenAZSMethodFrame(bitmap);
 }
 
-void AppMainWindow::OnRotateScale(wxCommandEvent &WXUNUSED(event))
+void AWM::OnRotateScale(wxCommandEvent& WXUNUSED(event))
 {
     CastAMWC->OpenRotateScaleFrame(bitmap);
 }
 
-void AppMainWindow::OnImageZoomIn(wxCommandEvent &WXUNUSED(event))
+void AWM::OnImageZoomIn(wxCommandEvent& WXUNUSED(event))
 {
     CastAMWC->ZoomInBitmap(bitmap);
 }
 
-void AppMainWindow::OnImageZoomOut(wxCommandEvent &WXUNUSED(event))
+void AWM::OnImageZoomOut(wxCommandEvent& WXUNUSED(event))
 {
     CastAMWC->ZoomOutBitmap(bitmap);
 }
 
-void AppMainWindow::OnExit(wxCommandEvent &WXUNUSED(event))
+void AWM::OnExit(wxCommandEvent& WXUNUSED(event))
 {
     Close(true);
 }
 
-void AppMainWindow::OnLoadImg(wxCommandEvent &WXUNUSED(event))
+void AWM::OnLoadImg(wxCommandEvent& WXUNUSED(event))
 {
     bool isImageNotLoaded = CastAMWC->LoadImage();
 
@@ -180,7 +163,7 @@ void AppMainWindow::OnLoadImg(wxCommandEvent &WXUNUSED(event))
     AllowSavingImage(true);
 }
 
-void AppMainWindow::OnSaveImg(wxCommandEvent &WXUNUSED(event))
+void AWM::OnSaveImg(wxCommandEvent& WXUNUSED(event))
 {
     bool isImageNotSaved = CastAMWC->SaveImage();
 
@@ -191,12 +174,12 @@ void AppMainWindow::OnSaveImg(wxCommandEvent &WXUNUSED(event))
     }
 }
 
-void AppMainWindow::AllowSavingImage(bool state)
+void AWM::AllowSavingImage(bool state)
 {
     saveImg->Enable(state);
 }
 
-void AppMainWindow::UpdateBitmap(wxBitmap bmp)
+void AWM::UpdateBitmap(wxBitmap bmp)
 {
     bitmap->SetBitmap(bmp);
     this->Layout();

@@ -3,7 +3,7 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 #include <wx/spinctrl.h>
 #include "ids_of_controls.hpp"
@@ -12,19 +12,26 @@
 #include "../controller/i_controller.hpp"
 #include "../controller/azsm_frame_controller.hpp"
 
-class AZSMControlFrame : public wxDialog
+#ifndef AZSMCF
+#define AZSMCF AZSMControlFrame
+#endif
+#ifndef CastAZSMFC
+#define CastAZSMFC dynamic_cast<AZSMFrameController*>(controller)
+#endif
+
+class AZSMCF : public wxDialog
 {
 private:
-    IController *controller;
-    wxSpinCtrl *binaryThreshValueSpin;
-    wxSpinCtrl *gaussConstSpin;
-    wxSpinCtrl *imgCompressPercentageSpin;
-    wxSpinCtrl *gaussBlockSizeSpin;
+    IController* controller;
+    wxSpinCtrl* binaryThreshValueSpin;
+    wxSpinCtrl* gaussConstSpin;
+    wxSpinCtrl* imgCompressPercentageSpin;
+    wxSpinCtrl* gaussBlockSizeSpin;
     void CreateControls();
     void BindEventHandlers();
-    void OnRunDetectorator(wxCommandEvent &);
+    void OnRunDetectorator(wxCommandEvent&);
 public:
-    AZSMControlFrame(IController *);
+    AZSMCF(IController*);
     int GetBinaryThresh() { return binaryThreshValueSpin->GetValue(); }
     int GetGaussConst() { return gaussConstSpin->GetValue(); }
     int GetCompressPercentage() { return imgCompressPercentageSpin->GetValue(); }

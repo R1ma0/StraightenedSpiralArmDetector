@@ -1,16 +1,11 @@
 #include "azsm_control_frame.hpp"
 
-#ifndef AZSMCF
-#define AZSMCF AZSMControlFrame
-#endif
-#ifndef CastAZSMFC
-#define CastAZSMFC dynamic_cast<AZSMFrameController *>(controller)
-#endif
-
 AZSMCF::AZSMCF
 (
-    IController *controller
-) : wxDialog(NULL, wxID_ANY, "Zhang Suen method settings")
+    IController* controller
+) : wxDialog(
+    NULL, wxID_ANY, "Zhang Suen method settings"
+)
 {
     this->controller = controller;
 
@@ -76,15 +71,10 @@ void AZSMCF::CreateControls()
 
 void AZSMCF::BindEventHandlers()
 {
-    Bind(
-        wxEVT_BUTTON, 
-        &AZSMCF::OnRunDetectorator,
-        this, 
-        ID_RUN_DETECTORATOR
-    );
+    Bind(wxEVT_BUTTON, &AZSMCF::OnRunDetectorator, this, ID_RUN_DETECTORATOR);
 }
 
-void AZSMCF::OnRunDetectorator(wxCommandEvent &WXUNUSED(event))
+void AZSMCF::OnRunDetectorator(wxCommandEvent& WXUNUSED(event))
 {
     CastAZSMFC->RunDetectorator();
 }

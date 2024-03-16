@@ -3,7 +3,7 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 #include "i_controller.hpp"
 #include "../view/app_main_window.hpp"
@@ -15,24 +15,31 @@
 #include "../controller/image_rotate_scale_frame_controller.hpp"
 #include "../controller/azsm_frame_controller.hpp"
 
-class AppMainWindowController : public IController
+#ifndef AMWC
+#define AMWC AppMainWindowController
+#endif
+#ifndef CastAMW
+#define CastAMW dynamic_cast<AppMainWindow*>(view)
+#endif
+
+class AMWC : public IController
 {
 private:
-    wxWindow *view;
+    wxWindow* view;
     ProcessedImage* procImage;
     wxString* fileFilters;
 public:
-    AppMainWindowController();
-    ~AppMainWindowController();
+    AMWC();
+    ~AMWC();
     wxBitmap GetBitmapImage();
-    ProcessedImage *GetProcessedImage();
+    ProcessedImage* GetProcessedImage();
     bool LoadImage();
     bool SaveImage();
-    void SetView(wxWindow *) override;
-    void OpenRotateScaleFrame(BufferedBitmap *);
-    void OpenAZSMethodFrame(BufferedBitmap *);
-    void ZoomInBitmap(BufferedBitmap *);
-    void ZoomOutBitmap(BufferedBitmap *);
+    void SetView(wxWindow*) override;
+    void OpenRotateScaleFrame(BufferedBitmap*);
+    void OpenAZSMethodFrame(BufferedBitmap*);
+    void ZoomInBitmap(BufferedBitmap*);
+    void ZoomOutBitmap(BufferedBitmap*);
 };
 
 #endif

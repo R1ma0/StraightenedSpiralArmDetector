@@ -1,16 +1,12 @@
 #include "image_rotate_scale_frame_controller.hpp"
 
-#ifndef IRSFC
-#define IRSFC ImageRotateScaleFrameController
-#endif
-
-IRSFC::IRSFC(BufferedBitmap *bitmap, ProcessedImage *procImage)
+IRSFC::IRSFC(BufferedBitmap* bitmap, ProcessedImage* procImage)
 {
     this->bitmap = bitmap;
     this->procImage = procImage;
 }
 
-void IRSFC::SetView(wxWindow *view)
+void IRSFC::SetView(wxWindow* view)
 {
     this->view = view;
 }
@@ -18,7 +14,6 @@ void IRSFC::SetView(wxWindow *view)
 void IRSFC::SetRotateScaleValues(RotateScaleValues rsv)
 {
     cv::Mat img = procImage->GetProcessedImage();
-
 
     cv::Size currentSize = procImage->GetImageSize();
     if (currentSize.width != rsv.x || currentSize.height != rsv.y)
@@ -41,7 +36,7 @@ void IRSFC::SetRotateScaleValues(RotateScaleValues rsv)
 
 RotateScaleValues IRSFC::GetRotateScaleValues()
 {
-    RotateScaleValues rsv;
+    RotateScaleValues rsv{};
 
     rsv.angle = procImage->GetRotationAngleDegrees();
     rsv.x = procImage->GetImageSize().width;

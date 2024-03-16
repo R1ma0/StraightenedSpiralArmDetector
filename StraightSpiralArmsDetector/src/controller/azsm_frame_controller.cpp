@@ -1,20 +1,13 @@
 #include "azsm_frame_controller.hpp"
 
-#ifndef AZSMFC
-#define AZSMFC AZSMFrameController
-#endif
-#ifndef CastAZSMCF
-#define CastAZSMCF dynamic_cast<AZSMControlFrame *>(view)
-#endif
-
-AZSMFC::AZSMFC(BufferedBitmap *bitmap, ProcessedImage *procImage)
+AZSMFC::AZSMFC(BufferedBitmap* bitmap, ProcessedImage* procImage)
 {
     this->bitmap = bitmap;
     this->procImage = procImage;
     azsm = new AdaptiveZhangSuenMethod();
 }
 
-void AZSMFC::SetView(wxWindow *view)
+void AZSMFC::SetView(wxWindow* view)
 {
     this->view = view;
 }

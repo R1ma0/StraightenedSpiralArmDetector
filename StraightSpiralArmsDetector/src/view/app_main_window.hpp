@@ -3,7 +3,7 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 #include <wx/wfstream.h>
 #include <wx/log.h>
@@ -15,28 +15,35 @@
 #include "../controller/i_controller.hpp"
 #include "../controller/app_main_window_controller.hpp"
 
-class AppMainWindow : public wxFrame
+#ifndef AMW
+#define AWM AppMainWindow
+#endif
+#ifndef CastAMWC
+#define CastAMWC dynamic_cast<AppMainWindowController *>(mainController)
+#endif
+
+class AWM : public wxFrame
 {
 private:
-    IController *mainController;
-    BufferedBitmap *bitmap;
-    wxMenuItem *saveImg;
-    wxBoxSizer *sizerMain;
-    void OnExit(wxCommandEvent &);
-    void OnLoadImg(wxCommandEvent &);
-    void OnSaveImg(wxCommandEvent &);
-    void OnRotateScale(wxCommandEvent &);
-    void OnImageZoomIn(wxCommandEvent &);
-    void OnImageZoomOut(wxCommandEvent &);
-    void OnUseAZSMethod(wxCommandEvent &);
-    void OnUseMultipleProcessing(wxCommandEvent &);
+    IController* mainController;
+    BufferedBitmap* bitmap;
+    wxMenuItem* saveImg;
+    wxBoxSizer* sizerMain;
+    void OnExit(wxCommandEvent&);
+    void OnLoadImg(wxCommandEvent&);
+    void OnSaveImg(wxCommandEvent&);
+    void OnRotateScale(wxCommandEvent&);
+    void OnImageZoomIn(wxCommandEvent&);
+    void OnImageZoomOut(wxCommandEvent&);
+    void OnUseAZSMethod(wxCommandEvent&);
+    void OnUseMultipleProcessing(wxCommandEvent&);
     void CreateControls();
     void BindEventHandlers();
     void AllowSavingImage(bool);
 public:
-    AppMainWindow(const wxString &, IController *);
-    ~AppMainWindow();
-    BufferedBitmap *GetBufferedBitmap() { return bitmap; }
+    AWM(const wxString&, IController*);
+    ~AWM();
+    BufferedBitmap* GetBufferedBitmap() { return bitmap; }
     void UpdateBitmap(wxBitmap);
 };
 
