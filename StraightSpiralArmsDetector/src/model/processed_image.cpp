@@ -60,8 +60,8 @@ cv::Mat ProcessedImage::RotateImage(cv::Mat image, int angle)
         imageCenter, angle, 1.0
     );
     cv::Rect2f bbox = cv::RotatedRect(
-        cv::Point2f(), image.size(), angle
-    ).boundingRect2f();
+        imageCenter, image.size(), angle
+    ).boundingRect();
 
     matrix.at<double>(0, 2) += bbox.width / 2.0 - image.cols / 2.0;
     matrix.at<double>(1, 2) += bbox.height / 2.0 - image.rows / 2.0;

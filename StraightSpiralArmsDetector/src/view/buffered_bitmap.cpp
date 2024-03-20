@@ -3,7 +3,7 @@
 BufferedBitmap::BufferedBitmap
 (
     wxWindow* parent, wxWindowID id, const wxBitmap& bitmap,
-    const wxPoint& pos = wxDefaultPosition, 
+    const wxPoint& pos = wxDefaultPosition,
     const wxSize& size = wxDefaultSize, long style = 0
 ) : wxScrolled<wxWindow>(
     parent, id, pos, size,
@@ -15,7 +15,7 @@ BufferedBitmap::BufferedBitmap
     this->SetBitmap(bitmap);
 }
 
-void BufferedBitmap::OnPaint([[maybe_unused]] wxPaintEvent &event)
+void BufferedBitmap::OnPaint(wxPaintEvent& WXUNUSED(event))
 {
     wxAutoBufferedPaintDC dc(this);
     dc.Clear();
