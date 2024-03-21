@@ -33,6 +33,7 @@ void AMWC::OpenRotateScaleFrame(BufferedBitmap* bitmap)
     rotateScaleController->SetView(rotateScaleFrame);
     wxSize bestSize = rotateScaleFrame->GetBestSize();
     rotateScaleFrame->SetSize(bestSize);
+    rotateScaleFrame->Center();
     rotateScaleFrame->ShowModal();
     rotateScaleFrame->Destroy();
 }
@@ -44,6 +45,7 @@ void AMWC::OpenAZSMethodFrame(BufferedBitmap* bitmap)
     azsmController->SetView(azsmFrame);
     wxSize bestSize = azsmFrame->GetBestSize();
     azsmFrame->SetSize(bestSize);
+    azsmFrame->Center();
     azsmFrame->ShowModal();
     azsmFrame->Destroy();
 }
