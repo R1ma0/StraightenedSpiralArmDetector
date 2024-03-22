@@ -1,19 +1,28 @@
 #include "app.hpp"
 
+App::App()
+{
+	appConfigurator = new Configurator();
+}
+
+App::~App()
+{
+	delete appConfigurator;
+	delete amw;
+	delete amwc;
+}
+
 bool App::OnInit()
 {
 	if (!wxApp::OnInit()) return false;
 
-	AppMainWindowController* mainController = new AppMainWindowController();
-	AppMainWindow* mainWindow = new AppMainWindow(
-		"Straight Spiral Arms Detector",
-		mainController
-	);
-    mainController->SetView(mainWindow);
-	mainWindow->SetSize(mainWindow->FromDIP(wxSize(800, 600)));
-	mainWindow->Center();
-	mainWindow->Maximize();
-	mainWindow->Show(true);
+	amwc = new AppMainWindowController();
+	amw = new AppMainWindow("Straight Spiral Arms Detector", amwc);
+    amwc->SetView(amw);
+	amw->SetSize(amw->FromDIP(appConfigurator->GetWindowSize()));
+	amw->Center();
+	amw->Maximize(appConfigurator->GetMaximize());
+	amw->Show(true);
 
 	return true;
 }
