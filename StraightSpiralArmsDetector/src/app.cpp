@@ -1,18 +1,4 @@
-#include <wx/wxprec.h>
-#ifndef WX_PRECOMP
-#include <wx/wx.h>
-#endif
-#include "controller/i_controller.hpp"
-#include "controller/app_main_window_controller.hpp"
-#include "view/app_main_window.hpp"
-
-class App : public wxApp
-{
-public:
-	bool OnInit() override;
-};
-
-wxIMPLEMENT_APP(App);
+#include "app.hpp"
 
 bool App::OnInit()
 {
