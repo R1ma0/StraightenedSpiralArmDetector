@@ -7,18 +7,22 @@
 #endif
 #include "controller/app_main_window_controller.hpp"
 #include "view/app_main_window.hpp"
-#include "model/app_utils/configurator.hpp"
+#include "model/configurator/configurator.hpp"
+#include "model/i18n/i18n.hpp"
 
 class App : public wxApp
 {
 private:
+	wxLocale* locale;
 	Configurator* appConfigurator;
+	I18N* i18n;
 	AppMainWindow* amw;
 	AppMainWindowController* amwc;
 public:
 	App();
 	~App();
 	virtual bool OnInit() override;
+	void ShowLangStatusMessage();
 };
 
 wxIMPLEMENT_APP(App);

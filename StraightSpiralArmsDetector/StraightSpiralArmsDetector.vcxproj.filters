@@ -57,6 +57,8 @@
     <ClCompile Include="src\controller\image_rotate_scale_frame_controller.cpp">
       <Filter>src\controller</Filter>
     </ClCompile>
+    <ClCompile Include="src\model\configurator\configurator.cpp" />
+    <ClCompile Include="src\model\i18n\i18n.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\view\app_main_window.hpp">
@@ -101,5 +103,11 @@
     <ClInclude Include="src\controller\image_rotate_scale_frame_controller.hpp">
       <Filter>src\controller</Filter>
     </ClInclude>
+    <ClInclude Include="src\app.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\configurator\configurator.hpp" />
+    <ClInclude Include="src\libs\ini.h" />
+    <ClInclude Include="src\model\i18n\i18n.hpp" />
   </ItemGroup>
 </Project>

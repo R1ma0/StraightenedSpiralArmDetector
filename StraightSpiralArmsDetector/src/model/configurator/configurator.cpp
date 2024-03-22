@@ -45,6 +45,11 @@ wxSize Configurator::GetWindowSize() const
 	);
 }
 
+std::string Configurator::GetLanguageCode() const
+{
+	return iniStructure.get("locale").get("language");
+}
+
 bool Configurator::GetMaximize() const
 {
 	return iniStructure.get("window").get("maximize") == "true" ? true : false;
@@ -53,6 +58,8 @@ bool Configurator::GetMaximize() const
 void Configurator::CreateDefaultIniFile()
 {
 	mINI::INIFile file(pathToIni.u8string());
+
+	iniStructure["locale"]["language"] = "en_GB";
 
 	iniStructure["window"]["width"] = "800";
 	iniStructure["window"]["height"] = "600";

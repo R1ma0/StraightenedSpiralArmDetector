@@ -23,6 +23,7 @@ public:
 	Configurator();
 	mINI::INIStructure GetIniData() const { return iniStructure; };
 	wxSize GetWindowSize() const;
+	std::string GetLanguageCode() const;
 	bool GetMaximize() const;
 	void CreateDefaultIniFile();
 };

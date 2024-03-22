@@ -23,10 +23,12 @@
     <ClCompile Include="src\controller\app_main_window_controller.cpp" />
     <ClCompile Include="src\controller\azsm_frame_controller.cpp" />
     <ClCompile Include="src\controller\image_rotate_scale_frame_controller.cpp" />
+    <ClCompile Include="src\model\configurator\configurator.cpp" />
     <ClCompile Include="src\model\converters.cpp" />
     <ClCompile Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.cpp" />
     <ClCompile Include="src\model\adaptive_zhang_suen_method\utils.cpp" />
     <ClCompile Include="src\model\adaptive_zhang_suen_method\zhang_suen.cpp" />
+    <ClCompile Include="src\model\i18n\i18n.cpp" />
     <ClCompile Include="src\model\processed_image.cpp" />
     <ClCompile Include="src\view\app_main_window.cpp" />
     <ClCompile Include="src\view\buffered_bitmap.cpp" />
@@ -34,14 +36,18 @@
     <ClCompile Include="src\view\image_rotate_scale_frame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\app.hpp" />
     <ClInclude Include="src\controller\app_main_window_controller.hpp" />
     <ClInclude Include="src\controller\azsm_frame_controller.hpp" />
     <ClInclude Include="src\controller\image_rotate_scale_frame_controller.hpp" />
     <ClInclude Include="src\controller\i_controller.hpp" />
+    <ClInclude Include="src\libs\ini.h" />
+    <ClInclude Include="src\model\configurator\configurator.hpp" />
     <ClInclude Include="src\model\converters.hpp" />
     <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.hpp" />
     <ClInclude Include="src\model\adaptive_zhang_suen_method\utils.hpp" />
     <ClInclude Include="src\model\adaptive_zhang_suen_method\zhang_suen.hpp" />
+    <ClInclude Include="src\model\i18n\i18n.hpp" />
     <ClInclude Include="src\model\processed_image.hpp" />
     <ClInclude Include="src\view\app_main_window.hpp" />
     <ClInclude Include="src\view\buffered_bitmap.hpp" />
@@ -109,11 +115,13 @@
     <EnableMicrosoftCodeAnalysis>true</EnableMicrosoftCodeAnalysis>
     <IncludePath>$(OpenCV_DIR)\lib;$(OpenCV_DIR)\..\..\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(WXWIN)\lib\vc_x64_lib;$(OpenCV_DIR)\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <EnableMicrosoftCodeAnalysis>true</EnableMicrosoftCodeAnalysis>
     <IncludePath>$(OpenCV_DIR)\lib;$(OpenCV_DIR)\..\..\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(WXWIN)\lib\vc_x64_lib;$(OpenCV_DIR)\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\bin\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -158,6 +166,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_x64_lib;$(OpenCV_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(OpenCV_DIR)\lib\opencv_world490d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -179,6 +189,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_x64_lib;$(OpenCV_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(OpenCV_DIR)\lib\opencv_world490.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>
+      </DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
