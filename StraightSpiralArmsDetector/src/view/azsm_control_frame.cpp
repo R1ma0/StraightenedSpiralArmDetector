@@ -4,7 +4,7 @@ AZSMCF::AZSMCF
 (
     IController* controller
 ) : wxDialog(
-    NULL, wxID_ANY, _("Zhang Suen method settings")
+    NULL, wxID_ANY, _("Zhang-Suen method settings")
 )
 {
     this->controller = controller;
