@@ -8,7 +8,7 @@ AMWC::AMWC()
     wxImage::AddHandler(new wxJPEGHandler);
 
     fileFilters = new wxString(
-        "Images (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg"
+        _("Images (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg")
     );
 }
 
@@ -64,7 +64,7 @@ bool AMWC::LoadImage()
 {
     wxFileDialog openFileDialog(
         CastAMW, 
-        "Select image", 
+        _("Image selection"), 
         "", 
         "", 
         *fileFilters,
@@ -91,7 +91,7 @@ bool AMWC::SaveImage()
 {
     wxFileDialog saveFileDialog(
         CastAMW,
-        "Save image",
+        _("Image saving"),
         "",
         "",
         *fileFilters,

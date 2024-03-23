@@ -5,7 +5,7 @@ IRSF::IRSF
     IController* controller
 ) : wxDialog
 (
-    NULL, wxID_ANY, "Rotate & Scale"
+    NULL, wxID_ANY, _("Rotation and stretching")
 )
 {
     this->controller = controller;
@@ -32,65 +32,65 @@ void IRSF::CreateControls()
         wxALL, 10
     ).CenterVertical();
 
-    auto rotateTitle = new wxStaticText(this, -1, wxT("Rotate"));
+    auto rotateTitle = new wxStaticText(this, -1, _("Rotation"));
     SetBoldFont(rotateTitle);
     gridSizer->Add(rotateTitle, gridSizerFlags);
 
     AddEmptyCells(4, *gridSizer, gridSizerFlags);
 
-    auto rotateOldText = new wxStaticText(this, -1, wxT("Current:"));
+    auto rotateOldText = new wxStaticText(this, -1, _("Current value:"));
     gridSizer->Add(rotateOldText, gridSizerFlags);
 
-    rotateOldValue = new wxStaticText(this, -1, wxT("None"));
+    rotateOldValue = new wxStaticText(this, -1, "None");
     gridSizer->Add(rotateOldValue, gridSizerFlags);
 
-    auto angleSpinNewText = new wxStaticText(this, -1, wxT("Set:"));
+    auto angleSpinNewText = new wxStaticText(this, -1, _("Set value:"));
     gridSizer->Add(angleSpinNewText, gridSizerFlags);
 
     angleSpin = new wxSpinCtrl(this);
     gridSizer->Add(angleSpin, gridSizerFlags);
 
-    auto angleSpinText = new wxStaticText(this, -1, wxT("degrees"));
+    auto angleSpinText = new wxStaticText(this, -1, _("degrees"));
     gridSizer->Add(angleSpinText, gridSizerFlags);
 
-    auto scaleTitle = new wxStaticText(this, -1, wxT("Scale"));
+    auto scaleTitle = new wxStaticText(this, -1, _("Stretch"));
     SetBoldFont(scaleTitle);
     gridSizer->Add(scaleTitle, gridSizerFlags);
 
     AddEmptyCells(4, *gridSizer, gridSizerFlags);
 
-    auto scaleXOldText = new wxStaticText(this, -1, wxT("Current width:"));
+    auto scaleXOldText = new wxStaticText(this, -1, _("Current width:"));
     gridSizer->Add(scaleXOldText, gridSizerFlags);
 
-    scaleXOldValue = new wxStaticText(this, -1, wxT("None"));
+    scaleXOldValue = new wxStaticText(this, -1, "None");
     gridSizer->Add(scaleXOldValue, gridSizerFlags);
 
-    auto scaleXNewText = new wxStaticText(this, -1, wxT("Set width:"));
+    auto scaleXNewText = new wxStaticText(this, -1, _("Set width:"));
     gridSizer->Add(scaleXNewText, gridSizerFlags);
 
     scaleXNewSpin = new wxSpinCtrl(this);
     gridSizer->Add(scaleXNewSpin, gridSizerFlags);
 
-    gridSizer->Add(new wxStaticText(this, -1, wxT("pixels")), gridSizerFlags);
+    gridSizer->Add(new wxStaticText(this, -1, _("pixels")), gridSizerFlags);
 
-    auto scaleYOldText = new wxStaticText(this, -1, wxT("Current height:"));
+    auto scaleYOldText = new wxStaticText(this, -1, _("Current height:"));
     gridSizer->Add(scaleYOldText, gridSizerFlags);
 
-    scaleYOldValue = new wxStaticText(this, -1, wxT("None"));
+    scaleYOldValue = new wxStaticText(this, -1, "None");
     gridSizer->Add(scaleYOldValue, gridSizerFlags);
 
-    auto scaleYNewText = new wxStaticText(this, -1, wxT("Set height:"));
+    auto scaleYNewText = new wxStaticText(this, -1, _("Set height:"));
     gridSizer->Add(scaleYNewText, gridSizerFlags);
 
     scaleYNewSpin = new wxSpinCtrl(this);
     gridSizer->Add(scaleYNewSpin, gridSizerFlags);
 
-    gridSizer->Add(new wxStaticText(this, -1, wxT("pixels")), gridSizerFlags);
+    gridSizer->Add(new wxStaticText(this, -1, _("pixels")), gridSizerFlags);
 
     AddEmptyCells(4, *gridSizer, gridSizerFlags);
 
     auto applyChangesBtn = new wxButton(
-        this, ID_APPLY_ROTATE_SCALE, wxT("Apply")
+        this, ID_APPLY_ROTATE_SCALE, _("Apply")
     );
     gridSizer->Add(applyChangesBtn, gridSizerFlags);
 
@@ -139,6 +139,6 @@ void IRSF::AddEmptyCells
 {
     for (unsigned int i = 0; i < num_cells; i++)
     {
-        grid.Add(new wxStaticText(this, -1, wxT("")), flags);
+        grid.Add(new wxStaticText(this, -1, ""), flags);
     }
 }

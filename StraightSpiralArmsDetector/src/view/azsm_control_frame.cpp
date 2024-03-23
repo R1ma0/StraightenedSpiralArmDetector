@@ -4,7 +4,7 @@ AZSMCF::AZSMCF
 (
     IController* controller
 ) : wxDialog(
-    NULL, wxID_ANY, "Zhang Suen method settings"
+    NULL, wxID_ANY, _("Zhang Suen method settings")
 )
 {
     this->controller = controller;
@@ -21,7 +21,7 @@ void AZSMCF::CreateControls()
     ).CenterVertical();
 
     auto binaryThreshValueLabel = new wxStaticText(
-        this, -1, wxT("Binary Thresh Value:")
+        this, -1, _("Threshold binarisation value:")
     );
     gridSizer->Add(binaryThreshValueLabel, gridSizerFlags);
 
@@ -31,7 +31,7 @@ void AZSMCF::CreateControls()
     gridSizer->Add(binaryThreshValueSpin, gridSizerFlags);
 
     auto gaussConstLabel = new wxStaticText(
-        this, -1, wxT("Gauss Constant Value:")
+        this, -1, _("Gaussian constant:")
     );
     gridSizer->Add(gaussConstLabel, gridSizerFlags);
 
@@ -41,7 +41,7 @@ void AZSMCF::CreateControls()
     gridSizer->Add(gaussConstSpin, gridSizerFlags);
 
     auto imgCompressPercentageLabel = new wxStaticText(
-        this, -1, wxT("Image Compress Percentage:")
+        this, -1, _("Image compression percentage:")
     );
     gridSizer->Add(imgCompressPercentageLabel, gridSizerFlags);
 
@@ -51,7 +51,7 @@ void AZSMCF::CreateControls()
     gridSizer->Add(imgCompressPercentageSpin, gridSizerFlags);
 
     auto gaussBlockSizeLabel = new wxStaticText(
-        this, -1, wxT("Gauss Block Size Value (odd): ")        
+        this, -1, _("Gaussian block size Value (odd): ")        
     );
     gridSizer->Add(gaussBlockSizeLabel, gridSizerFlags);
 
@@ -63,7 +63,7 @@ void AZSMCF::CreateControls()
     gridSizer->Add(new wxStaticText(this, -1, wxT("")), gridSizerFlags);
 
     auto computeBtn = new wxButton(
-        this, ID_RUN_DETECTORATOR, wxT("Start Processing")
+        this, ID_RUN_DETECTORATOR, _("Process")
     );
     gridSizer->Add(computeBtn, gridSizerFlags);
 

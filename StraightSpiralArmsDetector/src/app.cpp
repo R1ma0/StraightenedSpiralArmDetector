@@ -21,7 +21,7 @@ bool App::OnInit()
 	i18n = new I18N(locale, appConfigurator, this->GetAppName());
 	ShowLangStatusMessage();
 	amwc = new AppMainWindowController();
-	amw = new AppMainWindow(_("Straight Spiral Arms Detector"), amwc);
+	amw = new AppMainWindow(_("Spiral galaxy handler"), amwc);
 
     amwc->SetView(amw);
 	amw->SetSize(amw->FromDIP(appConfigurator->GetWindowSize()));
@@ -46,17 +46,17 @@ void App::ShowLangStatusMessage()
 				"The selected language is unsupported.\n"
 				"The default language is set."
 			),
-			_("Program language"),
+			_("Application language"),
 			wxICON_INFORMATION
 		);
 		break;
 	case LangStatusCode::Wrong:
 		wxMessageBox(
 			_(
-				"The wrong language is selected!\n"
+				"Wrong language has been selected!\n"
 				"The default language is set."
 			),
-			_("Program language"),
+			_("Application language"),
 			wxICON_WARNING
 		);
 		break;

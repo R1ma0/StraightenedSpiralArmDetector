@@ -27,14 +27,14 @@ void AWM::CreateControls()
     auto loadImg = new wxMenuItem(
         menuFile, 
         ID_LOAD_IMG, 
-        wxT("Load Image\tCtrl-O"), 
-        wxT("Opening and loading an image for processing")
+        _("Upload image\tCtrl-O"), 
+        _("Upload an image for processing")
     );
     saveImg = new wxMenuItem(
         menuFile, 
         ID_SAVE_IMG, 
-        wxT("Save Image\tCtrl-S"),        
-        wxT("Saving processed image")
+        _("Save image\tCtrl-S"),        
+        _("Save the processed image")
     );
     menuFile->Append(loadImg);
     menuFile->Append(saveImg);
@@ -45,14 +45,14 @@ void AWM::CreateControls()
     auto zoomInItem = new wxMenuItem(
         menuView, 
         ID_ZOOM_IN, 
-        wxT("Zoom In\tCtrl-+"),
-        wxT("Increase the size of the image in the preview window")
+        _("Zoom in\tCtrl-+"),
+        _("Increase the size of the image in the preview window")
     );
     auto zoomOutItem = new wxMenuItem(
         menuView,
         ID_ZOOM_OUT, 
-        wxT("Zoom Out\tCtrl--"),
-        wxT("Reduce the size of the image in the preview window")
+        _("Zoom out\tCtrl--"),
+        _("Reduce the image size in the preview window")
     );
     menuView->Append(zoomInItem);
     menuView->Append(zoomOutItem);
@@ -61,35 +61,35 @@ void AWM::CreateControls()
     auto openRotateScaleDialog = new wxMenuItem(
         menuProcessing, 
         ID_ROTATE_SCALE, 
-        wxT("Rotate and Scale\tAlt-R"),
-        wxT("Opens a window for rotating and scaling the image")
+        _("Rotation and stretching\tAlt-R"),
+        _("Open the image rotation and stretching window")
     );
     auto skeletonizationMenu = new wxMenu();
     auto adaptiveZhangSuenMethod = new wxMenuItem(
         skeletonizationMenu, 
         ID_OPEN_AZSM, 
-        wxT("Adaptive Zhang Suen"),
-        wxT("Configure and use Adaptive Zhang Suen skeletonization method")
+        _("Adaptive Zhang Suen"),
+        _("Use Zhang Suen`s adaptive skeletonisation method")
     );
     auto useMuiltipleProcessing = new wxMenuItem(
         menuProcessing,
         ID_USE_MULT_PROC,
-        wxT("Multiple processing"),
-        wxT("Processing multiple images with specified parameters")
+        _("Multi-image processing"),
+        _("Processing of several images with specified parameters")
     );
     skeletonizationMenu->Append(adaptiveZhangSuenMethod);
     menuProcessing->Append(openRotateScaleDialog);
     menuProcessing->AppendSubMenu(
         skeletonizationMenu, 
-        wxT("Skeletonization Methods")
+        _("Skeletonisation algorithms")
     );
     menuProcessing->AppendSeparator();
     menuProcessing->Append(useMuiltipleProcessing);
 
     auto menuBar = new wxMenuBar();
-    menuBar->Append(menuFile, wxT("File"));
-    menuBar->Append(menuView, wxT("View"));
-    menuBar->Append(menuProcessing, wxT("Processing"));
+    menuBar->Append(menuFile, _("File"));
+    menuBar->Append(menuView, _("View"));
+    menuBar->Append(menuProcessing, _("Processing"));
     SetMenuBar(menuBar);
     
     CreateStatusBar();
@@ -156,7 +156,11 @@ void AWM::OnLoadImg(wxCommandEvent& WXUNUSED(event))
 
     if (isImageNotLoaded)
     {
-        wxMessageBox("Failed to open image", "Error", wxOK | wxICON_ERROR);
+        wxMessageBox(
+            _("Image opening error!"), 
+            _("Error"), 
+            wxOK | wxICON_ERROR
+        );
         return;
     }
 
@@ -169,7 +173,11 @@ void AWM::OnSaveImg(wxCommandEvent& WXUNUSED(event))
 
     if (!isImageSaved)
     {
-        wxMessageBox("Failed to save image", "Error", wxOK | wxICON_ERROR);
+        wxMessageBox(
+            _("Image saving error!"), 
+            _("Error"), 
+            wxOK | wxICON_ERROR
+        );
         return;
     }
 }
