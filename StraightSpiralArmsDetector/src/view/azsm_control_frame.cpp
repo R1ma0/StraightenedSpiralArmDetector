@@ -51,7 +51,7 @@ void AZSMCF::CreateControls()
     gridSizer->Add(imgCompressPercentageSpin, gridSizerFlags);
 
     auto gaussBlockSizeLabel = new wxStaticText(
-        this, -1, _("Gaussian block size Value (odd): ")        
+        this, -1, _("Gaussian block size value (odd): ")        
     );
     gridSizer->Add(gaussBlockSizeLabel, gridSizerFlags);
 

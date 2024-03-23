@@ -69,7 +69,7 @@ void AWM::CreateControls()
         skeletonizationMenu, 
         ID_OPEN_AZSM, 
         _("Adaptive Zhang-Suen"),
-        _("Use Zhang Suen`s adaptive skeletonisation method")
+        _("Use Zhang-Suen`s adaptive skeletonisation method")
     );
     auto useMuiltipleProcessing = new wxMenuItem(
         menuProcessing,
