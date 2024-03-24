@@ -9,13 +9,13 @@
 #include <filesystem>
 #include <string>
 #include "../../libs/ini.h"
+#include "../constants.hpp"
 
 class Configurator
 {
 private:
 	mINI::INIStructure iniStructure;
 	std::filesystem::path pathToIni;
-	const std::string DEFAULT_INI_NAME = "settings.ini";
 	bool IsIniFileExist();
 	bool ReadIniFile();
 	void Configure();

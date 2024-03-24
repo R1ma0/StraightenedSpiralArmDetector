@@ -1,27 +1,25 @@
 #include "app_main_window.hpp"
 
-AWM::AWM
-(
+AMW::AMW(
     const wxString& title, IController* controller
-) : wxFrame
-(
+) : wxFrame(
     nullptr, wxID_ANY, title
 )
 {
-    mainController = controller;
+    this->controller = controller;
 
     CreateControls();
     BindEventHandlers();
     AllowSavingImage(false);
 }
 
-AWM::~AWM()
+AMW::~AMW()
 {
     delete bitmap;
     delete saveImg;
 }
 
-void AWM::CreateControls()
+void AMW::CreateControls()
 {
     auto menuFile = new wxMenu();
     auto loadImg = new wxMenuItem(
@@ -86,10 +84,20 @@ void AWM::CreateControls()
     menuProcessing->AppendSeparator();
     menuProcessing->Append(useMuiltipleProcessing);
 
+    auto toolsMenu = new wxMenu();
+    auto openOtionsWindow = new wxMenuItem(
+        toolsMenu,
+        ID_OPEN_OPTIONS,
+        _("Options..."),
+        _("Open the options window to configure the programme")
+    );
+    toolsMenu->Append(openOtionsWindow);
+    
     auto menuBar = new wxMenuBar();
     menuBar->Append(menuFile, _("File"));
     menuBar->Append(menuView, _("View"));
     menuBar->Append(menuProcessing, _("Processing"));
+    menuBar->Append(toolsMenu, _("Tools"));
     SetMenuBar(menuBar);
     
     CreateStatusBar();
@@ -108,49 +116,55 @@ void AWM::CreateControls()
     this->SetSizerAndFit(sizerMain);
 }
 
-void AWM::BindEventHandlers()
+void AMW::BindEventHandlers()
 {
-    Bind(wxEVT_MENU, &AWM::OnLoadImg, this, ID_LOAD_IMG);
-    Bind(wxEVT_MENU, &AWM::OnSaveImg, this, ID_SAVE_IMG);
-    Bind(wxEVT_MENU, &AWM::OnExit, this, wxID_EXIT);
-    Bind(wxEVT_MENU, &AWM::OnRotateScale, this, ID_ROTATE_SCALE);
-    Bind(wxEVT_MENU, &AWM::OnImageZoomIn, this, ID_ZOOM_IN);
-    Bind(wxEVT_MENU, &AWM::OnImageZoomOut, this, ID_ZOOM_OUT);
-    Bind(wxEVT_MENU, &AWM::OnUseAZSMethod, this, ID_OPEN_AZSM);
-    Bind(wxEVT_MENU, &AWM::OnUseMultipleProcessing, this, ID_USE_MULT_PROC);
+    Bind(wxEVT_MENU, &AMW::OnLoadImg, this, ID_LOAD_IMG);
+    Bind(wxEVT_MENU, &AMW::OnSaveImg, this, ID_SAVE_IMG);
+    Bind(wxEVT_MENU, &AMW::OnExit, this, wxID_EXIT);
+    Bind(wxEVT_MENU, &AMW::OnRotateScale, this, ID_ROTATE_SCALE);
+    Bind(wxEVT_MENU, &AMW::OnImageZoomIn, this, ID_ZOOM_IN);
+    Bind(wxEVT_MENU, &AMW::OnImageZoomOut, this, ID_ZOOM_OUT);
+    Bind(wxEVT_MENU, &AMW::OnUseAZSMethod, this, ID_OPEN_AZSM);
+    Bind(wxEVT_MENU, &AMW::OnUseMultipleProcessing, this, ID_USE_MULT_PROC);
+    Bind(wxEVT_MENU, &AMW::OnOpenOptionsFrame, this, ID_OPEN_OPTIONS);
 }
 
-void AWM::OnUseMultipleProcessing(wxCommandEvent& WXUNUSED(event))
+void AMW::OnOpenOptionsFrame(wxCommandEvent& WXUNUSED(event))
+{
+    CastAMWC->OpenOptionsFrame();
+}
+
+void AMW::OnUseMultipleProcessing(wxCommandEvent& WXUNUSED(event))
 {
     
 }
 
-void AWM::OnUseAZSMethod(wxCommandEvent& WXUNUSED(event))
+void AMW::OnUseAZSMethod(wxCommandEvent& WXUNUSED(event))
 {
     CastAMWC->OpenAZSMethodFrame(bitmap);
 }
 
-void AWM::OnRotateScale(wxCommandEvent& WXUNUSED(event))
+void AMW::OnRotateScale(wxCommandEvent& WXUNUSED(event))
 {
     CastAMWC->OpenRotateScaleFrame(bitmap);
 }
 
-void AWM::OnImageZoomIn(wxCommandEvent& WXUNUSED(event))
+void AMW::OnImageZoomIn(wxCommandEvent& WXUNUSED(event))
 {
     CastAMWC->ZoomInBitmap(bitmap);
 }
 
-void AWM::OnImageZoomOut(wxCommandEvent& WXUNUSED(event))
+void AMW::OnImageZoomOut(wxCommandEvent& WXUNUSED(event))
 {
     CastAMWC->ZoomOutBitmap(bitmap);
 }
 
-void AWM::OnExit(wxCommandEvent& WXUNUSED(event))
+void AMW::OnExit(wxCommandEvent& WXUNUSED(event))
 {
     Close(true);
 }
 
-void AWM::OnLoadImg(wxCommandEvent& WXUNUSED(event))
+void AMW::OnLoadImg(wxCommandEvent& WXUNUSED(event))
 {
     bool isImageNotLoaded = CastAMWC->LoadImage();
 
@@ -167,7 +181,7 @@ void AWM::OnLoadImg(wxCommandEvent& WXUNUSED(event))
     AllowSavingImage(true);
 }
 
-void AWM::OnSaveImg(wxCommandEvent& WXUNUSED(event))
+void AMW::OnSaveImg(wxCommandEvent& WXUNUSED(event))
 {
     bool isImageSaved = CastAMWC->SaveImage();
 
@@ -182,12 +196,12 @@ void AWM::OnSaveImg(wxCommandEvent& WXUNUSED(event))
     }
 }
 
-void AWM::AllowSavingImage(bool state)
+void AMW::AllowSavingImage(bool state)
 {
     saveImg->Enable(state);
 }
 
-void AWM::UpdateBitmap(wxBitmap bmp)
+void AMW::UpdateBitmap(wxBitmap bmp)
 {
     bitmap->SetBitmap(bmp);
     this->Layout();

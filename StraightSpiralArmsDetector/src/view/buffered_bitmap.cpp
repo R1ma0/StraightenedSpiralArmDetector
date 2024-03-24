@@ -1,7 +1,6 @@
 #include "buffered_bitmap.hpp"
 
-BufferedBitmap::BufferedBitmap
-(
+BufferedBitmap::BufferedBitmap(
     wxWindow* parent, wxWindowID id, const wxBitmap& bitmap,
     const wxPoint& pos = wxDefaultPosition,
     const wxSize& size = wxDefaultSize, long style = 0

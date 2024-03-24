@@ -9,6 +9,7 @@
 #include "view/app_main_window.hpp"
 #include "model/configurator/configurator.hpp"
 #include "model/i18n/i18n.hpp"
+#include "model/constants.hpp"
 
 class App : public wxApp
 {

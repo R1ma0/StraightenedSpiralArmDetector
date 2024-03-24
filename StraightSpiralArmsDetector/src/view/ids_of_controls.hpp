@@ -12,7 +12,8 @@ enum IDs
     ID_RUN_DETECTORATOR,
     ID_APPLY_ROTATE_SCALE,
     ID_USE_MULT_PROC,
-    ID_GBS_SPIN
+    ID_GBS_SPIN,
+    ID_OPEN_OPTIONS,
 };
 
 #endif

@@ -59,6 +59,8 @@
     </ClCompile>
     <ClCompile Include="src\model\configurator\configurator.cpp" />
     <ClCompile Include="src\model\i18n\i18n.cpp" />
+    <ClCompile Include="src\controller\options_frame_controller.cpp" />
+    <ClCompile Include="src\view\options_frame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\view\app_main_window.hpp">
@@ -109,5 +111,14 @@
     <ClInclude Include="src\model\configurator\configurator.hpp" />
     <ClInclude Include="src\libs\ini.h" />
     <ClInclude Include="src\model\i18n\i18n.hpp" />
+    <ClInclude Include="src\controller\options_frame_controller.hpp">
+      <Filter>src\controller</Filter>
+    </ClInclude>
+    <ClInclude Include="src\view\options_frame.hpp">
+      <Filter>src\view</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\constants.hpp">
+      <Filter>src\model</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

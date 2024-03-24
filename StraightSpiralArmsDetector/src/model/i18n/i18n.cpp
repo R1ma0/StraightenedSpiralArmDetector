@@ -19,15 +19,15 @@ void I18N::SetLanguage()
 {
 	std::string langCode = configurator->GetLanguageCode();
 	
-	if (LANGUAGES.find(langCode) == LANGUAGES.end())
+	if (cts::LANGUAGES.find(langCode) == cts::LANGUAGES.end())
 	{
 		language = DEFAULT_LANG;
-		langStatusCode = LangStatusCode::Wrong;
+		langStatusCode = cts::LangStatusCode::Wrong;
 	}
 	else
 	{
-		language = wxLanguage(LANGUAGES.at(langCode));
-		langStatusCode = LangStatusCode::OK;
+		language = wxLanguage(cts::LANGUAGES.at(langCode));
+		langStatusCode = cts::LangStatusCode::OK;
 	}
 
 	if (wxLocale::IsAvailable(language))
@@ -41,14 +41,14 @@ void I18N::SetLanguage()
 			language = DEFAULT_LANG;
 			delete tmpLocale;
 			tmpLocale = new wxLocale(language);
-			langStatusCode = LangStatusCode::Wrong;
+			langStatusCode = cts::LangStatusCode::Wrong;
 		}
 	}
 	else
 	{
 		language = DEFAULT_LANG;
 		tmpLocale = new wxLocale(language);
-		langStatusCode = LangStatusCode::Unsupported;
+		langStatusCode = cts::LangStatusCode::Unsupported;
 	}
 
 	locale = tmpLocale;

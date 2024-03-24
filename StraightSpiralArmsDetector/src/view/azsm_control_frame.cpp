@@ -1,7 +1,6 @@
 #include "azsm_control_frame.hpp"
 
-AZSMCF::AZSMCF
-(
+AZSMCF::AZSMCF(
     IController* controller
 ) : wxDialog(
     NULL, wxID_ANY, _("Zhang-Suen method settings")

@@ -25,7 +25,7 @@ bool Configurator::IsIniFileExist()
 	wxString exePath = standardPaths->GetExecutablePath();
 
 	pathToIni = std::filesystem::u8path(std::string(exePath)).parent_path();
-	pathToIni += "/" + DEFAULT_INI_NAME;
+	pathToIni += "/" + cts::DEFAULT_INI_NAME;
 
 	return std::filesystem::exists(pathToIni);
 }

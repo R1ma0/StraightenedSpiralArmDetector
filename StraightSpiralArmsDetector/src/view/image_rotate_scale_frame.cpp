@@ -1,10 +1,8 @@
 #include "image_rotate_scale_frame.hpp"
 
-IRSF::IRSF
-(
+IRSF::IRSF(
     IController* controller
-) : wxDialog
-(
+) : wxDialog(
     NULL, wxID_ANY, _("Rotation and stretching")
 )
 {

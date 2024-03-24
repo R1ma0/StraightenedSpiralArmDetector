@@ -12,20 +12,20 @@
 #include <wx/event.h>
 #include "ids_of_controls.hpp"
 #include "buffered_bitmap.hpp"
-#include "../controller/i_controller.hpp"
 #include "../controller/app_main_window_controller.hpp"
+#include "../controller/i_controller.hpp"
 
 #ifndef AMW
-#define AWM AppMainWindow
+#define AMW AppMainWindow
 #endif
 #ifndef CastAMWC
-#define CastAMWC dynamic_cast<AppMainWindowController *>(mainController)
+#define CastAMWC dynamic_cast<AppMainWindowController *>(controller)
 #endif
 
-class AWM : public wxFrame
+class AMW : public wxFrame
 {
 private:
-    IController* mainController;
+    IController* controller;
     BufferedBitmap* bitmap;
     wxMenuItem* saveImg;
     wxBoxSizer* sizerMain;
@@ -37,12 +37,13 @@ private:
     void OnImageZoomOut(wxCommandEvent&);
     void OnUseAZSMethod(wxCommandEvent&);
     void OnUseMultipleProcessing(wxCommandEvent&);
+    void OnOpenOptionsFrame(wxCommandEvent&);
     void CreateControls();
     void BindEventHandlers();
     void AllowSavingImage(bool);
 public:
-    AWM(const wxString&, IController*);
-    ~AWM();
+    AMW(const wxString&, IController*);
+    ~AMW();
     BufferedBitmap* GetBufferedBitmap() { return bitmap; }
     void UpdateBitmap(wxBitmap);
 };

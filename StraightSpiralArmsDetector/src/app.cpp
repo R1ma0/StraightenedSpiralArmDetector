@@ -20,7 +20,7 @@ bool App::OnInit()
 
 	i18n = new I18N(locale, appConfigurator, this->GetAppName());
 	ShowLangStatusMessage();
-	amwc = new AppMainWindowController();
+	amwc = new AppMainWindowController(appConfigurator);
 	amw = new AppMainWindow(_("Spiral galaxy handler"), amwc);
 
     amwc->SetView(amw);
@@ -34,13 +34,13 @@ bool App::OnInit()
 
 void App::ShowLangStatusMessage()
 {
-	LangStatusCode code = i18n->GetLangStatusCode();
+	cts::LangStatusCode code = i18n->GetLangStatusCode();
 
 	switch (code)
 	{
-	case LangStatusCode::OK:
+	case cts::LangStatusCode::OK:
 		break;
-	case LangStatusCode::Unsupported:
+	case cts::LangStatusCode::Unsupported:
 		wxMessageBox(
 			_(
 				"The selected language is unsupported.\n"
@@ -50,7 +50,7 @@ void App::ShowLangStatusMessage()
 			wxICON_INFORMATION
 		);
 		break;
-	case LangStatusCode::Wrong:
+	case cts::LangStatusCode::Wrong:
 		wxMessageBox(
 			_(
 				"Wrong language has been selected!\n"
