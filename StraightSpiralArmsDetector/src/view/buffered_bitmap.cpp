@@ -23,6 +23,7 @@ void BufferedBitmap::OnPaint(wxPaintEvent& WXUNUSED(event))
 
     if (gc)
     {
+        gc->SetInterpolationQuality(wxINTERPOLATION_NONE);
         const wxSize bmpSize = GetScaledBitmapSize();
         const wxPoint bmpCenter = GetScaledBitmapCenter();
 
