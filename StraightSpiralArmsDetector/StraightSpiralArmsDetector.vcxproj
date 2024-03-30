@@ -23,7 +23,6 @@
     <ClCompile Include="src\controller\app_main_window_controller.cpp" />
     <ClCompile Include="src\controller\azsm_frame_controller.cpp" />
     <ClCompile Include="src\controller\image_rotate_scale_frame_controller.cpp" />
-    <ClCompile Include="src\controller\options_frame_controller.cpp" />
     <ClCompile Include="src\model\configurator\configurator.cpp" />
     <ClCompile Include="src\model\converters.cpp" />
     <ClCompile Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.cpp" />
@@ -35,7 +34,6 @@
     <ClCompile Include="src\view\buffered_bitmap.cpp" />
     <ClCompile Include="src\view\azsm_control_frame.cpp" />
     <ClCompile Include="src\view\image_rotate_scale_frame.cpp" />
-    <ClCompile Include="src\view\options_frame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app.hpp" />
@@ -43,7 +41,6 @@
     <ClInclude Include="src\controller\azsm_frame_controller.hpp" />
     <ClInclude Include="src\controller\image_rotate_scale_frame_controller.hpp" />
     <ClInclude Include="src\controller\i_controller.hpp" />
-    <ClInclude Include="src\controller\options_frame_controller.hpp" />
     <ClInclude Include="src\libs\ini.h" />
     <ClInclude Include="src\model\configurator\configurator.hpp" />
     <ClInclude Include="src\model\constants.hpp" />
@@ -58,7 +55,6 @@
     <ClInclude Include="src\view\azsm_control_frame.hpp" />
     <ClInclude Include="src\view\ids_of_controls.hpp" />
     <ClInclude Include="src\view\image_rotate_scale_frame.hpp" />
-    <ClInclude Include="src\view\options_frame.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

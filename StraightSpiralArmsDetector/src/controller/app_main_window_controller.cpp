@@ -58,14 +58,6 @@ void AMWC::OpenAZSMethodFrame(BufferedBitmap* bitmap)
     InitModalDialog(azsmFrame);
 }
 
-void AMWC::OpenOptionsFrame()
-{
-    auto optionsFrameController = new OptionsFrameController(configurator);
-    auto optionsFrame = new OptionsFrame(optionsFrameController);
-    optionsFrameController->SetView(optionsFrame);
-    InitModalDialog(optionsFrame, wxSize(400, 400));
-}
-
 void AMWC::ZoomInBitmap(BufferedBitmap* bitmap)
 {
     bitmap->ZoomInBitmap();

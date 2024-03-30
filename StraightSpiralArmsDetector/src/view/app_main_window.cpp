@@ -83,21 +83,11 @@ void AMW::CreateControls()
     );
     menuProcessing->AppendSeparator();
     menuProcessing->Append(useMuiltipleProcessing);
-
-    auto toolsMenu = new wxMenu();
-    auto openOtionsWindow = new wxMenuItem(
-        toolsMenu,
-        ID_OPEN_OPTIONS,
-        _("Options..."),
-        _("Open the options window to configure the programme")
-    );
-    toolsMenu->Append(openOtionsWindow);
     
     auto menuBar = new wxMenuBar();
     menuBar->Append(menuFile, _("File"));
     menuBar->Append(menuView, _("View"));
     menuBar->Append(menuProcessing, _("Processing"));
-    menuBar->Append(toolsMenu, _("Tools"));
     SetMenuBar(menuBar);
     
     CreateStatusBar();
@@ -126,12 +116,6 @@ void AMW::BindEventHandlers()
     Bind(wxEVT_MENU, &AMW::OnImageZoomOut, this, ID_ZOOM_OUT);
     Bind(wxEVT_MENU, &AMW::OnUseAZSMethod, this, ID_OPEN_AZSM);
     Bind(wxEVT_MENU, &AMW::OnUseMultipleProcessing, this, ID_USE_MULT_PROC);
-    Bind(wxEVT_MENU, &AMW::OnOpenOptionsFrame, this, ID_OPEN_OPTIONS);
-}
-
-void AMW::OnOpenOptionsFrame(wxCommandEvent& WXUNUSED(event))
-{
-    CastAMWC->OpenOptionsFrame();
 }
 
 void AMW::OnUseMultipleProcessing(wxCommandEvent& WXUNUSED(event))
