@@ -11,6 +11,8 @@ AMW::AMW(
     CreateControls();
     BindEventHandlers();
     AllowSavingImage(false);
+    AllowViewMenu(false);
+    AllowProcessingMenu(false);
 }
 
 AMW::~AMW()
@@ -175,6 +177,8 @@ void AMW::OnLoadImg(wxCommandEvent& WXUNUSED(event))
     }
 
     AllowSavingImage(true);
+    AllowViewMenu(true);
+    AllowProcessingMenu(true);
 }
 
 void AMW::OnSaveImg(wxCommandEvent& WXUNUSED(event))
@@ -193,6 +197,18 @@ void AMW::OnSaveImg(wxCommandEvent& WXUNUSED(event))
 void AMW::AllowSavingImage(bool state)
 {
     saveImg->Enable(state);
+}
+
+void AMW::AllowViewMenu(bool state)
+{
+    zoomInItem->Enable(state);
+    zoomOutItem->Enable(state);
+}
+
+void AMW::AllowProcessingMenu(bool state)
+{
+    adaptiveZhangSuenMethod->Enable(state);
+    openRotateScaleDialog->Enable(state);
 }
 
 void AMW::UpdateBitmap(wxBitmap bmp)

@@ -51,6 +51,8 @@ private:
     void CreateControls();
     void BindEventHandlers();
     void AllowSavingImage(bool);
+    void AllowViewMenu(bool);
+    void AllowProcessingMenu(bool);
 public:
     AMW(const wxString&, IController*);
     ~AMW();
