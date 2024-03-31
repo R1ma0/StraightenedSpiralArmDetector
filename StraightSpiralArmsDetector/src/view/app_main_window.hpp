@@ -27,7 +27,18 @@ class AMW : public wxFrame
 private:
     IController* controller;
     BufferedBitmap* bitmap;
+    wxMenu* menuFile;
+    wxMenu* menuView;
+    wxMenu* menuProcessing;
+    wxMenu* skeletonizationMenu;
     wxMenuItem* saveImg;
+    wxMenuItem* loadImg;
+    wxMenuItem* zoomInItem;
+    wxMenuItem* zoomOutItem;
+    wxMenuItem* openRotateScaleDialog;
+    wxMenuItem* adaptiveZhangSuenMethod;
+    wxMenuItem* useMuiltipleProcessing;
+    wxMenuBar* menuBar;
     wxBoxSizer* sizerMain;
     void OnExit(wxCommandEvent&);
     void OnLoadImg(wxCommandEvent&);

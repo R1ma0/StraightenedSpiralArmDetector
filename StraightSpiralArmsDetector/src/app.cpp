@@ -12,6 +12,7 @@ App::~App()
 	delete appConfigurator;
 	delete amw;
 	delete amwc;
+	delete locale;
 }
 
 bool App::OnInit()
@@ -34,9 +35,9 @@ bool App::OnInit()
 
 void App::ShowLangStatusMessage()
 {
-	cts::LangStatusCode code = i18n->GetLangStatusCode();
+	cts::LangStatusCode* code = new cts::LangStatusCode(i18n->GetLangStatusCode());
 
-	switch (code)
+	switch (*code)
 	{
 	case cts::LangStatusCode::OK:
 		break;
@@ -63,4 +64,6 @@ void App::ShowLangStatusMessage()
 	default:
 		break;
 	}
+
+	delete code;
 }

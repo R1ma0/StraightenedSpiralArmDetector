@@ -5,11 +5,14 @@ Configurator::Configurator()
 	Configure();
 }
 
+Configurator::~Configurator()
+{
+	delete standardPaths;
+}
+
 void Configurator::Configure()
 {
-	bool isIniExist = IsIniFileExist();
-
-	if (!isIniExist)
+	if (!IsIniFileExist())
 	{
 		CreateDefaultIniFile();
 	}
@@ -21,7 +24,7 @@ void Configurator::Configure()
 
 bool Configurator::IsIniFileExist()
 {
-	wxStandardPaths* standardPaths = (wxStandardPaths*)&wxStandardPaths::Get();
+	standardPaths = (wxStandardPaths*)&wxStandardPaths::Get();
 	wxString exePath = standardPaths->GetExecutablePath();
 
 	pathToIni = std::filesystem::u8path(std::string(exePath)).parent_path();

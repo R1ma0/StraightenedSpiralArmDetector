@@ -25,14 +25,16 @@ void AZSMFC::RunDetectorator()
     };
 
     cv::Mat img = procImage->GetProcessedImage();
-    cv::Mat dst = cv::Mat();
-    cv::cvtColor(img, dst, cv::COLOR_RGB2GRAY);
+    cv::Mat* dst = new cv::Mat();
+    cv::cvtColor(img, *dst, cv::COLOR_RGB2GRAY);
 
-    img = azsm->execute(dst, azsmParams);
+    img = azsm->execute(*dst, azsmParams);
 
     procImage->SetProcessedImage(img);
-    cv::cvtColor(img, dst, cv::COLOR_GRAY2RGB);
+    cv::cvtColor(img, *dst, cv::COLOR_GRAY2RGB);
     bitmap->SetBitmap(wxBitmap(MatToWxImage(dst)));
+
+    delete dst;
 }
 
 int AZSMFC::CheckGBSValue(int value)

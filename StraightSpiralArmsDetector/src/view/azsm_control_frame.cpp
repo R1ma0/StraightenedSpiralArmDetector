@@ -12,6 +12,20 @@ AZSMCF::AZSMCF(
     BindEventHandlers();
 }
 
+AZSMCF::~AZSMCF()
+{
+    delete controller;
+    delete binaryThreshValueSpin;
+    delete gaussBlockSizeSpin;
+    delete gaussConstSpin;
+    delete imgCompressPercentageSpin;
+    delete binaryThreshValueLabel;
+    delete gaussConstLabel;
+    delete imgCompressPercentageLabel;
+    delete gaussBlockSizeLabel;
+    delete computeBtn;
+}
+
 void AZSMCF::CreateControls()
 {
     auto gridSizer = new wxGridSizer(0, 2, wxSize(50, 5));
@@ -19,7 +33,7 @@ void AZSMCF::CreateControls()
         wxALL, 10
     ).CenterVertical();
 
-    auto binaryThreshValueLabel = new wxStaticText(
+    binaryThreshValueLabel = new wxStaticText(
         this, -1, _("Threshold binarisation value:")
     );
     gridSizer->Add(binaryThreshValueLabel, gridSizerFlags);
@@ -29,7 +43,7 @@ void AZSMCF::CreateControls()
     binaryThreshValueSpin->SetValue(125);
     gridSizer->Add(binaryThreshValueSpin, gridSizerFlags);
 
-    auto gaussConstLabel = new wxStaticText(
+    gaussConstLabel = new wxStaticText(
         this, -1, _("Gaussian constant:")
     );
     gridSizer->Add(gaussConstLabel, gridSizerFlags);
@@ -39,7 +53,7 @@ void AZSMCF::CreateControls()
     gaussConstSpin->SetValue(0);
     gridSizer->Add(gaussConstSpin, gridSizerFlags);
 
-    auto imgCompressPercentageLabel = new wxStaticText(
+    imgCompressPercentageLabel = new wxStaticText(
         this, -1, _("Image compression percentage:")
     );
     gridSizer->Add(imgCompressPercentageLabel, gridSizerFlags);
@@ -49,8 +63,8 @@ void AZSMCF::CreateControls()
     imgCompressPercentageSpin->SetValue(20);
     gridSizer->Add(imgCompressPercentageSpin, gridSizerFlags);
 
-    auto gaussBlockSizeLabel = new wxStaticText(
-        this, -1, _("Gaussian block size value (odd): ")        
+    gaussBlockSizeLabel = new wxStaticText(
+        this, -1, _("Gaussian block size value (odd):")        
     );
     gridSizer->Add(gaussBlockSizeLabel, gridSizerFlags);
 
@@ -61,7 +75,7 @@ void AZSMCF::CreateControls()
 
     gridSizer->Add(new wxStaticText(this, -1, wxT("")), gridSizerFlags);
 
-    auto computeBtn = new wxButton(
+    computeBtn = new wxButton(
         this, ID_RUN_DETECTORATOR, _("Process")
     );
     gridSizer->Add(computeBtn, gridSizerFlags);

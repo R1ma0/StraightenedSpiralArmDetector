@@ -17,7 +17,7 @@ AMWC::~AMWC()
 wxBitmap AMWC::GetBitmapImage()
 {
     cv::Mat img = procImage->GetProcessedImage();
-    return wxBitmap(MatToWxImage(img));   
+    return wxBitmap(MatToWxImage(&img));
 }
 
 void AMWC::InitModalDialog(wxDialog* dialog, wxSize size)
@@ -36,7 +36,7 @@ void AMWC::InitModalDialog(wxDialog* dialog, wxSize size)
     dialog->SetSize(dialogSize);
     dialog->Center();
     dialog->ShowModal();
-    dialog->Destroy();
+    delete dialog;
 }
 
 void AppMainWindowController::OpenRotateScaleFrame(BufferedBitmap* bitmap)
@@ -70,7 +70,7 @@ void AMWC::ZoomOutBitmap(BufferedBitmap* bitmap)
 
 bool AMWC::LoadImage()
 {
-    wxFileDialog openFileDialog(
+    wxFileDialog* openFileDialog = new wxFileDialog(
         CastAMW, 
         _("Image selection"), 
         "", 
@@ -79,12 +79,13 @@ bool AMWC::LoadImage()
         wxFD_OPEN | wxFD_FILE_MUST_EXIST
     );
 
-    if (openFileDialog.ShowModal() == wxID_CANCEL) 
+    if (openFileDialog->ShowModal() == wxID_CANCEL) 
     { 
+        delete openFileDialog;
         return true; 
     }
 
-    std::string pathToFile = openFileDialog.GetPath().ToStdString();
+    std::string* pathToFile = new std::string(openFileDialog->GetPath().ToStdString());
     bool uploadStatus = procImage->LoadSrcImage(pathToFile);
 
     if (uploadStatus == false)
@@ -92,6 +93,8 @@ bool AMWC::LoadImage()
         CastAMW->UpdateBitmap(GetBitmapImage());
     }
 
+    delete pathToFile;
+    delete openFileDialog;
     return uploadStatus;
 }
 

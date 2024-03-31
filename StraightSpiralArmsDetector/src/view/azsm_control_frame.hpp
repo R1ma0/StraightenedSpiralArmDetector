@@ -27,12 +27,18 @@ private:
     wxSpinCtrl* gaussConstSpin;
     wxSpinCtrl* imgCompressPercentageSpin;
     wxSpinCtrl* gaussBlockSizeSpin;
+    wxStaticText* binaryThreshValueLabel;
+    wxStaticText* gaussConstLabel;
+    wxStaticText* imgCompressPercentageLabel;
+    wxStaticText* gaussBlockSizeLabel;
+    wxButton* computeBtn;
     void CreateControls();
     void BindEventHandlers();
     void OnRunDetectorator(wxCommandEvent&);
     void OnSetGaussBlockSize(wxCommandEvent&);
 public:
     AZSMCF(IController*);
+    ~AZSMCF();
     int GetBinaryThresh() { return binaryThreshValueSpin->GetValue(); }
     int GetGaussConst() { return gaussConstSpin->GetValue(); }
     int GetCompressPercentage() { return imgCompressPercentageSpin->GetValue(); }

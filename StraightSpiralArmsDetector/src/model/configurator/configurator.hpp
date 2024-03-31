@@ -16,11 +16,13 @@ class Configurator
 private:
 	mINI::INIStructure iniStructure;
 	std::filesystem::path pathToIni;
+	wxStandardPaths* standardPaths;
 	bool IsIniFileExist();
 	bool ReadIniFile();
 	void Configure();
 public:
 	Configurator();
+	~Configurator();
 	mINI::INIStructure GetIniData() const { return iniStructure; };
 	wxSize GetWindowSize() const;
 	std::string GetLanguageCode() const;

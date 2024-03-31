@@ -26,9 +26,19 @@ private:
     wxStaticText* rotateOldValue;
     wxStaticText* scaleXOldValue;
     wxStaticText* scaleYOldValue;
+    wxStaticText* rotateTitle;
+    wxStaticText* rotateOldText;
+    wxStaticText* angleSpinNewText;
+    wxStaticText* angleSpinText;
+    wxStaticText* scaleTitle;
+    wxStaticText* scaleXOldText;
+    wxStaticText* scaleXNewText;
+    wxStaticText* scaleYOldText;
+    wxStaticText* scaleYNewText;
     wxSpinCtrl* angleSpin;
     wxSpinCtrl* scaleXNewSpin;
     wxSpinCtrl* scaleYNewSpin;
+    wxButton* applyChangesBtn;
     unsigned int xScaleMult;
     unsigned int yScaleMult;
     void AddEmptyCells(unsigned int, wxGridSizer&, wxSizerFlags&);
@@ -39,6 +49,7 @@ private:
     void OnApplyRotateScale(wxCommandEvent&);
 public:
     IRSF(IController*);
+    ~IRSF();
 };
 
 #endif

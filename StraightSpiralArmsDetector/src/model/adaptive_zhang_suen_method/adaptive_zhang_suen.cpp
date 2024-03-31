@@ -26,14 +26,13 @@ AdaptiveZhangSuenMethod::AdaptiveZhangSuenMethod()
 
 AdaptiveZhangSuenMethod::~AdaptiveZhangSuenMethod()
 {
-    free(utils);
-    free(zhangSuen);
-    free(patternsToRemove);
-    free(patternsToAdd);
+    delete utils;
+    delete zhangSuen;
+    delete patternsToRemove;
+    delete patternsToAdd;
 }
 
-cv::Mat AdaptiveZhangSuenMethod::execute
-(
+cv::Mat AdaptiveZhangSuenMethod::execute(
     cv::Mat img, AdaptiveZhangSuenParameters parameters
 )
 {

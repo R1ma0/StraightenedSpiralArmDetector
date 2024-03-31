@@ -20,9 +20,9 @@ void ProcessedImage::SetProcessedImage(cv::Mat img)
     image = img;
 }
 
-bool ProcessedImage::LoadSrcImage(const std::string path)
+bool ProcessedImage::LoadSrcImage(const std::string* path)
 {
-    cv::Mat img = cv::imread(path);
+    cv::Mat img = cv::imread(*path);
 
     if (img.empty()) return true;
 

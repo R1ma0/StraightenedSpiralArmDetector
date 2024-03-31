@@ -14,24 +14,20 @@ void IRSFC::SetView(wxWindow* view)
 void IRSFC::SetRotateScaleValues(RotateScaleValues rsv)
 {
     cv::Mat img = procImage->GetProcessedImage();
-
     cv::Size currentSize = procImage->GetImageSize();
+    
     if (currentSize.width != rsv.x || currentSize.height != rsv.y)
     {
-        img = procImage->GetProcessedImage();
         cv::resize(img, img, cv::Size(rsv.x, rsv.y), cv::INTER_LINEAR);
     }
 
     if (rsv.angle != procImage->GetRotationAngleDegrees())
     {
-        img = procImage->RotateImage(
-            procImage->GetProcessedImage(),
-            rsv.angle        
-        );
+        img = procImage->RotateImage(img, rsv.angle);
     }
 
     procImage->SetProcessedImage(img);
-    bitmap->SetBitmap(wxBitmap(MatToWxImage(img)));
+    bitmap->SetBitmap(wxBitmap(MatToWxImage(&img)));
 }
 
 RotateScaleValues IRSFC::GetRotateScaleValues()

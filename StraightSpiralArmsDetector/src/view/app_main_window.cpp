@@ -15,14 +15,28 @@ AMW::AMW(
 
 AMW::~AMW()
 {
+    delete controller;
     delete bitmap;
+    delete menuFile;
+    delete menuView;
+    delete menuProcessing;
+    delete skeletonizationMenu;
     delete saveImg;
+    delete loadImg;
+    delete zoomInItem;
+    delete zoomOutItem;
+    delete openRotateScaleDialog;
+    delete adaptiveZhangSuenMethod;
+    delete useMuiltipleProcessing;
+    delete menuBar;
+    delete sizerMain;
+    delete sizerMain;
 }
 
 void AMW::CreateControls()
 {
-    auto menuFile = new wxMenu();
-    auto loadImg = new wxMenuItem(
+    menuFile = new wxMenu();
+    loadImg = new wxMenuItem(
         menuFile, 
         ID_LOAD_IMG, 
         _("Upload image\tCtrl-O"), 
@@ -39,14 +53,14 @@ void AMW::CreateControls()
     menuFile->AppendSeparator();
     menuFile->Append(wxID_EXIT);
 
-    auto menuView = new wxMenu();
-    auto zoomInItem = new wxMenuItem(
+    menuView = new wxMenu();
+    zoomInItem = new wxMenuItem(
         menuView, 
         ID_ZOOM_IN, 
         _("Zoom in\tCtrl-+"),
         _("Increase the size of the image in the preview window")
     );
-    auto zoomOutItem = new wxMenuItem(
+    zoomOutItem = new wxMenuItem(
         menuView,
         ID_ZOOM_OUT, 
         _("Zoom out\tCtrl--"),
@@ -55,21 +69,21 @@ void AMW::CreateControls()
     menuView->Append(zoomInItem);
     menuView->Append(zoomOutItem);
 
-    auto menuProcessing = new wxMenu();
-    auto openRotateScaleDialog = new wxMenuItem(
+    menuProcessing = new wxMenu();
+    openRotateScaleDialog = new wxMenuItem(
         menuProcessing, 
         ID_ROTATE_SCALE, 
         _("Rotation and stretching\tAlt-R"),
         _("Open the image rotation and stretching window")
     );
-    auto skeletonizationMenu = new wxMenu();
-    auto adaptiveZhangSuenMethod = new wxMenuItem(
+    skeletonizationMenu = new wxMenu();
+    adaptiveZhangSuenMethod = new wxMenuItem(
         skeletonizationMenu, 
         ID_OPEN_AZSM, 
         _("Adaptive Zhang-Suen"),
         _("Use Zhang-Suen`s adaptive skeletonisation method")
     );
-    auto useMuiltipleProcessing = new wxMenuItem(
+    useMuiltipleProcessing = new wxMenuItem(
         menuProcessing,
         ID_USE_MULT_PROC,
         _("Multi-image processing"),
@@ -84,7 +98,7 @@ void AMW::CreateControls()
     menuProcessing->AppendSeparator();
     menuProcessing->Append(useMuiltipleProcessing);
     
-    auto menuBar = new wxMenuBar();
+    menuBar = new wxMenuBar();
     menuBar->Append(menuFile, _("File"));
     menuBar->Append(menuView, _("View"));
     menuBar->Append(menuProcessing, _("Processing"));
@@ -150,9 +164,7 @@ void AMW::OnExit(wxCommandEvent& WXUNUSED(event))
 
 void AMW::OnLoadImg(wxCommandEvent& WXUNUSED(event))
 {
-    bool isImageNotLoaded = CastAMWC->LoadImage();
-
-    if (isImageNotLoaded)
+    if (CastAMWC->LoadImage())
     {
         wxMessageBox(
             _("Image opening error!"), 
@@ -167,9 +179,7 @@ void AMW::OnLoadImg(wxCommandEvent& WXUNUSED(event))
 
 void AMW::OnSaveImg(wxCommandEvent& WXUNUSED(event))
 {
-    bool isImageSaved = CastAMWC->SaveImage();
-
-    if (!isImageSaved)
+    if (!CastAMWC->SaveImage())
     {
         wxMessageBox(
             _("Image saving error!"), 
