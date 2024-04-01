@@ -17,16 +17,19 @@ uses
   StrUtils,
   FGL,
   LCLTranslator,
+  LazHelpHTML,
+  UTF8Process,
   ini_handler;
 
 type
 
   AppLangDict = specialize TFPGMap<string, string>;
+  AppManualDict = specialize TFPGMap<string, string>;
 
   { TMainForm }
 
   TMainForm = class(TForm)
-    Image1: TImage;
+    OpenUsrManual: TButton;
     ResetBtn: TButton;
     ResolutionCombo: TComboBox;
     Label1: TLabel;
@@ -36,6 +39,9 @@ type
     GroupBox2: TGroupBox;
     LangCombo: TComboBox;
     GroupBox1: TGroupBox;
+    function CheckManualExists(LangCode: String): Boolean;
+    function GetPathToManualFile(LangCode: String): String;
+    procedure OpenUsrManualClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure LangComboSelect(Sender: TObject);
     procedure LaunchBtnClick(Sender: TObject);
@@ -43,6 +49,7 @@ type
     procedure SaveBtnClick(Sender: TObject);
     procedure UpdateWidgetsFromIni(ini: IniHandler);
     procedure UpdateWidgets(ini: IniHandler);
+    procedure OpenManualInBrowser(Path: String);
     procedure ShowMsgIniNotFound;
     procedure ShowMsgExeNotFound;
     public
@@ -58,10 +65,12 @@ var
   ProcessCls: TProcess;
   IniFileHandler: IniHandler;
   AvailableLangs: AppLangDict;
+  ManualFilePaths: AppManualDict;
 
 resourcestring
   MsgIniNotFoundText = 'Settings file not found.'#10'Default settings set.';
   MsgExeNotFoundText = 'Executable file not found.';
+  MsgManualFileNotFound = 'Manual file could not be found.';
 
 implementation
 
@@ -73,6 +82,7 @@ destructor TMainForm.Destroy;
 begin
   FreeAndNil(IniFileHandler);
   FreeAndNil(AvailableLangs);
+  FreeAndNil(ManualFilePaths);
   inherited;
 end;
 
@@ -81,6 +91,10 @@ begin
   AvailableLangs := AppLangDict.Create;
   AvailableLangs.Add('en_GB', 'English');
   AvailableLangs.Add('ru_RU', 'Russian');
+
+  ManualFilePaths := AppManualDict.Create;
+  ManualFilePaths.Add('en_GB', 'manual\UserManualEN.pdf');
+  ManualFilePaths.Add('ru_RU', 'manual\UserManualRU.pdf');
 
   IniFileHandler := IniHandler.Create();
 
@@ -95,6 +109,66 @@ begin
       ShowMsgIniNotFound();
       IniFileHandler.CreateDefaultIni();
     end;
+end;
+
+procedure TMainForm.OpenUsrManualClick(Sender: TObject);
+var
+  LangCode: String;
+begin
+  LangCode := AvailableLangs.GetKey(LangCombo.ItemIndex);
+
+  if not CheckManualExists(LangCode) then
+    begin
+      ShowMessage(MsgManualFileNotFound);
+      Exit;
+    end;
+
+  OpenManualInBrowser(GetPathToManualFile(LangCode));
+end;
+
+function TMainForm.CheckManualExists(LangCode: String): Boolean;
+begin
+  if FileExists(GetPathToManualFile(LangCode)) then
+    Result := true
+  else
+    Result := false;
+end;
+
+function TMainForm.GetPathToManualFile(LangCode: String): String;
+var
+  Idx: Integer;
+begin
+  Idx := ManualFilePaths.IndexOf(LangCode);
+  Result := ManualFilePaths.GetData(Idx);
+end;
+
+procedure TMainForm.OpenManualInBrowser(Path: String);
+var
+  HTMLHelp: THTMLBrowserHelpViewer;
+  BrowserPath, BrowserParams: String;
+  ParamPos: LongInt;
+  BrowserProcess: TProcessUTF8;
+  AbsoluteFilePath: String;
+begin
+  HTMLHelp := THTMLBrowserHelpViewer.Create(nil);
+
+  try
+    HTMLHelp.FindDefaultBrowser(BrowserPath, BrowserParams);
+    ParamPos := System.Pos('%s', BrowserParams);
+    System.Delete(BrowserParams, ParamPos, 2);
+    AbsoluteFilePath := GetCurrentDir() + '\' + Path;
+    System.Insert(AbsoluteFilePath, BrowserParams, ParamPos);
+
+    BrowserProcess := TProcessUTF8.Create(nil);
+    try
+      BrowserProcess.CommandLine := BrowserPath + ' ' + BrowserParams;
+      BrowserProcess.Execute;
+    finally
+      BrowserProcess.Free;
+    end;
+  finally
+    HTMLHelp.Free;
+  end;
 end;
 
 procedure TMainForm.LangComboSelect(Sender: TObject);
