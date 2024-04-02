@@ -13,6 +13,7 @@ AZSMFC::~AZSMFC()
     delete bitmap;
     delete procImage;
     delete activityIndicator;
+    delete computeThread;
 }
 
 void AZSMFC::SetView(wxWindow* view)
@@ -51,8 +52,8 @@ void AZSMFC::RunDetectorator()
 
     EnableDialogComponents(false);
 
-    std::thread th1(&AZSMFC::Compute, this, azsmParams, activityIndicator);
-    th1.detach();
+    computeThread = new std::thread{ &AZSMFC::Compute, this, azsmParams, activityIndicator };
+    computeThread->detach();
 }
 
 void AZSMFC::Compute(AdaptiveZhangSuenParameters azsmParams, wxActivityIndicator* actInd)
