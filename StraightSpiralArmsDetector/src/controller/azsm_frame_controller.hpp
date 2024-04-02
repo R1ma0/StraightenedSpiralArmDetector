@@ -5,7 +5,9 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+#include <wx/activityindicator.h>
 #include <opencv2/opencv.hpp>
+#include <thread>
 #include "i_controller.hpp"
 #include "../view/app_main_window.hpp"
 #include "../view/buffered_bitmap.hpp"
@@ -27,10 +29,15 @@ private:
     wxWindow* view;
     ProcessedImage* procImage;
     BufferedBitmap* bitmap;
-    AdaptiveZhangSuenMethod* azsm;
+
+    wxActivityIndicator* activityIndicator;
     int gbsOldValue;
+    void Compute(AdaptiveZhangSuenParameters, wxActivityIndicator*);
+    void CreateActivityIndicator();
+    void EnableDialogComponents(bool);
 public:
     AZSMFC(BufferedBitmap*, ProcessedImage*);
+    ~AZSMFC();
     const int GBS_SPIN_DEFAULT_VALUE{ 3 };
     void SetView(wxWindow*) override;
     void RunDetectorator();

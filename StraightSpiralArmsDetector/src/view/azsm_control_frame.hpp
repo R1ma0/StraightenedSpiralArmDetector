@@ -43,6 +43,7 @@ public:
     int GetGaussConst() { return gaussConstSpin->GetValue(); }
     int GetCompressPercentage() { return imgCompressPercentageSpin->GetValue(); }
     int GetGaussBlockSize() { return gaussBlockSizeSpin->GetValue(); }
+    void SetEnableComponents(bool);
 };
 
 #endif

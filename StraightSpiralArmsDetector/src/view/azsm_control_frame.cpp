@@ -101,3 +101,16 @@ void AZSMCF::OnRunDetectorator(wxCommandEvent& WXUNUSED(event))
 {
     CastAZSMFC->RunDetectorator();
 }
+
+void AZSMCF::SetEnableComponents(bool state)
+{
+    computeBtn->Enable(state);
+    binaryThreshValueSpin->Enable(state);
+    gaussConstSpin->Enable(state);
+    imgCompressPercentageSpin->Enable(state);
+    gaussBlockSizeSpin->Enable(state);
+    binaryThreshValueLabel->Enable(state);
+    gaussConstLabel->Enable(state);
+    imgCompressPercentageLabel->Enable(state);
+    gaussBlockSizeLabel->Enable(state);
+}
