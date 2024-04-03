@@ -54,7 +54,7 @@ msgid "File"
 msgstr "Файл"
 
 #: ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp:53
-msgid "Gaussian block size value (odd): "
+msgid "Gaussian block size value (odd):"
 msgstr "Значение размера блока Гаусса (нечетное):"
 
 #: ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp:33
