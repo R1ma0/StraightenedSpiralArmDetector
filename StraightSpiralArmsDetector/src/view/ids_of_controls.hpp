@@ -14,6 +14,7 @@ enum IDs
     ID_USE_MULT_PROC,
     ID_GBS_SPIN,
     ID_OPEN_OPTIONS,
+    ID_AZSM_MP,
 };
 
 #endif

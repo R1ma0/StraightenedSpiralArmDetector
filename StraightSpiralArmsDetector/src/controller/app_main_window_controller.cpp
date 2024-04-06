@@ -58,6 +58,14 @@ void AMWC::OpenAZSMethodFrame(BufferedBitmap* bitmap)
     InitModalDialog(azsmFrame);
 }
 
+void AMWC::OpenAZSMMultipleProcessingFrame()
+{
+    auto azsmmpController = new AZSMMultipleProcessingFrameController();
+    auto azsmmpFrame = new AZSMMultipleProcessingFrame(azsmmpController);
+    azsmmpController->SetView(azsmmpFrame);
+    InitModalDialog(azsmmpFrame);
+}
+
 void AMWC::ZoomInBitmap(BufferedBitmap* bitmap)
 {
     bitmap->ZoomInBitmap();

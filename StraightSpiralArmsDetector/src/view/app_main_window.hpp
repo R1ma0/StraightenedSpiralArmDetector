@@ -31,13 +31,14 @@ private:
     wxMenu* menuView;
     wxMenu* menuProcessing;
     wxMenu* skeletonizationMenu;
+    wxMenu* useMuiltipleProcessing;
     wxMenuItem* saveImg;
     wxMenuItem* loadImg;
     wxMenuItem* zoomInItem;
     wxMenuItem* zoomOutItem;
     wxMenuItem* openRotateScaleDialog;
     wxMenuItem* adaptiveZhangSuenMethod;
-    wxMenuItem* useMuiltipleProcessing;
+    wxMenuItem* adaptiveZhangSuenMethodMP;
     wxMenuBar* menuBar;
     wxBoxSizer* sizerMain;
     void OnExit(wxCommandEvent&);
@@ -47,7 +48,7 @@ private:
     void OnImageZoomIn(wxCommandEvent&);
     void OnImageZoomOut(wxCommandEvent&);
     void OnUseAZSMethod(wxCommandEvent&);
-    void OnUseMultipleProcessing(wxCommandEvent&);
+    void OnUseAZSMMP(wxCommandEvent&);
     void CreateControls();
     void BindEventHandlers();
     void AllowSavingImage(bool);

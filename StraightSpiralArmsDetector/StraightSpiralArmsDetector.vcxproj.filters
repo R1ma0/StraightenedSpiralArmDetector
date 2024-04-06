@@ -59,6 +59,8 @@
     </ClCompile>
     <ClCompile Include="src\model\configurator\configurator.cpp" />
     <ClCompile Include="src\model\i18n\i18n.cpp" />
+    <ClCompile Include="src\view\azsm_multiple_processing_frame.cpp" />
+    <ClCompile Include="src\controller\azsm_multiple_processing_frame_controller.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\view\app_main_window.hpp">
@@ -112,5 +114,7 @@
     <ClInclude Include="src\model\constants.hpp">
       <Filter>src\model</Filter>
     </ClInclude>
+    <ClInclude Include="src\view\azsm_multiple_processing_frame.hpp" />
+    <ClInclude Include="src\controller\azsm_multiple_processing_frame_controller.hpp" />
   </ItemGroup>
 </Project>

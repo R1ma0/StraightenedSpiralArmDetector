@@ -33,6 +33,7 @@ AMW::~AMW()
     delete menuBar;
     delete sizerMain;
     delete sizerMain;
+    delete adaptiveZhangSuenMethodMP;
 }
 
 void AMW::CreateControls()
@@ -85,20 +86,25 @@ void AMW::CreateControls()
         _("Adaptive Zhang-Suen"),
         _("Use Zhang-Suen`s adaptive skeletonisation method")
     );
-    useMuiltipleProcessing = new wxMenuItem(
-        menuProcessing,
-        ID_USE_MULT_PROC,
-        _("Multi-image processing"),
-        _("Processing of several images with specified parameters")
+    useMuiltipleProcessing = new wxMenu();
+    adaptiveZhangSuenMethodMP = new wxMenuItem(
+        useMuiltipleProcessing,
+        ID_AZSM_MP,
+        _("Adaptive Zhang-Suen"),
+        _("Use Zhang-Suen`s adaptive skeletonisation method for multiple images")
     );
     skeletonizationMenu->Append(adaptiveZhangSuenMethod);
+    useMuiltipleProcessing->Append(adaptiveZhangSuenMethodMP);
     menuProcessing->Append(openRotateScaleDialog);
     menuProcessing->AppendSubMenu(
-        skeletonizationMenu, 
+        skeletonizationMenu,
         _("Skeletonisation algorithms")
     );
     menuProcessing->AppendSeparator();
-    menuProcessing->Append(useMuiltipleProcessing);
+    menuProcessing->AppendSubMenu(
+        useMuiltipleProcessing,
+        _("Multi-image processing")
+    );
     
     menuBar = new wxMenuBar();
     menuBar->Append(menuFile, _("File"));
@@ -131,12 +137,12 @@ void AMW::BindEventHandlers()
     Bind(wxEVT_MENU, &AMW::OnImageZoomIn, this, ID_ZOOM_IN);
     Bind(wxEVT_MENU, &AMW::OnImageZoomOut, this, ID_ZOOM_OUT);
     Bind(wxEVT_MENU, &AMW::OnUseAZSMethod, this, ID_OPEN_AZSM);
-    Bind(wxEVT_MENU, &AMW::OnUseMultipleProcessing, this, ID_USE_MULT_PROC);
+    Bind(wxEVT_MENU, &AMW::OnUseAZSMMP, this, ID_AZSM_MP);
 }
 
-void AMW::OnUseMultipleProcessing(wxCommandEvent& WXUNUSED(event))
+void AMW::OnUseAZSMMP(wxCommandEvent& WXUNUSED(event))
 {
-    
+    CastAMWC->OpenAZSMMultipleProcessingFrame();
 }
 
 void AMW::OnUseAZSMethod(wxCommandEvent& WXUNUSED(event))
