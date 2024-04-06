@@ -55,7 +55,7 @@ void IRSF::CreateControls()
     SetBoldFont(rotateTitle);
     gridSizer->Add(rotateTitle, gridSizerFlags);
 
-    AddEmptyCells(4, *gridSizer, gridSizerFlags);
+    AddEmptyCells(this, 4, *gridSizer, gridSizerFlags);
 
     rotateOldText = new wxStaticText(this, -1, _("Current value:"));
     gridSizer->Add(rotateOldText, gridSizerFlags);
@@ -76,7 +76,7 @@ void IRSF::CreateControls()
     SetBoldFont(scaleTitle);
     gridSizer->Add(scaleTitle, gridSizerFlags);
 
-    AddEmptyCells(4, *gridSizer, gridSizerFlags);
+    AddEmptyCells(this, 4, *gridSizer, gridSizerFlags);
 
     scaleXOldText = new wxStaticText(this, -1, _("Current width:"));
     gridSizer->Add(scaleXOldText, gridSizerFlags);
@@ -106,7 +106,7 @@ void IRSF::CreateControls()
 
     gridSizer->Add(new wxStaticText(this, -1, _("pixels")), gridSizerFlags);
 
-    AddEmptyCells(4, *gridSizer, gridSizerFlags);
+    AddEmptyCells(this, 4, *gridSizer, gridSizerFlags);
 
     applyChangesBtn = new wxButton(
         this, ID_APPLY_ROTATE_SCALE, _("Apply")
@@ -149,15 +149,4 @@ void IRSF::OnApplyRotateScale(wxCommandEvent& WXUNUSED(event))
 
     CastIRSF->SetRotateScaleValues(rsv);
     SetValuesAndRanges();
-}
-
-void IRSF::AddEmptyCells
-(
-    unsigned int num_cells, wxGridSizer& grid, wxSizerFlags& flags
-)
-{
-    for (unsigned int i = 0; i < num_cells; i++)
-    {
-        grid.Add(new wxStaticText(this, -1, ""), flags);
-    }
 }

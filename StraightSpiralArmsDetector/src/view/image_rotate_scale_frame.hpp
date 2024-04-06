@@ -10,6 +10,7 @@
 #include "../model/processed_image.hpp"
 #include "../controller/i_controller.hpp"
 #include "../controller/image_rotate_scale_frame_controller.hpp"
+#include "grid_empty_cell.hpp"
 
 
 #ifndef IRSF
@@ -41,7 +42,6 @@ private:
     wxButton* applyChangesBtn;
     unsigned int xScaleMult;
     unsigned int yScaleMult;
-    void AddEmptyCells(unsigned int, wxGridSizer&, wxSizerFlags&);
     void CreateControls();
     void SetValuesAndRanges();
     void BindEventHandlers();
