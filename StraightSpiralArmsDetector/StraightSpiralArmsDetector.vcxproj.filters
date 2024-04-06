@@ -61,6 +61,8 @@
     <ClCompile Include="src\model\i18n\i18n.cpp" />
     <ClCompile Include="src\view\azsm_multiple_processing_frame.cpp" />
     <ClCompile Include="src\controller\azsm_multiple_processing_frame_controller.cpp" />
+    <ClCompile Include="src\view\utils\grid_empty_cell.cpp" />
+    <ClCompile Include="src\view\utils\static_text_fonts.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\view\app_main_window.hpp">
@@ -116,5 +118,7 @@
     </ClInclude>
     <ClInclude Include="src\view\azsm_multiple_processing_frame.hpp" />
     <ClInclude Include="src\controller\azsm_multiple_processing_frame_controller.hpp" />
+    <ClInclude Include="src\view\utils\grid_empty_cell.hpp" />
+    <ClInclude Include="src\view\utils\static_text_fonts.hpp" />
   </ItemGroup>
 </Project>

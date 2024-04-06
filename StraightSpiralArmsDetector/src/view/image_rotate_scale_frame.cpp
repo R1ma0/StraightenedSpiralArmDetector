@@ -37,13 +37,6 @@ IRSF::~IRSF()
     delete applyChangesBtn;
 }
 
-void IRSF::SetBoldFont(wxStaticText* text)
-{
-    wxFont boldFont = text->GetFont();
-    boldFont.SetWeight(wxFONTWEIGHT_BOLD);
-    text->SetFont(boldFont);
-}
-
 void IRSF::CreateControls()
 {
     auto gridSizer = new wxGridSizer(0, 5, wxSize(1, 1));

@@ -7,11 +7,11 @@
 #endif
 #include <wx/spinctrl.h>
 #include "ids_of_controls.hpp"
+#include "utils/grid_empty_cell.hpp"
+#include "utils/static_text_fonts.hpp"
 #include "../model/processed_image.hpp"
 #include "../controller/i_controller.hpp"
 #include "../controller/image_rotate_scale_frame_controller.hpp"
-#include "grid_empty_cell.hpp"
-
 
 #ifndef IRSF
 #define IRSF ImageRotateScaleFrame
@@ -45,7 +45,6 @@ private:
     void CreateControls();
     void SetValuesAndRanges();
     void BindEventHandlers();
-    void SetBoldFont(wxStaticText*);
     void OnApplyRotateScale(wxCommandEvent&);
 public:
     IRSF(IController*);

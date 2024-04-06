@@ -15,6 +15,7 @@ enum IDs
     ID_GBS_SPIN,
     ID_OPEN_OPTIONS,
     ID_AZSM_MP,
+    ID_START_MP,
 };
 
 #endif
