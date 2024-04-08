@@ -52,6 +52,7 @@ private:
     void CreateControls();
     void BindEventHandlers();
     void OnStartProcess(wxCommandEvent&);
+    void SetSpinRangeAndValue(wxSpinCtrl*, int, int, int);
 public:
     AZSMMPF(IController*);
     ~AZSMMPF();

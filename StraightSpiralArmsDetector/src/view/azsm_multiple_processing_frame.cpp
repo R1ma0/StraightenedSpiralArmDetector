@@ -147,10 +147,13 @@ void AZSMMPF::CreateControls()
     );
     gridSizer->Add(binaryThreshValueLabel, gridSizerFlags);
     binaryThreshMinSpin = new wxSpinCtrl(this);
+    SetSpinRangeAndValue(binaryThreshMinSpin, 0, 255, 125);
     gridSizer->Add(binaryThreshMinSpin, gridSizerFlags);
     binaryThreshMaxSpin = new wxSpinCtrl(this);
+    SetSpinRangeAndValue(binaryThreshMaxSpin, 0, 255, 125);
     gridSizer->Add(binaryThreshMaxSpin, gridSizerFlags);
     binaryThreshStepSpin = new wxSpinCtrl(this);
+    SetSpinRangeAndValue(binaryThreshStepSpin, 1, 255, 1);
     gridSizer->Add(binaryThreshStepSpin, gridSizerFlags);
 
     // Gauss constant value
@@ -165,10 +168,13 @@ void AZSMMPF::CreateControls()
     );
     gridSizer->Add(gaussConstLabel, gridSizerFlags);
     gaussConstMinSpin = new wxSpinCtrl(this);
+    SetSpinRangeAndValue(gaussConstMinSpin, -50, 50, 0);
     gridSizer->Add(gaussConstMinSpin, gridSizerFlags);
     gaussConstMaxSpin = new wxSpinCtrl(this);
+    SetSpinRangeAndValue(gaussConstMaxSpin, -50, 50, 0);
     gridSizer->Add(gaussConstMaxSpin, gridSizerFlags);
     gaussConstStepSpin = new wxSpinCtrl(this);
+    SetSpinRangeAndValue(gaussConstStepSpin, 1, 100, 1);
     gridSizer->Add(gaussConstStepSpin, gridSizerFlags);
 
     // Image compress percentage value
@@ -183,10 +189,13 @@ void AZSMMPF::CreateControls()
     );
     gridSizer->Add(imgCompressPercentageLabel, gridSizerFlags);
     imgCompressMinSpin = new wxSpinCtrl(this);
+    SetSpinRangeAndValue(imgCompressMinSpin, 1, 99, 20);
     gridSizer->Add(imgCompressMinSpin, gridSizerFlags);
     imgCompressMaxSpin = new wxSpinCtrl(this);
+    SetSpinRangeAndValue(imgCompressMaxSpin, 1, 99, 20);
     gridSizer->Add(imgCompressMaxSpin, gridSizerFlags);
     imgCompressStepSpin = new wxSpinCtrl(this);
+    SetSpinRangeAndValue(imgCompressStepSpin, 1, 99, 1);
     gridSizer->Add(imgCompressStepSpin, gridSizerFlags);
 
     // Gauss block size value
@@ -202,10 +211,13 @@ void AZSMMPF::CreateControls()
     gridSizer->Add(gaussBlockSizeLabel, gridSizerFlags);
 
     gaussBlockMinSpin = new wxSpinCtrl(this);
+    SetSpinRangeAndValue(gaussBlockMinSpin, 3, 1001, 3);
     gridSizer->Add(gaussBlockMinSpin, gridSizerFlags);
     gaussBlockMaxSpin = new wxSpinCtrl(this);
+    SetSpinRangeAndValue(gaussBlockMaxSpin, 3, 1001, 3);
     gridSizer->Add(gaussBlockMaxSpin, gridSizerFlags);
     gaussBlockStepSpin = new wxSpinCtrl(this);
+    SetSpinRangeAndValue(gaussBlockStepSpin, 2, 1001, 2);
     gridSizer->Add(gaussBlockStepSpin, gridSizerFlags);
 
     //
@@ -227,4 +239,10 @@ void AZSMMPF::BindEventHandlers()
 void AZSMMPF::OnStartProcess(wxCommandEvent& WXUNUSED(event))
 {
 
+}
+
+void AZSMMPF::SetSpinRangeAndValue(wxSpinCtrl* spin, int min, int max, int value)
+{
+    spin->SetRange(min, max);
+    spin->SetValue(value);
 }
