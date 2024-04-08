@@ -55,6 +55,7 @@ private:
 public:
     AZSMMPF(IController*);
     ~AZSMMPF();
+    const std::string DIR_DEFAULT_PATH{ "C:\\" };
 };
 
 #endif

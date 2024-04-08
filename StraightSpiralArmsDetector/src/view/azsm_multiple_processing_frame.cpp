@@ -63,12 +63,13 @@ void AZSMMPF::CreateControls()
     srcDirPicker = new wxDirPickerCtrl(
         this, 
         wxID_ANY,
-        wxEmptyString,
+        DIR_DEFAULT_PATH,
         wxDirSelectorPromptStr,
         wxDefaultPosition,
         wxDefaultSize,
         wxDIRP_DEFAULT_STYLE | wxDIRP_SMALL
     );
+    srcDirPicker->SetInitialDirectory(DIR_DEFAULT_PATH);
     gridSizer->Add(srcDirPicker, gridSizerFlags);
     dstFolderLabel = new wxStaticText(
         this, 
@@ -82,12 +83,13 @@ void AZSMMPF::CreateControls()
     dstDirPicker = new wxDirPickerCtrl(
         this, 
         wxID_ANY,
-        wxEmptyString,
+        DIR_DEFAULT_PATH,
         wxDirSelectorPromptStr,
         wxDefaultPosition,
         wxDefaultSize,
         wxDIRP_DEFAULT_STYLE | wxDIRP_SMALL
     );
+    dstDirPicker->SetInitialDirectory(DIR_DEFAULT_PATH);
     gridSizer->Add(dstDirPicker, gridSizerFlags);
 
     // Parameters labels
