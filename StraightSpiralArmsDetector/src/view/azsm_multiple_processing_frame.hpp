@@ -71,6 +71,18 @@ public:
     ~AZSMMPF();
     const std::string DIR_DEFAULT_PATH{ "C:\\" };
     void SetStartProcessingBtnEnable(bool);
+    int GetBTVMin() { return binaryThreshMinSpin->GetValue(); };
+    int GetBTVMax() { return binaryThreshMaxSpin->GetValue(); };
+    int GetBTVStep() { return binaryThreshStepSpin->GetValue(); };
+    int GetGCMin() { return gaussConstMinSpin->GetValue(); };
+    int GetGCMax() { return gaussConstMaxSpin->GetValue(); };
+    int GetGCStep() { return gaussConstStepSpin->GetValue(); };
+    int GetICPMin() { return imgCompressMinSpin->GetValue(); };
+    int GetICPMax() { return imgCompressMaxSpin->GetValue(); };
+    int GetICPStep() { return imgCompressStepSpin->GetValue(); };
+    int GetGBSMin() { return gaussBlockMinSpin->GetValue(); };
+    int GetGBSMax() { return gaussBlockMaxSpin->GetValue(); };
+    int GetGBSStep() { return gaussBlockStepSpin->GetValue(); };
 };
 
 #endif

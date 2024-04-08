@@ -21,10 +21,11 @@ class AZSMMPFC : public IController
 {
 private:
     wxWindow* view;
+    AZSParametersRanges GetRanges();
 public:
     AZSMMPFC();
     void SetView(wxWindow*) override;
-    void MakeProcessing(AZSParametersRanges, wxString, wxString);
+    void MakeProcessing();
     void CheckDirExist(wxDirPickerCtrl*);
 };
 

@@ -62,7 +62,6 @@ void AZSMMPF::CreateControls()
     gridSizer->Add(srcFolderLabel, gridSizerFlags);
     srcDirPicker = new wxDirPickerCtrl(
         this, 
-        wxID_ANY,
         ID_SRC_DIR_PICKER,
         DIR_DEFAULT_PATH,
         wxDirSelectorPromptStr,
@@ -83,7 +82,6 @@ void AZSMMPF::CreateControls()
     gridSizer->Add(dstFolderLabel, gridSizerFlags);
     dstDirPicker = new wxDirPickerCtrl(
         this, 
-        wxID_ANY,
         ID_DST_DIR_PICKER,
         DIR_DEFAULT_PATH,
         wxDirSelectorPromptStr,
@@ -339,34 +337,16 @@ void AZSMMPF::OnSetGaussBlockSizeStep(wxCommandEvent& WXUNUSED(event))
 
 void AZSMMPF::OnStartProcess(wxCommandEvent& WXUNUSED(event))
 {
-    AZSParametersRanges paramRanges{};
-
-    paramRanges.min = AdaptiveZhangSuenParameters{
-        float(binaryThreshMinSpin->GetValue()),
-        float(gaussConstMinSpin->GetValue()),
-        float(imgCompressMinSpin->GetValue()),
-        gaussBlockMinSpin->GetValue()
-    };
-    paramRanges.max = AdaptiveZhangSuenParameters{
-        float(binaryThreshMaxSpin->GetValue()),
-        float(gaussConstMaxSpin->GetValue()),
-        float(imgCompressMaxSpin->GetValue()),
-        gaussBlockMaxSpin->GetValue()
-    };
-    paramRanges.step = AdaptiveZhangSuenParameters{
-        float(binaryThreshStepSpin->GetValue()),
-        float(gaussConstStepSpin->GetValue()),
-        float(imgCompressStepSpin->GetValue()),
-        gaussBlockStepSpin->GetValue()
-    };
-
-        CastAZSMMPFC->MakeProcessing(
-            paramRanges, srcDirPicker->GetPath(), dstDirPicker->GetPath()
-        );
+    CastAZSMMPFC->MakeProcessing();
 }
 
 void AZSMMPF::SetSpinRangeAndValue(wxSpinCtrl* spin, int min, int max, int value)
 {
     spin->SetRange(min, max);
     spin->SetValue(value);
+}
+
+void AZSMMPF::SetStartProcessingBtnEnable(bool state)
+{
+    startProcessing->Enable(state);
 }
