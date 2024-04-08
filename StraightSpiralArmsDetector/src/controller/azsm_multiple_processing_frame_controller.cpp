@@ -9,7 +9,9 @@ void AZSMMPFC::SetView(wxWindow* view)
     this->view = view;
 }
 
-void AZSMMPFC::MakeProcessing(AZSParametersRanges params)
+void AZSMMPFC::MakeProcessing(
+    AZSParametersRanges params, wxString srcDir, wxString dstDir
+)
 {
-
+    
 }

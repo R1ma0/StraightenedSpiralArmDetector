@@ -54,6 +54,7 @@ private:
     int gbsMinOldValue;
     int gbsMaxOldValue;
     int gbsStepOldValue;
+    bool CheckDirsExists();
     void CreateControls();
     void BindEventHandlers();
     void OnStartProcess(wxCommandEvent&);

@@ -19,7 +19,7 @@ private:
 public:
     AZSMMPFC();
     void SetView(wxWindow*) override;
-    void MakeProcessing(AZSParametersRanges);
+    void MakeProcessing(AZSParametersRanges, wxString, wxString);
 };
 
 #endif

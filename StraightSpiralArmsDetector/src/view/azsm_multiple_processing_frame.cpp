@@ -333,9 +333,33 @@ void AZSMMPF::OnStartProcess(wxCommandEvent& WXUNUSED(event))
         gaussBlockStepSpin->GetValue()
     };
 
-    CastAZSMMPFC->MakeProcessing(paramRanges);
+    if (CheckDirsExists())
+    {
+        CastAZSMMPFC->MakeProcessing(
+            paramRanges, srcDirPicker->GetPath(), dstDirPicker->GetPath()
+        );
+    }
+    else
+    {
+        wxMessageBox(
+            _("Wrong way round."),
+            _("Attention!"),
+            wxICON_WARNING
+        );
+    }
+}
 
-    wxMessageBox(srcDirPicker->GetPath(), "");
+bool AZSMMPF::CheckDirsExists()
+{
+    bool srcDirExist = wxDirExists(srcDirPicker->GetPath());
+    bool dstDirExist = wxDirExists(dstDirPicker->GetPath());
+
+    if (srcDirExist && dstDirExist)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 void AZSMMPF::SetSpinRangeAndValue(wxSpinCtrl* spin, int min, int max, int value)
