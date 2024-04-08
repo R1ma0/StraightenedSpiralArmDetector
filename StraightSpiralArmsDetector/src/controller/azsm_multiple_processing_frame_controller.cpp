@@ -11,5 +11,5 @@ void AZSMMPFC::SetView(wxWindow* view)
 
 void AZSMMPFC::MakeProcessing(AZSParametersRanges params)
 {
-    wxMessageBox(std::to_string(params.max.gaussBlockSize), "");
+
 }

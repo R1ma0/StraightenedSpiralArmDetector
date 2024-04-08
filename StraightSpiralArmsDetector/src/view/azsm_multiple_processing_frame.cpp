@@ -55,6 +55,7 @@ void AZSMMPF::CreateControls()
         this, 
         -1, 
         _("Tate the original images from..."),
+        _("Take the source images from..."),
         wxDefaultPosition,
         wxDefaultSize,
         wxALIGN_RIGHT
@@ -334,6 +335,8 @@ void AZSMMPF::OnStartProcess(wxCommandEvent& WXUNUSED(event))
     };
 
     CastAZSMMPFC->MakeProcessing(paramRanges);
+
+    wxMessageBox(srcDirPicker->GetPath(), "");
 }
 
 void AZSMMPF::SetSpinRangeAndValue(wxSpinCtrl* spin, int min, int max, int value)
