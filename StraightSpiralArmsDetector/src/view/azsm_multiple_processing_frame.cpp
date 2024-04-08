@@ -312,7 +312,28 @@ void AZSMMPF::OnSetGaussBlockSizeStep(wxCommandEvent& WXUNUSED(event))
 
 void AZSMMPF::OnStartProcess(wxCommandEvent& WXUNUSED(event))
 {
+    AZSParametersRanges paramRanges{};
 
+    paramRanges.min = AdaptiveZhangSuenParameters{
+        float(binaryThreshMinSpin->GetValue()),
+        float(gaussConstMinSpin->GetValue()),
+        float(imgCompressMinSpin->GetValue()),
+        gaussBlockMinSpin->GetValue()
+    };
+    paramRanges.max = AdaptiveZhangSuenParameters{
+        float(binaryThreshMaxSpin->GetValue()),
+        float(gaussConstMaxSpin->GetValue()),
+        float(imgCompressMaxSpin->GetValue()),
+        gaussBlockMaxSpin->GetValue()
+    };
+    paramRanges.step = AdaptiveZhangSuenParameters{
+        float(binaryThreshStepSpin->GetValue()),
+        float(gaussConstStepSpin->GetValue()),
+        float(imgCompressStepSpin->GetValue()),
+        gaussBlockStepSpin->GetValue()
+    };
+
+    CastAZSMMPFC->MakeProcessing(paramRanges);
 }
 
 void AZSMMPF::SetSpinRangeAndValue(wxSpinCtrl* spin, int min, int max, int value)

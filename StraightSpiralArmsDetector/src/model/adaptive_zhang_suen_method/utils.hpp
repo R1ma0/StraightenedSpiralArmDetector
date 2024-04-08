@@ -2,7 +2,6 @@
 #define UTILS_HPP
 
 #include <opencv2/opencv.hpp>
-#include <vector>
 #include "adaptive_zhang_suen_types.hpp"
 
 class Utils
