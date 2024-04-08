@@ -56,6 +56,9 @@ private:
     void CreateControls();
     void BindEventHandlers();
     void OnStartProcess(wxCommandEvent&);
+    void OnSetBinaryThreshMinSpin(wxCommandEvent&);
+    void OnSetGaussConstMinSpin(wxCommandEvent&);
+    void OnSetImgCompressPercentageMinSpin(wxCommandEvent&);
     void OnSetGaussBlockSizeMin(wxCommandEvent&);
     void OnSetGaussBlockSizeMax(wxCommandEvent&);
     void OnSetGaussBlockSizeStep(wxCommandEvent&);

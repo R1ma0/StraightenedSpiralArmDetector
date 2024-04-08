@@ -146,7 +146,7 @@ void AZSMMPF::CreateControls()
         wxALIGN_RIGHT
     );
     gridSizer->Add(binaryThreshValueLabel, gridSizerFlags);
-    binaryThreshMinSpin = new wxSpinCtrl(this);
+    binaryThreshMinSpin = new wxSpinCtrl(this, ID_AZSMMP_BTV_MIN_SPIN);
     SetSpinRangeAndValue(binaryThreshMinSpin, 0, 255, 125);
     gridSizer->Add(binaryThreshMinSpin, gridSizerFlags);
     binaryThreshMaxSpin = new wxSpinCtrl(this);
@@ -167,7 +167,7 @@ void AZSMMPF::CreateControls()
         wxALIGN_RIGHT
     );
     gridSizer->Add(gaussConstLabel, gridSizerFlags);
-    gaussConstMinSpin = new wxSpinCtrl(this);
+    gaussConstMinSpin = new wxSpinCtrl(this, ID_AZSMMP_GC_MIN_SPIN);
     SetSpinRangeAndValue(gaussConstMinSpin, -50, 50, 0);
     gridSizer->Add(gaussConstMinSpin, gridSizerFlags);
     gaussConstMaxSpin = new wxSpinCtrl(this);
@@ -188,7 +188,7 @@ void AZSMMPF::CreateControls()
         wxALIGN_RIGHT
     );
     gridSizer->Add(imgCompressPercentageLabel, gridSizerFlags);
-    imgCompressMinSpin = new wxSpinCtrl(this);
+    imgCompressMinSpin = new wxSpinCtrl(this, ID_AZSMMP_ICP_MIN_SPIN);
     SetSpinRangeAndValue(imgCompressMinSpin, 1, 99, 20);
     gridSizer->Add(imgCompressMinSpin, gridSizerFlags);
     imgCompressMaxSpin = new wxSpinCtrl(this);
@@ -234,9 +234,57 @@ void AZSMMPF::CreateControls()
 void AZSMMPF::BindEventHandlers()
 {
     Bind(wxEVT_BUTTON, &AZSMMPF::OnStartProcess, this, ID_START_MP);
-    Bind(wxEVT_SPINCTRL, &AZSMMPF::OnSetGaussBlockSizeMin, this, ID_AZSMMP_GBS_MIN_SPIN);
-    Bind(wxEVT_SPINCTRL, &AZSMMPF::OnSetGaussBlockSizeMax, this, ID_AZSMMP_GBS_MAX_SPIN);
-    Bind(wxEVT_SPINCTRL, &AZSMMPF::OnSetGaussBlockSizeStep, this, ID_AZSMMP_GBS_STEP_SPIN);
+    Bind(
+        wxEVT_SPINCTRL, 
+        &AZSMMPF::OnSetGaussBlockSizeMin, 
+        this, 
+        ID_AZSMMP_GBS_MIN_SPIN
+    );
+    Bind(
+        wxEVT_SPINCTRL, 
+        &AZSMMPF::OnSetGaussBlockSizeMax, 
+        this, 
+        ID_AZSMMP_GBS_MAX_SPIN
+    );
+    Bind(
+        wxEVT_SPINCTRL, 
+        &AZSMMPF::OnSetGaussBlockSizeStep,
+        this, 
+        ID_AZSMMP_GBS_STEP_SPIN
+    );
+    Bind(
+        wxEVT_SPINCTRL, 
+        &AZSMMPF::OnSetBinaryThreshMinSpin, 
+        this, 
+        ID_AZSMMP_BTV_MIN_SPIN
+    );
+    Bind(
+        wxEVT_SPINCTRL, 
+        &AZSMMPF::OnSetGaussConstMinSpin,
+        this, 
+        ID_AZSMMP_GC_MIN_SPIN
+    );
+    Bind(
+        wxEVT_SPINCTRL, 
+        &AZSMMPF::OnSetImgCompressPercentageMinSpin, 
+        this, 
+        ID_AZSMMP_ICP_MIN_SPIN
+    );
+}
+
+void AZSMMPF::OnSetBinaryThreshMinSpin(wxCommandEvent& WXUNUSED(event))
+{
+    binaryThreshMaxSpin->SetRange(binaryThreshMinSpin->GetValue(), 255);
+}
+
+void AZSMMPF::OnSetGaussConstMinSpin(wxCommandEvent& WXUNUSED(event))
+{
+    gaussConstMaxSpin->SetRange(gaussConstMinSpin->GetValue(), 50);
+}
+
+void AZSMMPF::OnSetImgCompressPercentageMinSpin(wxCommandEvent& WXUNUSED(event))
+{
+    imgCompressMaxSpin->SetRange(imgCompressMinSpin->GetValue(), 99);
 }
 
 void AZSMMPF::OnSetGaussBlockSizeMin(wxCommandEvent& WXUNUSED(event))
@@ -244,8 +292,10 @@ void AZSMMPF::OnSetGaussBlockSizeMin(wxCommandEvent& WXUNUSED(event))
     gaussBlockMinSpin->SetValue(
         CheckOddValue(gaussBlockMinSpin->GetValue(), &gbsMinOldValue)
     );
-}
 
+    gaussBlockMaxSpin->SetRange(gaussBlockMinSpin->GetValue(), 1001);
+}
+    
 void AZSMMPF::OnSetGaussBlockSizeMax(wxCommandEvent& WXUNUSED(event))
 {
     gaussBlockMaxSpin->SetValue(
