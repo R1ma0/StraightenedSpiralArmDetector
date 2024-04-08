@@ -54,7 +54,6 @@ private:
     int gbsMinOldValue;
     int gbsMaxOldValue;
     int gbsStepOldValue;
-    bool CheckDirsExists();
     void CreateControls();
     void BindEventHandlers();
     void OnStartProcess(wxCommandEvent&);
@@ -64,11 +63,14 @@ private:
     void OnSetGaussBlockSizeMin(wxCommandEvent&);
     void OnSetGaussBlockSizeMax(wxCommandEvent&);
     void OnSetGaussBlockSizeStep(wxCommandEvent&);
+    void OnSrcDirPickerChanged(wxCommandEvent&);
+    void OnDstDirPickerChanged(wxCommandEvent&);
     void SetSpinRangeAndValue(wxSpinCtrl*, int, int, int);
 public:
     AZSMMPF(IController*);
     ~AZSMMPF();
     const std::string DIR_DEFAULT_PATH{ "C:\\" };
+    void SetStartProcessingBtnEnable(bool);
 };
 
 #endif

@@ -14,4 +14,17 @@ void AZSMMPFC::MakeProcessing(
 )
 {
     
+void AZSMMPFC::CheckDirExist(wxDirPickerCtrl* picker)
+{
+    bool dirExist = wxDirExists(picker->GetPath());
+
+    if (dirExist)
+    {
+        CastAZSMMPF->SetStartProcessingBtnEnable(true);
+    }
+    else
+    {
+        CastAZSMMPF->SetStartProcessingBtnEnable(false);
+    }
+}
 }

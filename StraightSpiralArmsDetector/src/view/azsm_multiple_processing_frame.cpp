@@ -63,6 +63,7 @@ void AZSMMPF::CreateControls()
     srcDirPicker = new wxDirPickerCtrl(
         this, 
         wxID_ANY,
+        ID_SRC_DIR_PICKER,
         DIR_DEFAULT_PATH,
         wxDirSelectorPromptStr,
         wxDefaultPosition,
@@ -83,6 +84,7 @@ void AZSMMPF::CreateControls()
     dstDirPicker = new wxDirPickerCtrl(
         this, 
         wxID_ANY,
+        ID_DST_DIR_PICKER,
         DIR_DEFAULT_PATH,
         wxDirSelectorPromptStr,
         wxDefaultPosition,
@@ -225,6 +227,7 @@ void AZSMMPF::CreateControls()
     AddEmptyCells(this, 3, *gridSizer, gridSizerFlags);
 
     startProcessing = new wxButton(this, ID_START_MP, _("Process"));
+    startProcessing->Enable(false);
     gridSizer->Add(startProcessing, gridSizerFlags);
 
     this->SetSizer(gridSizer);
@@ -270,6 +273,30 @@ void AZSMMPF::BindEventHandlers()
         this, 
         ID_AZSMMP_ICP_MIN_SPIN
     );
+    Bind(
+        wxEVT_DIRPICKER_CHANGED, 
+        &AZSMMPF::OnSrcDirPickerChanged, 
+        this, 
+        ID_SRC_DIR_PICKER
+    );
+    Bind(
+        wxEVT_DIRPICKER_CHANGED,
+        &AZSMMPF::OnDstDirPickerChanged,
+        this,
+        ID_DST_DIR_PICKER
+    );
+}
+
+void AZSMMPF::OnSrcDirPickerChanged(wxCommandEvent& WXUNUSED(event))
+{
+    CastAZSMMPFC->CheckDirExist(srcDirPicker);
+    CastAZSMMPFC->CheckDirExist(dstDirPicker);
+}
+
+void AZSMMPF::OnDstDirPickerChanged(wxCommandEvent& WXUNUSED(event))
+{
+    CastAZSMMPFC->CheckDirExist(srcDirPicker);
+    CastAZSMMPFC->CheckDirExist(dstDirPicker);
 }
 
 void AZSMMPF::OnSetBinaryThreshMinSpin(wxCommandEvent& WXUNUSED(event))
@@ -333,33 +360,9 @@ void AZSMMPF::OnStartProcess(wxCommandEvent& WXUNUSED(event))
         gaussBlockStepSpin->GetValue()
     };
 
-    if (CheckDirsExists())
-    {
         CastAZSMMPFC->MakeProcessing(
             paramRanges, srcDirPicker->GetPath(), dstDirPicker->GetPath()
         );
-    }
-    else
-    {
-        wxMessageBox(
-            _("Wrong way round."),
-            _("Attention!"),
-            wxICON_WARNING
-        );
-    }
-}
-
-bool AZSMMPF::CheckDirsExists()
-{
-    bool srcDirExist = wxDirExists(srcDirPicker->GetPath());
-    bool dstDirExist = wxDirExists(dstDirPicker->GetPath());
-
-    if (srcDirExist && dstDirExist)
-    {
-        return true;
-    }
-
-    return false;
 }
 
 void AZSMMPF::SetSpinRangeAndValue(wxSpinCtrl* spin, int min, int max, int value)
