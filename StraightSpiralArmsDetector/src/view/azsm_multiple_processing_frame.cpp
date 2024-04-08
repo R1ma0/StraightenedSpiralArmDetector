@@ -54,7 +54,6 @@ void AZSMMPF::CreateControls()
     srcFolderLabel = new wxStaticText(
         this, 
         -1, 
-        _("Tate the original images from..."),
         _("Take the source images from..."),
         wxDefaultPosition,
         wxDefaultSize,
