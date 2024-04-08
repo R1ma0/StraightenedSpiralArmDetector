@@ -63,6 +63,7 @@
     <ClCompile Include="src\controller\azsm_multiple_processing_frame_controller.cpp" />
     <ClCompile Include="src\view\utils\grid_empty_cell.cpp" />
     <ClCompile Include="src\view\utils\static_text_fonts.cpp" />
+    <ClCompile Include="src\model\odd_even_checker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\view\app_main_window.hpp">
@@ -120,5 +121,6 @@
     <ClInclude Include="src\controller\azsm_multiple_processing_frame_controller.hpp" />
     <ClInclude Include="src\view\utils\grid_empty_cell.hpp" />
     <ClInclude Include="src\view\utils\static_text_fonts.hpp" />
+    <ClInclude Include="src\model\odd_even_checker.hpp" />
   </ItemGroup>
 </Project>

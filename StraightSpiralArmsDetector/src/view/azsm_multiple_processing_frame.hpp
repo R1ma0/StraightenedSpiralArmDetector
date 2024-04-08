@@ -10,6 +10,7 @@
 #include "ids_of_controls.hpp"
 #include "utils/grid_empty_cell.hpp"
 #include "utils/static_text_fonts.hpp"
+#include "../model/odd_even_checker.hpp"
 #include "../controller/i_controller.hpp"
 #include "../controller/azsm_multiple_processing_frame_controller.hpp"
 
@@ -49,9 +50,15 @@ private:
     wxSpinCtrl* gaussBlockMaxSpin;
     wxSpinCtrl* gaussBlockStepSpin;
     wxButton* startProcessing;
+    int gbsMinOldValue;
+    int gbsMaxOldValue;
+    int gbsStepOldValue;
     void CreateControls();
     void BindEventHandlers();
     void OnStartProcess(wxCommandEvent&);
+    void OnSetGaussBlockSizeMin(wxCommandEvent&);
+    void OnSetGaussBlockSizeMax(wxCommandEvent&);
+    void OnSetGaussBlockSizeStep(wxCommandEvent&);
     void SetSpinRangeAndValue(wxSpinCtrl*, int, int, int);
 public:
     AZSMMPF(IController*);

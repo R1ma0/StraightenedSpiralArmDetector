@@ -210,13 +210,13 @@ void AZSMMPF::CreateControls()
     );
     gridSizer->Add(gaussBlockSizeLabel, gridSizerFlags);
 
-    gaussBlockMinSpin = new wxSpinCtrl(this);
+    gaussBlockMinSpin = new wxSpinCtrl(this, ID_AZSMMP_GBS_MIN_SPIN);
     SetSpinRangeAndValue(gaussBlockMinSpin, 3, 1001, 3);
     gridSizer->Add(gaussBlockMinSpin, gridSizerFlags);
-    gaussBlockMaxSpin = new wxSpinCtrl(this);
+    gaussBlockMaxSpin = new wxSpinCtrl(this, ID_AZSMMP_GBS_MAX_SPIN);
     SetSpinRangeAndValue(gaussBlockMaxSpin, 3, 1001, 3);
     gridSizer->Add(gaussBlockMaxSpin, gridSizerFlags);
-    gaussBlockStepSpin = new wxSpinCtrl(this);
+    gaussBlockStepSpin = new wxSpinCtrl(this, ID_AZSMMP_GBS_STEP_SPIN);
     SetSpinRangeAndValue(gaussBlockStepSpin, 2, 1001, 2);
     gridSizer->Add(gaussBlockStepSpin, gridSizerFlags);
 
@@ -234,6 +234,30 @@ void AZSMMPF::CreateControls()
 void AZSMMPF::BindEventHandlers()
 {
     Bind(wxEVT_BUTTON, &AZSMMPF::OnStartProcess, this, ID_START_MP);
+    Bind(wxEVT_SPINCTRL, &AZSMMPF::OnSetGaussBlockSizeMin, this, ID_AZSMMP_GBS_MIN_SPIN);
+    Bind(wxEVT_SPINCTRL, &AZSMMPF::OnSetGaussBlockSizeMax, this, ID_AZSMMP_GBS_MAX_SPIN);
+    Bind(wxEVT_SPINCTRL, &AZSMMPF::OnSetGaussBlockSizeStep, this, ID_AZSMMP_GBS_STEP_SPIN);
+}
+
+void AZSMMPF::OnSetGaussBlockSizeMin(wxCommandEvent& WXUNUSED(event))
+{
+    gaussBlockMinSpin->SetValue(
+        CheckOddValue(gaussBlockMinSpin->GetValue(), &gbsMinOldValue)
+    );
+}
+
+void AZSMMPF::OnSetGaussBlockSizeMax(wxCommandEvent& WXUNUSED(event))
+{
+    gaussBlockMaxSpin->SetValue(
+        CheckOddValue(gaussBlockMaxSpin->GetValue(), &gbsMaxOldValue)
+    );
+}
+
+void AZSMMPF::OnSetGaussBlockSizeStep(wxCommandEvent& WXUNUSED(event))
+{
+    gaussBlockStepSpin->SetValue(
+        CheckEvenValue(gaussBlockStepSpin->GetValue(), &gbsStepOldValue)
+    );
 }
 
 void AZSMMPF::OnStartProcess(wxCommandEvent& WXUNUSED(event))
