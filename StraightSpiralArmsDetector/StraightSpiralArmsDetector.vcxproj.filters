@@ -122,5 +122,6 @@
     <ClInclude Include="src\view\utils\grid_empty_cell.hpp" />
     <ClInclude Include="src\view\utils\static_text_fonts.hpp" />
     <ClInclude Include="src\model\odd_even_checker.hpp" />
+    <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen_types.hpp" />
   </ItemGroup>
 </Project>

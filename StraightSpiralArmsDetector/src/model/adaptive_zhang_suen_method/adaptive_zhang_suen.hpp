@@ -2,26 +2,9 @@
 #define ADAPTIVE_ZHANG_SUEN_HPP
 
 #include <opencv2/opencv.hpp>
-#include <cstdlib>
 #include "zhang_suen.hpp"
 #include "utils.hpp"
-
-enum class PixelsOperation { Add, Remove };
-
-struct AdaptiveZhangSuenParameters
-{
-    float binaryThreshValue;
-    float gaussConst;
-    float imgCompressPercentage;
-    int gaussBlockSize; // Size of a pixel neighbourhood : 3, 5, 7, ...
-};
-
-struct PixelPatterns
-{
-    std::vector<vInt> composite;
-    vInt compositeSum;
-    vInt simple;
-};
+#include "adaptive_zhang_suen_types.hpp"
 
 class AdaptiveZhangSuenMethod
 {
