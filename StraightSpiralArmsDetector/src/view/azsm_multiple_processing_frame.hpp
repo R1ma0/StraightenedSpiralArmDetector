@@ -71,6 +71,8 @@ public:
     ~AZSMMPF();
     const std::string DIR_DEFAULT_PATH{ "C:\\" };
     void SetStartProcessingBtnEnable(bool);
+    wxString GetSrcDirPath() { return srcDirPicker->GetPath(); };
+    wxString GetDstDirPath() { return dstDirPicker->GetPath(); };
     int GetBTVMin() { return binaryThreshMinSpin->GetValue(); };
     int GetBTVMax() { return binaryThreshMaxSpin->GetValue(); };
     int GetBTVStep() { return binaryThreshStepSpin->GetValue(); };

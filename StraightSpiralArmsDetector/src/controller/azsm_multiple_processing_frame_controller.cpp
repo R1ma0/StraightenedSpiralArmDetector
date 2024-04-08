@@ -1,7 +1,8 @@
 #include "azsm_multiple_processing_frame_controller.hpp"
 
-AZSMMPFC::AZSMMPFC()
+AZSMMPFC::~AZSMMPFC()
 {
+    delete view;
 }
 
 void AZSMMPFC::SetView(wxWindow* view)
@@ -12,6 +13,8 @@ void AZSMMPFC::SetView(wxWindow* view)
 void AZSMMPFC::MakeProcessing()
 {
     AZSParametersRanges ranges = GetRanges();
+    wxString srcDirPath = CastAZSMMPF->GetSrcDirPath();
+    wxString dstDirPath = CastAZSMMPF->GetDstDirPath();
 }
 
 void AZSMMPFC::CheckDirExist(wxDirPickerCtrl* picker)

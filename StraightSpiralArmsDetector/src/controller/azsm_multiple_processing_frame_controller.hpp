@@ -23,7 +23,7 @@ private:
     wxWindow* view;
     AZSParametersRanges GetRanges();
 public:
-    AZSMMPFC();
+    ~AZSMMPFC();
     void SetView(wxWindow*) override;
     void MakeProcessing();
     void CheckDirExist(wxDirPickerCtrl*);
