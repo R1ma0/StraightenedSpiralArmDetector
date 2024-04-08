@@ -4,8 +4,6 @@ AZSMFC::AZSMFC(BufferedBitmap* bitmap, ProcessedImage* procImage)
 {
     this->bitmap = bitmap;
     this->procImage = procImage;
-
-    gbsOldValue = GBS_SPIN_DEFAULT_VALUE;
 }
 
 AZSMFC::~AZSMFC()
@@ -82,19 +80,4 @@ void AZSMFC::Compute(AdaptiveZhangSuenParameters azsmParams, wxActivityIndicator
 void AZSMFC::EnableDialogComponents(bool state)
 {
     CastAZSMCF->SetEnableComponents(state);
-}
-
-int AZSMFC::CheckGBSValue(int value)
-{
-    int newValue = value;
-
-    if (value % 2 == 0)
-    {
-        if (value - gbsOldValue > 0) { newValue = value + 1; }
-        if (value - gbsOldValue < 0) { newValue = value - 1; }
-    }
-
-    gbsOldValue = newValue;
-
-    return newValue;
 }

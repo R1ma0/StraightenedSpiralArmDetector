@@ -68,9 +68,9 @@ void AZSMCF::CreateControls()
     );
     gridSizer->Add(gaussBlockSizeLabel, gridSizerFlags);
 
-    gaussBlockSizeSpin = new wxSpinCtrl(this, ID_GBS_SPIN);
-    gaussBlockSizeSpin->SetRange(CastAZSMFC->GBS_SPIN_DEFAULT_VALUE, 1001);
-    gaussBlockSizeSpin->SetValue(CastAZSMFC->GBS_SPIN_DEFAULT_VALUE);
+    gaussBlockSizeSpin = new wxSpinCtrl(this, ID_AZSM_GBS_SPIN);
+    gaussBlockSizeSpin->SetRange(3, 1001);
+    gaussBlockSizeSpin->SetValue(3);
     gridSizer->Add(gaussBlockSizeSpin, gridSizerFlags);
 
     gridSizer->Add(new wxStaticText(this, -1, wxT("")), gridSizerFlags);
@@ -87,13 +87,13 @@ void AZSMCF::CreateControls()
 void AZSMCF::BindEventHandlers()
 {
     Bind(wxEVT_BUTTON, &AZSMCF::OnRunDetectorator, this, ID_RUN_DETECTORATOR);
-    Bind(wxEVT_SPINCTRL, &AZSMCF::OnSetGaussBlockSize, this, ID_GBS_SPIN);
+    Bind(wxEVT_SPINCTRL, &AZSMCF::OnSetGaussBlockSize, this, ID_AZSM_GBS_SPIN);
 }
 
 void AZSMCF::OnSetGaussBlockSize(wxCommandEvent& WXUNUSED(event))
 {
     gaussBlockSizeSpin->SetValue(
-        CastAZSMFC->CheckGBSValue(gaussBlockSizeSpin->GetValue())
+        CheckOddValue(gaussBlockSizeSpin->GetValue(), &gbsOldValue)
     );
 }
 

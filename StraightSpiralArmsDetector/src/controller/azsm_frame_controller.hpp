@@ -31,15 +31,12 @@ private:
     BufferedBitmap* bitmap;
     std::thread* computeThread;
     wxActivityIndicator* activityIndicator;
-    int gbsOldValue;
     void Compute(AdaptiveZhangSuenParameters, wxActivityIndicator*);
     void CreateActivityIndicator();
     void EnableDialogComponents(bool);
 public:
     AZSMFC(BufferedBitmap*, ProcessedImage*);
     ~AZSMFC();
-    const int GBS_SPIN_DEFAULT_VALUE{ 3 };
-    int CheckGBSValue(int);
     void SetView(wxWindow*) override;
     void RunDetectorator();
 };
