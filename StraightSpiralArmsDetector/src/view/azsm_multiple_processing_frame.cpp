@@ -140,7 +140,7 @@ void AZSMMPF::CreateControls()
     binaryThreshValueLabel = new wxStaticText(
         this,
         -1,
-        _("Binary threshold parameters:"),
+        _("Binary threshold:"),
         wxDefaultPosition,
         wxDefaultSize,
         wxALIGN_RIGHT
@@ -161,7 +161,7 @@ void AZSMMPF::CreateControls()
     gaussConstLabel = new wxStaticText(
         this,
         -1,
-        _("Gaussian constant parameters:"),
+        _("Gaussian constant:"),
         wxDefaultPosition,
         wxDefaultSize,
         wxALIGN_RIGHT
@@ -182,7 +182,7 @@ void AZSMMPF::CreateControls()
     imgCompressPercentageLabel = new wxStaticText(
         this,
         -1,
-        _("Image compress percentage parameters:"),
+        _("Image compress percentage:"),
         wxDefaultPosition,
         wxDefaultSize,
         wxALIGN_RIGHT
@@ -203,7 +203,7 @@ void AZSMMPF::CreateControls()
     gaussBlockSizeLabel = new wxStaticText(
         this, 
         -1,
-        _("Gauss block size parameters:"),
+        _("Gauss block size:"),
         wxDefaultPosition,
         wxDefaultSize,
         wxALIGN_RIGHT
