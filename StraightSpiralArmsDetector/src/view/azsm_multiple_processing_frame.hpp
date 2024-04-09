@@ -63,8 +63,7 @@ private:
     void OnSetGaussBlockSizeMin(wxCommandEvent&);
     void OnSetGaussBlockSizeMax(wxCommandEvent&);
     void OnSetGaussBlockSizeStep(wxCommandEvent&);
-    void OnSrcDirPickerChanged(wxCommandEvent&);
-    void OnDstDirPickerChanged(wxCommandEvent&);
+    void OnDirPickerChanged(wxCommandEvent&);
     void SetSpinRangeAndValue(wxSpinCtrl*, int, int, int);
 public:
     AZSMMPF(IController*);

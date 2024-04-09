@@ -273,25 +273,19 @@ void AZSMMPF::BindEventHandlers()
     );
     Bind(
         wxEVT_DIRPICKER_CHANGED, 
-        &AZSMMPF::OnSrcDirPickerChanged, 
+        &AZSMMPF::OnDirPickerChanged, 
         this, 
         ID_SRC_DIR_PICKER
     );
     Bind(
         wxEVT_DIRPICKER_CHANGED,
-        &AZSMMPF::OnDstDirPickerChanged,
+        &AZSMMPF::OnDirPickerChanged,
         this,
         ID_DST_DIR_PICKER
     );
 }
 
-void AZSMMPF::OnSrcDirPickerChanged(wxCommandEvent& WXUNUSED(event))
-{
-    CastAZSMMPFC->CheckDirExist(srcDirPicker);
-    CastAZSMMPFC->CheckDirExist(dstDirPicker);
-}
-
-void AZSMMPF::OnDstDirPickerChanged(wxCommandEvent& WXUNUSED(event))
+void AZSMMPF::OnDirPickerChanged(wxCommandEvent& WXUNUSED(event))
 {
     CastAZSMMPFC->CheckDirExist(srcDirPicker);
     CastAZSMMPFC->CheckDirExist(dstDirPicker);
