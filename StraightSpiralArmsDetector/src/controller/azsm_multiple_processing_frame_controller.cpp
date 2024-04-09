@@ -15,6 +15,77 @@ void AZSMMPFC::MakeProcessing()
     AZSParametersRanges ranges = GetRanges();
     wxString srcDirPath = CastAZSMMPF->GetSrcDirPath();
     wxString dstDirPath = CastAZSMMPF->GetDstDirPath();
+    SrcFilesData* srcFiles = GetFilesList(srcDirPath, cts::IN_FILE_FORMATS);
+    AdaptiveZhangSuenParameters* azsParams = new AdaptiveZhangSuenParameters();
+    AdaptiveZhangSuenMethod* azsm = new AdaptiveZhangSuenMethod();
+    cv::Mat outImg;
+    
+    for (
+        auto imgPath{ srcFiles->files.begin() }; 
+        imgPath != srcFiles->files.end();
+        imgPath++
+    )
+    {
+        for (
+            float gbs = ranges.min.gaussBlockSize;
+            gbs <= ranges.max.gaussBlockSize;
+            gbs += ranges.step.gaussBlockSize
+            )
+        {
+            for (
+                float gc = ranges.min.gaussConst;
+                gc <= ranges.max.gaussConst;
+                gc += ranges.step.gaussConst
+                )
+            {
+                for (
+                    float icp = ranges.min.imgCompressPercentage;
+                    icp <= ranges.max.imgCompressPercentage;
+                    icp += ranges.step.imgCompressPercentage
+                    )
+                {
+                    for (
+                        float btv = ranges.min.binaryThreshValue;
+                        btv <= ranges.max.binaryThreshValue;
+                        btv += ranges.step.binaryThreshValue
+                        )
+                    {
+                        azsParams->binaryThreshValue = btv;
+                        azsParams->gaussBlockSize = gbs;
+                        azsParams->gaussConst = gc;
+                        azsParams->imgCompressPercentage = icp;
+
+                        outImg = cv::imread(cv::String(*imgPath), cv::IMREAD_GRAYSCALE);
+                        outImg = azsm->execute(outImg, *azsParams);
+                        
+                        cv::imwrite(
+                            GetPathToSave(
+                                std::string(dstDirPath), 
+                                std::string(*imgPath)
+                            ).u8string(),
+                            outImg
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    delete srcFiles;
+    delete azsParams;
+    delete azsm;
+}
+
+std::filesystem::path AZSMMPFC::GetPathToSave(
+    std::string dstPath, 
+    std::string filePath
+)
+{
+    std::filesystem::path pathToSave{ dstPath };
+    std::filesystem::path srcPath{ filePath };
+    pathToSave += std::string("/_" + srcPath.filename().u8string());
+
+    return pathToSave;
 }
 
 void AZSMMPFC::CheckDirExist(wxDirPickerCtrl* picker)

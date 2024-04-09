@@ -32,6 +32,7 @@
     <ClCompile Include="src\model\odd_even_checker.cpp" />
     <ClCompile Include="src\model\i18n\i18n.cpp" />
     <ClCompile Include="src\model\processed_image.cpp" />
+    <ClCompile Include="src\model\src_files_handler.cpp" />
     <ClCompile Include="src\view\app_main_window.cpp" />
     <ClCompile Include="src\view\buffered_bitmap.cpp" />
     <ClCompile Include="src\view\azsm_control_frame.cpp" />
@@ -58,6 +59,7 @@
     <ClInclude Include="src\model\odd_even_checker.hpp" />
     <ClInclude Include="src\model\i18n\i18n.hpp" />
     <ClInclude Include="src\model\processed_image.hpp" />
+    <ClInclude Include="src\model\src_files_handler.hpp" />
     <ClInclude Include="src\view\app_main_window.hpp" />
     <ClInclude Include="src\view\buffered_bitmap.hpp" />
     <ClInclude Include="src\view\azsm_control_frame.hpp" />
