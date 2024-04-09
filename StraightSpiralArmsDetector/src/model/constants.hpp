@@ -18,7 +18,7 @@ namespace cts
 			{"en_GB", wxLANGUAGE_ENGLISH}
 	};
 	const std::string DEFAULT_INI_NAME = "settings.ini";
-	std::vector<wxString> FILE_FORMATS{ "*.png", "*.jpg", "*.jpeg" };
+	const std::vector<wxString> IN_FILE_FORMATS{ "*.png", "*.jpg", "*.jpeg" };
 	const wxString FILE_FILTERS = wxString(
 		_("Images (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg")
 	);
