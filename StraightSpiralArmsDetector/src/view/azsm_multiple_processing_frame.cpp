@@ -344,3 +344,32 @@ void AZSMMPF::SetStartProcessingBtnEnable(bool state)
 {
     startProcessing->Enable(state);
 }
+
+void AZSMMPF::SetEnableComponents(bool state)
+{
+    startProcessing->Enable(state);
+    srcFolderLabel->Enable(state);
+    dstFolderLabel->Enable(state);
+    srcDirPicker->Enable(state);
+    dstDirPicker->Enable(state);
+    binaryThreshValueLabel->Enable(state);
+    gaussConstLabel->Enable(state);
+    imgCompressPercentageLabel->Enable(state);
+    gaussBlockSizeLabel->Enable(state);
+    parameterLabel->Enable(state);
+    parameterMinLabel->Enable(state);
+    parameterMaxLabel->Enable(state);
+    parameterStepLabel->Enable(state);
+    binaryThreshMinSpin->Enable(state);
+    binaryThreshMaxSpin->Enable(state);
+    binaryThreshStepSpin->Enable(state);
+    gaussConstMinSpin->Enable(state);
+    gaussConstMaxSpin->Enable(state);
+    gaussConstStepSpin->Enable(state);
+    imgCompressMinSpin->Enable(state);
+    imgCompressMaxSpin->Enable(state);
+    imgCompressStepSpin->Enable(state);
+    gaussBlockMinSpin->Enable(state);
+    gaussBlockMaxSpin->Enable(state);
+    gaussBlockStepSpin->Enable(state);
+}

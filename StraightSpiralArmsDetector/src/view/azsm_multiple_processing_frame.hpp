@@ -69,7 +69,6 @@ public:
     AZSMMPF(IController*);
     ~AZSMMPF();
     const std::string DIR_DEFAULT_PATH{ "C:\\" };
-    void SetStartProcessingBtnEnable(bool);
     wxString GetSrcDirPath() { return srcDirPicker->GetPath(); };
     wxString GetDstDirPath() { return dstDirPicker->GetPath(); };
     int GetBTVMin() { return binaryThreshMinSpin->GetValue(); };
@@ -84,6 +83,8 @@ public:
     int GetGBSMin() { return gaussBlockMinSpin->GetValue(); };
     int GetGBSMax() { return gaussBlockMaxSpin->GetValue(); };
     int GetGBSStep() { return gaussBlockStepSpin->GetValue(); };
+    void SetEnableComponents(bool);
+    void SetStartProcessingBtnEnable(bool);
 };
 
 #endif
