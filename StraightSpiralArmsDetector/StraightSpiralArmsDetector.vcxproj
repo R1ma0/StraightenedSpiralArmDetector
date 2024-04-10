@@ -43,6 +43,7 @@
     <ClCompile Include="src\view\azsm_multiple_processing_frame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="src\app.hpp" />
     <ClInclude Include="src\controller\app_main_window_controller.hpp" />
     <ClInclude Include="src\controller\azsm_frame_controller.hpp" />
@@ -70,6 +71,13 @@
     <ClInclude Include="src\view\ids_of_controls.hpp" />
     <ClInclude Include="src\view\image_rotate_scale_frame.hpp" />
     <ClInclude Include="src\view\azsm_multiple_processing_frame.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\icon\icon.bmp" />
+    <Image Include="src\icon\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="StraightSpiralArmsDetector.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

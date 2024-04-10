@@ -5,6 +5,7 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+#include "../resource.h"
 #include "controller/app_main_window_controller.hpp"
 #include "view/app_main_window.hpp"
 #include "model/configurator/configurator.hpp"

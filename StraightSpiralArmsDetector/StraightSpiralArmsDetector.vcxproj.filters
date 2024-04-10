@@ -127,5 +127,13 @@
     <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen_types.hpp" />
     <ClInclude Include="src\model\src_files_handler.hpp" />
     <ClInclude Include="src\view\utils\proc_activity_indicator.hpp" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\icon\icon.ico" />
+    <Image Include="src\icon\icon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="StraightSpiralArmsDetector.rc" />
   </ItemGroup>
 </Project>

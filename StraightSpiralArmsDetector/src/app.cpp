@@ -24,10 +24,11 @@ bool App::OnInit()
 	amwc = new AppMainWindowController(appConfigurator);
 	amw = new AppMainWindow(_("Spiral galaxy handler"), amwc);
 
-    amwc->SetView(amw);
+	amwc->SetView(amw);
 	amw->SetSize(amw->FromDIP(appConfigurator->GetWindowSize()));
 	amw->Center();
 	amw->Maximize(appConfigurator->GetMaximize());
+	amw->SetIcon(wxICON(IDB_BITMAP1));
 	amw->Show(true);
 
 	return true;
@@ -35,7 +36,9 @@ bool App::OnInit()
 
 void App::ShowLangStatusMessage()
 {
-	cts::LangStatusCode* code = new cts::LangStatusCode(i18n->GetLangStatusCode());
+	cts::LangStatusCode* code = new cts::LangStatusCode(
+		i18n->GetLangStatusCode()
+	);
 
 	switch (*code)
 	{
