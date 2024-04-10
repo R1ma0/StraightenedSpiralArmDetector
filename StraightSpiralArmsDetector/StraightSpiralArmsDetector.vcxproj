@@ -36,6 +36,7 @@
     <ClCompile Include="src\view\app_main_window.cpp" />
     <ClCompile Include="src\view\buffered_bitmap.cpp" />
     <ClCompile Include="src\view\azsm_control_frame.cpp" />
+    <ClCompile Include="src\view\utils\proc_activity_indicator.cpp" />
     <ClCompile Include="src\view\utils\static_text_fonts.cpp" />
     <ClCompile Include="src\view\utils\grid_empty_cell.cpp" />
     <ClCompile Include="src\view\image_rotate_scale_frame.cpp" />
@@ -63,6 +64,7 @@
     <ClInclude Include="src\view\app_main_window.hpp" />
     <ClInclude Include="src\view\buffered_bitmap.hpp" />
     <ClInclude Include="src\view\azsm_control_frame.hpp" />
+    <ClInclude Include="src\view\utils\proc_activity_indicator.hpp" />
     <ClInclude Include="src\view\utils\static_text_fonts.hpp" />
     <ClInclude Include="src\view\utils\grid_empty_cell.hpp" />
     <ClInclude Include="src\view\ids_of_controls.hpp" />

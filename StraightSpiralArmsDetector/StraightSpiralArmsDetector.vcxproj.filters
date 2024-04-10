@@ -65,6 +65,7 @@
     <ClCompile Include="src\view\utils\static_text_fonts.cpp" />
     <ClCompile Include="src\model\odd_even_checker.cpp" />
     <ClCompile Include="src\model\src_files_handler.cpp" />
+    <ClCompile Include="src\view\utils\proc_activity_indicator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\view\app_main_window.hpp">
@@ -125,5 +126,6 @@
     <ClInclude Include="src\model\odd_even_checker.hpp" />
     <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen_types.hpp" />
     <ClInclude Include="src\model\src_files_handler.hpp" />
+    <ClInclude Include="src\view\utils\proc_activity_indicator.hpp" />
   </ItemGroup>
 </Project>

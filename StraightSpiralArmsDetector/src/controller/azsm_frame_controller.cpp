@@ -19,20 +19,6 @@ void AZSMFC::SetView(wxWindow* view)
     this->view = view;
 }
 
-void AZSMFC::CreateActivityIndicator()
-{
-    wxSize size = wxSize(100, 100);
-    wxPoint pos;
-
-    pos.x = view->GetSize().GetWidth() / 2;
-    pos.y = view->GetSize().GetHeight() / 2;
-
-    pos.x -= size.GetWidth() / 2;
-    pos.y -= size.GetHeight() - size.GetHeight() / 4;
-
-    activityIndicator = new wxActivityIndicator(view, -1, pos, size);
-}
-
 void AZSMFC::RunDetectorator()
 {
     float binaryThresh = (float)CastAZSMCF->GetBinaryThresh();
@@ -44,7 +30,7 @@ void AZSMFC::RunDetectorator()
         binaryThresh, gaussConst, compressPercentage, gaussBlockSize
     };
 
-    CreateActivityIndicator();
+    activityIndicator = CreateActivityIndicator(view, wxSize(100, 100));
     activityIndicator->Start();
     activityIndicator->Show();
 
