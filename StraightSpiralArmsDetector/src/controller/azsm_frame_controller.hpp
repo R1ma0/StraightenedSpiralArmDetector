@@ -5,7 +5,6 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
-#include <wx/activityindicator.h>
 #include <opencv2/opencv.hpp>
 #include <thread>
 #include "i_controller.hpp"
