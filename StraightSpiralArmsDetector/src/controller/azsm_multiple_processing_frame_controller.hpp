@@ -28,7 +28,8 @@ class AZSMMPFC : public IController
 private:
     wxWindow* view;
     AZSParametersRanges GetRanges();
-    std::filesystem::path GetPathToSave(std::string, std::string);
+    std::filesystem::path GetPathToSave(std::string, std::string, std::string);
+    std::string ParamsSeqToStr(AdaptiveZhangSuenParameters*);
 public:
     ~AZSMMPFC();
     void SetView(wxWindow*) override;

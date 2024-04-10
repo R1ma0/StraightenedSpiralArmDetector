@@ -19,6 +19,7 @@ void AZSMMPFC::MakeProcessing()
     AdaptiveZhangSuenParameters* azsParams = new AdaptiveZhangSuenParameters();
     AdaptiveZhangSuenMethod* azsm = new AdaptiveZhangSuenMethod();
     cv::Mat outImg;
+    std::string paramsStr;
     
     for (
         auto imgPath{ srcFiles->files.begin() }; 
@@ -58,10 +59,13 @@ void AZSMMPFC::MakeProcessing()
                         outImg = cv::imread(cv::String(*imgPath), cv::IMREAD_GRAYSCALE);
                         outImg = azsm->execute(outImg, *azsParams);
                         
+                        paramsStr = ParamsSeqToStr(azsParams);
+
                         cv::imwrite(
                             GetPathToSave(
                                 std::string(dstDirPath), 
-                                std::string(*imgPath)
+                                std::string(*imgPath),
+                                paramsStr
                             ).u8string(),
                             outImg
                         );
@@ -78,14 +82,31 @@ void AZSMMPFC::MakeProcessing()
 
 std::filesystem::path AZSMMPFC::GetPathToSave(
     std::string dstPath, 
-    std::string filePath
+    std::string filePath,
+    std::string paramsStr
 )
 {
     std::filesystem::path pathToSave{ dstPath };
     std::filesystem::path srcPath{ filePath };
-    pathToSave += std::string("/_" + srcPath.filename().u8string());
+
+    std::string extension = srcPath.extension().u8string();
+    std::string filename = srcPath.stem().u8string();
+
+    pathToSave += std::string(
+        "/_" + filename + "_" + paramsStr + extension
+    );
 
     return pathToSave;
+}
+
+std::string AZSMMPFC::ParamsSeqToStr(AdaptiveZhangSuenParameters* p)
+{
+    std::string btvStr = std::to_string(int(p->binaryThreshValue));
+    std::string gcStr = std::to_string(int(p->gaussConst));
+    std::string icpStr = std::to_string(int(p->imgCompressPercentage));
+    std::string gbsStr = std::to_string(int(p->gaussBlockSize));
+
+    return btvStr + "_" + gcStr + "_" + icpStr + "_" + gbsStr;
 }
 
 void AZSMMPFC::CheckDirExist(wxDirPickerCtrl* picker)
