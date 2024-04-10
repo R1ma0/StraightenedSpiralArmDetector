@@ -3,6 +3,8 @@
 AZSMMPFC::~AZSMMPFC()
 {
     delete view;
+    delete activityIndicator;
+    delete computeThread;
 }
 
 void AZSMMPFC::SetView(wxWindow* view)
@@ -18,14 +20,43 @@ void AZSMMPFC::MakeProcessing()
     SrcFilesData* srcFiles = GetFilesList(srcDirPath, cts::IN_FILE_FORMATS);
     AdaptiveZhangSuenParameters* azsParams = new AdaptiveZhangSuenParameters();
     AdaptiveZhangSuenMethod* azsm = new AdaptiveZhangSuenMethod();
+
+    activityIndicator = CreateActivityIndicator(view, wxSize(100, 100));
+    activityIndicator->Start();
+    activityIndicator->Show();
+
+    EnableDialogComponents(false);
+
+    computeThread = new std::thread{
+        &AZSMMPFC::Compute,
+        this,
+        srcFiles,
+        dstDirPath,
+        azsm,
+        ranges,
+        azsParams,
+        activityIndicator
+    };
+    computeThread->detach();
+}
+
+void AZSMMPFC::Compute(
+    SrcFilesData* srcFiles,
+    wxString dstDirPath,
+    AdaptiveZhangSuenMethod* azsm,
+    AZSParametersRanges ranges,
+    AdaptiveZhangSuenParameters* azsParams,
+    wxActivityIndicator* actInd
+)
+{
     cv::Mat outImg;
     std::string paramsStr;
-    
+
     for (
-        auto imgPath{ srcFiles->files.begin() }; 
+        auto imgPath{ srcFiles->files.begin() };
         imgPath != srcFiles->files.end();
         imgPath++
-    )
+        )
     {
         for (
             float gbs = ranges.min.gaussBlockSize;
@@ -58,12 +89,12 @@ void AZSMMPFC::MakeProcessing()
 
                         outImg = cv::imread(cv::String(*imgPath), cv::IMREAD_GRAYSCALE);
                         outImg = azsm->execute(outImg, *azsParams);
-                        
+
                         paramsStr = ParamsSeqToStr(azsParams);
 
                         cv::imwrite(
                             GetPathToSave(
-                                std::string(dstDirPath), 
+                                std::string(dstDirPath),
                                 std::string(*imgPath),
                                 paramsStr
                             ).u8string(),
@@ -78,6 +109,10 @@ void AZSMMPFC::MakeProcessing()
     delete srcFiles;
     delete azsParams;
     delete azsm;
+
+    actInd->Stop();
+    actInd->Hide();
+    EnableDialogComponents(true);
 }
 
 std::filesystem::path AZSMMPFC::GetPathToSave(
@@ -147,4 +182,9 @@ AZSParametersRanges AZSMMPFC::GetRanges()
     };
 
     return paramRanges;
+}
+
+void AZSMMPFC::EnableDialogComponents(bool state)
+{
+    CastAZSMMPF->SetEnableComponents(state);
 }
