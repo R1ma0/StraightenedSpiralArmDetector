@@ -21,13 +21,11 @@ void AZSMFC::SetView(wxWindow* view)
 
 void AZSMFC::RunDetectorator()
 {
-    float binaryThresh = (float)CastAZSMCF->GetBinaryThresh();
-    float gaussConst = (float)CastAZSMCF->GetGaussConst();
-    float compressPercentage = (float)CastAZSMCF->GetCompressPercentage();
-    int gaussBlockSize = CastAZSMCF->GetGaussBlockSize();
-
     AdaptiveZhangSuenParameters azsmParams{
-        binaryThresh, gaussConst, compressPercentage, gaussBlockSize
+        (float)CastAZSMCF->GetBinaryThresh(),
+        (float)CastAZSMCF->GetGaussConst(),
+        (float)CastAZSMCF->GetCompressPercentage(),
+        CastAZSMCF->GetGaussBlockSize()
     };
 
     activityIndicator = CreateActivityIndicator(view, wxSize(100, 100));
