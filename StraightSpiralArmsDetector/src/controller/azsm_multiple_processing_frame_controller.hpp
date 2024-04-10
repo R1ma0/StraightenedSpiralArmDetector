@@ -6,7 +6,6 @@
 #include <wx/wx.h>
 #endif
 #include <opencv2/opencv.hpp>
-#include <wx/filepicker.h>
 #include <vector>
 #include <filesystem>
 #include <thread>
@@ -47,7 +46,6 @@ public:
     ~AZSMMPFC();
     void SetView(wxWindow*) override;
     void MakeProcessing();
-    void CheckDirExist(wxDirPickerCtrl*);
 };
 
 #endif

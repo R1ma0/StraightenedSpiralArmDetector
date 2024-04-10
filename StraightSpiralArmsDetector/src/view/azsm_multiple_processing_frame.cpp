@@ -287,8 +287,11 @@ void AZSMMPF::BindEventHandlers()
 
 void AZSMMPF::OnDirPickerChanged(wxCommandEvent& WXUNUSED(event))
 {
-    CastAZSMMPFC->CheckDirExist(srcDirPicker);
-    CastAZSMMPFC->CheckDirExist(dstDirPicker);
+    bool isSrcDirValid = wxDirExists(srcDirPicker->GetPath());;
+    bool isDstDirValid = wxDirExists(dstDirPicker->GetPath());;
+    bool btnState = (isSrcDirValid && isDstDirValid) ? true : false;
+
+    SetStartProcessingBtnEnable(btnState);
 }
 
 void AZSMMPF::OnSetBinaryThreshMinSpin(wxCommandEvent& WXUNUSED(event))

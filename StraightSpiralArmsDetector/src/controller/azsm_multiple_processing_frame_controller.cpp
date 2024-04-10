@@ -144,20 +144,6 @@ std::string AZSMMPFC::ParamsSeqToStr(AdaptiveZhangSuenParameters* p)
     return btvStr + "_" + gcStr + "_" + icpStr + "_" + gbsStr;
 }
 
-void AZSMMPFC::CheckDirExist(wxDirPickerCtrl* picker)
-{
-    bool dirExist = wxDirExists(picker->GetPath());
-
-    if (dirExist)
-    {
-        CastAZSMMPF->SetStartProcessingBtnEnable(true);
-    }
-    else
-    {
-        CastAZSMMPF->SetStartProcessingBtnEnable(false);
-    }
-}
-
 AZSParametersRanges AZSMMPFC::GetRanges()
 {
     AZSParametersRanges paramRanges{};
