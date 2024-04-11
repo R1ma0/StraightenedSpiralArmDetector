@@ -50,7 +50,11 @@ void AZSMMPFC::Compute(
 )
 {
     cv::Mat outImg;
+    cv::Mat inImg;
+    std::filesystem::path pathToImg;
     std::string paramsStr;
+    std::string extension;
+    std::string filename;
 
     for (
         auto imgPath{ srcFiles->files.begin() };
@@ -58,24 +62,36 @@ void AZSMMPFC::Compute(
         imgPath++
         )
     {
+        pathToImg = { std::string(*imgPath) };
+        extension = pathToImg.extension().u8string();
+        filename = pathToImg.stem().u8string();
+
+        inImg = cv::imread(cv::String(*imgPath), cv::IMREAD_GRAYSCALE);
+
         for (
             float gbs = ranges.min.gaussBlockSize;
             gbs <= ranges.max.gaussBlockSize;
             gbs += ranges.step.gaussBlockSize
             )
         {
+            azsParams->gaussBlockSize = gbs;
+
             for (
                 float gc = ranges.min.gaussConst;
                 gc <= ranges.max.gaussConst;
                 gc += ranges.step.gaussConst
                 )
             {
+                azsParams->gaussConst = gc;
+
                 for (
                     float icp = ranges.min.imgCompressPercentage;
                     icp <= ranges.max.imgCompressPercentage;
                     icp += ranges.step.imgCompressPercentage
                     )
                 {
+                    azsParams->imgCompressPercentage = icp;
+
                     for (
                         float btv = ranges.min.binaryThreshValue;
                         btv <= ranges.max.binaryThreshValue;
@@ -83,19 +99,16 @@ void AZSMMPFC::Compute(
                         )
                     {
                         azsParams->binaryThreshValue = btv;
-                        azsParams->gaussBlockSize = gbs;
-                        azsParams->gaussConst = gc;
-                        azsParams->imgCompressPercentage = icp;
 
-                        outImg = cv::imread(cv::String(*imgPath), cv::IMREAD_GRAYSCALE);
-                        outImg = azsm->execute(outImg, *azsParams);
+                        outImg = azsm->execute(inImg, *azsParams);
 
                         paramsStr = ParamsSeqToStr(azsParams);
 
                         cv::imwrite(
                             GetPathToSave(
                                 std::string(dstDirPath),
-                                std::string(*imgPath),
+                                filename,
+                                extension,
                                 paramsStr
                             ).u8string(),
                             outImg
@@ -116,16 +129,13 @@ void AZSMMPFC::Compute(
 }
 
 std::filesystem::path AZSMMPFC::GetPathToSave(
-    std::string dstPath, 
-    std::string filePath,
+    std::string dstPath,
+    std::string filename,
+    std::string extension,
     std::string paramsStr
 )
 {
     std::filesystem::path pathToSave{ dstPath };
-    std::filesystem::path srcPath{ filePath };
-
-    std::string extension = srcPath.extension().u8string();
-    std::string filename = srcPath.stem().u8string();
 
     pathToSave += std::string(
         "/_" + filename + "_" + paramsStr + extension

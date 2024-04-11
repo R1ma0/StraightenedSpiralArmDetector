@@ -31,7 +31,12 @@ private:
     std::thread* computeThread;
     wxActivityIndicator* activityIndicator;
     AZSParametersRanges GetRanges();
-    std::filesystem::path GetPathToSave(std::string, std::string, std::string);
+    std::filesystem::path GetPathToSave(
+        std::string, 
+        std::string, 
+        std::string,
+        std::string
+    );
     std::string ParamsSeqToStr(AdaptiveZhangSuenParameters*);
     void Compute(
         SrcFilesData*,
