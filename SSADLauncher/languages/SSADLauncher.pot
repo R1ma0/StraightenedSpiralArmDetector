@@ -17,7 +17,7 @@ msgid "Manual file could not be found."
 msgstr ""
 
 #: tmainform.caption
-msgid "SSADLauncher v1.1.0"
+msgid "SSADLauncher v1.2.0"
 msgstr ""
 
 #: tmainform.groupbox1.caption

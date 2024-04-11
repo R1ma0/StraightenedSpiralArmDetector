@@ -1,5 +1,5 @@
 {"version":1,"strings":[
-{"hash":61894272,"name":"tmainform.caption","sourcebytes":[83,83,65,68,76,97,117,110,99,104,101,114,32,118,49,46,49,46,48],"value":"SSADLauncher v1.1.0"},
+{"hash":61893504,"name":"tmainform.caption","sourcebytes":[83,83,65,68,76,97,117,110,99,104,101,114,32,118,49,46,50,46,48],"value":"SSADLauncher v1.2.0"},
 {"hash":95238254,"name":"tmainform.groupbox1.caption","sourcebytes":[76,111,99,97,108,105,115,97,116,105,111,110],"value":"Localisation"},
 {"hash":206450904,"name":"tmainform.langcombo.text","sourcebytes":[69,110,103,108,105,115,104],"value":"English"},
 {"hash":98585447,"name":"tmainform.groupbox2.caption","sourcebytes":[87,105,110,100,111,119],"value":"Window"},

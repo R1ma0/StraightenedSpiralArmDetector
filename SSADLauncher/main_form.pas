@@ -29,6 +29,9 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+      Image1: TImage;
+      Image2: TImage;
+      Image3: TImage;
     OpenUsrManual: TButton;
     ResetBtn: TButton;
     ResolutionCombo: TComboBox;
