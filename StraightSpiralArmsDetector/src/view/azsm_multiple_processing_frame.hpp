@@ -7,6 +7,7 @@
 #endif
 #include <wx/filepicker.h>
 #include <wx/spinctrl.h>
+#include <algorithm>
 #include "ids_of_controls.hpp"
 #include "utils/grid_empty_cell.hpp"
 #include "utils/static_text_fonts.hpp"

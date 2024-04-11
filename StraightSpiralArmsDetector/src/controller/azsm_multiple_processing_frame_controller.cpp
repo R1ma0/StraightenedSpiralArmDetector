@@ -184,3 +184,38 @@ void AZSMMPFC::EnableDialogComponents(bool state)
 {
     CastAZSMMPF->SetEnableComponents(state);
 }
+
+bool AZSMMPFC::IsFolderHasFiles(wxString dir, std::vector<wxString> formats)
+{
+    wxDir d(dir);
+
+    if (!d.IsOpened())
+    {
+        return false;
+    }
+
+    bool isContainFiles = true;
+
+    for (auto format{ formats.begin() }; format != formats.end(); format++)
+    {
+        isContainFiles = d.HasFiles(*format);
+    }
+
+    return isContainFiles;
+}
+
+wxString AZSMMPFC::GetFileFormatsStr()
+{
+    wxString formats = "";
+
+    for (
+        auto format{ cts::IN_FILE_FORMATS.begin() };
+        format != cts::IN_FILE_FORMATS.end();
+        format++
+        )
+    {
+        formats += *format;
+    }
+
+    return formats;
+}

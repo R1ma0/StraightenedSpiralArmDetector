@@ -334,7 +334,26 @@ void AZSMMPF::OnSetGaussBlockSizeStep(wxCommandEvent& WXUNUSED(event))
 
 void AZSMMPF::OnStartProcess(wxCommandEvent& WXUNUSED(event))
 {
-    CastAZSMMPFC->MakeProcessing();
+    wxString folder = srcDirPicker->GetPath();
+    folder.erase(std::remove_if(folder.begin(), folder.end(), isspace), folder.end());
+    bool isFolderHasFiles = CastAZSMMPFC->IsFolderHasFiles(
+        folder,
+        cts::IN_FILE_FORMATS
+    );
+
+    if (isFolderHasFiles)
+    {
+        CastAZSMMPFC->MakeProcessing();
+    }
+    else
+    {
+        wxString formats = CastAZSMMPFC->GetFileFormatsStr();
+
+        wxMessageBox(
+            folder + _(" folder does not contain ") + formats + _(" files."),
+            _("File search error")
+        );
+    }
 }
 
 void AZSMMPF::SetSpinRangeAndValue(wxSpinCtrl* spin, int min, int max, int value)

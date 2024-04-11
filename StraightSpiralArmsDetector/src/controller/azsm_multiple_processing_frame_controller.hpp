@@ -51,6 +51,8 @@ public:
     ~AZSMMPFC();
     void SetView(wxWindow*) override;
     void MakeProcessing();
+    bool IsFolderHasFiles(wxString, std::vector<wxString>);
+    wxString GetFileFormatsStr();
 };
 
 #endif
