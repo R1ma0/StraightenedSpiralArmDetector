@@ -9,4 +9,7 @@ StraightSpiralArmsDetector\
     ru_RU\
       SSADLauncher.mo
       StraightSpiralArmsDetector.mo
+  manual\
+    UserManualEN.pdf
+    UserManualRU.pdf
   SSADLauncher.exe
