@@ -194,14 +194,15 @@ bool AZSMMPFC::IsFolderHasFiles(wxString dir, std::vector<wxString> formats)
         return false;
     }
 
-    bool isContainFiles = true;
-
     for (auto format{ formats.begin() }; format != formats.end(); format++)
     {
-        isContainFiles = d.HasFiles(*format);
+        if (d.HasFiles(*format))
+        {
+            return true;
+        }
     }
 
-    return isContainFiles;
+    return false;
 }
 
 wxString AZSMMPFC::GetFileFormatsStr()
