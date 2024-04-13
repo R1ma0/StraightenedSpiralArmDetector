@@ -41,6 +41,7 @@
     <ClCompile Include="src\view\utils\grid_empty_cell.cpp" />
     <ClCompile Include="src\view\image_rotate_scale_frame.cpp" />
     <ClCompile Include="src\view\azsm_multiple_processing_frame.cpp" />
+    <ClCompile Include="src\model\thread_pool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -71,6 +72,7 @@
     <ClInclude Include="src\view\ids_of_controls.hpp" />
     <ClInclude Include="src\view\image_rotate_scale_frame.hpp" />
     <ClInclude Include="src\view\azsm_multiple_processing_frame.hpp" />
+    <ClInclude Include="src\model\thread_pool.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="src\icon\icon.bmp" />

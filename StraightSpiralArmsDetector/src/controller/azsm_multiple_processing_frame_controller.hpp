@@ -14,6 +14,7 @@
 #include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen.hpp"
 #include "../model/src_files_handler.hpp"
 #include "../model/constants.hpp"
+#include "../model/thread_pool.hpp"
 #include "../view/azsm_multiple_processing_frame.hpp"
 #include "../view/utils/proc_activity_indicator.hpp"
 
@@ -28,6 +29,7 @@ class AZSMMPFC : public IController
 {
 private:
     wxWindow* view;
+    ThreadPool* thPool;
     std::thread* computeThread;
     wxActivityIndicator* activityIndicator;
     AZSParametersRanges GetRanges();

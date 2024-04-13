@@ -14,10 +14,11 @@ void AZSMMPFC::SetView(wxWindow* view)
 
 void AZSMMPFC::MakeProcessing()
 {
-    AZSParametersRanges ranges = GetRanges();
     wxString srcDirPath = CastAZSMMPF->GetSrcDirPath();
     wxString dstDirPath = CastAZSMMPF->GetDstDirPath();
     SrcFilesData* srcFiles = GetFilesList(srcDirPath, cts::IN_FILE_FORMATS);
+
+    AZSParametersRanges ranges = GetRanges();
     AdaptiveZhangSuenParameters* azsParams = new AdaptiveZhangSuenParameters();
     AdaptiveZhangSuenMethod* azsm = new AdaptiveZhangSuenMethod();
 
@@ -49,10 +50,9 @@ void AZSMMPFC::Compute(
     wxActivityIndicator* actInd
 )
 {
-    cv::Mat outImg;
+    thPool = new ThreadPool();
     cv::Mat inImg;
     std::filesystem::path pathToImg;
-    std::string paramsStr;
     std::string extension;
     std::string filename;
 
@@ -60,7 +60,7 @@ void AZSMMPFC::Compute(
         auto imgPath{ srcFiles->files.begin() };
         imgPath != srcFiles->files.end();
         imgPath++
-        )
+    )
     {
         pathToImg = { std::string(*imgPath) };
         extension = pathToImg.extension().u8string();
@@ -72,7 +72,7 @@ void AZSMMPFC::Compute(
             float gbs = ranges.min.gaussBlockSize;
             gbs <= ranges.max.gaussBlockSize;
             gbs += ranges.step.gaussBlockSize
-            )
+        )
         {
             azsParams->gaussBlockSize = gbs;
 
@@ -80,7 +80,7 @@ void AZSMMPFC::Compute(
                 float gc = ranges.min.gaussConst;
                 gc <= ranges.max.gaussConst;
                 gc += ranges.step.gaussConst
-                )
+            )
             {
                 azsParams->gaussConst = gc;
 
@@ -88,7 +88,7 @@ void AZSMMPFC::Compute(
                     float icp = ranges.min.imgCompressPercentage;
                     icp <= ranges.max.imgCompressPercentage;
                     icp += ranges.step.imgCompressPercentage
-                    )
+                )
                 {
                     azsParams->imgCompressPercentage = icp;
 
@@ -96,36 +96,45 @@ void AZSMMPFC::Compute(
                         float btv = ranges.min.binaryThreshValue;
                         btv <= ranges.max.binaryThreshValue;
                         btv += ranges.step.binaryThreshValue
-                        )
+                    )
                     {
                         azsParams->binaryThreshValue = btv;
 
-                        outImg = azsm->execute(inImg, *azsParams);
+                        // thPool->Enqueue([
+                        //     azsParams, inImg, this, dstDirPath, filename, extension, azsm
+                        // ] {
+                        //     cv::Mat outImg = azsm->execute(inImg, *azsParams);
 
-                        paramsStr = ParamsSeqToStr(azsParams);
+                        //     std::string paramsStr = ParamsSeqToStr(azsParams);
 
-                        cv::imwrite(
-                            GetPathToSave(
-                                std::string(dstDirPath),
-                                filename,
-                                extension,
-                                paramsStr
-                            ).u8string(),
-                            outImg
-                        );
+                        //     cv::imwrite(
+                        //         GetPathToSave(
+                        //             std::string(dstDirPath),
+                        //             filename,
+                        //             extension,
+                        //             paramsStr
+                        //         ).u8string(),
+                        //         outImg
+                        //     );
+                        // });
                     }
                 }
             }
         }
     }
 
-    delete srcFiles;
-    delete azsParams;
-    delete azsm;
+    while (!thPool->IsTasksEmpty())
+    {
+        thPool->~ThreadPool();
 
-    actInd->Stop();
-    actInd->Hide();
-    EnableDialogComponents(true);
+        delete srcFiles;
+        delete azsParams;
+        delete azsm;
+
+        actInd->Stop();
+        actInd->Hide();
+        EnableDialogComponents(true);
+    }
 }
 
 std::filesystem::path AZSMMPFC::GetPathToSave(
