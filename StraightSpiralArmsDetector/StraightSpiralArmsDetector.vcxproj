@@ -24,6 +24,7 @@
     <ClCompile Include="src\controller\azsm_frame_controller.cpp" />
     <ClCompile Include="src\controller\azsm_multiple_processing_frame_controller.cpp" />
     <ClCompile Include="src\controller\image_rotate_scale_frame_controller.cpp" />
+    <ClCompile Include="src\model\azs_mp_task.cpp" />
     <ClCompile Include="src\model\configurator\configurator.cpp" />
     <ClCompile Include="src\model\converters.cpp" />
     <ClCompile Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.cpp" />
@@ -53,6 +54,7 @@
     <ClInclude Include="src\controller\i_controller.hpp" />
     <ClInclude Include="src\libs\ini.h" />
     <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen_types.hpp" />
+    <ClInclude Include="src\model\azs_mp_task.hpp" />
     <ClInclude Include="src\model\configurator\configurator.hpp" />
     <ClInclude Include="src\model\constants.hpp" />
     <ClInclude Include="src\model\converters.hpp" />

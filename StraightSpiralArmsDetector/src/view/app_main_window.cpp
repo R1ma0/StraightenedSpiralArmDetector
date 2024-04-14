@@ -17,23 +17,22 @@ AMW::AMW(
 
 AMW::~AMW()
 {
-    delete controller;
-    delete bitmap;
-    delete menuFile;
-    delete menuView;
-    delete menuProcessing;
-    delete skeletonizationMenu;
     delete saveImg;
     delete loadImg;
     delete zoomInItem;
     delete zoomOutItem;
     delete openRotateScaleDialog;
     delete adaptiveZhangSuenMethod;
+    delete adaptiveZhangSuenMethodMP;
     delete useMuiltipleProcessing;
+    delete skeletonizationMenu;
+    delete menuView;
+    delete menuFile;
+    delete menuProcessing;
     delete menuBar;
     delete sizerMain;
-    delete sizerMain;
-    delete adaptiveZhangSuenMethodMP;
+    delete controller;
+    delete bitmap;
 }
 
 void AMW::CreateControls()

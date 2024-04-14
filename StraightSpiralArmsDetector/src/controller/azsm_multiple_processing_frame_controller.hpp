@@ -7,7 +7,6 @@
 #endif
 #include <opencv2/opencv.hpp>
 #include <vector>
-#include <filesystem>
 #include <thread>
 #include "i_controller.hpp"
 #include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen_types.hpp"
@@ -15,6 +14,7 @@
 #include "../model/src_files_handler.hpp"
 #include "../model/constants.hpp"
 #include "../model/thread_pool.hpp"
+#include "../model/azs_mp_task.hpp"
 #include "../view/azsm_multiple_processing_frame.hpp"
 #include "../view/utils/proc_activity_indicator.hpp"
 
@@ -29,25 +29,12 @@ class AZSMMPFC : public IController
 {
 private:
     wxWindow* view;
-    ThreadPool* thPool;
+    SrcFilesData* srcFiles;
+    AZSTasks* thPoolTasks;
     std::thread* computeThread;
     wxActivityIndicator* activityIndicator;
     AZSParametersRanges GetRanges();
-    std::filesystem::path GetPathToSave(
-        std::string, 
-        std::string, 
-        std::string,
-        std::string
-    );
-    std::string ParamsSeqToStr(AdaptiveZhangSuenParameters*);
-    void Compute(
-        SrcFilesData*,
-        wxString,
-        AdaptiveZhangSuenMethod*,
-        AZSParametersRanges,
-        AdaptiveZhangSuenParameters*,
-        wxActivityIndicator*
-    );
+    void Compute(AZSTasks*, wxActivityIndicator*);
     void EnableDialogComponents(bool);
 public:
     ~AZSMMPFC();
