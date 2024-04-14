@@ -22,7 +22,6 @@ private:
 	void Configure();
 public:
 	Configurator();
-	~Configurator();
 	mINI::INIStructure GetIniData() const { return iniStructure; };
 	wxSize GetWindowSize() const;
 	std::string GetLanguageCode() const;

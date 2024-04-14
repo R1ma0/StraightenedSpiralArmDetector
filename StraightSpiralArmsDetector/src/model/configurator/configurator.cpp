@@ -5,11 +5,6 @@ Configurator::Configurator()
 	Configure();
 }
 
-Configurator::~Configurator()
-{
-	delete standardPaths;
-}
-
 void Configurator::Configure()
 {
 	if (!IsIniFileExist())

@@ -8,11 +8,10 @@ App::App()
 
 App::~App()
 {
-	delete i18n;
-	delete appConfigurator;
-	delete amw;
-	delete amwc;
-	delete locale;
+	wxDELETE(amw);
+	wxDELETE(amwc);
+	wxDELETE(i18n);
+	wxDELETE(appConfigurator);
 }
 
 bool App::OnInit()

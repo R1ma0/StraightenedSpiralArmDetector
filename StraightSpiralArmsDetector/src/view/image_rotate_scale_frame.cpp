@@ -18,23 +18,7 @@ IRSF::IRSF(
 
 IRSF::~IRSF()
 {
-    delete controller;
-    delete rotateOldValue;
-    delete scaleXOldValue;
-    delete scaleYOldValue;
-    delete angleSpin;
-    delete scaleXNewSpin;
-    delete scaleYNewSpin;
-    delete rotateTitle;
-    delete rotateOldText;
-    delete angleSpinNewText;
-    delete angleSpinText;
-    delete scaleTitle;
-    delete scaleXOldText;
-    delete scaleXNewText;
-    delete scaleYOldText;
-    delete scaleYNewText;
-    delete applyChangesBtn;
+    wxDELETE(controller);
 }
 
 void IRSF::CreateControls()

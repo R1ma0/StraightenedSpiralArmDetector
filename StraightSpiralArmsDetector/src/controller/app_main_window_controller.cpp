@@ -11,7 +11,7 @@ AMWC::AMWC(Configurator* configurator)
 
 AMWC::~AMWC()
 {
-    delete procImage;
+    wxDELETE(procImage);
 }
 
 wxBitmap AMWC::GetBitmapImage()

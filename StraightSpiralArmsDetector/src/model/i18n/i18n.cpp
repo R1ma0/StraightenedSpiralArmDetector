@@ -11,9 +11,7 @@ I18N::I18N(wxLocale* locale, Configurator* configurator, wxString appName)
 
 I18N::~I18N()
 {
-	delete locale;
-	delete tmpLocale;
-	delete configurator;
+	wxDELETE(configurator);
 }
 
 void I18N::SetLanguage()

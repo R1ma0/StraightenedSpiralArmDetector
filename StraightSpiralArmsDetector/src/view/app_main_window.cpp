@@ -17,22 +17,7 @@ AMW::AMW(
 
 AMW::~AMW()
 {
-    delete saveImg;
-    delete loadImg;
-    delete zoomInItem;
-    delete zoomOutItem;
-    delete openRotateScaleDialog;
-    delete adaptiveZhangSuenMethod;
-    delete adaptiveZhangSuenMethodMP;
-    delete useMuiltipleProcessing;
-    delete skeletonizationMenu;
-    delete menuView;
-    delete menuFile;
-    delete menuProcessing;
-    delete menuBar;
-    delete sizerMain;
-    delete controller;
-    delete bitmap;
+    wxDELETE(controller);
 }
 
 void AMW::CreateControls()

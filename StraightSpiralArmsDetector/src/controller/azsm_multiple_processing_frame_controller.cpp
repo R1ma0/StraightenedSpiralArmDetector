@@ -2,11 +2,9 @@
 
 AZSMMPFC::~AZSMMPFC()
 {
-    delete view;
-    delete activityIndicator;
-    delete computeThread;
-    delete thPoolTasks;
-    delete srcFiles;
+    wxDELETE(computeThread);
+    wxDELETE(thPoolTasks);
+    wxDELETE(srcFiles);
 }
 
 void AZSMMPFC::SetView(wxWindow* view)

@@ -8,10 +8,8 @@ AZSMFC::AZSMFC(BufferedBitmap* bitmap, ProcessedImage* procImage)
 
 AZSMFC::~AZSMFC()
 {
-    delete bitmap;
-    delete procImage;
-    delete activityIndicator;
-    delete computeThread;
+    wxDELETE(procImage);
+    wxDELETE(computeThread);
 }
 
 void AZSMFC::SetView(wxWindow* view)

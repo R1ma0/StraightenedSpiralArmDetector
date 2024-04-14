@@ -14,32 +14,7 @@ AZSMMPF::AZSMMPF(
 
 AZSMMPF::~AZSMMPF()
 {
-    delete controller;
-    delete srcFolderLabel;
-    delete dstFolderLabel;
-    delete srcDirPicker;
-    delete dstDirPicker;
-    delete startProcessing;
-    delete binaryThreshValueLabel;
-    delete gaussConstLabel;
-    delete imgCompressPercentageLabel;
-    delete gaussBlockSizeLabel;
-    delete parameterLabel;
-    delete parameterMinLabel;
-    delete parameterMaxLabel;
-    delete parameterStepLabel;
-    delete binaryThreshMinSpin;
-    delete binaryThreshMaxSpin;
-    delete binaryThreshStepSpin;
-    delete gaussConstMinSpin;
-    delete gaussConstMaxSpin;
-    delete gaussConstStepSpin;
-    delete imgCompressMinSpin;
-    delete imgCompressMaxSpin;
-    delete imgCompressStepSpin;
-    delete gaussBlockMinSpin;
-    delete gaussBlockMaxSpin;
-    delete gaussBlockStepSpin;
+    wxDELETE(controller);
 }
 
 void AZSMMPF::CreateControls()

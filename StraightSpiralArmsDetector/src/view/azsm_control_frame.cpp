@@ -14,16 +14,7 @@ AZSMCF::AZSMCF(
 
 AZSMCF::~AZSMCF()
 {
-    delete controller;
-    delete binaryThreshValueSpin;
-    delete gaussBlockSizeSpin;
-    delete gaussConstSpin;
-    delete imgCompressPercentageSpin;
-    delete binaryThreshValueLabel;
-    delete gaussConstLabel;
-    delete imgCompressPercentageLabel;
-    delete gaussBlockSizeLabel;
-    delete computeBtn;
+    wxDELETE(controller);
 }
 
 void AZSMCF::CreateControls()
