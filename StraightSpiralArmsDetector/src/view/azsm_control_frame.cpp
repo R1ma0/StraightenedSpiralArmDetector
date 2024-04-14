@@ -1,16 +1,10 @@
 #include "azsm_control_frame.hpp"
 
-#ifndef AZSMCF
-#define AZSMCF AZSMControlFrame
-#endif
-#ifndef CastAZSMFC
-#define CastAZSMFC dynamic_cast<AZSMFrameController *>(controller)
-#endif
-
-AZSMCF::AZSMCF
-(
-    IController *controller
-) : wxDialog(NULL, wxID_ANY, "Zhang Suen method settings")
+AZSMCF::AZSMCF(
+    IController* controller
+) : wxDialog(
+    NULL, wxID_ANY, _("Zhang-Suen method settings")
+)
 {
     this->controller = controller;
 
@@ -18,13 +12,20 @@ AZSMCF::AZSMCF
     BindEventHandlers();
 }
 
+AZSMCF::~AZSMCF()
+{
+    wxDELETE(controller);
+}
+
 void AZSMCF::CreateControls()
 {
     auto gridSizer = new wxGridSizer(0, 2, wxSize(50, 5));
-    auto& gridSizerFlags = wxSizerFlags().Expand().Border(wxALL, 10).CenterVertical();
+    auto& gridSizerFlags = wxSizerFlags().Expand().Border(
+        wxALL, 10
+    ).CenterVertical();
 
-    auto binaryThreshValueLabel = new wxStaticText(
-        this, -1, wxT("Binary Thresh Value:")
+    binaryThreshValueLabel = new wxStaticText(
+        this, -1, _("Threshold binarisation value:")
     );
     gridSizer->Add(binaryThreshValueLabel, gridSizerFlags);
 
@@ -33,8 +34,8 @@ void AZSMCF::CreateControls()
     binaryThreshValueSpin->SetValue(125);
     gridSizer->Add(binaryThreshValueSpin, gridSizerFlags);
 
-    auto gaussConstLabel = new wxStaticText(
-        this, -1, wxT("Gauss Constant Value:")
+    gaussConstLabel = new wxStaticText(
+        this, -1, _("Gaussian constant:")
     );
     gridSizer->Add(gaussConstLabel, gridSizerFlags);
 
@@ -43,8 +44,8 @@ void AZSMCF::CreateControls()
     gaussConstSpin->SetValue(0);
     gridSizer->Add(gaussConstSpin, gridSizerFlags);
 
-    auto imgCompressPercentageLabel = new wxStaticText(
-        this, -1, wxT("Image Compress Percentage:")
+    imgCompressPercentageLabel = new wxStaticText(
+        this, -1, _("Image compression percentage:")
     );
     gridSizer->Add(imgCompressPercentageLabel, gridSizerFlags);
 
@@ -53,20 +54,20 @@ void AZSMCF::CreateControls()
     imgCompressPercentageSpin->SetValue(20);
     gridSizer->Add(imgCompressPercentageSpin, gridSizerFlags);
 
-    auto gaussBlockSizeLabel = new wxStaticText(
-        this, -1, wxT("Gauss Block Size Value (odd): ")        
+    gaussBlockSizeLabel = new wxStaticText(
+        this, -1, _("Gaussian block size value (odd):")        
     );
     gridSizer->Add(gaussBlockSizeLabel, gridSizerFlags);
 
-    gaussBlockSizeSpin = new wxSpinCtrl(this);
+    gaussBlockSizeSpin = new wxSpinCtrl(this, ID_AZSM_GBS_SPIN);
     gaussBlockSizeSpin->SetRange(3, 1001);
     gaussBlockSizeSpin->SetValue(3);
     gridSizer->Add(gaussBlockSizeSpin, gridSizerFlags);
 
     gridSizer->Add(new wxStaticText(this, -1, wxT("")), gridSizerFlags);
 
-    auto computeBtn = new wxButton(
-        this, ID_RUN_DETECTORATOR, wxT("Start Processing")
+    computeBtn = new wxButton(
+        this, ID_RUN_DETECTORATOR, _("Process")
     );
     gridSizer->Add(computeBtn, gridSizerFlags);
 
@@ -76,15 +77,31 @@ void AZSMCF::CreateControls()
 
 void AZSMCF::BindEventHandlers()
 {
-    Bind(
-        wxEVT_BUTTON, 
-        &AZSMCF::OnRunDetectorator,
-        this, 
-        ID_RUN_DETECTORATOR
+    Bind(wxEVT_BUTTON, &AZSMCF::OnRunDetectorator, this, ID_RUN_DETECTORATOR);
+    Bind(wxEVT_SPINCTRL, &AZSMCF::OnSetGaussBlockSize, this, ID_AZSM_GBS_SPIN);
+}
+
+void AZSMCF::OnSetGaussBlockSize(wxCommandEvent& WXUNUSED(event))
+{
+    gaussBlockSizeSpin->SetValue(
+        CheckOddValue(gaussBlockSizeSpin->GetValue(), &gbsOldValue)
     );
 }
 
-void AZSMCF::OnRunDetectorator(wxCommandEvent &WXUNUSED(event))
+void AZSMCF::OnRunDetectorator(wxCommandEvent& WXUNUSED(event))
 {
     CastAZSMFC->RunDetectorator();
+}
+
+void AZSMCF::SetEnableComponents(bool state)
+{
+    computeBtn->Enable(state);
+    binaryThreshValueSpin->Enable(state);
+    gaussConstSpin->Enable(state);
+    imgCompressPercentageSpin->Enable(state);
+    gaussBlockSizeSpin->Enable(state);
+    binaryThreshValueLabel->Enable(state);
+    gaussConstLabel->Enable(state);
+    imgCompressPercentageLabel->Enable(state);
+    gaussBlockSizeLabel->Enable(state);
 }

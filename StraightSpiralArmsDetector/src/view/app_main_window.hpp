@@ -3,7 +3,7 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 #include <wx/wfstream.h>
 #include <wx/log.h>
@@ -12,30 +12,52 @@
 #include <wx/event.h>
 #include "ids_of_controls.hpp"
 #include "buffered_bitmap.hpp"
-#include "../controller/i_controller.hpp"
 #include "../controller/app_main_window_controller.hpp"
+#include "../controller/i_controller.hpp"
 
-class AppMainWindow : public wxFrame
+#ifndef AMW
+#define AMW AppMainWindow
+#endif
+#ifndef CastAMWC
+#define CastAMWC dynamic_cast<AppMainWindowController *>(controller)
+#endif
+
+class AMW : public wxFrame
 {
 private:
-    IController *mainController;
-    BufferedBitmap *bitmap;
-    wxMenuItem *saveImg;
-    wxBoxSizer *sizerMain;
-    void OnExit(wxCommandEvent &);
-    void OnLoadImg(wxCommandEvent &);
-    void OnSaveImg(wxCommandEvent &);
-    void OnRotateScale(wxCommandEvent &);
-    void OnImageZoomIn(wxCommandEvent &);
-    void OnImageZoomOut(wxCommandEvent &);
-    void OnUseAZSMethod(wxCommandEvent &);
+    IController* controller;
+    BufferedBitmap* bitmap;
+    wxMenu* menuFile;
+    wxMenu* menuView;
+    wxMenu* menuProcessing;
+    wxMenu* skeletonizationMenu;
+    wxMenu* useMuiltipleProcessing;
+    wxMenuItem* saveImg;
+    wxMenuItem* loadImg;
+    wxMenuItem* zoomInItem;
+    wxMenuItem* zoomOutItem;
+    wxMenuItem* openRotateScaleDialog;
+    wxMenuItem* adaptiveZhangSuenMethod;
+    wxMenuItem* adaptiveZhangSuenMethodMP;
+    wxMenuBar* menuBar;
+    wxBoxSizer* sizerMain;
+    void OnExit(wxCommandEvent&);
+    void OnLoadImg(wxCommandEvent&);
+    void OnSaveImg(wxCommandEvent&);
+    void OnRotateScale(wxCommandEvent&);
+    void OnImageZoomIn(wxCommandEvent&);
+    void OnImageZoomOut(wxCommandEvent&);
+    void OnUseAZSMethod(wxCommandEvent&);
+    void OnUseAZSMMP(wxCommandEvent&);
     void CreateControls();
     void BindEventHandlers();
     void AllowSavingImage(bool);
+    void AllowViewMenu(bool);
+    void AllowProcessingMenu(bool);
 public:
-    AppMainWindow(const wxString &, IController *);
-    ~AppMainWindow();
-    BufferedBitmap *GetBufferedBitmap() { return bitmap; }
+    AMW(const wxString&, IController*);
+    ~AMW();
+    BufferedBitmap* GetBufferedBitmap() { return bitmap; }
     void UpdateBitmap(wxBitmap);
 };
 

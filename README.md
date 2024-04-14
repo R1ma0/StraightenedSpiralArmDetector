@@ -6,6 +6,5 @@ ______
 1. OpenCV
 2. wxWidgets
 3. Visual Studio
+4. Lazarus (for launcher)
 ______
-
-To run the program, you must place `opencv_world490.dll` next to the executable file

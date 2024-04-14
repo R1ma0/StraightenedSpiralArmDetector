@@ -1,29 +1,71 @@
-#include <wx/wxprec.h>
-#ifndef WX_PRECOMP
-#include <wx/wx.h>
-#endif
-#include "controller/i_controller.hpp"
-#include "controller/app_main_window_controller.hpp"
-#include "view/app_main_window.hpp"
+#include "app.hpp"
 
-class App : public wxApp
+App::App()
 {
-public:
-	bool OnInit() override;
-};
+	locale = new wxLocale();
+	appConfigurator = new Configurator();
+}
 
-wxIMPLEMENT_APP(App);
+App::~App()
+{
+	wxDELETE(amw);
+	wxDELETE(amwc);
+	wxDELETE(i18n);
+	wxDELETE(appConfigurator);
+}
 
 bool App::OnInit()
 {
-    AppMainWindowController *mainController = new AppMainWindowController();
-	AppMainWindow *mainWindow = new AppMainWindow(
-	    "Straight Spiral Arms Detector", 
-        mainController
-    );
-    mainController->SetView(mainWindow);
-	mainWindow->SetSize(mainWindow->FromDIP(wxSize(1024, 768)));
-	mainWindow->Show(true);
+	if (!wxApp::OnInit()) return false;
+
+	i18n = new I18N(locale, appConfigurator, this->GetAppName());
+	ShowLangStatusMessage();
+	amwc = new AppMainWindowController(appConfigurator);
+	amw = new AppMainWindow(_("Spiral galaxy handler"), amwc);
+
+	amwc->SetView(amw);
+	amw->SetSize(amw->FromDIP(appConfigurator->GetWindowSize()));
+	amw->Center();
+	amw->Maximize(appConfigurator->GetMaximize());
+	amw->SetIcon(wxICON(IDB_BITMAP1));
+	amw->Show(true);
 
 	return true;
+}
+
+void App::ShowLangStatusMessage()
+{
+	cts::LangStatusCode* code = new cts::LangStatusCode(
+		i18n->GetLangStatusCode()
+	);
+
+	switch (*code)
+	{
+	case cts::LangStatusCode::OK:
+		break;
+	case cts::LangStatusCode::Unsupported:
+		wxMessageBox(
+			_(
+				"The selected language is unsupported.\n"
+				"The default language is set."
+			),
+			_("Application language"),
+			wxICON_INFORMATION
+		);
+		break;
+	case cts::LangStatusCode::Wrong:
+		wxMessageBox(
+			_(
+				"Wrong language has been selected!\n"
+				"The default language is set."
+			),
+			_("Application language"),
+			wxICON_WARNING
+		);
+		break;
+	default:
+		break;
+	}
+
+	delete code;
 }

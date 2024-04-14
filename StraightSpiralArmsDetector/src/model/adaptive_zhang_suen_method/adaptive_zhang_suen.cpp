@@ -7,40 +7,40 @@ AdaptiveZhangSuenMethod::AdaptiveZhangSuenMethod()
     
     patternsToRemove = new PixelPatterns();
 	patternsToRemove->composite = {
-		{2, 6},	{0, 4}, {7, 0, 1}, {7, 6, 5}, {3, 4, 5}, {1, 2, 3}, 
-		{1, 3, 5, 7}, {7, 0, 1, 3, 5}, {7, 6, 1, 3, 5}, {7, 1, 3, 4, 5}, 
+		{2, 6},	{0, 4}, {7, 0, 1}, {7, 6, 5}, {3, 4, 5}, {1, 2, 3},
+		{1, 3, 5, 7}, {7, 0, 1, 3, 5}, {7, 6, 1, 3, 5}, {7, 1, 3, 4, 5},
 		{1, 2, 3, 5, 7}
 	};
-	patternsToRemove->compositeSum = {6, 6, 3, 3, 3, 3, 4, 5, 5, 5, 5};
-	patternsToRemove->simple = {0};
+	patternsToRemove->compositeSum = { 6, 6, 3, 3, 3, 3, 4, 5, 5, 5, 5 };
+	patternsToRemove->simple = { 0 };
 
     patternsToAdd = new PixelPatterns();
 	patternsToAdd->composite = {
-		{1, 3, 5, 7}, {0, 1, 7}, {3, 4, 5}, {5, 6, 7}, {1, 2, 3}, {3, 7}, 
-		{1, 5}, {0, 7}, {4, 5}, {0, 1}, {3, 4}, {3, 5, 7}, {1, 3, 5}, 
+		{1, 3, 5, 7}, {0, 1, 7}, {3, 4, 5}, {5, 6, 7}, {1, 2, 3}, {3, 7},
+		{1, 5}, {0, 7}, {4, 5}, {0, 1}, {3, 4}, {3, 5, 7}, {1, 3, 5},
 		{1, 3, 7}, {1, 5, 7}
 	};
-	patternsToAdd->compositeSum = {4, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5};
-	patternsToAdd->simple = {8, 7};
+	patternsToAdd->compositeSum = { 4, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5 };
+	patternsToAdd->simple = { 8, 7 };
 }
 
 AdaptiveZhangSuenMethod::~AdaptiveZhangSuenMethod()
 {
-    free(utils);
-    free(zhangSuen);
-    free(patternsToRemove);
-    free(patternsToAdd);
+    delete utils;
+    delete zhangSuen;
+    delete patternsToRemove;
+    delete patternsToAdd;
 }
 
 cv::Mat AdaptiveZhangSuenMethod::execute(
     cv::Mat img, AdaptiveZhangSuenParameters parameters
 )
 {
-    cv::adaptiveThreshold(
+	cv::adaptiveThreshold(
 		img,
-		img, 
+		img,
 		255.,
-		cv::ADAPTIVE_THRESH_GAUSSIAN_C, 
+		cv::ADAPTIVE_THRESH_GAUSSIAN_C,
 		cv::THRESH_BINARY,
 		parameters.gaussBlockSize,
 		parameters.gaussConst
@@ -62,7 +62,8 @@ cv::Mat AdaptiveZhangSuenMethod::execute(
     return img;
 }
 
-void AdaptiveZhangSuenMethod::performAnOperationWithPixels(
+void AdaptiveZhangSuenMethod::performAnOperationWithPixels
+(
     PixelsOperation op, cv::Mat img
 )
 {
@@ -113,7 +114,7 @@ void AdaptiveZhangSuenMethod::performAnOperationWithPixels(
 		{
 			for (cv::Point pixel: pixelsToChange)
 			{   
-			    bool value = (op == PixelsOperation::Remove) ? 0 : 1;
+				bool value = (op == PixelsOperation::Remove) ? 0 : 1;
 				img.at<uchar>(pixel.x, pixel.y) = value;
 			}
 
@@ -122,8 +123,9 @@ void AdaptiveZhangSuenMethod::performAnOperationWithPixels(
 	}
 }
 
-bool AdaptiveZhangSuenMethod::isPixelMatchesPatterns(
-	vInt &n, PixelPatterns *patterns
+bool AdaptiveZhangSuenMethod::isPixelMatchesPatterns
+(
+	vInt& n, PixelPatterns* patterns
 )
 {
 	bool statementOne;

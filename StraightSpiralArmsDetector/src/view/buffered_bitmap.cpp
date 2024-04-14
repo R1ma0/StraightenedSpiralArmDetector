@@ -1,11 +1,11 @@
 #include "buffered_bitmap.hpp"
 
 BufferedBitmap::BufferedBitmap(
-    wxWindow *parent, wxWindowID id, const wxBitmap &bitmap, 
-    const wxPoint &pos=wxDefaultPosition, const wxSize &size=wxDefaultSize, 
-    long style=0
+    wxWindow* parent, wxWindowID id, const wxBitmap& bitmap,
+    const wxPoint& pos = wxDefaultPosition,
+    const wxSize& size = wxDefaultSize, long style = 0
 ) : wxScrolled<wxWindow>(
-    parent, id, pos, size, 
+    parent, id, pos, size,
     wxFULL_REPAINT_ON_RESIZE | wxVSCROLL | wxHSCROLL | style
 )
 {
@@ -14,7 +14,7 @@ BufferedBitmap::BufferedBitmap(
     this->SetBitmap(bitmap);
 }
 
-void BufferedBitmap::OnPaint([[maybe_unused]] wxPaintEvent &event)
+void BufferedBitmap::OnPaint(wxPaintEvent& WXUNUSED(event))
 {
     wxAutoBufferedPaintDC dc(this);
     dc.Clear();
@@ -23,6 +23,7 @@ void BufferedBitmap::OnPaint([[maybe_unused]] wxPaintEvent &event)
 
     if (gc)
     {
+        gc->SetInterpolationQuality(wxINTERPOLATION_NONE);
         const wxSize bmpSize = GetScaledBitmapSize();
         const wxPoint bmpCenter = GetScaledBitmapCenter();
 
@@ -36,7 +37,7 @@ void BufferedBitmap::OnPaint([[maybe_unused]] wxPaintEvent &event)
     }
 }
 
-void BufferedBitmap::SetBitmap(const wxBitmap &bitmap)
+void BufferedBitmap::SetBitmap(const wxBitmap& bitmap)
 {
     this->bitmap = bitmap;
     

@@ -1,0 +1,15 @@
+~Folder structure for using the programme
+
+StraightSpiralArmsDetector\
+  bin\
+    opencv_world490.dll
+    settings.ini
+    StraightSpiralArmsDetector.exe
+  locale\
+    ru_RU\
+      SSADLauncher.mo
+      StraightSpiralArmsDetector.mo
+  manual\
+    UserManualEN.pdf
+    UserManualRU.pdf
+  SSADLauncher.exe

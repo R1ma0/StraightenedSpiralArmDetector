@@ -3,27 +3,40 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 #include <opencv2/opencv.hpp>
+#include <thread>
 #include "i_controller.hpp"
 #include "../view/app_main_window.hpp"
 #include "../view/buffered_bitmap.hpp"
 #include "../view/azsm_control_frame.hpp"
+#include "../view/utils/proc_activity_indicator.hpp"
 #include "../model/converters.hpp"
 #include "../model/processed_image.hpp"
 #include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen.hpp"
 
-class AZSMFrameController : public IController
+#ifndef AZSMFC
+#define AZSMFC AZSMFrameController
+#endif
+#ifndef CastAZSMCF
+#define CastAZSMCF dynamic_cast<AZSMControlFrame*>(view)
+#endif
+
+class AZSMFC : public IController
 {
 private:
-    wxWindow *view;
-    ProcessedImage *procImage;
-    BufferedBitmap *bitmap;
-    AdaptiveZhangSuenMethod *azsm;
+    wxWindow* view;
+    ProcessedImage* procImage;
+    BufferedBitmap* bitmap;
+    std::thread* computeThread;
+    wxActivityIndicator* activityIndicator;
+    void Compute(AdaptiveZhangSuenParameters, wxActivityIndicator*);
+    void EnableDialogComponents(bool);
 public:
-    AZSMFrameController(BufferedBitmap *, ProcessedImage *);
-    void SetView(wxWindow *) override;
+    AZSMFC(BufferedBitmap*, ProcessedImage*);
+    ~AZSMFC();
+    void SetView(wxWindow*) override;
     void RunDetectorator();
 };
 

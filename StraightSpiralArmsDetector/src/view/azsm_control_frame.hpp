@@ -3,32 +3,49 @@
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 #include <wx/spinctrl.h>
 #include "ids_of_controls.hpp"
 #include "buffered_bitmap.hpp"
 #include "../model/processed_image.hpp"
+#include "../model/odd_even_checker.hpp"
 #include "../controller/i_controller.hpp"
 #include "../controller/azsm_frame_controller.hpp"
 
-class AZSMControlFrame : public wxDialog
+#ifndef AZSMCF
+#define AZSMCF AZSMControlFrame
+#endif
+#ifndef CastAZSMFC
+#define CastAZSMFC dynamic_cast<AZSMFrameController*>(controller)
+#endif
+
+class AZSMCF : public wxDialog
 {
 private:
-    IController *controller;
-    wxSpinCtrl *binaryThreshValueSpin;
-    wxSpinCtrl *gaussConstSpin;
-    wxSpinCtrl *imgCompressPercentageSpin;
-    wxSpinCtrl *gaussBlockSizeSpin;
+    IController* controller;
+    wxSpinCtrl* binaryThreshValueSpin;
+    wxSpinCtrl* gaussConstSpin;
+    wxSpinCtrl* imgCompressPercentageSpin;
+    wxSpinCtrl* gaussBlockSizeSpin;
+    wxStaticText* binaryThreshValueLabel;
+    wxStaticText* gaussConstLabel;
+    wxStaticText* imgCompressPercentageLabel;
+    wxStaticText* gaussBlockSizeLabel;
+    wxButton* computeBtn;
+    int gbsOldValue;
     void CreateControls();
     void BindEventHandlers();
-    void OnRunDetectorator(wxCommandEvent &);
+    void OnRunDetectorator(wxCommandEvent&);
+    void OnSetGaussBlockSize(wxCommandEvent&);
 public:
-    AZSMControlFrame(IController *);
+    AZSMCF(IController*);
+    ~AZSMCF();
     int GetBinaryThresh() { return binaryThreshValueSpin->GetValue(); }
     int GetGaussConst() { return gaussConstSpin->GetValue(); }
     int GetCompressPercentage() { return imgCompressPercentageSpin->GetValue(); }
     int GetGaussBlockSize() { return gaussBlockSizeSpin->GetValue(); }
+    void SetEnableComponents(bool);
 };
 
 #endif

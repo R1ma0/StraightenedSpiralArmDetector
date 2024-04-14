@@ -1,0 +1,65 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: main_form.msgexenotfoundtext
+msgid "Executable file not found."
+msgstr "Исполняемый файл не найден."
+
+#: main_form.msgininotfoundtext
+msgctxt "main_form.msgininotfoundtext"
+msgid ""
+"Settings file not found.\n"
+"Default settings set."
+msgstr ""
+"Файл настроек не найден.\n"
+"Установлены настройки по умолчанию."
+
+#: main_form.msgmanualfilenotfound
+msgid "Manual file could not be found."
+msgstr "Не удалось найти файл руководства."
+
+#: tmainform.caption
+msgid "SSADLauncher v1.2.0"
+msgstr ""
+
+#: tmainform.groupbox1.caption
+msgid "Localisation"
+msgstr "Язык"
+
+#: tmainform.groupbox2.caption
+msgid "Window"
+msgstr "Окно"
+
+#: tmainform.label1.caption
+msgid "Resolution"
+msgstr "Разрешение"
+
+#: tmainform.langcombo.text
+msgid "English"
+msgstr ""
+
+#: tmainform.launchbtn.caption
+msgid "Launch"
+msgstr "Запустить"
+
+#: tmainform.maximizecheck.caption
+msgid "Fullscrean"
+msgstr "Полноэкранный"
+
+#: tmainform.openusrmanual.caption
+msgctxt "tmainform.openusrmanual.caption"
+msgid "User Manual"
+msgstr "Руководство"
+
+#: tmainform.resetbtn.caption
+msgid "Reset"
+msgstr "Сбросить"
+
+#: tmainform.resolutioncombo.text
+msgid "800x600"
+msgstr ""
+
+#: tmainform.savebtn.caption
+msgid "Save"
+msgstr "Сохранить"
+

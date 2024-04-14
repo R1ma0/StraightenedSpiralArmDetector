@@ -4,6 +4,6 @@
 #include <opencv2/opencv.hpp>
 #include <wx/image.h>
 
-wxImage MatToWxImage(cv::Mat);
+wxImage MatToWxImage(cv::Mat*);	
 
 #endif

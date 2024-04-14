@@ -1,94 +1,99 @@
 #include "app_main_window.hpp"
 
-#ifndef CastAMWC
-#define CastAMWC dynamic_cast<AppMainWindowController *>(mainController)
-#endif
-
-AppMainWindow::AppMainWindow
-(
-    const wxString &title,
-    IController *controller
-) : wxFrame
-(
-    nullptr, 
-    wxID_ANY, 
-    title
+AMW::AMW(
+    const wxString& title, IController* controller
+) : wxFrame(
+    nullptr, wxID_ANY, title
 )
 {
-    mainController = controller;
+    this->controller = controller;
 
     CreateControls();
     BindEventHandlers();
     AllowSavingImage(false);
+    AllowViewMenu(false);
+    AllowProcessingMenu(false);
 }
 
-AppMainWindow::~AppMainWindow() 
+AMW::~AMW()
 {
-    delete bitmap;
-    delete saveImg;
+    wxDELETE(controller);
 }
 
-void AppMainWindow::CreateControls()
+void AMW::CreateControls()
 {
-    auto menuFile = new wxMenu();
-    auto loadImg = new wxMenuItem(
+    menuFile = new wxMenu();
+    loadImg = new wxMenuItem(
         menuFile, 
         ID_LOAD_IMG, 
-        wxT("Load Image\tCtrl-O"), 
-        wxT("Opening and loading an image for processing")
+        _("Upload image\tCtrl-O"), 
+        _("Upload an image for processing")
     );
     saveImg = new wxMenuItem(
         menuFile, 
         ID_SAVE_IMG, 
-        wxT("Save Image\tCtrl-S"),        
-        wxT("Saving processed image")
+        _("Save image\tCtrl-S"),        
+        _("Save the processed image")
     );
     menuFile->Append(loadImg);
     menuFile->Append(saveImg);
     menuFile->AppendSeparator();
     menuFile->Append(wxID_EXIT);
 
-    auto menuView = new wxMenu();
-    auto zoomInItem = new wxMenuItem(
+    menuView = new wxMenu();
+    zoomInItem = new wxMenuItem(
         menuView, 
         ID_ZOOM_IN, 
-        wxT("Zoom In\tCtrl-+"),
-        wxT("Increase the size of the image in the preview window")
+        _("Zoom in\tCtrl-+"),
+        _("Increase the size of the image in the preview window")
     );
-    auto zoomOutItem = new wxMenuItem(
+    zoomOutItem = new wxMenuItem(
         menuView,
         ID_ZOOM_OUT, 
-        wxT("Zoom Out\tCtrl--"),
-        wxT("Reduce the size of the image in the preview window")
+        _("Zoom out\tCtrl--"),
+        _("Reduce the image size in the preview window")
     );
     menuView->Append(zoomInItem);
     menuView->Append(zoomOutItem);
 
-    auto menuProcessing = new wxMenu();
-    auto openRotateScaleDialog = new wxMenuItem(
+    menuProcessing = new wxMenu();
+    openRotateScaleDialog = new wxMenuItem(
         menuProcessing, 
         ID_ROTATE_SCALE, 
-        wxT("Rotate and Scale\tAlt-R"),
-        wxT("Opens a window for rotating and scaling the image")
+        _("Rotation and stretching\tAlt-R"),
+        _("Open the image rotation and stretching window")
     );
-    auto skeletonizationMenu = new wxMenu();
-    auto adaptiveZhangSuenMethod = new wxMenuItem(
+    skeletonizationMenu = new wxMenu();
+    adaptiveZhangSuenMethod = new wxMenuItem(
         skeletonizationMenu, 
-        ID_OPEN_ADAPTIVE_ZHANG_SUEN, 
-        wxT("Adaptive Zhang Suen"),
-        wxT("Configure and use Adaptive Zhang Suen skeletonization method")
+        ID_OPEN_AZSM, 
+        _("Adaptive Zhang-Suen"),
+        _("Use Zhang-Suen`s adaptive skeletonisation method")
+    );
+    useMuiltipleProcessing = new wxMenu();
+    adaptiveZhangSuenMethodMP = new wxMenuItem(
+        useMuiltipleProcessing,
+        ID_AZSM_MP,
+        _("Adaptive Zhang-Suen"),
+        _("Use Zhang-Suen`s adaptive skeletonisation method for multiple images")
     );
     skeletonizationMenu->Append(adaptiveZhangSuenMethod);
+    useMuiltipleProcessing->Append(adaptiveZhangSuenMethodMP);
     menuProcessing->Append(openRotateScaleDialog);
     menuProcessing->AppendSubMenu(
-        skeletonizationMenu, 
-        wxT("Skeletonization Methods")
+        skeletonizationMenu,
+        _("Skeletonisation algorithms")
     );
-
-    auto menuBar = new wxMenuBar();
-    menuBar->Append(menuFile, wxT("File"));
-    menuBar->Append(menuView, wxT("View"));
-    menuBar->Append(menuProcessing, wxT("Processing"));
+    menuProcessing->AppendSeparator();
+    menuProcessing->AppendSubMenu(
+        useMuiltipleProcessing,
+        _("Multi-image processing")
+    );
+    
+    menuBar = new wxMenuBar();
+    menuBar->Append(menuFile, _("File"));
+    menuBar->Append(menuView, _("View"));
+    menuBar->Append(menuProcessing, _("Processing"));
     SetMenuBar(menuBar);
     
     CreateStatusBar();
@@ -107,77 +112,96 @@ void AppMainWindow::CreateControls()
     this->SetSizerAndFit(sizerMain);
 }
 
-void AppMainWindow::BindEventHandlers()
+void AMW::BindEventHandlers()
 {
-    Bind(wxEVT_MENU, &AppMainWindow::OnLoadImg, this, ID_LOAD_IMG);
-    Bind(wxEVT_MENU, &AppMainWindow::OnSaveImg, this, ID_SAVE_IMG);
-    Bind(wxEVT_MENU, &AppMainWindow::OnExit, this, wxID_EXIT);
-    Bind(wxEVT_MENU, &AppMainWindow::OnRotateScale, this, ID_ROTATE_SCALE);
-    Bind(wxEVT_MENU, &AppMainWindow::OnImageZoomIn, this, ID_ZOOM_IN);
-    Bind(wxEVT_MENU, &AppMainWindow::OnImageZoomOut, this, ID_ZOOM_OUT);
-    Bind(
-        wxEVT_MENU, 
-        &AppMainWindow::OnUseAZSMethod, 
-        this, 
-        ID_OPEN_ADAPTIVE_ZHANG_SUEN
-    );
+    Bind(wxEVT_MENU, &AMW::OnLoadImg, this, ID_LOAD_IMG);
+    Bind(wxEVT_MENU, &AMW::OnSaveImg, this, ID_SAVE_IMG);
+    Bind(wxEVT_MENU, &AMW::OnExit, this, wxID_EXIT);
+    Bind(wxEVT_MENU, &AMW::OnRotateScale, this, ID_ROTATE_SCALE);
+    Bind(wxEVT_MENU, &AMW::OnImageZoomIn, this, ID_ZOOM_IN);
+    Bind(wxEVT_MENU, &AMW::OnImageZoomOut, this, ID_ZOOM_OUT);
+    Bind(wxEVT_MENU, &AMW::OnUseAZSMethod, this, ID_OPEN_AZSM);
+    Bind(wxEVT_MENU, &AMW::OnUseAZSMMP, this, ID_AZSM_MP);
 }
 
-void AppMainWindow::OnUseAZSMethod(wxCommandEvent &WXUNUSED(event))
+void AMW::OnUseAZSMMP(wxCommandEvent& WXUNUSED(event))
+{
+    CastAMWC->OpenAZSMMultipleProcessingFrame();
+}
+
+void AMW::OnUseAZSMethod(wxCommandEvent& WXUNUSED(event))
 {
     CastAMWC->OpenAZSMethodFrame(bitmap);
 }
 
-void AppMainWindow::OnRotateScale(wxCommandEvent &WXUNUSED(event))
+void AMW::OnRotateScale(wxCommandEvent& WXUNUSED(event))
 {
     CastAMWC->OpenRotateScaleFrame(bitmap);
 }
 
-void AppMainWindow::OnImageZoomIn(wxCommandEvent &WXUNUSED(event))
+void AMW::OnImageZoomIn(wxCommandEvent& WXUNUSED(event))
 {
     CastAMWC->ZoomInBitmap(bitmap);
 }
 
-void AppMainWindow::OnImageZoomOut(wxCommandEvent &WXUNUSED(event))
+void AMW::OnImageZoomOut(wxCommandEvent& WXUNUSED(event))
 {
     CastAMWC->ZoomOutBitmap(bitmap);
 }
 
-void AppMainWindow::OnExit(wxCommandEvent &WXUNUSED(event))
+void AMW::OnExit(wxCommandEvent& WXUNUSED(event))
 {
     Close(true);
 }
 
-void AppMainWindow::OnLoadImg(wxCommandEvent &WXUNUSED(event))
+void AMW::OnLoadImg(wxCommandEvent& WXUNUSED(event))
 {
-    bool isImageNotLoaded = CastAMWC->LoadImage();
-
-    if (isImageNotLoaded)
+    if (CastAMWC->LoadImage())
     {
-        wxMessageBox("Failed to open image", "Error", wxOK | wxICON_ERROR);
+        wxMessageBox(
+            _("Image opening error!"), 
+            _("Error"), 
+            wxOK | wxICON_ERROR
+        );
         return;
     }
 
     AllowSavingImage(true);
+    AllowViewMenu(true);
+    AllowProcessingMenu(true);
 }
 
-void AppMainWindow::OnSaveImg(wxCommandEvent &WXUNUSED(event))
+void AMW::OnSaveImg(wxCommandEvent& WXUNUSED(event))
 {
-    bool isImageNotSaved = CastAMWC->SaveImage();
-
-    if (isImageNotSaved)
+    if (!CastAMWC->SaveImage())
     {
-        wxMessageBox("Failed to save image", "Error", wxOK | wxICON_ERROR);
+        wxMessageBox(
+            _("Image saving error!"), 
+            _("Error"), 
+            wxOK | wxICON_ERROR
+        );
         return;
     }
 }
 
-void AppMainWindow::AllowSavingImage(bool state)
+void AMW::AllowSavingImage(bool state)
 {
     saveImg->Enable(state);
 }
 
-void AppMainWindow::UpdateBitmap(wxBitmap bmp)
+void AMW::AllowViewMenu(bool state)
+{
+    zoomInItem->Enable(state);
+    zoomOutItem->Enable(state);
+}
+
+void AMW::AllowProcessingMenu(bool state)
+{
+    adaptiveZhangSuenMethod->Enable(state);
+    openRotateScaleDialog->Enable(state);
+}
+
+void AMW::UpdateBitmap(wxBitmap bmp)
 {
     bitmap->SetBitmap(bmp);
     this->Layout();

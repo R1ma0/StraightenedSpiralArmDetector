@@ -14,8 +14,8 @@ public:
     cv::Mat GetProcessedImage();
     cv::Mat RotateImage(cv::Mat, int);
     cv::Size GetImageSize();
-    int GetRotationAngleDegrees();
-    bool LoadSrcImage(const std::string);
+    int GetRotationAngleDegrees() const;
+    bool LoadSrcImage(const std::string*);
     bool SaveImage(const std::string);
     void SetProcessedImage(cv::Mat);
 };

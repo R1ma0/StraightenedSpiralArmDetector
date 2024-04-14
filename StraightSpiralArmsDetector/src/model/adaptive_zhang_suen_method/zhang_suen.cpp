@@ -12,8 +12,8 @@ ZhangSuen::~ZhangSuen()
 
 cv::Mat ZhangSuen::execute(cv::Mat img, bool replace)
 {
-	bool isStepOneChangesComplete {false};
-	bool isStepTwoChangesComplete {false};
+	bool isStepOneChangesComplete{ false };
+	bool isStepTwoChangesComplete{ false };
 	vInt neighbours(8);
 
 	if (replace)
@@ -36,7 +36,7 @@ cv::Mat ZhangSuen::execute(cv::Mat img, bool replace)
 }
 
 void ZhangSuen::processPixels(
-	cv::Mat &img, bool &isComplete, vInt nIdx, vInt neighbours
+	cv::Mat& img, bool& isComplete, vInt nIdx, vInt neighbours
 )
 {
 	int sumOfTransitions;
@@ -86,7 +86,7 @@ void ZhangSuen::processPixels(
 	}
 }
 
-void ZhangSuen::extractSumOfTransitions(int &sum, vInt n)
+void ZhangSuen::extractSumOfTransitions(int& sum, vInt n)
 {
 	sum = 0;
 

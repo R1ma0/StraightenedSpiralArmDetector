@@ -1,0 +1,272 @@
+# Russian translations for PACKAGE package
+# Английские переводы для пакета PACKAGE.
+# Copyright (C) 2024 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-14 20:27+0300\n"
+"PO-Revision-Date: 2024-03-23 14:11+0300\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CP1251\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:328
+msgid " files."
+msgstr " файлов."
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:328
+msgid " folder does not contain "
+msgstr " не содержит "
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:70
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:77
+msgid "Adaptive Zhang-Suen"
+msgstr "Адаптивный Зонга-Суня"
+
+#: ..\StraightSpiralArmsDetector\src\app.cpp:52
+#: ..\StraightSpiralArmsDetector\src\app.cpp:62
+msgid "Application language"
+msgstr "Язык приложения"
+
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:89
+msgid "Apply"
+msgstr "Применить"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:118
+msgid "Binary threshold:"
+msgstr "Пороговая бинаризациия:"
+
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:72
+msgid "Current height:"
+msgstr "Текущая высота:"
+
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:37
+msgid "Current value:"
+msgstr "Текущее значение:"
+
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:58
+msgid "Current width:"
+msgstr "Текущая ширина:"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:163
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:180
+msgid "Error"
+msgstr "Ошибка"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:94
+msgid "File"
+msgstr "Файл"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:329
+msgid "File search error"
+msgstr "Ошибка поиска файла"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:181
+msgid "Gauss block size:"
+msgstr "Размер блока Гаусса:"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp:58
+msgid "Gaussian block size value (odd):"
+msgstr "Значение размера блока Гаусса (нечетное):"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp:38
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:139
+msgid "Gaussian constant:"
+msgstr "Гауссова постоянная:"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:160
+msgid "Image compress percentage:"
+msgstr "Процент сжатия изображения:"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp:48
+msgid "Image compression percentage:"
+msgstr "Процент сжатия изображения:"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:162
+msgid "Image opening error!"
+msgstr "Ошибка открытия изображения!"
+
+#: ..\StraightSpiralArmsDetector\src\controller\app_main_window_controller.cpp:113
+msgid "Image saving"
+msgstr "Сохранение изображения"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:179
+msgid "Image saving error!"
+msgstr "Ошибка сохранения изображения!"
+
+#: ..\StraightSpiralArmsDetector\src\controller\app_main_window_controller.cpp:83
+msgid "Image selection"
+msgstr "Выбор изображения"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:48
+msgid "Increase the size of the image in the preview window"
+msgstr "Увеличить размер изображения в окне предпросмотра"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:95
+msgid "Max"
+msgstr "Максимум"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:85
+msgid "Min"
+msgstr "Минимум"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:90
+msgid "Multi-image processing"
+msgstr "Обработка нескольких изображений"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:6
+msgid "Multiple processing: Adaptive Zhang-Suen method"
+msgstr "Множественная обработка: Адаптивный метод Зонга-Суня"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:64
+msgid "Open the image rotation and stretching window"
+msgstr "Открыть окно поворота и растяжения изображения"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:75
+msgid "Parameter"
+msgstr "Параметр"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp:70
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:202
+msgid "Process"
+msgstr "Обработать"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:96
+msgid "Processing"
+msgstr "Обработка"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:54
+msgid "Reduce the image size in the preview window"
+msgstr "Уменьшить размер изображения в окне предпросмотра"
+
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:31
+msgid "Rotation"
+msgstr "Поворот"
+
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:6
+msgid "Rotation and stretching"
+msgstr "Поворот и растяжение"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:63
+msgid "Rotation and stretching\tAlt-R"
+msgstr "Поворот и растяжение\tAlt-R"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:35
+msgid "Save image\tCtrl-S"
+msgstr "Сохранить изображение\tCtrl-S"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:36
+msgid "Save the processed image"
+msgstr "Сохранить обработанное изображение"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:52
+msgid "Save the processed images to..."
+msgstr "Папка сохранения изображений..."
+
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:78
+msgid "Set height:"
+msgstr "Установить высоту:"
+
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:43
+msgid "Set value:"
+msgstr "Установить значение:"
+
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:64
+msgid "Set width:"
+msgstr "Установить ширину:"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:85
+msgid "Skeletonisation algorithms"
+msgstr "Алгоритмы скелетизации"
+
+#: ..\StraightSpiralArmsDetector\src\app.cpp:24
+msgid "Spiral galaxy handler"
+msgstr "Обработчик спиральных галактик"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:105
+msgid "Step"
+msgstr "Шаг"
+
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:52
+msgid "Stretch"
+msgstr "Растяжение"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:32
+msgid "Take the source images from..."
+msgstr "Папка загрузки изображений..."
+
+#: ..\StraightSpiralArmsDetector\src\app.cpp:49
+msgid ""
+"The selected language is unsupported.\n"
+"The default language is set."
+msgstr ""
+"Выбранный язык не поддерживается.\n"
+"Установлен язык по умолчанию."
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp:28
+msgid "Threshold binarisation value:"
+msgstr "Значение пороговой бинаризации:"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:30
+msgid "Upload an image for processing"
+msgstr "Загрузка изображения для обработки"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:29
+msgid "Upload image\tCtrl-O"
+msgstr "Загрузить изображение\tCtrl-O"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:71
+msgid "Use Zhang-Suen`s adaptive skeletonisation method"
+msgstr "Использовать адаптивный метод скелетизации Зонга-Суня"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:78
+msgid "Use Zhang-Suen`s adaptive skeletonisation method for multiple images"
+msgstr "Использовать адаптивный метод скелетизации Зонга-Суня"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:95
+msgid "View"
+msgstr "Вид"
+
+#: ..\StraightSpiralArmsDetector\src\app.cpp:59
+msgid ""
+"Wrong language has been selected!\n"
+"The default language is set."
+msgstr ""
+"Выбран неверный язык!\n"
+"Установлен язык по умолчанию."
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp:6
+msgid "Zhang-Suen method settings"
+msgstr "Настройки метода Зонга-Суня"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:47
+msgid "Zoom in\tCtrl-+"
+msgstr "Увеличить\tCtrl-+"
+
+#: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:53
+msgid "Zoom out\tCtrl--"
+msgstr "Уменьшить\tCtrl--"
+
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:49
+msgid "degrees"
+msgstr "градусов"
+
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:70
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:84
+msgid "pixels"
+msgstr "пикселей"
+
+#~ msgid "Processing of several images with specified parameters"
+#~ msgstr "Обработка нескольких изображений с заданными параметрами"
+
+#~ msgid "Images (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg"
+#~ msgstr "Изображения (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg"

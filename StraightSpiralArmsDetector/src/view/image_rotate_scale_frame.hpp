@@ -7,30 +7,48 @@
 #endif
 #include <wx/spinctrl.h>
 #include "ids_of_controls.hpp"
+#include "utils/grid_empty_cell.hpp"
+#include "utils/static_text_fonts.hpp"
 #include "../model/processed_image.hpp"
 #include "../controller/i_controller.hpp"
 #include "../controller/image_rotate_scale_frame_controller.hpp"
 
-class ImageRotateScaleFrame : public wxDialog
+#ifndef IRSF
+#define IRSF ImageRotateScaleFrame
+#endif
+#ifndef CastIRSF
+#define CastIRSF dynamic_cast<ImageRotateScaleFrameController*>(controller)
+#endif
+
+class IRSF : public wxDialog
 {
 private:
-    IController *controller;
-    wxStaticText *rotateOldValue;
-    wxStaticText *scaleXOldValue;
-    wxStaticText *scaleYOldValue;
-    wxSpinCtrl *angleSpin;
-    wxSpinCtrl *scaleXNewSpin;
-    wxSpinCtrl *scaleYNewSpin;
+    IController* controller;
+    wxStaticText* rotateOldValue;
+    wxStaticText* scaleXOldValue;
+    wxStaticText* scaleYOldValue;
+    wxStaticText* rotateTitle;
+    wxStaticText* rotateOldText;
+    wxStaticText* angleSpinNewText;
+    wxStaticText* angleSpinText;
+    wxStaticText* scaleTitle;
+    wxStaticText* scaleXOldText;
+    wxStaticText* scaleXNewText;
+    wxStaticText* scaleYOldText;
+    wxStaticText* scaleYNewText;
+    wxSpinCtrl* angleSpin;
+    wxSpinCtrl* scaleXNewSpin;
+    wxSpinCtrl* scaleYNewSpin;
+    wxButton* applyChangesBtn;
     unsigned int xScaleMult;
     unsigned int yScaleMult;
-    void AddEmptyCells(unsigned int, wxGridSizer &, wxSizerFlags &);
     void CreateControls();
     void SetValuesAndRanges();
     void BindEventHandlers();
-    void SetBoldFont(wxStaticText *);
-    void OnApplyRotateScale(wxCommandEvent &);
+    void OnApplyRotateScale(wxCommandEvent&);
 public:
-    ImageRotateScaleFrame(IController *);
+    IRSF(IController*);
+    ~IRSF();
 };
 
 #endif

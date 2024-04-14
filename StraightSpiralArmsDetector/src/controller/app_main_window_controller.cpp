@@ -1,33 +1,45 @@
 #include "app_main_window_controller.hpp"
 
-#ifndef CastAMW
-#define CastAMW dynamic_cast<AppMainWindow *>(view)
-#endif
-
-AppMainWindowController::AppMainWindowController()
+AMWC::AMWC(Configurator* configurator)
 {
     procImage = new ProcessedImage();
+    this->configurator = configurator;
 
     wxImage::AddHandler(new wxPNGHandler);
     wxImage::AddHandler(new wxJPEGHandler);
-
-    fileFilters = new wxString(
-        "Images (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg"
-    );
 }
 
-AppMainWindowController::~AppMainWindowController()
+AMWC::~AMWC()
 {
-    delete procImage;
+    wxDELETE(procImage);
 }
 
-wxBitmap AppMainWindowController::GetBitmapImage()
+wxBitmap AMWC::GetBitmapImage()
 {
     cv::Mat img = procImage->GetProcessedImage();
-    return wxBitmap(MatToWxImage(img));   
+    return wxBitmap(MatToWxImage(&img));
 }
 
-void AppMainWindowController::OpenRotateScaleFrame(BufferedBitmap *bitmap)
+void AMWC::InitModalDialog(wxDialog* dialog, wxSize size)
+{
+    wxSize dialogSize;
+
+    if (size == wxDefaultSize)
+    {
+        dialogSize = dialog->GetBestSize();
+    }
+    else
+    {
+        dialogSize = size;
+    }
+    
+    dialog->SetSize(dialogSize);
+    dialog->Center();
+    dialog->ShowModal();
+    delete dialog;
+}
+
+void AppMainWindowController::OpenRotateScaleFrame(BufferedBitmap* bitmap)
 {
     auto rotateScaleController = new ImageRotateScaleFrameController(
         bitmap,
@@ -35,50 +47,53 @@ void AppMainWindowController::OpenRotateScaleFrame(BufferedBitmap *bitmap)
     );
     auto rotateScaleFrame = new ImageRotateScaleFrame(rotateScaleController);
     rotateScaleController->SetView(rotateScaleFrame);
-    wxSize bestSize = rotateScaleFrame->GetBestSize();
-    rotateScaleFrame->SetSize(bestSize);
-    rotateScaleFrame->ShowModal();
-    rotateScaleFrame->Destroy();
+    InitModalDialog(rotateScaleFrame);
 }
 
-void AppMainWindowController::OpenAZSMethodFrame(BufferedBitmap *bitmap)
+void AMWC::OpenAZSMethodFrame(BufferedBitmap* bitmap)
 {
     auto azsmController = new AZSMFrameController(bitmap, procImage);
     auto azsmFrame = new AZSMControlFrame(azsmController);
     azsmController->SetView(azsmFrame);
-    wxSize bestSize = azsmFrame->GetBestSize();
-    azsmFrame->SetSize(bestSize);
-    azsmFrame->ShowModal();
-    azsmFrame->Destroy();
+    InitModalDialog(azsmFrame);
 }
 
-void AppMainWindowController::ZoomInBitmap(BufferedBitmap *bitmap)
+void AMWC::OpenAZSMMultipleProcessingFrame()
+{
+    auto azsmmpController = new AZSMMultipleProcessingFrameController();
+    auto azsmmpFrame = new AZSMMultipleProcessingFrame(azsmmpController);
+    azsmmpController->SetView(azsmmpFrame);
+    InitModalDialog(azsmmpFrame);
+}
+
+void AMWC::ZoomInBitmap(BufferedBitmap* bitmap)
 {
     bitmap->ZoomInBitmap();
 }
 
-void AppMainWindowController::ZoomOutBitmap(BufferedBitmap *bitmap)
+void AMWC::ZoomOutBitmap(BufferedBitmap* bitmap)
 {
     bitmap->ZoomOutBitmap();
 }
 
-bool AppMainWindowController::LoadImage()
+bool AMWC::LoadImage()
 {
-    wxFileDialog openFileDialog(
+    wxFileDialog* openFileDialog = new wxFileDialog(
         CastAMW, 
-        "Select image", 
+        _("Image selection"), 
         "", 
         "", 
-        *fileFilters,
+        cts::FILE_FILTERS,
         wxFD_OPEN | wxFD_FILE_MUST_EXIST
     );
 
-    if (openFileDialog.ShowModal() == wxID_CANCEL) 
+    if (openFileDialog->ShowModal() == wxID_CANCEL) 
     { 
+        delete openFileDialog;
         return true; 
     }
 
-    std::string pathToFile = openFileDialog.GetPath().ToStdString();
+    std::string* pathToFile = new std::string(openFileDialog->GetPath().ToStdString());
     bool uploadStatus = procImage->LoadSrcImage(pathToFile);
 
     if (uploadStatus == false)
@@ -86,23 +101,25 @@ bool AppMainWindowController::LoadImage()
         CastAMW->UpdateBitmap(GetBitmapImage());
     }
 
+    delete pathToFile;
+    delete openFileDialog;
     return uploadStatus;
 }
 
-bool AppMainWindowController::SaveImage()
+bool AMWC::SaveImage()
 {
     wxFileDialog saveFileDialog(
         CastAMW,
-        "Save image", 
-        "", 
+        _("Image saving"),
         "",
-        *fileFilters,
+        "",
+        cts::FILE_FILTERS,
         wxFD_SAVE | wxFD_OVERWRITE_PROMPT
     );
 
     if (saveFileDialog.ShowModal() == wxID_CANCEL) 
     { 
-        return true; 
+        return true;
     }
 
     std::string pathToFile = saveFileDialog.GetPath().ToStdString();
@@ -110,12 +127,12 @@ bool AppMainWindowController::SaveImage()
     return procImage->SaveImage(pathToFile);
 }
 
-void AppMainWindowController::SetView(wxWindow *view)
+void AMWC::SetView(wxWindow* view)
 {
     this->view = view;
 }
 
-ProcessedImage *AppMainWindowController::GetProcessedImage()
+ProcessedImage* AMWC::GetProcessedImage()
 {
     return procImage;
 }
