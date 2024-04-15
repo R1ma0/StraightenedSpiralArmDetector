@@ -24,28 +24,30 @@ void AZSMMPFC::MakeProcessing()
     srcFiles = GetFilesList(srcDirPath, cts::IN_FILE_FORMATS);
     AZSParametersRanges ranges = GetRanges();
 
-    thPoolTasks = CreateSetOfTasks(srcFiles, dstDirPath, ranges);
-
     computeThread = new std::thread{
         &AZSMMPFC::Compute,
         this,
-        thPoolTasks,
+        dstDirPath,
+        ranges,
         activityIndicator
     };
     computeThread->detach();
 }
 
 void AZSMMPFC::Compute(
-    AZSTasks* tasks,
+    wxString dstDirPath,
+    AZSParametersRanges ranges,
     wxActivityIndicator* actInd
 )
 {
     ThreadPool* thPool = new ThreadPool();
     AdaptiveZhangSuenMethod* azsm = new AdaptiveZhangSuenMethod();
 
+    thPoolTasks = CreateSetOfTasks(srcFiles, dstDirPath, ranges);
+
     for (
-        auto task{ tasks->begin() };
-        task != tasks->end();
+        auto task{ thPoolTasks->begin() };
+        task != thPoolTasks->end();
         ++task
     )
     {

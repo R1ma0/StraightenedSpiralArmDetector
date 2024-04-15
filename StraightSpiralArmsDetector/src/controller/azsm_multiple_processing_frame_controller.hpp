@@ -34,7 +34,7 @@ private:
     std::thread* computeThread;
     wxActivityIndicator* activityIndicator;
     AZSParametersRanges GetRanges();
-    void Compute(AZSTasks*, wxActivityIndicator*);
+    void Compute(wxString, AZSParametersRanges, wxActivityIndicator*);
     void EnableDialogComponents(bool);
 public:
     ~AZSMMPFC();
