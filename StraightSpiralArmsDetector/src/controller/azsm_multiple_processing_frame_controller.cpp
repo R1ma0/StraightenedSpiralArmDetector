@@ -44,6 +44,12 @@ void AZSMMPFC::Compute(
     AdaptiveZhangSuenMethod* azsm = new AdaptiveZhangSuenMethod();
 
     thPoolTasks = CreateSetOfTasks(srcFiles, dstDirPath, ranges);
+    totalImgsCount = thPoolTasks->size();
+
+    CastAZSMMPF->SetProcessingBarRange(totalImgsCount);
+    CastAZSMMPF->SetHideProcessingInfoComponents(false);
+    CastAZSMMPF->SetProcessingBarPulse();
+    readyImgs = 0;
 
     for (
         auto task{ thPoolTasks->begin() };
@@ -51,9 +57,16 @@ void AZSMMPFC::Compute(
         ++task
     )
     {
-        thPool->Enqueue([task, azsm] {
+        thPool->Enqueue([task, azsm, this] {
             cv::Mat outImg = azsm->execute(task->img, task->params);
             cv::imwrite(task->pathToSave, outImg);
+
+            multiProcMtx.lock();
+            readyImgs++;
+            CastAZSMMPF->UpdateProcessingBarComponents(
+                readyImgs, totalImgsCount
+            );
+            multiProcMtx.unlock();
         });
     }
 
@@ -61,6 +74,8 @@ void AZSMMPFC::Compute(
     {
         thPool->~ThreadPool();
 
+        CastAZSMMPF->SetHideProcessingInfoComponents(true);
+        CastAZSMMPF->ResetProcessingBarComponents();
         actInd->Stop();
         actInd->Hide();
         EnableDialogComponents(true);

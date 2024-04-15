@@ -26,7 +26,9 @@
 class AZSMMPF : public wxDialog
 {
 private:
+    const wxString multProcLabel = _("Ready/Total");
     IController* controller;
+    wxStaticText* multiProcImgsLabel;
     wxStaticText* srcFolderLabel;
     wxStaticText* dstFolderLabel;
     wxStaticText* binaryThreshValueLabel;
@@ -52,9 +54,15 @@ private:
     wxSpinCtrl* gaussBlockMaxSpin;
     wxSpinCtrl* gaussBlockStepSpin;
     wxButton* startProcessing;
+    wxGauge* procImgsBar;
     int gbsMinOldValue;
     int gbsMaxOldValue;
     int gbsStepOldValue;
+    void SetMultiProcImgsLabel(
+        wxStaticText*, 
+        wxString, 
+        wxString
+    );
     void CreateControls();
     void BindEventHandlers();
     void OnStartProcess(wxCommandEvent&);
@@ -86,6 +94,11 @@ public:
     int GetGBSStep() { return gaussBlockStepSpin->GetValue(); };
     void SetEnableComponents(bool);
     void SetStartProcessingBtnEnable(bool);
+    void SetHideProcessingInfoComponents(bool);
+    void SetProcessingBarRange(int);
+    void UpdateProcessingBarComponents(int, int);
+    void ResetProcessingBarComponents();
+    void SetProcessingBarPulse();
 };
 
 #endif
