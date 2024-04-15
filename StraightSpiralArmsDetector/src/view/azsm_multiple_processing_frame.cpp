@@ -197,7 +197,21 @@ void AZSMMPF::CreateControls()
 
     //
 
-    AddEmptyCells(this, 3, *gridSizer, gridSizerFlags);
+    procImgsBar = new wxGauge(this, wxID_ANY, 1);
+    procImgsBar->SetValue(0);
+    procImgsBar->Hide();
+    gridSizer->Add(procImgsBar, gridSizerFlags);
+
+    multiProcImgsLabel = new wxStaticText(
+        this,
+        -1,
+        multProcLabel + " : 0/0"
+    );
+    SetBoldFont(multiProcImgsLabel);
+    multiProcImgsLabel->Hide();
+    gridSizer->Add(multiProcImgsLabel, gridSizerFlags);
+
+    AddEmptyCells(this, 1, *gridSizer, gridSizerFlags);
 
     startProcessing = new wxButton(this, ID_START_MP, _("Process"));
     startProcessing->Enable(false);
@@ -369,4 +383,54 @@ void AZSMMPF::SetEnableComponents(bool state)
     gaussBlockMinSpin->Enable(state);
     gaussBlockMaxSpin->Enable(state);
     gaussBlockStepSpin->Enable(state);
+}
+
+void AZSMMPF::SetHideProcessingInfoComponents(bool state)
+{
+    if (state)
+    {
+        multiProcImgsLabel->Hide();
+        procImgsBar->Hide();
+    }
+    else
+    {
+        multiProcImgsLabel->Show();
+        procImgsBar->Show();
+    }
+}
+
+void AZSMMPF::SetProcessingBarRange(int range)
+{
+    procImgsBar->SetRange(range);
+}
+
+void AZSMMPF::UpdateProcessingBarComponents(int barValue, int totalValue)
+{
+    procImgsBar->SetValue(barValue);
+
+    wxString ready = std::to_string(barValue);
+    wxString total = std::to_string(totalValue);
+
+    SetMultiProcImgsLabel(multiProcImgsLabel, ready, total);
+}
+
+void AZSMMPF::ResetProcessingBarComponents()
+{
+    procImgsBar->SetValue(0);
+    procImgsBar->SetRange(1);
+    SetMultiProcImgsLabel(multiProcImgsLabel, "0", "0");
+}
+
+void AZSMMPF::SetMultiProcImgsLabel(
+    wxStaticText* st,
+    wxString ready,
+    wxString total
+)
+{
+    st->SetLabelText(multProcLabel + " : " + ready + "/" + total);
+}
+
+void AZSMMPF::SetProcessingBarPulse()
+{
+    procImgsBar->Pulse();
 }

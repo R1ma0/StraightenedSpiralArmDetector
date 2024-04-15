@@ -8,6 +8,7 @@
 #include <opencv2/opencv.hpp>
 #include <vector>
 #include <thread>
+#include <mutex>
 #include "i_controller.hpp"
 #include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen_types.hpp"
 #include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen.hpp"
@@ -29,12 +30,15 @@ class AZSMMPFC : public IController
 {
 private:
     wxWindow* view;
+    wxActivityIndicator* activityIndicator;
     SrcFilesData* srcFiles;
     AZSTasks* thPoolTasks;
     std::thread* computeThread;
-    wxActivityIndicator* activityIndicator;
+    std::mutex multiProcMtx;
+    std::atomic<int> readyImgs;
+    std::atomic<int> totalImgsCount;
     AZSParametersRanges GetRanges();
-    void Compute(AZSTasks*, wxActivityIndicator*);
+    void Compute(wxString, AZSParametersRanges, wxActivityIndicator*);
     void EnableDialogComponents(bool);
 public:
     ~AZSMMPFC();
