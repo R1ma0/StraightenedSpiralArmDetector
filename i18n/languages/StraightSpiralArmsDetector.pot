@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-14 20:27+0300\n"
+"POT-Creation-Date: 2024-04-15 18:51+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:328
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:342
 msgid " files."
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:328
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:342
 msgid " folder does not contain "
 msgstr ""
 
@@ -64,7 +64,7 @@ msgstr ""
 msgid "File"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:329
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:343
 msgid "File search error"
 msgstr ""
 
@@ -134,12 +134,16 @@ msgid "Parameter"
 msgstr ""
 
 #: ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp:70
-#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:202
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:216
 msgid "Process"
 msgstr ""
 
 #: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:96
 msgid "Processing"
+msgstr ""
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.hpp:29
+msgid "Ready/Total"
 msgstr ""
 
 #: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:54

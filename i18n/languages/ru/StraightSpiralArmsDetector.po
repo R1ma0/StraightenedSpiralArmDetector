@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-14 20:27+0300\n"
+"POT-Creation-Date: 2024-04-15 18:51+0300\n"
 "PO-Revision-Date: 2024-03-23 14:11+0300\n"
 "Last-Translator: <EMAIL@ADDRESS>\n"
 "Language-Team: Russian\n"
@@ -19,11 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:328
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:342
 msgid " files."
 msgstr " файлов."
 
-#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:328
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:342
 msgid " folder does not contain "
 msgstr " не содержит "
 
@@ -66,7 +66,7 @@ msgstr "Ошибка"
 msgid "File"
 msgstr "Файл"
 
-#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:329
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:343
 msgid "File search error"
 msgstr "Ошибка поиска файла"
 
@@ -136,13 +136,17 @@ msgid "Parameter"
 msgstr "Параметр"
 
 #: ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp:70
-#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:202
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:216
 msgid "Process"
 msgstr "Обработать"
 
 #: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:96
 msgid "Processing"
 msgstr "Обработка"
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.hpp:29
+msgid "Ready/Total"
+msgstr "Готово/Всего"
 
 #: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:54
 msgid "Reduce the image size in the preview window"

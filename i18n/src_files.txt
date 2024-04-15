@@ -3,4 +3,5 @@
 ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp
 ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp
 ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp
+..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.hpp
 ..\StraightSpiralArmsDetector\src\controller\app_main_window_controller.cpp
