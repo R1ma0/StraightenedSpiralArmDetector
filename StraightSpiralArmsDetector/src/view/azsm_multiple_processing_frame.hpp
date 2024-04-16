@@ -26,7 +26,8 @@
 class AZSMMPF : public wxDialog
 {
 private:
-    const wxString multProcLabel = _("Ready/Total");
+    const wxString multProcLabelPP = _("Preparation...");
+    const wxString multProcLabelRT = _("Ready/Total");
     IController* controller;
     wxStaticText* multiProcImgsLabel;
     wxStaticText* srcFolderLabel;
@@ -54,18 +55,21 @@ private:
     wxSpinCtrl* gaussBlockMaxSpin;
     wxSpinCtrl* gaussBlockStepSpin;
     wxButton* startProcessing;
+    wxButton* stopProcessing;
     wxGauge* procImgsBar;
     int gbsMinOldValue;
     int gbsMaxOldValue;
     int gbsStepOldValue;
     void SetMultiProcImgsLabel(
-        wxStaticText*, 
-        wxString, 
-        wxString
+        wxStaticText*,
+        wxString = wxEmptyString,
+        wxString = wxEmptyString,
+        wxString = wxEmptyString
     );
     void CreateControls();
     void BindEventHandlers();
     void OnStartProcess(wxCommandEvent&);
+    void OnStopProcess(wxCommandEvent&);
     void OnSetBinaryThreshMinSpin(wxCommandEvent&);
     void OnSetGaussConstMinSpin(wxCommandEvent&);
     void OnSetImgCompressPercentageMinSpin(wxCommandEvent&);
@@ -74,6 +78,7 @@ private:
     void OnSetGaussBlockSizeStep(wxCommandEvent&);
     void OnDirPickerChanged(wxCommandEvent&);
     void SetSpinRangeAndValue(wxSpinCtrl*, int, int, int);
+    void SetStartProcessingBtnEnable(bool);
 public:
     AZSMMPF(IController*);
     ~AZSMMPF();
@@ -93,7 +98,6 @@ public:
     int GetGBSMax() { return gaussBlockMaxSpin->GetValue(); };
     int GetGBSStep() { return gaussBlockStepSpin->GetValue(); };
     void SetEnableComponents(bool);
-    void SetStartProcessingBtnEnable(bool);
     void SetHideProcessingInfoComponents(bool);
     void SetProcessingBarRange(int);
     void UpdateProcessingBarComponents(int, int);
