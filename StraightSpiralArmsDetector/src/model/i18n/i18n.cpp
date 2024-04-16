@@ -1,27 +1,31 @@
 #include "i18n.hpp"
 
-I18N::I18N(wxLocale* locale, Configurator* configurator, wxString appName)
+I18N::I18N(
+	wxLocale* locale, 
+	wxStandardPaths* standardPaths, 
+	wxString appName,
+	std::string langCode
+)
 {
 	this->locale = locale;
-	this->configurator = configurator;
+	this->standardPaths = standardPaths;
 	this->appName = appName;
+	this->langCode = langCode;
 
 	SetLanguage();
 }
 
 void I18N::SetLanguage()
 {
-	std::string langCode = configurator->GetLanguageCode();
-	
-	if (cts::LANGUAGES.find(langCode) == cts::LANGUAGES.end())
+	if (LANGUAGES.find(langCode) == LANGUAGES.end())
 	{
 		language = DEFAULT_LANG;
-		langStatusCode = cts::LangStatusCode::Wrong;
+		langStatusCode = LangStatusCode::Wrong;
 	}
 	else
 	{
-		language = wxLanguage(cts::LANGUAGES.at(langCode));
-		langStatusCode = cts::LangStatusCode::OK;
+		language = wxLanguage(LANGUAGES.at(langCode));
+		langStatusCode = LangStatusCode::OK;
 	}
 
 	if (wxLocale::IsAvailable(language))
@@ -35,14 +39,14 @@ void I18N::SetLanguage()
 			language = DEFAULT_LANG;
 			delete tmpLocale;
 			tmpLocale = new wxLocale(language);
-			langStatusCode = cts::LangStatusCode::Wrong;
+			langStatusCode = LangStatusCode::Wrong;
 		}
 	}
 	else
 	{
 		language = DEFAULT_LANG;
 		tmpLocale = new wxLocale(language);
-		langStatusCode = cts::LangStatusCode::Unsupported;
+		langStatusCode = LangStatusCode::Unsupported;
 	}
 
 	locale = tmpLocale;
@@ -50,8 +54,7 @@ void I18N::SetLanguage()
 
 void I18N::SetLanguagesPath()
 {
-	wxStandardPaths* stdPaths = (wxStandardPaths*)&wxStandardPaths::Get();
-	wxString dataDir = stdPaths->GetDataDir();
+	wxString dataDir = standardPaths->GetDataDir();
 	fs::path langDir = fs::u8path(std::string(dataDir)).parent_path();
 	langDir += "/locale";
 
