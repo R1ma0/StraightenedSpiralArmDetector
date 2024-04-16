@@ -33,6 +33,7 @@ private:
     wxActivityIndicator* activityIndicator;
     SrcFilesData* srcFiles;
     AZSTasks* thPoolTasks;
+    ThreadPool* thPool;
     std::thread* computeThread;
     std::mutex multiProcMtx;
     std::atomic<int> readyImgs;
@@ -42,10 +43,11 @@ private:
     void EnableDialogComponents(bool);
 public:
     ~AZSMMPFC();
+    wxString GetFileFormatsStr();
+    bool IsFolderHasFiles(wxString, std::vector<wxString>);
     void SetView(wxWindow*) override;
     void MakeProcessing();
-    bool IsFolderHasFiles(wxString, std::vector<wxString>);
-    wxString GetFileFormatsStr();
+    void StopProcessing();
 };
 
 #endif

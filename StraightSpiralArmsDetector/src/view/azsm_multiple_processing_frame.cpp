@@ -205,13 +205,15 @@ void AZSMMPF::CreateControls()
     multiProcImgsLabel = new wxStaticText(
         this,
         -1,
-        multProcLabel + " : 0/0"
+        multProcLabelPP
     );
     SetBoldFont(multiProcImgsLabel);
     multiProcImgsLabel->Hide();
     gridSizer->Add(multiProcImgsLabel, gridSizerFlags);
 
-    AddEmptyCells(this, 1, *gridSizer, gridSizerFlags);
+    stopProcessing = new wxButton(this, ID_STOP_MP, _("Stop"));
+    stopProcessing->Hide();
+    gridSizer->Add(stopProcessing, gridSizerFlags);
 
     startProcessing = new wxButton(this, ID_START_MP, _("Process"));
     startProcessing->Enable(false);
@@ -224,6 +226,7 @@ void AZSMMPF::CreateControls()
 void AZSMMPF::BindEventHandlers()
 {
     Bind(wxEVT_BUTTON, &AZSMMPF::OnStartProcess, this, ID_START_MP);
+    Bind(wxEVT_BUTTON, &AZSMMPF::OnStopProcess, this, ID_STOP_MP);
     Bind(
         wxEVT_SPINCTRL, 
         &AZSMMPF::OnSetGaussBlockSizeMin, 
@@ -345,6 +348,11 @@ void AZSMMPF::OnStartProcess(wxCommandEvent& WXUNUSED(event))
     }
 }
 
+void AZSMMPF::OnStopProcess(wxCommandEvent& WXUNUSED(event))
+{
+    CastAZSMMPFC->StopProcessing();
+}
+
 void AZSMMPF::SetSpinRangeAndValue(wxSpinCtrl* spin, int min, int max, int value)
 {
     spin->SetRange(min, max);
@@ -391,11 +399,13 @@ void AZSMMPF::SetHideProcessingInfoComponents(bool state)
     {
         multiProcImgsLabel->Hide();
         procImgsBar->Hide();
+        stopProcessing->Hide();
     }
     else
     {
         multiProcImgsLabel->Show();
         procImgsBar->Show();
+        stopProcessing->Show();
     }
 }
 
@@ -411,23 +421,31 @@ void AZSMMPF::UpdateProcessingBarComponents(int barValue, int totalValue)
     wxString ready = std::to_string(barValue);
     wxString total = std::to_string(totalValue);
 
-    SetMultiProcImgsLabel(multiProcImgsLabel, ready, total);
+    SetMultiProcImgsLabel(multiProcImgsLabel, ready, total, multProcLabelRT);
 }
 
 void AZSMMPF::ResetProcessingBarComponents()
 {
     procImgsBar->SetValue(0);
     procImgsBar->SetRange(1);
-    SetMultiProcImgsLabel(multiProcImgsLabel, "0", "0");
+    SetMultiProcImgsLabel(multiProcImgsLabel);
 }
 
 void AZSMMPF::SetMultiProcImgsLabel(
     wxStaticText* st,
     wxString ready,
-    wxString total
+    wxString total,
+    wxString label
 )
 {
-    st->SetLabelText(multProcLabel + " : " + ready + "/" + total);
+    if (label == wxEmptyString)
+    {
+        st->SetLabelText(multProcLabelPP);
+    }
+    else
+    {
+        st->SetLabelText(label + " : " + ready + "/" + total);
+    }
 }
 
 void AZSMMPF::SetProcessingBarPulse()

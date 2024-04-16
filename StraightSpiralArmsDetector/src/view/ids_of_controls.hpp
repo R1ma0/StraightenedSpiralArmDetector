@@ -22,6 +22,7 @@ enum IDs
     ID_OPEN_OPTIONS,
     ID_AZSM_MP,
     ID_START_MP,
+    ID_STOP_MP,
     ID_SRC_DIR_PICKER,
     ID_DST_DIR_PICKER,
 };
