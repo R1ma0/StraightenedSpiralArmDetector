@@ -25,7 +25,6 @@
     <ClCompile Include="src\controller\azsm_multiple_processing_frame_controller.cpp" />
     <ClCompile Include="src\controller\image_rotate_scale_frame_controller.cpp" />
     <ClCompile Include="src\model\azs_mp_task.cpp" />
-    <ClCompile Include="src\model\configurator\configurator.cpp" />
     <ClCompile Include="src\model\converters.cpp" />
     <ClCompile Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.cpp" />
     <ClCompile Include="src\model\adaptive_zhang_suen_method\utils.cpp" />
@@ -52,10 +51,8 @@
     <ClInclude Include="src\controller\azsm_multiple_processing_frame_controller.hpp" />
     <ClInclude Include="src\controller\image_rotate_scale_frame_controller.hpp" />
     <ClInclude Include="src\controller\i_controller.hpp" />
-    <ClInclude Include="src\libs\ini.h" />
     <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen_types.hpp" />
     <ClInclude Include="src\model\azs_mp_task.hpp" />
-    <ClInclude Include="src\model\configurator\configurator.hpp" />
     <ClInclude Include="src\model\constants.hpp" />
     <ClInclude Include="src\model\converters.hpp" />
     <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.hpp" />
@@ -82,6 +79,11 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="StraightSpiralArmsDetector.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DLL\Configurator\Configurator.vcxproj">
+      <Project>{a80209cf-05e7-413e-a164-aecdc780c91a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -183,10 +185,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SSAD_CONFIGURATOR_EXPORTS;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DLL\Configurator;$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -207,7 +209,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DLL\Configurator;$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>

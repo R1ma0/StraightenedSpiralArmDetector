@@ -57,7 +57,6 @@
     <ClCompile Include="src\controller\image_rotate_scale_frame_controller.cpp">
       <Filter>src\controller</Filter>
     </ClCompile>
-    <ClCompile Include="src\model\configurator\configurator.cpp" />
     <ClCompile Include="src\model\i18n\i18n.cpp" />
     <ClCompile Include="src\view\azsm_multiple_processing_frame.cpp" />
     <ClCompile Include="src\controller\azsm_multiple_processing_frame_controller.cpp" />
@@ -115,8 +114,6 @@
     <ClInclude Include="src\app.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\model\configurator\configurator.hpp" />
-    <ClInclude Include="src\libs\ini.h" />
     <ClInclude Include="src\model\i18n\i18n.hpp" />
     <ClInclude Include="src\model\constants.hpp">
       <Filter>src\model</Filter>

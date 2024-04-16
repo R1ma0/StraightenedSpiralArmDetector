@@ -7,7 +7,7 @@
 #endif
 #include <wx/stdpaths.h>
 #include <filesystem>
-#include "../configurator/configurator.hpp"
+#include "configurator.hpp"
 #include "../constants.hpp"
 
 namespace fs = std::filesystem;
@@ -26,7 +26,6 @@ private:
 	void SetLanguagesPath();
 public:
 	I18N(wxLocale*, Configurator*, wxString);
-	~I18N();
 	wxLanguage GetLanguage() const { return language; };
 	cts::LangStatusCode GetLangStatusCode() const { return langStatusCode; };
 };

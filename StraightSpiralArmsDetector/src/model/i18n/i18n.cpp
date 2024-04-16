@@ -9,11 +9,6 @@ I18N::I18N(wxLocale* locale, Configurator* configurator, wxString appName)
 	SetLanguage();
 }
 
-I18N::~I18N()
-{
-	wxDELETE(configurator);
-}
-
 void I18N::SetLanguage()
 {
 	std::string langCode = configurator->GetLanguageCode();

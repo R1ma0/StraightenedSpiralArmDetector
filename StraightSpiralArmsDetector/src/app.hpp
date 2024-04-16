@@ -8,7 +8,7 @@
 #include "../resource.h"
 #include "controller/app_main_window_controller.hpp"
 #include "view/app_main_window.hpp"
-#include "model/configurator/configurator.hpp"
+#include "configurator.hpp"
 #include "model/i18n/i18n.hpp"
 #include "model/constants.hpp"
 

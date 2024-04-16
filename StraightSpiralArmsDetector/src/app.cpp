@@ -3,7 +3,10 @@
 App::App()
 {
 	locale = new wxLocale();
-	appConfigurator = new Configurator();
+	appConfigurator = new Configurator(
+		"settings.ini",
+		(wxStandardPaths*)&wxStandardPaths::Get()
+	);
 }
 
 App::~App()

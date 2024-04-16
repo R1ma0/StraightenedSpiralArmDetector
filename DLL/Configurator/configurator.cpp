@@ -1,8 +1,17 @@
+#include "pch.h"
 #include "configurator.hpp"
 
-Configurator::Configurator()
+Configurator::Configurator(std::string iniName, wxStandardPaths* standardPaths)
 {
+	this->iniName = iniName;
+	this->standardPaths = standardPaths;
+
 	Configure();
+}
+
+mINI::INIStructure Configurator::GetIniData() const
+{
+	return iniStructure;
 }
 
 void Configurator::Configure()
@@ -19,11 +28,10 @@ void Configurator::Configure()
 
 bool Configurator::IsIniFileExist()
 {
-	standardPaths = (wxStandardPaths*)&wxStandardPaths::Get();
 	wxString exePath = standardPaths->GetExecutablePath();
 
 	pathToIni = std::filesystem::u8path(std::string(exePath)).parent_path();
-	pathToIni += "/" + cts::DEFAULT_INI_NAME;
+	pathToIni += "/" + iniName;
 
 	return std::filesystem::exists(pathToIni);
 }
