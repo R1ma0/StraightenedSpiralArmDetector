@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-15 18:51+0300\n"
+"POT-Creation-Date: 2024-04-16 15:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:342
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:345
 msgid " files."
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:342
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:345
 msgid " folder does not contain "
 msgstr ""
 
@@ -64,7 +64,7 @@ msgstr ""
 msgid "File"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:343
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:346
 msgid "File search error"
 msgstr ""
 
@@ -133,8 +133,12 @@ msgstr ""
 msgid "Parameter"
 msgstr ""
 
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.hpp:29
+msgid "Preparation..."
+msgstr ""
+
 #: ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp:70
-#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:216
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:218
 msgid "Process"
 msgstr ""
 
@@ -142,7 +146,7 @@ msgstr ""
 msgid "Processing"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.hpp:29
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.hpp:30
 msgid "Ready/Total"
 msgstr ""
 
@@ -196,6 +200,10 @@ msgstr ""
 
 #: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:105
 msgid "Step"
+msgstr ""
+
+#: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:214
+msgid "Stop"
 msgstr ""
 
 #: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:52
