@@ -54,3 +54,9 @@ void ThreadPool::Enqueue(std::function<void()> task)
 
 	cv.notify_one();
 }
+
+void ThreadPool::ClearQueue()
+{
+	std::queue<std::function<void()>> empty;
+	std::swap(tasks, empty);
+}

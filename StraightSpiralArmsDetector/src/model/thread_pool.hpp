@@ -20,6 +20,7 @@ public:
 	~ThreadPool();
 	bool IsTasksEmpty() { return tasks.empty(); };
 	void Enqueue(std::function<void()>);
+	void ClearQueue();
 };
 
 #endif
