@@ -40,7 +40,7 @@ void AZSMMPFC::Compute(
     wxActivityIndicator* actInd
 )
 {
-    ThreadPool* thPool = new ThreadPool();
+    thPool = new ThreadPool();
     AdaptiveZhangSuenMethod* azsm = new AdaptiveZhangSuenMethod();
 
     thPoolTasks = CreateSetOfTasks(srcFiles, dstDirPath, ranges);
@@ -82,6 +82,12 @@ void AZSMMPFC::Compute(
     }
 
     delete azsm;
+    delete thPool;
+}
+
+void AZSMMPFC::StopProcessing()
+{
+    thPool->ClearQueue();
 }
 
 AZSParametersRanges AZSMMPFC::GetRanges()
