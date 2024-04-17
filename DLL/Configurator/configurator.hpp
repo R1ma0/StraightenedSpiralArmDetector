@@ -7,10 +7,8 @@
 #define SSAD_CONFIGURATOR_API __declspec(dllimport)
 #endif
 
-#include <wx/wxprec.h>
-#ifndef WX_PRECOMP
-#include <wx/wx.h>
-#endif
+#include <wx/string.h>
+#include <wx/gdicmn.h>
 #include <filesystem>
 #include <string>
 #include "ini.h"
