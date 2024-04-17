@@ -11,7 +11,7 @@ App::App()
 	);
 	i18n = new I18N(
 		locale,
-		standardPaths,
+		standardPaths->GetDataDir(),
 		this->GetAppName(),
 		appConfigurator->GetLanguageCode()
 	);

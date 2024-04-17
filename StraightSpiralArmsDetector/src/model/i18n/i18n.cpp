@@ -2,13 +2,13 @@
 
 I18N::I18N(
 	wxLocale* locale, 
-	wxStandardPaths* standardPaths, 
+	wxString dataDir, 
 	wxString appName,
 	std::string langCode
 )
 {
 	this->locale = locale;
-	this->standardPaths = standardPaths;
+	this->dataDir = dataDir;
 	this->appName = appName;
 	this->langCode = langCode;
 
@@ -54,7 +54,6 @@ void I18N::SetLanguage()
 
 void I18N::SetLanguagesPath()
 {
-	wxString dataDir = standardPaths->GetDataDir();
 	fs::path langDir = fs::u8path(std::string(dataDir)).parent_path();
 	langDir += "/locale";
 

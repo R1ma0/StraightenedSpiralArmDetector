@@ -5,7 +5,6 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
-#include <wx/stdpaths.h>
 #include <filesystem>
 #include <map>
 
@@ -26,14 +25,14 @@ private:
 	wxLocale* tmpLocale;
 	wxString appName;
 	wxLanguage language;
-	wxStandardPaths* standardPaths;
+	wxString dataDir;
 	std::string langCode;
 	LangStatusCode langStatusCode = LangStatusCode::OK;
 	const wxLanguage DEFAULT_LANG = wxLANGUAGE_ENGLISH;
 	void SetLanguage();
 	void SetLanguagesPath();
 public:
-	I18N(wxLocale*, wxStandardPaths*, wxString, std::string);
+	I18N(wxLocale*, wxString, wxString, std::string);
 	wxLanguage GetLanguage() const { return language; };
 	LangStatusCode GetLangStatusCode() const { return langStatusCode; };
 };
