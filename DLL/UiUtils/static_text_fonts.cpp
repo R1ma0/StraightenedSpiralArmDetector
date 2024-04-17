@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "static_text_fonts.hpp"
 
 void SetBoldFont(wxStaticText* text)

@@ -17,7 +17,7 @@
 #include "../model/thread_pool.hpp"
 #include "../model/azs_mp_task.hpp"
 #include "../view/azsm_multiple_processing_frame.hpp"
-#include "../view/utils/proc_activity_indicator.hpp"
+#include "../view/proc_activity_indicator.hpp"
 
 #ifndef AZSMMPFC
 #define AZSMMPFC AZSMMultipleProcessingFrameController

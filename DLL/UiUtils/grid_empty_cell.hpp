@@ -5,7 +5,8 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+#include "ui_utils.hpp"
 
-void AddEmptyCells(wxWindow*, unsigned int, wxGridSizer&, wxSizerFlags&);
+void SSAD_UI_UTILS_API AddEmptyCells(wxWindow*, unsigned int, wxGridSizer&, wxSizerFlags&);
 
 #endif
