@@ -144,13 +144,13 @@
     <EnableMicrosoftCodeAnalysis>true</EnableMicrosoftCodeAnalysis>
     <IncludePath>$(OpenCV_DIR)\lib;$(OpenCV_DIR)\..\..\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(WXWIN)\lib\vc_x64_lib;$(OpenCV_DIR)\lib;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\bin\</OutDir>
+    <OutDir>$(SolutionDir)$(TargetName)\bin\$(Platform)\$(Configuration)</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <EnableMicrosoftCodeAnalysis>true</EnableMicrosoftCodeAnalysis>
     <IncludePath>$(OpenCV_DIR)\lib;$(OpenCV_DIR)\..\..\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(WXWIN)\lib\vc_x64_lib;$(OpenCV_DIR)\lib;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\bin\</OutDir>
+    <OutDir>$(SolutionDir)$(TargetName)\bin\$(Platform)\$(Configuration)</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -198,6 +198,9 @@
       <DelayLoadDLLs>
       </DelayLoadDLLs>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(SolutionDir)$(TargetName)\bin\$(Platform)\$(Configuration)\$(TargetName).exe" "$(SolutionDir)$(Platform)\$(Configuration)\bin"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -221,6 +224,9 @@
       <DelayLoadDLLs>
       </DelayLoadDLLs>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(SolutionDir)$(TargetName)\bin\$(Platform)\$(Configuration)\$(TargetName).exe" "$(SolutionDir)$(Platform)\$(Configuration)\bin"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
