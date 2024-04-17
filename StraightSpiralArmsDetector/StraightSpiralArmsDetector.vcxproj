@@ -38,7 +38,6 @@
     <ClCompile Include="src\view\azsm_control_frame.cpp" />
     <ClCompile Include="src\view\image_rotate_scale_frame.cpp" />
     <ClCompile Include="src\view\azsm_multiple_processing_frame.cpp" />
-    <ClCompile Include="src\model\thread_pool.cpp" />
     <ClCompile Include="src\view\proc_activity_indicator.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -66,7 +65,6 @@
     <ClInclude Include="src\view\ids_of_controls.hpp" />
     <ClInclude Include="src\view\image_rotate_scale_frame.hpp" />
     <ClInclude Include="src\view\azsm_multiple_processing_frame.hpp" />
-    <ClInclude Include="src\model\thread_pool.hpp" />
     <ClInclude Include="src\view\proc_activity_indicator.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +77,9 @@
   <ItemGroup>
     <ProjectReference Include="..\DLL\Configurator\Configurator.vcxproj">
       <Project>{a80209cf-05e7-413e-a164-aecdc780c91a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DLL\ThreadPool\ThreadPool.vcxproj">
+      <Project>{5ec87da2-aa6e-4fcd-8564-a0ace0dc6529}</Project>
     </ProjectReference>
     <ProjectReference Include="..\DLL\UiUtils\UiUtils.vcxproj">
       <Project>{b2a41c27-f3ab-4dc9-9b98-be26f8daf566}</Project>
@@ -184,10 +185,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_SSAD_UI_UTILS_EXPORTS;_SSAD_CONFIGURATOR_EXPORTS;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SSAD_THREAD_POOL_EXPORTS;_SSAD_UI_UTILS_EXPORTS;_SSAD_CONFIGURATOR_EXPORTS;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)DLL\UiUtils;$(SolutionDir)DLL\Configurator;$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DLL\ThreadPool;$(SolutionDir)DLL\UiUtils;$(SolutionDir)DLL\Configurator;$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -209,10 +210,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_SSAD_UI_UTILS_EXPORTS;_SSAD_CONFIGURATOR_EXPORTS;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SSAD_THREAD_POOL_EXPORTS;_SSAD_UI_UTILS_EXPORTS;_SSAD_CONFIGURATOR_EXPORTS;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)DLL\UiUtils;$(SolutionDir)DLL\Configurator;$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DLL\ThreadPool;$(SolutionDir)DLL\UiUtils;$(SolutionDir)DLL\Configurator;$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
