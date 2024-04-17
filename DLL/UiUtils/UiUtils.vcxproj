@@ -72,11 +72,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)DLL\UiUtils\$(Platform)\$(Configuration)\</OutDir>
-    <TargetName>uiut</TargetName>
+    <TargetName>ui_utils</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)DLL\UiUtils\$(Platform)\$(Configuration)\</OutDir>
-    <TargetName>uiut</TargetName>
+    <TargetName>ui_utils</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -130,7 +130,7 @@
       <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_x64_lib;</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d "$(SolutionDir)DLL\UiUtils\$(Platform)\$(Configuration)\uiut.dll" "$(SolutionDir)$(Platform)\$(Configuration)\bin"</Command>
+      <Command>xcopy /y /d "$(SolutionDir)DLL\UiUtils\$(Platform)\$(Configuration)\ui_utils.dll" "$(SolutionDir)$(Platform)\$(Configuration)\bin"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,7 +155,7 @@
       <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_x64_lib;</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d "$(SolutionDir)DLL\UiUtils\$(Platform)\$(Configuration)\uiut.dll" "$(SolutionDir)$(Platform)\$(Configuration)\bin"</Command>
+      <Command>xcopy /y /d "$(SolutionDir)DLL\UiUtils\$(Platform)\$(Configuration)\ui_utils.dll" "$(SolutionDir)$(Platform)\$(Configuration)\bin"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

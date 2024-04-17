@@ -72,11 +72,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)DLL\ThreadPool\$(Platform)\$(Configuration)\</OutDir>
-    <TargetName>thp</TargetName>
+    <TargetName>thread_pool</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)DLL\ThreadPool\$(Platform)\$(Configuration)\</OutDir>
-    <TargetName>thp</TargetName>
+    <TargetName>thread_pool</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -128,7 +128,7 @@
       <EnableUAC>false</EnableUAC>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d "$(SolutionDir)DLL\ThreadPool\$(Platform)\$(Configuration)\thp.dll" "$(SolutionDir)$(Platform)\$(Configuration)\bin"</Command>
+      <Command>xcopy /y /d "$(SolutionDir)DLL\ThreadPool\$(Platform)\$(Configuration)\thread_pool.dll" "$(SolutionDir)$(Platform)\$(Configuration)\bin"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,7 +151,7 @@
       <EnableUAC>false</EnableUAC>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d "$(SolutionDir)DLL\ThreadPool\$(Platform)\$(Configuration)\thp.dll" "$(SolutionDir)$(Platform)\$(Configuration)\bin"</Command>
+      <Command>xcopy /y /d "$(SolutionDir)DLL\ThreadPool\$(Platform)\$(Configuration)\thread_pool.dll" "$(SolutionDir)$(Platform)\$(Configuration)\bin"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
