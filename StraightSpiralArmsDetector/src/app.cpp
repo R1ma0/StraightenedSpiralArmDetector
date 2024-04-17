@@ -4,6 +4,19 @@ App::App()
 {
 	standardPaths = (wxStandardPaths*)&wxStandardPaths::Get();
 	locale = new wxLocale();
+
+	appConfigurator = new Configurator(
+		"settings.ini", 
+		standardPaths->GetExecutablePath()
+	);
+	i18n = new I18N(
+		locale,
+		standardPaths,
+		this->GetAppName(),
+		appConfigurator->GetLanguageCode()
+	);
+
+	ShowLangStatusMessage();
 }
 
 App::~App()
@@ -17,16 +30,6 @@ App::~App()
 bool App::OnInit()
 {
 	if (!wxApp::OnInit()) return false;
-
-	appConfigurator = new Configurator("settings.ini", standardPaths);
-	i18n = new I18N(
-		locale, 
-		standardPaths,
-		this->GetAppName(),
-		appConfigurator->GetLanguageCode()
-	);
-	
-	ShowLangStatusMessage();
 
 	amwc = new AppMainWindowController(appConfigurator);
 	amw = new AppMainWindow(_("Spiral galaxy handler"), amwc);

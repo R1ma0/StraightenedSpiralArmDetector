@@ -11,7 +11,6 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
-#include <wx/stdpaths.h>
 #include <filesystem>
 #include <string>
 #include "ini.h"
@@ -22,12 +21,12 @@ private:
 	std::string iniName;
 	mINI::INIStructure iniStructure;
 	std::filesystem::path pathToIni;
-	wxStandardPaths* standardPaths;
+	wxString exePath;
 	bool IsIniFileExist();
 	bool ReadIniFile();
 	void Configure();
 public:
-	Configurator(std::string, wxStandardPaths*);
+	Configurator(std::string, wxString);
 	mINI::INIStructure GetIniData() const;
 	wxSize GetWindowSize() const;
 	std::string GetLanguageCode() const;
