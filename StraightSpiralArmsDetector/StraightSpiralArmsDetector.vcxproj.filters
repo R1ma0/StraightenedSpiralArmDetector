@@ -39,9 +39,6 @@
     <ClCompile Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.cpp">
       <Filter>src\model\detectorator</Filter>
     </ClCompile>
-    <ClCompile Include="src\model\zhang_suen_method\zhang_suen.cpp">
-      <Filter>src\model\detectorator</Filter>
-    </ClCompile>
     <ClCompile Include="src\controller\app_main_window_controller.cpp">
       <Filter>src\controller</Filter>
     </ClCompile>
@@ -77,9 +74,6 @@
       <Filter>src\model</Filter>
     </ClInclude>
     <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.hpp">
-      <Filter>src\model\detectorator</Filter>
-    </ClInclude>
-    <ClInclude Include="src\model\zhang_suen_method\zhang_suen.hpp">
       <Filter>src\model\detectorator</Filter>
     </ClInclude>
     <ClInclude Include="src\controller\app_main_window_controller.hpp">

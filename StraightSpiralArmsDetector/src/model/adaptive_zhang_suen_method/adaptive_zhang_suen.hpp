@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <vector>
 #include <opencv2/opencv.hpp>
-#include "../zhang_suen_method/zhang_suen.hpp"
+#include "zhang_suen.hpp"
 
 typedef unsigned int uint;
 

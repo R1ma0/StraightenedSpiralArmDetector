@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "zhang_suen.hpp"
 
 cv::Mat ZhangSuen::execute(cv::Mat img, bool replace)
@@ -82,7 +83,9 @@ void ZhangSuen::extractSumOfTransitions(int& sum, vInt n)
 
 	for (long unsigned int i = 0; i < n.size() - 1; i++)
 	{
-		sum += (n[i] == 0 && n[i + 1] == 1) ? 1 : 0;
+		sum += (n[i] == 0 && n[
+			static_cast<std::vector<int, std::allocator<int>>::size_type>(i) + 1
+		] == 1) ? 1 : 0;
 	}
 
 	sum += (n[n.size() - 1] == 0 && n[0] == 1) ? 1 : 0;

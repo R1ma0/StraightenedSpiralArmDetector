@@ -1,6 +1,12 @@
 #ifndef ZHANG_SUEN_HPP
 #define ZHANG_SUEN_HPP
 
+#ifdef _SSAD_ZHANG_SUEN_EXPORTS
+#define SSAD_ZHANG_SUEN_API __declspec(dllexport)
+#else
+#define SSAD_ZHANG_SUEN_API __declspec(dllimport)
+#endif
+
 #include <opencv2/opencv.hpp>
 #include <vector>
 
@@ -10,7 +16,7 @@ typedef std::vector<cv::Point> vPoint;
 const vInt STEP_ONE_NEIGHBOURS_IDX{ 0, 2, 6, 0, 4, 6 };
 const vInt STEP_TWO_NEIGHBOURS_IDX{ 0, 2, 4, 2, 4, 6 };
 
-class ZhangSuen
+class SSAD_ZHANG_SUEN_API ZhangSuen
 {
 private:
 	void extractSumOfTransitions(int&, vInt);
