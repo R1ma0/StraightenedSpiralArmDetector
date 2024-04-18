@@ -1,10 +1,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-#include <wx/wxprec.h>
-#ifndef WX_PRECOMP
-#include <wx/wx.h>
-#endif
+#include <wx/string.h>
 #include <vector>
 
 namespace cts
