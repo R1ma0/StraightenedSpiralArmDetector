@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "converters.hpp"
 
 wxImage MatToWxImage(cv::Mat* img)

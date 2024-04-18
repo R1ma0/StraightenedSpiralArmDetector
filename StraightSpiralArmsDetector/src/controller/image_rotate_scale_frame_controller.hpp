@@ -7,7 +7,7 @@
 #endif
 #include <opencv2/opencv.hpp>
 #include "i_controller.hpp"
-#include "../model/converters.hpp"
+#include "converters.hpp"
 #include "../view/buffered_bitmap.hpp"
 #include "../model/processed_image.hpp"
 

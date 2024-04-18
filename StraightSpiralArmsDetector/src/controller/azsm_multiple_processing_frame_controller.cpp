@@ -21,7 +21,8 @@ void AZSMMPFC::MakeProcessing()
 
     wxString srcDirPath = CastAZSMMPF->GetSrcDirPath();
     wxString dstDirPath = CastAZSMMPF->GetDstDirPath();
-    srcFiles = GetFilesList(srcDirPath, cts::IN_FILE_FORMATS);
+    srcFiles = new SrcFilesData();
+    GetFilesList(srcFiles, srcDirPath, cts::IN_FILE_FORMATS);
     AZSParametersRanges ranges = GetRanges();
 
     computeThread = new std::thread{

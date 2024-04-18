@@ -1,6 +1,7 @@
+#include "pch.h"
 #include "src_files_handler.hpp"
 
-SrcFilesData* GetFilesList(wxString dir, std::vector<wxString> formats)
+void GetFilesList(SrcFilesData* data, wxString dir, std::vector<wxString> formats)
 {
 	wxArrayString* formatFiles = new wxArrayString();
 	wxArrayString allFiles;
@@ -13,7 +14,8 @@ SrcFilesData* GetFilesList(wxString dir, std::vector<wxString> formats)
 		allFiles.insert(allFiles.end(), formatFiles->begin(), formatFiles->end());
 	}
 
-	delete formatFiles;
+	data->files = allFiles;
+	data->filesCount = filesCount;
 
-	return new SrcFilesData{ allFiles, filesCount };
+	delete formatFiles;
 }
