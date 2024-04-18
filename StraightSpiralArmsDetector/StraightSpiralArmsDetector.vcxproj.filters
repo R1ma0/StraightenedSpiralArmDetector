@@ -39,10 +39,7 @@
     <ClCompile Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.cpp">
       <Filter>src\model\detectorator</Filter>
     </ClCompile>
-    <ClCompile Include="src\model\adaptive_zhang_suen_method\utils.cpp">
-      <Filter>src\model\detectorator</Filter>
-    </ClCompile>
-    <ClCompile Include="src\model\adaptive_zhang_suen_method\zhang_suen.cpp">
+    <ClCompile Include="src\model\zhang_suen_method\zhang_suen.cpp">
       <Filter>src\model\detectorator</Filter>
     </ClCompile>
     <ClCompile Include="src\controller\app_main_window_controller.cpp">
@@ -82,10 +79,7 @@
     <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.hpp">
       <Filter>src\model\detectorator</Filter>
     </ClInclude>
-    <ClInclude Include="src\model\adaptive_zhang_suen_method\utils.hpp">
-      <Filter>src\model\detectorator</Filter>
-    </ClInclude>
-    <ClInclude Include="src\model\adaptive_zhang_suen_method\zhang_suen.hpp">
+    <ClInclude Include="src\model\zhang_suen_method\zhang_suen.hpp">
       <Filter>src\model\detectorator</Filter>
     </ClInclude>
     <ClInclude Include="src\controller\app_main_window_controller.hpp">
@@ -109,7 +103,6 @@
     </ClInclude>
     <ClInclude Include="src\view\azsm_multiple_processing_frame.hpp" />
     <ClInclude Include="src\controller\azsm_multiple_processing_frame_controller.hpp" />
-    <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen_types.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="src\model\azs_mp_task.hpp" />
     <ClInclude Include="src\view\proc_activity_indicator.hpp" />

@@ -9,7 +9,7 @@
 #include <vector>
 #include <filesystem>
 #include "src_files_handler.hpp"
-#include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen_types.hpp"
+#include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen.hpp"
 
 struct AZSTask
 {

@@ -12,7 +12,6 @@
 #include "i_controller.hpp"
 #include "thread_pool.hpp"
 #include "src_files_handler.hpp"
-#include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen_types.hpp"
 #include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen.hpp"
 #include "../model/constants.hpp"
 #include "../model/azs_mp_task.hpp"
