@@ -1,11 +1,17 @@
 #ifndef PROCESSED_IMAGE_H
 #define PROCESSED_IMAGE_H
 
+#ifdef _SSAD_PROCESSED_IMG_EXPORTS
+#define SSAD_PROCESSED_IMG_API __declspec(dllexport)
+#else
+#define SSAD_PROCESSED_IMG_API __declspec(dllimport)
+#endif
+
 #include <opencv2/opencv.hpp>
 #include <wx/image.h>
 #include <vector>
 
-class ProcessedImage
+class SSAD_PROCESSED_IMG_API ProcessedImage
 {
 private:
     cv::Mat image;

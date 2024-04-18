@@ -9,7 +9,7 @@
 #include "ids_of_controls.hpp"
 #include "buffered_bitmap.hpp"
 #include "odd_even_checker.hpp"
-#include "../model/processed_image.hpp"
+#include "processed_image.hpp"
 #include "../controller/i_controller.hpp"
 #include "../controller/azsm_frame_controller.hpp"
 

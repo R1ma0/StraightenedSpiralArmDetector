@@ -27,7 +27,6 @@
     <ClCompile Include="src\model\azs_mp_task.cpp" />
     <ClCompile Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.cpp" />
     <ClCompile Include="src\model\i18n\i18n.cpp" />
-    <ClCompile Include="src\model\processed_image.cpp" />
     <ClCompile Include="src\view\app_main_window.cpp" />
     <ClCompile Include="src\view\buffered_bitmap.cpp" />
     <ClCompile Include="src\view\azsm_control_frame.cpp" />
@@ -47,7 +46,6 @@
     <ClInclude Include="src\model\constants.hpp" />
     <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.hpp" />
     <ClInclude Include="src\model\i18n\i18n.hpp" />
-    <ClInclude Include="src\model\processed_image.hpp" />
     <ClInclude Include="src\view\app_main_window.hpp" />
     <ClInclude Include="src\view\buffered_bitmap.hpp" />
     <ClInclude Include="src\view\azsm_control_frame.hpp" />
@@ -69,6 +67,9 @@
     </ProjectReference>
     <ProjectReference Include="..\DLL\ModelUtils\ModelUtils.vcxproj">
       <Project>{ae13fe10-3be1-4eb1-a416-bc82c6b528a6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DLL\ProcessedImage\ProcessedImage.vcxproj">
+      <Project>{4e5d2331-0084-431e-bc33-3ae0be2f3705}</Project>
     </ProjectReference>
     <ProjectReference Include="..\DLL\ThreadPool\ThreadPool.vcxproj">
       <Project>{5ec87da2-aa6e-4fcd-8564-a0ace0dc6529}</Project>
@@ -180,10 +181,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_SSAD_ZHANG_SUEN_EXPORTS;_SSAD_MODEL_UTILS_EXPORTS;_SSAD_THREAD_POOL_EXPORTS;_SSAD_UI_UTILS_EXPORTS;_SSAD_CONFIGURATOR_EXPORTS;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SSAD_PROCESSED_IMG_EXPORTS;_SSAD_ZHANG_SUEN_EXPORTS;_SSAD_MODEL_UTILS_EXPORTS;_SSAD_THREAD_POOL_EXPORTS;_SSAD_UI_UTILS_EXPORTS;_SSAD_CONFIGURATOR_EXPORTS;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)DLL\ZhangSuenMethod;$(SolutionDir)DLL\ModelUtils;$(SolutionDir)DLL\ThreadPool;$(SolutionDir)DLL\UiUtils;$(SolutionDir)DLL\Configurator;$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DLL\ProcessedImage;$(SolutionDir)DLL\ZhangSuenMethod;$(SolutionDir)DLL\ModelUtils;$(SolutionDir)DLL\ThreadPool;$(SolutionDir)DLL\UiUtils;$(SolutionDir)DLL\Configurator;$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -205,10 +206,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_SSAD_ZHANG_SUEN_EXPORTS;_SSAD_MODEL_UTILS_EXPORTS;_SSAD_THREAD_POOL_EXPORTS;_SSAD_UI_UTILS_EXPORTS;_SSAD_CONFIGURATOR_EXPORTS;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SSAD_PROCESSED_IMG_EXPORTS;_SSAD_ZHANG_SUEN_EXPORTS;_SSAD_MODEL_UTILS_EXPORTS;_SSAD_THREAD_POOL_EXPORTS;_SSAD_UI_UTILS_EXPORTS;_SSAD_CONFIGURATOR_EXPORTS;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)DLL\ZhangSuenMethod;$(SolutionDir)DLL\ModelUtils;$(SolutionDir)DLL\ThreadPool;$(SolutionDir)DLL\UiUtils;$(SolutionDir)DLL\Configurator;$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DLL\ProcessedImage;$(SolutionDir)DLL\ZhangSuenMethod;$(SolutionDir)DLL\ModelUtils;$(SolutionDir)DLL\ThreadPool;$(SolutionDir)DLL\UiUtils;$(SolutionDir)DLL\Configurator;$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>

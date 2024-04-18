@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "processed_image.hpp"
 
 cv::Mat ProcessedImage::GetProcessedImage()

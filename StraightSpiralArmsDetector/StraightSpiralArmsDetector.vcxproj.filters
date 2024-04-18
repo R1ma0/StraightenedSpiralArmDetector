@@ -33,9 +33,6 @@
     <ClCompile Include="src\view\image_rotate_scale_frame.cpp">
       <Filter>src\view</Filter>
     </ClCompile>
-    <ClCompile Include="src\model\processed_image.cpp">
-      <Filter>src\model</Filter>
-    </ClCompile>
     <ClCompile Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.cpp">
       <Filter>src\model\detectorator</Filter>
     </ClCompile>
@@ -69,9 +66,6 @@
     </ClInclude>
     <ClInclude Include="src\view\image_rotate_scale_frame.hpp">
       <Filter>src\view</Filter>
-    </ClInclude>
-    <ClInclude Include="src\model\processed_image.hpp">
-      <Filter>src\model</Filter>
     </ClInclude>
     <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.hpp">
       <Filter>src\model\detectorator</Filter>
