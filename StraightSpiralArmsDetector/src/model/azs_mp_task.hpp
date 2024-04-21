@@ -8,8 +8,8 @@
 #include <opencv2/opencv.hpp>
 #include <vector>
 #include <filesystem>
-#include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen_types.hpp"
-#include "../model/src_files_handler.hpp"
+#include "src_files_handler.hpp"
+#include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen.hpp"
 
 struct AZSTask
 {

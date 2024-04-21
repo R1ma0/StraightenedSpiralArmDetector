@@ -25,24 +25,14 @@
     <ClCompile Include="src\controller\azsm_multiple_processing_frame_controller.cpp" />
     <ClCompile Include="src\controller\image_rotate_scale_frame_controller.cpp" />
     <ClCompile Include="src\model\azs_mp_task.cpp" />
-    <ClCompile Include="src\model\configurator\configurator.cpp" />
-    <ClCompile Include="src\model\converters.cpp" />
     <ClCompile Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.cpp" />
-    <ClCompile Include="src\model\adaptive_zhang_suen_method\utils.cpp" />
-    <ClCompile Include="src\model\adaptive_zhang_suen_method\zhang_suen.cpp" />
-    <ClCompile Include="src\model\odd_even_checker.cpp" />
     <ClCompile Include="src\model\i18n\i18n.cpp" />
-    <ClCompile Include="src\model\processed_image.cpp" />
-    <ClCompile Include="src\model\src_files_handler.cpp" />
     <ClCompile Include="src\view\app_main_window.cpp" />
     <ClCompile Include="src\view\buffered_bitmap.cpp" />
     <ClCompile Include="src\view\azsm_control_frame.cpp" />
-    <ClCompile Include="src\view\utils\proc_activity_indicator.cpp" />
-    <ClCompile Include="src\view\utils\static_text_fonts.cpp" />
-    <ClCompile Include="src\view\utils\grid_empty_cell.cpp" />
     <ClCompile Include="src\view\image_rotate_scale_frame.cpp" />
     <ClCompile Include="src\view\azsm_multiple_processing_frame.cpp" />
-    <ClCompile Include="src\model\thread_pool.cpp" />
+    <ClCompile Include="src\view\proc_activity_indicator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -52,29 +42,17 @@
     <ClInclude Include="src\controller\azsm_multiple_processing_frame_controller.hpp" />
     <ClInclude Include="src\controller\image_rotate_scale_frame_controller.hpp" />
     <ClInclude Include="src\controller\i_controller.hpp" />
-    <ClInclude Include="src\libs\ini.h" />
-    <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen_types.hpp" />
     <ClInclude Include="src\model\azs_mp_task.hpp" />
-    <ClInclude Include="src\model\configurator\configurator.hpp" />
     <ClInclude Include="src\model\constants.hpp" />
-    <ClInclude Include="src\model\converters.hpp" />
     <ClInclude Include="src\model\adaptive_zhang_suen_method\adaptive_zhang_suen.hpp" />
-    <ClInclude Include="src\model\adaptive_zhang_suen_method\utils.hpp" />
-    <ClInclude Include="src\model\adaptive_zhang_suen_method\zhang_suen.hpp" />
-    <ClInclude Include="src\model\odd_even_checker.hpp" />
     <ClInclude Include="src\model\i18n\i18n.hpp" />
-    <ClInclude Include="src\model\processed_image.hpp" />
-    <ClInclude Include="src\model\src_files_handler.hpp" />
     <ClInclude Include="src\view\app_main_window.hpp" />
     <ClInclude Include="src\view\buffered_bitmap.hpp" />
     <ClInclude Include="src\view\azsm_control_frame.hpp" />
-    <ClInclude Include="src\view\utils\proc_activity_indicator.hpp" />
-    <ClInclude Include="src\view\utils\static_text_fonts.hpp" />
-    <ClInclude Include="src\view\utils\grid_empty_cell.hpp" />
     <ClInclude Include="src\view\ids_of_controls.hpp" />
     <ClInclude Include="src\view\image_rotate_scale_frame.hpp" />
     <ClInclude Include="src\view\azsm_multiple_processing_frame.hpp" />
-    <ClInclude Include="src\model\thread_pool.hpp" />
+    <ClInclude Include="src\view\proc_activity_indicator.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="src\icon\icon.bmp" />
@@ -82,6 +60,26 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="StraightSpiralArmsDetector.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DLL\Configurator\Configurator.vcxproj">
+      <Project>{a80209cf-05e7-413e-a164-aecdc780c91a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DLL\ModelUtils\ModelUtils.vcxproj">
+      <Project>{ae13fe10-3be1-4eb1-a416-bc82c6b528a6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DLL\ProcessedImage\ProcessedImage.vcxproj">
+      <Project>{4e5d2331-0084-431e-bc33-3ae0be2f3705}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DLL\ThreadPool\ThreadPool.vcxproj">
+      <Project>{5ec87da2-aa6e-4fcd-8564-a0ace0dc6529}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DLL\UiUtils\UiUtils.vcxproj">
+      <Project>{b2a41c27-f3ab-4dc9-9b98-be26f8daf566}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DLL\ZhangSuenMethod\ZhangSuenMethod.vcxproj">
+      <Project>{0135b656-c355-4b5d-b4c0-7802bb58e467}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -183,10 +181,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SSAD_PROCESSED_IMG_EXPORTS;_SSAD_ZHANG_SUEN_EXPORTS;_SSAD_MODEL_UTILS_EXPORTS;_SSAD_THREAD_POOL_EXPORTS;_SSAD_UI_UTILS_EXPORTS;_SSAD_CONFIGURATOR_EXPORTS;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DLL\ProcessedImage;$(SolutionDir)DLL\ZhangSuenMethod;$(SolutionDir)DLL\ModelUtils;$(SolutionDir)DLL\ThreadPool;$(SolutionDir)DLL\UiUtils;$(SolutionDir)DLL\Configurator;$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -197,6 +195,10 @@
       <DelayLoadDLLs>
       </DelayLoadDLLs>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -204,10 +206,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SSAD_PROCESSED_IMG_EXPORTS;_SSAD_ZHANG_SUEN_EXPORTS;_SSAD_MODEL_UTILS_EXPORTS;_SSAD_THREAD_POOL_EXPORTS;_SSAD_UI_UTILS_EXPORTS;_SSAD_CONFIGURATOR_EXPORTS;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DLL\ProcessedImage;$(SolutionDir)DLL\ZhangSuenMethod;$(SolutionDir)DLL\ModelUtils;$(SolutionDir)DLL\ThreadPool;$(SolutionDir)DLL\UiUtils;$(SolutionDir)DLL\Configurator;$(WXWIN)\include;$(WXWIN)\include\msvc;$(OpenCV_DIR)\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -220,6 +222,10 @@
       <DelayLoadDLLs>
       </DelayLoadDLLs>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

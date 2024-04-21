@@ -6,15 +6,15 @@
 #include <wx/wx.h>
 #endif
 #include "i_controller.hpp"
+#include "configurator.hpp"
+#include "converters.hpp"
+#include "processed_image.hpp"
 #include "../view/app_main_window.hpp"
 #include "../view/image_rotate_scale_frame.hpp"
 #include "../view/buffered_bitmap.hpp"
 #include "../view/azsm_control_frame.hpp"
 #include "../view/azsm_multiple_processing_frame.hpp"
-#include "../model/processed_image.hpp"
-#include "../model/converters.hpp"
 #include "../model/constants.hpp"
-#include "../model/configurator/configurator.hpp"
 #include "../controller/image_rotate_scale_frame_controller.hpp"
 #include "../controller/azsm_frame_controller.hpp"
 #include "../controller/azsm_multiple_processing_frame_controller.hpp"

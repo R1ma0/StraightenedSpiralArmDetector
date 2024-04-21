@@ -2,14 +2,25 @@
 
 App::App()
 {
+	standardPaths = (wxStandardPaths*)&wxStandardPaths::Get();
 	locale = new wxLocale();
-	appConfigurator = new Configurator();
+
+	appConfigurator = new Configurator(
+		"settings.ini", 
+		standardPaths->GetExecutablePath()
+	);
+	i18n = new I18N(
+		locale,
+		standardPaths->GetDataDir(),
+		this->GetAppName(),
+		appConfigurator->GetLanguageCode()
+	);
+
+	ShowLangStatusMessage();
 }
 
 App::~App()
 {
-	wxDELETE(amw);
-	wxDELETE(amwc);
 	wxDELETE(i18n);
 	wxDELETE(appConfigurator);
 }
@@ -18,8 +29,6 @@ bool App::OnInit()
 {
 	if (!wxApp::OnInit()) return false;
 
-	i18n = new I18N(locale, appConfigurator, this->GetAppName());
-	ShowLangStatusMessage();
 	amwc = new AppMainWindowController(appConfigurator);
 	amw = new AppMainWindow(_("Spiral galaxy handler"), amwc);
 
@@ -35,15 +44,15 @@ bool App::OnInit()
 
 void App::ShowLangStatusMessage()
 {
-	cts::LangStatusCode* code = new cts::LangStatusCode(
+	LangStatusCode* code = new LangStatusCode(
 		i18n->GetLangStatusCode()
 	);
 
 	switch (*code)
 	{
-	case cts::LangStatusCode::OK:
+	case LangStatusCode::OK:
 		break;
-	case cts::LangStatusCode::Unsupported:
+	case LangStatusCode::Unsupported:
 		wxMessageBox(
 			_(
 				"The selected language is unsupported.\n"
@@ -53,7 +62,7 @@ void App::ShowLangStatusMessage()
 			wxICON_INFORMATION
 		);
 		break;
-	case cts::LangStatusCode::Wrong:
+	case LangStatusCode::Wrong:
 		wxMessageBox(
 			_(
 				"Wrong language has been selected!\n"

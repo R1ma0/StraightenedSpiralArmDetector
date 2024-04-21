@@ -7,9 +7,9 @@
 #endif
 #include <opencv2/opencv.hpp>
 #include "i_controller.hpp"
-#include "../model/converters.hpp"
+#include "converters.hpp"
+#include "processed_image.hpp"
 #include "../view/buffered_bitmap.hpp"
-#include "../model/processed_image.hpp"
 
 #ifndef IRSFC
 #define IRSFC ImageRotateScaleFrameController

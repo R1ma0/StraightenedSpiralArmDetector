@@ -8,7 +8,6 @@ AZSMFC::AZSMFC(BufferedBitmap* bitmap, ProcessedImage* procImage)
 
 AZSMFC::~AZSMFC()
 {
-    wxDELETE(procImage);
     wxDELETE(computeThread);
 }
 
@@ -56,7 +55,7 @@ void AZSMFC::Compute(AdaptiveZhangSuenParameters azsmParams, wxActivityIndicator
     actInd->Hide();
     EnableDialogComponents(true);
 
-    delete azsm;
+    wxDELETE(azsm);
 }
 
 void AZSMFC::EnableDialogComponents(bool state)

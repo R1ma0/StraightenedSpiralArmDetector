@@ -2,7 +2,6 @@
 
 AdaptiveZhangSuenMethod::AdaptiveZhangSuenMethod()
 {
-    utils = new Utils();
     zhangSuen = new ZhangSuen();
     
     patternsToRemove = new PixelPatterns();
@@ -26,7 +25,6 @@ AdaptiveZhangSuenMethod::AdaptiveZhangSuenMethod()
 
 AdaptiveZhangSuenMethod::~AdaptiveZhangSuenMethod()
 {
-    delete utils;
     delete zhangSuen;
     delete patternsToRemove;
     delete patternsToAdd;
@@ -45,7 +43,7 @@ cv::Mat AdaptiveZhangSuenMethod::execute(
 		parameters.gaussBlockSize,
 		parameters.gaussConst
 	);
-	img = utils->resizeImage(img, parameters.imgCompressPercentage);
+	img = zhangSuen->resizeImage(img, parameters.imgCompressPercentage);
 	cv::threshold(
 		img, 
 		img, 
@@ -53,11 +51,11 @@ cv::Mat AdaptiveZhangSuenMethod::execute(
 		255., 
 		cv::THRESH_BINARY
 	);
-	utils->replacePixelValue(img, 255, 1);
+	zhangSuen->replacePixelValue(img, 255, 1);
 	performAnOperationWithPixels(PixelsOperation::Add, img);
 	performAnOperationWithPixels(PixelsOperation::Remove, img);
 	img = zhangSuen->execute(img, false);
-	utils->replacePixelValue(img, 1, 255);
+	zhangSuen->replacePixelValue(img, 1, 255);
 
     return img;
 }
@@ -77,7 +75,7 @@ void AdaptiveZhangSuenMethod::performAnOperationWithPixels
 		{
 			for (int c = 1; c < img.cols - 1; c++)
 			{		
-				utils->extractPixelNeighbours(img, r, c, neighbours);
+				zhangSuen->extractPixelNeighbours(img, r, c, neighbours);
 
 				switch (op)
 				{
@@ -133,15 +131,15 @@ bool AdaptiveZhangSuenMethod::isPixelMatchesPatterns
 
 	for (auto spv : patterns->simple)
 	{
-		if (utils->getSumOfVector(n) == spv) return true;
+		if (zhangSuen->getSumOfVector(n) == spv) return true;
 	}
 
 	for (long unsigned int idx = 0; idx < patterns->composite.size(); idx++)
 	{
-		statementOne = utils->getSumOfVectorExclude(
+		statementOne = zhangSuen->getSumOfVectorExclude(
 			n, patterns->composite[idx]
 		) == patterns->compositeSum[idx];
-		statementTwo = utils->getSumOfVectorInclude(
+		statementTwo = zhangSuen->getSumOfVectorInclude(
 		    n, patterns->composite[idx]
 		) == 0;
 

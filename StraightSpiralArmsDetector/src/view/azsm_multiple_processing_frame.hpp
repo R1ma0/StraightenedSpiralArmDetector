@@ -9,10 +9,10 @@
 #include <wx/spinctrl.h>
 #include <algorithm>
 #include "ids_of_controls.hpp"
-#include "utils/grid_empty_cell.hpp"
-#include "utils/static_text_fonts.hpp"
-#include "../model/odd_even_checker.hpp"
-#include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen_types.hpp"
+#include "grid_empty_cell.hpp"
+#include "static_text_fonts.hpp"
+#include "odd_even_checker.hpp"
+#include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen.hpp"
 #include "../controller/i_controller.hpp"
 #include "../controller/azsm_multiple_processing_frame_controller.hpp"
 

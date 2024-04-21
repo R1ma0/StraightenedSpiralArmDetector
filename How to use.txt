@@ -3,6 +3,7 @@
 StraightSpiralArmsDetector\
   bin\
     opencv_world490.dll
+    (Other dll from DLL folder)
     settings.ini
     StraightSpiralArmsDetector.exe
   locale\

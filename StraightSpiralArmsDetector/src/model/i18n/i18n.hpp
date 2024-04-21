@@ -5,30 +5,36 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
-#include <wx/stdpaths.h>
 #include <filesystem>
-#include "../configurator/configurator.hpp"
-#include "../constants.hpp"
+#include <map>
 
 namespace fs = std::filesystem;
+
+typedef std::map<std::string, long> LangMap;
+
+const LangMap LANGUAGES = {
+		{"ru_RU", wxLANGUAGE_RUSSIAN},
+		{"en_GB", wxLANGUAGE_ENGLISH}
+};
+const enum class LangStatusCode { OK, Unsupported, Wrong };
 
 class I18N
 {
 private:
 	wxLocale* locale;
 	wxLocale* tmpLocale;
-	Configurator* configurator;
 	wxString appName;
 	wxLanguage language;
-	cts::LangStatusCode langStatusCode = cts::LangStatusCode::OK;
+	wxString dataDir;
+	std::string langCode;
+	LangStatusCode langStatusCode = LangStatusCode::OK;
 	const wxLanguage DEFAULT_LANG = wxLANGUAGE_ENGLISH;
 	void SetLanguage();
 	void SetLanguagesPath();
 public:
-	I18N(wxLocale*, Configurator*, wxString);
-	~I18N();
+	I18N(wxLocale*, wxString, wxString, std::string);
 	wxLanguage GetLanguage() const { return language; };
-	cts::LangStatusCode GetLangStatusCode() const { return langStatusCode; };
+	LangStatusCode GetLangStatusCode() const { return langStatusCode; };
 };
 
 #endif

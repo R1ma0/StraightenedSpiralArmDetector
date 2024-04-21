@@ -10,14 +10,13 @@
 #include <thread>
 #include <mutex>
 #include "i_controller.hpp"
-#include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen_types.hpp"
+#include "thread_pool.hpp"
+#include "src_files_handler.hpp"
 #include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen.hpp"
-#include "../model/src_files_handler.hpp"
 #include "../model/constants.hpp"
-#include "../model/thread_pool.hpp"
 #include "../model/azs_mp_task.hpp"
 #include "../view/azsm_multiple_processing_frame.hpp"
-#include "../view/utils/proc_activity_indicator.hpp"
+#include "../view/proc_activity_indicator.hpp"
 
 #ifndef AZSMMPFC
 #define AZSMMPFC AZSMMultipleProcessingFrameController

@@ -5,10 +5,11 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+#include <wx/stdpaths.h>
 #include "../resource.h"
+#include "configurator.hpp"
 #include "controller/app_main_window_controller.hpp"
 #include "view/app_main_window.hpp"
-#include "model/configurator/configurator.hpp"
 #include "model/i18n/i18n.hpp"
 #include "model/constants.hpp"
 
@@ -20,6 +21,7 @@ private:
 	I18N* i18n;
 	AppMainWindow* amw;
 	AppMainWindowController* amwc;
+	wxStandardPaths* standardPaths;
 public:
 	App();
 	~App();

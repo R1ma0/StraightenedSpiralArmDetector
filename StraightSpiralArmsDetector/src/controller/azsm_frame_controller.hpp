@@ -8,12 +8,12 @@
 #include <opencv2/opencv.hpp>
 #include <thread>
 #include "i_controller.hpp"
+#include "converters.hpp"
+#include "processed_image.hpp"
+#include "../view/proc_activity_indicator.hpp"
 #include "../view/app_main_window.hpp"
 #include "../view/buffered_bitmap.hpp"
 #include "../view/azsm_control_frame.hpp"
-#include "../view/utils/proc_activity_indicator.hpp"
-#include "../model/converters.hpp"
-#include "../model/processed_image.hpp"
 #include "../model/adaptive_zhang_suen_method/adaptive_zhang_suen.hpp"
 
 #ifndef AZSMFC
