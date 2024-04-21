@@ -36,7 +36,7 @@ void AMWC::InitModalDialog(wxDialog* dialog, wxSize size)
     dialog->SetSize(dialogSize);
     dialog->Center();
     dialog->ShowModal();
-    delete dialog;
+    wxDELETE(dialog);
 }
 
 void AppMainWindowController::OpenRotateScaleFrame(BufferedBitmap* bitmap)
@@ -89,11 +89,13 @@ bool AMWC::LoadImage()
 
     if (openFileDialog->ShowModal() == wxID_CANCEL) 
     { 
-        delete openFileDialog;
+        wxDELETE(openFileDialog);
         return true; 
     }
 
-    std::string* pathToFile = new std::string(openFileDialog->GetPath().ToStdString());
+    std::string* pathToFile = new std::string(
+        openFileDialog->GetPath().ToStdString()
+    );
     bool uploadStatus = procImage->LoadSrcImage(pathToFile);
 
     if (uploadStatus == false)
@@ -101,14 +103,15 @@ bool AMWC::LoadImage()
         CastAMW->UpdateBitmap(GetBitmapImage());
     }
 
-    delete pathToFile;
-    delete openFileDialog;
+    wxDELETE(pathToFile);
+    wxDELETE(openFileDialog);
+
     return uploadStatus;
 }
 
 bool AMWC::SaveImage()
 {
-    wxFileDialog saveFileDialog(
+    wxFileDialog* saveFileDialog = new wxFileDialog(
         CastAMW,
         _("Image saving"),
         "",
@@ -117,12 +120,14 @@ bool AMWC::SaveImage()
         wxFD_SAVE | wxFD_OVERWRITE_PROMPT
     );
 
-    if (saveFileDialog.ShowModal() == wxID_CANCEL) 
+    if (saveFileDialog->ShowModal() == wxID_CANCEL) 
     { 
         return true;
     }
 
-    std::string pathToFile = saveFileDialog.GetPath().ToStdString();
+    std::string pathToFile = saveFileDialog->GetPath().ToStdString();
+
+    wxDELETE(saveFileDialog);
 
     return procImage->SaveImage(pathToFile);
 }

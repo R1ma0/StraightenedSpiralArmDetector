@@ -82,8 +82,8 @@ void AZSMMPFC::Compute(
         EnableDialogComponents(true);
     }
 
-    delete azsm;
-    delete thPool;
+    wxDELETE(azsm);
+    wxDELETE(thPool);
 }
 
 void AZSMMPFC::StopProcessing()

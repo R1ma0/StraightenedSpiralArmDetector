@@ -21,8 +21,6 @@ App::App()
 
 App::~App()
 {
-	wxDELETE(amw);
-	wxDELETE(amwc);
 	wxDELETE(i18n);
 	wxDELETE(appConfigurator);
 }
