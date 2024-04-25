@@ -40,6 +40,8 @@ bool ProcessedImage::LoadSrcImage(const std::string* path)
         cv::cvtColor(img, image, cv::COLOR_BGR2RGB); 
     }
 
+    baseImage = cv::Mat(image);
+
     return false;
 }
 
@@ -51,25 +53,30 @@ bool ProcessedImage::SaveImage(const std::string path)
     else return 0;
 }
 
-cv::Mat ProcessedImage::RotateImage(cv::Mat image, int angle)
+void ProcessedImage::RotateImage(int angle)
 {
+    cv::Mat img = cv::Mat(baseImage);
+
     cv::Point2f imageCenter(
-        (image.size().width) / 2.0, 
-        (image.size().height) / 2.0
+        (img.size().width) / 2.0, 
+        (img.size().height) / 2.0
     );
     cv::Mat matrix = cv::getRotationMatrix2D(
         imageCenter, angle, 1.0
     );
     cv::Rect2f bbox = cv::RotatedRect(
-        imageCenter, image.size(), angle
+        imageCenter, img.size(), angle
     ).boundingRect();
 
-    matrix.at<double>(0, 2) += bbox.width / 2.0 - image.cols / 2.0;
-    matrix.at<double>(1, 2) += bbox.height / 2.0 - image.rows / 2.0;
+    matrix.at<double>(0, 2) += bbox.width / 2.0 - img.cols / 2.0;
+    matrix.at<double>(1, 2) += bbox.height / 2.0 - img.rows / 2.0;
 
-    cv::warpAffine(image, image, matrix, bbox.size());
+    cv::warpAffine(img, image, matrix, bbox.size());
 
     rotationAngleDegrees = angle;
+}
 
-    return image;
+void ProcessedImage::ResizeImage(int width, int height)
+{
+    cv::resize(image, image, cv::Size(width, height), cv::INTER_LINEAR);
 }
