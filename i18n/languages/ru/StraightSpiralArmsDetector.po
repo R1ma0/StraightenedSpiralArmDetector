@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-16 15:04+0300\n"
+"POT-Creation-Date: 2024-04-22 20:25+0300\n"
 "PO-Revision-Date: 2024-03-23 14:11+0300\n"
 "Last-Translator: <EMAIL@ADDRESS>\n"
 "Language-Team: Russian\n"
@@ -32,8 +32,8 @@ msgstr " не содержит "
 msgid "Adaptive Zhang-Suen"
 msgstr "Адаптивный Зонга-Суня"
 
-#: ..\StraightSpiralArmsDetector\src\app.cpp:52
-#: ..\StraightSpiralArmsDetector\src\app.cpp:62
+#: ..\StraightSpiralArmsDetector\src\app.cpp:61
+#: ..\StraightSpiralArmsDetector\src\app.cpp:71
 msgid "Application language"
 msgstr "Язык приложения"
 
@@ -95,7 +95,7 @@ msgstr "Процент сжатия изображения:"
 msgid "Image opening error!"
 msgstr "Ошибка открытия изображения!"
 
-#: ..\StraightSpiralArmsDetector\src\controller\app_main_window_controller.cpp:113
+#: ..\StraightSpiralArmsDetector\src\controller\app_main_window_controller.cpp:116
 msgid "Image saving"
 msgstr "Сохранение изображения"
 
@@ -196,7 +196,7 @@ msgstr "Установить ширину:"
 msgid "Skeletonisation algorithms"
 msgstr "Алгоритмы скелетизации"
 
-#: ..\StraightSpiralArmsDetector\src\app.cpp:24
+#: ..\StraightSpiralArmsDetector\src\app.cpp:33
 msgid "Spiral galaxy handler"
 msgstr "Обработчик спиральных галактик"
 
@@ -216,7 +216,7 @@ msgstr "Растяжение"
 msgid "Take the source images from..."
 msgstr "Папка загрузки изображений..."
 
-#: ..\StraightSpiralArmsDetector\src\app.cpp:49
+#: ..\StraightSpiralArmsDetector\src\app.cpp:58
 msgid ""
 "The selected language is unsupported.\n"
 "The default language is set."
@@ -248,7 +248,7 @@ msgstr "Использовать адаптивный метод скелетизации Зонга-Суня"
 msgid "View"
 msgstr "Вид"
 
-#: ..\StraightSpiralArmsDetector\src\app.cpp:59
+#: ..\StraightSpiralArmsDetector\src\app.cpp:68
 msgid ""
 "Wrong language has been selected!\n"
 "The default language is set."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-16 15:04+0300\n"
+"POT-Creation-Date: 2024-04-22 20:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,8 +30,8 @@ msgstr ""
 msgid "Adaptive Zhang-Suen"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\app.cpp:52
-#: ..\StraightSpiralArmsDetector\src\app.cpp:62
+#: ..\StraightSpiralArmsDetector\src\app.cpp:61
+#: ..\StraightSpiralArmsDetector\src\app.cpp:71
 msgid "Application language"
 msgstr ""
 
@@ -93,7 +93,7 @@ msgstr ""
 msgid "Image opening error!"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\controller\app_main_window_controller.cpp:113
+#: ..\StraightSpiralArmsDetector\src\controller\app_main_window_controller.cpp:116
 msgid "Image saving"
 msgstr ""
 
@@ -194,7 +194,7 @@ msgstr ""
 msgid "Skeletonisation algorithms"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\app.cpp:24
+#: ..\StraightSpiralArmsDetector\src\app.cpp:33
 msgid "Spiral galaxy handler"
 msgstr ""
 
@@ -214,7 +214,7 @@ msgstr ""
 msgid "Take the source images from..."
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\app.cpp:49
+#: ..\StraightSpiralArmsDetector\src\app.cpp:58
 msgid ""
 "The selected language is unsupported.\n"
 "The default language is set."
@@ -244,7 +244,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\app.cpp:59
+#: ..\StraightSpiralArmsDetector\src\app.cpp:68
 msgid ""
 "Wrong language has been selected!\n"
 "The default language is set."
