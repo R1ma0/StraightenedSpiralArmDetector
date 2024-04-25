@@ -25,7 +25,7 @@ void IRSF::CreateControls()
 {
     auto gridSizer = new wxGridSizer(0, 5, wxSize(1, 1));
     auto& gridSizerFlags = wxSizerFlags().Expand().Border(
-        wxALL, 10
+        wxALL, 5
     ).CenterVertical();
 
     rotateTitle = new wxStaticText(this, -1, _("Rotation"));
