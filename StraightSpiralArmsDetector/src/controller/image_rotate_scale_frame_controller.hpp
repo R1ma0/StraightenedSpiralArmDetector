@@ -30,9 +30,10 @@ private:
     BufferedBitmap* bitmap;
 public:
     IRSFC(BufferedBitmap*, ProcessedImage*);
+    RotateScaleValues GetRotateScaleValues();
+    wxSize GetBaseImageSize();
     void SetView(wxWindow*) override;
     void SetRotateScaleValues(RotateScaleValues);
-    RotateScaleValues GetRotateScaleValues();
 };
 
 #endif
