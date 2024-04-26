@@ -48,7 +48,7 @@ void IRSF::CreateControls()
     angleSlider = new wxSlider(this, ID_ANGLE_SLIDER, 0, -1, 1);
     gridSizer->Add(angleSlider, gridSizerFlags);
 
-    angleSpinText = new wxStaticText(this, -1, _("°"));
+    angleSpinText = new wxStaticText(this, -1, "deg");
     gridSizer->Add(angleSpinText, gridSizerFlags);
 
     scaleTitle = new wxStaticText(this, -1, _("Stretch"));
@@ -72,7 +72,7 @@ void IRSF::CreateControls()
     scaleXNewSlider = new wxSlider(this, ID_NEW_X_SLIDER, 0, -1, 1);
     gridSizer->Add(scaleXNewSlider, gridSizerFlags);
 
-    gridSizer->Add(new wxStaticText(this, -1, _("px")), gridSizerFlags);
+    gridSizer->Add(new wxStaticText(this, -1, wxT("px")), gridSizerFlags);
 
     scaleYOldText = new wxStaticText(this, -1, _("Current height:"));
     gridSizer->Add(scaleYOldText, gridSizerFlags);
@@ -89,7 +89,7 @@ void IRSF::CreateControls()
     scaleYNewSlider = new wxSlider(this, ID_NEW_Y_SLIDER, 0, -1, 1);
     gridSizer->Add(scaleYNewSlider, gridSizerFlags);
 
-    gridSizer->Add(new wxStaticText(this, -1, _("px")), gridSizerFlags);
+    gridSizer->Add(new wxStaticText(this, -1, wxT("px")), gridSizerFlags);
 
     enableLivePreviewCB = new wxCheckBox(
         this, 
