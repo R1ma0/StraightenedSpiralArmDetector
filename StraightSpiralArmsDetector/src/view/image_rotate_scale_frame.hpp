@@ -40,12 +40,20 @@ private:
     wxSpinCtrl* scaleXNewSpin;
     wxSpinCtrl* scaleYNewSpin;
     wxButton* applyChangesBtn;
+    wxCheckBox* enableLivePreviewCB;
     unsigned int xScaleMult;
     unsigned int yScaleMult;
+    bool isEnabledLivePreview = false;
     void CreateControls();
     void SetValuesAndRanges();
     void BindEventHandlers();
+    void PerformProcessing();
+    void IfEnableLivePreviewPerformProcessing();
     void OnApplyRotateScale(wxCommandEvent&);
+    void OnEnableLivePreview(wxCommandEvent&);
+    void OnAngleSpinChange(wxSpinEvent&);
+    void OnNewScaleXSpinChange(wxSpinEvent&);
+    void OnNewScaleYSpinChange(wxSpinEvent&);
 public:
     IRSF(IController*);
     ~IRSF();

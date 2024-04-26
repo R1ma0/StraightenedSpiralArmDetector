@@ -43,7 +43,7 @@ void IRSF::CreateControls()
     angleSpinNewText = new wxStaticText(this, -1, _("Set value:"));
     gridSizer->Add(angleSpinNewText, gridSizerFlags);
 
-    angleSpin = new wxSpinCtrl(this);
+    angleSpin = new wxSpinCtrl(this, ID_ON_ANGLE_CHANGE);
     gridSizer->Add(angleSpin, gridSizerFlags);
 
     angleSpinText = new wxStaticText(this, -1, _("degrees"));
@@ -64,7 +64,7 @@ void IRSF::CreateControls()
     scaleXNewText = new wxStaticText(this, -1, _("Set width:"));
     gridSizer->Add(scaleXNewText, gridSizerFlags);
 
-    scaleXNewSpin = new wxSpinCtrl(this);
+    scaleXNewSpin = new wxSpinCtrl(this, ID_ON_NEW_X_SCALE_CHANGE);
     gridSizer->Add(scaleXNewSpin, gridSizerFlags);
 
     gridSizer->Add(new wxStaticText(this, -1, _("pixels")), gridSizerFlags);
@@ -78,12 +78,19 @@ void IRSF::CreateControls()
     scaleYNewText = new wxStaticText(this, -1, _("Set height:"));
     gridSizer->Add(scaleYNewText, gridSizerFlags);
 
-    scaleYNewSpin = new wxSpinCtrl(this);
+    scaleYNewSpin = new wxSpinCtrl(this, ID_ON_NEW_Y_SCALE_CHANGE);
     gridSizer->Add(scaleYNewSpin, gridSizerFlags);
 
     gridSizer->Add(new wxStaticText(this, -1, _("pixels")), gridSizerFlags);
 
-    AddEmptyCells(this, 4, *gridSizer, gridSizerFlags);
+    enableLivePreviewCB = new wxCheckBox(
+        this, 
+        ID_ENABLE_LIVE_PREVIEW, 
+        _("Live Preview")
+    );
+    gridSizer->Add(enableLivePreviewCB, gridSizerFlags);
+
+    AddEmptyCells(this, 3, *gridSizer, gridSizerFlags);
 
     applyChangesBtn = new wxButton(
         this, ID_APPLY_ROTATE_SCALE, _("Apply")
@@ -114,16 +121,68 @@ void IRSF::SetValuesAndRanges()
 void IRSF::BindEventHandlers()
 {
     Bind(wxEVT_BUTTON, &IRSF::OnApplyRotateScale, this, ID_APPLY_ROTATE_SCALE);
+    Bind(
+        wxEVT_CHECKBOX, 
+        &IRSF::OnEnableLivePreview, 
+        this, 
+        ID_ENABLE_LIVE_PREVIEW
+    );
+    Bind(wxEVT_SPINCTRL, &IRSF::OnAngleSpinChange, this, ID_ON_ANGLE_CHANGE);
+    Bind(
+        wxEVT_SPINCTRL, 
+        &IRSF::OnNewScaleXSpinChange, 
+        this, 
+        ID_ON_NEW_X_SCALE_CHANGE
+    );
+    Bind(
+        wxEVT_SPINCTRL,
+        &IRSF::OnNewScaleYSpinChange,
+        this,
+        ID_ON_NEW_Y_SCALE_CHANGE
+    );
 }
 
-void IRSF::OnApplyRotateScale(wxCommandEvent& WXUNUSED(event))
+void IRSF::PerformProcessing()
 {
     RotateScaleValues rsv{};
 
-    rsv.angle = angleSpin->GetValue(); 
-    rsv.x = scaleXNewSpin->GetValue(); 
+    rsv.angle = angleSpin->GetValue();
+    rsv.x = scaleXNewSpin->GetValue();
     rsv.y = scaleYNewSpin->GetValue();
 
     CastIRSF->SetRotateScaleValues(rsv);
     SetValuesAndRanges();
+}
+
+void IRSF::IfEnableLivePreviewPerformProcessing()
+{
+    if (isEnabledLivePreview)
+    {
+        PerformProcessing();
+    }
+}
+
+void IRSF::OnEnableLivePreview(wxCommandEvent& WXUNUSED(event))
+{
+    isEnabledLivePreview = enableLivePreviewCB->IsChecked() ? true : false;
+}
+
+void IRSF::OnApplyRotateScale(wxCommandEvent& WXUNUSED(event))
+{
+    PerformProcessing();
+}
+
+void IRSF::OnAngleSpinChange(wxSpinEvent& WXUNUSED(event))
+{
+    IfEnableLivePreviewPerformProcessing();
+}
+
+void IRSF::OnNewScaleXSpinChange(wxSpinEvent& WXUNUSED(event))
+{
+    IfEnableLivePreviewPerformProcessing();
+}
+
+void IRSF::OnNewScaleYSpinChange(wxSpinEvent& WXUNUSED(event))
+{
+    IfEnableLivePreviewPerformProcessing();
 }
