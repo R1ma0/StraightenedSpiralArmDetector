@@ -9,7 +9,6 @@
 #include "ids_of_controls.hpp"
 #include "grid_empty_cell.hpp"
 #include "static_text_fonts.hpp"
-#include "processed_image.hpp"
 #include "../controller/i_controller.hpp"
 #include "../controller/image_rotate_scale_frame_controller.hpp"
 
@@ -23,6 +22,11 @@
 class IRSF : public wxDialog
 {
 private:
+    const int ANGLE_MIN_RANGE = -180;
+    const int ANGLE_MAX_RANGE = 180;
+    const unsigned int X_SCALE_MULT = 5;
+    const unsigned int Y_SCALE_MULT = 5;
+    wxSize baseImageSize;
     IController* controller;
     wxStaticText* rotateOldValue;
     wxStaticText* scaleXOldValue;
@@ -41,19 +45,24 @@ private:
     wxSpinCtrl* scaleYNewSpin;
     wxButton* applyChangesBtn;
     wxCheckBox* enableLivePreviewCB;
-    unsigned int xScaleMult;
-    unsigned int yScaleMult;
+    wxSlider* angleSlider;
+    wxSlider* scaleXNewSlider;
+    wxSlider* scaleYNewSlider;
     bool isEnabledLivePreview = false;
     void CreateControls();
     void SetValuesAndRanges();
     void BindEventHandlers();
     void PerformProcessing();
     void IfEnableLivePreviewPerformProcessing();
+    template <typename T, typename F> void UpdateValue(T*, F*);
     void OnApplyRotateScale(wxCommandEvent&);
     void OnEnableLivePreview(wxCommandEvent&);
     void OnAngleSpinChange(wxSpinEvent&);
+    void OnAngleSliderChange(wxCommandEvent&);
     void OnNewScaleXSpinChange(wxSpinEvent&);
+    void OnNewScaleXSliderChange(wxCommandEvent&);
     void OnNewScaleYSpinChange(wxSpinEvent&);
+    void OnNewScaleYSliderChange(wxCommandEvent&);
 public:
     IRSF(IController*);
     ~IRSF();

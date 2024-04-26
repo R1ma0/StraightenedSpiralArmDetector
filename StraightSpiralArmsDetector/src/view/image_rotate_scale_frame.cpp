@@ -8,8 +8,7 @@ IRSF::IRSF(
 {
     this->controller = controller;
 
-    xScaleMult = 10;
-    yScaleMult = 10;
+    baseImageSize = CastIRSF->GetBaseImageSize();
 
     CreateControls();
     SetValuesAndRanges();
@@ -23,16 +22,16 @@ IRSF::~IRSF()
 
 void IRSF::CreateControls()
 {
-    auto gridSizer = new wxGridSizer(0, 5, wxSize(1, 1));
+    auto gridSizer = new wxGridSizer(0, 6, wxSize(1, 1));
     auto& gridSizerFlags = wxSizerFlags().Expand().Border(
-        wxALL, 5
+        wxALL, 10
     ).CenterVertical();
 
     rotateTitle = new wxStaticText(this, -1, _("Rotation"));
     SetBoldFont(rotateTitle);
     gridSizer->Add(rotateTitle, gridSizerFlags);
 
-    AddEmptyCells(this, 4, *gridSizer, gridSizerFlags);
+    AddEmptyCells(this, 5, *gridSizer, gridSizerFlags);
 
     rotateOldText = new wxStaticText(this, -1, _("Current value:"));
     gridSizer->Add(rotateOldText, gridSizerFlags);
@@ -46,14 +45,17 @@ void IRSF::CreateControls()
     angleSpin = new wxSpinCtrl(this, ID_ON_ANGLE_CHANGE);
     gridSizer->Add(angleSpin, gridSizerFlags);
 
-    angleSpinText = new wxStaticText(this, -1, _("degrees"));
+    angleSlider = new wxSlider(this, ID_ANGLE_SLIDER, 0, -1, 1);
+    gridSizer->Add(angleSlider, gridSizerFlags);
+
+    angleSpinText = new wxStaticText(this, -1, _("°"));
     gridSizer->Add(angleSpinText, gridSizerFlags);
 
     scaleTitle = new wxStaticText(this, -1, _("Stretch"));
     SetBoldFont(scaleTitle);
     gridSizer->Add(scaleTitle, gridSizerFlags);
 
-    AddEmptyCells(this, 4, *gridSizer, gridSizerFlags);
+    AddEmptyCells(this, 5, *gridSizer, gridSizerFlags);
 
     scaleXOldText = new wxStaticText(this, -1, _("Current width:"));
     gridSizer->Add(scaleXOldText, gridSizerFlags);
@@ -67,7 +69,10 @@ void IRSF::CreateControls()
     scaleXNewSpin = new wxSpinCtrl(this, ID_ON_NEW_X_SCALE_CHANGE);
     gridSizer->Add(scaleXNewSpin, gridSizerFlags);
 
-    gridSizer->Add(new wxStaticText(this, -1, _("pixels")), gridSizerFlags);
+    scaleXNewSlider = new wxSlider(this, ID_NEW_X_SLIDER, 0, -1, 1);
+    gridSizer->Add(scaleXNewSlider, gridSizerFlags);
+
+    gridSizer->Add(new wxStaticText(this, -1, _("px")), gridSizerFlags);
 
     scaleYOldText = new wxStaticText(this, -1, _("Current height:"));
     gridSizer->Add(scaleYOldText, gridSizerFlags);
@@ -81,7 +86,10 @@ void IRSF::CreateControls()
     scaleYNewSpin = new wxSpinCtrl(this, ID_ON_NEW_Y_SCALE_CHANGE);
     gridSizer->Add(scaleYNewSpin, gridSizerFlags);
 
-    gridSizer->Add(new wxStaticText(this, -1, _("pixels")), gridSizerFlags);
+    scaleYNewSlider = new wxSlider(this, ID_NEW_Y_SLIDER, 0, -1, 1);
+    gridSizer->Add(scaleYNewSlider, gridSizerFlags);
+
+    gridSizer->Add(new wxStaticText(this, -1, _("px")), gridSizerFlags);
 
     enableLivePreviewCB = new wxCheckBox(
         this, 
@@ -90,7 +98,7 @@ void IRSF::CreateControls()
     );
     gridSizer->Add(enableLivePreviewCB, gridSizerFlags);
 
-    AddEmptyCells(this, 3, *gridSizer, gridSizerFlags);
+    AddEmptyCells(this, 4, *gridSizer, gridSizerFlags);
 
     applyChangesBtn = new wxButton(
         this, ID_APPLY_ROTATE_SCALE, _("Apply")
@@ -105,16 +113,22 @@ void IRSF::SetValuesAndRanges()
 {
     RotateScaleValues rsv = CastIRSF->GetRotateScaleValues();
 
-    angleSpin->SetRange(-180, 180);
+    angleSpin->SetRange(ANGLE_MIN_RANGE, ANGLE_MAX_RANGE);
     angleSpin->SetValue(rsv.angle);
+    angleSlider->SetRange(ANGLE_MIN_RANGE, ANGLE_MAX_RANGE);
+    angleSlider->SetValue(rsv.angle);
     rotateOldValue->SetLabel(std::to_string(rsv.angle));
 
-    scaleXNewSpin->SetRange(-(int)(rsv.x * xScaleMult), rsv.x * xScaleMult);
+    scaleXNewSpin->SetRange(1, baseImageSize.GetWidth() * X_SCALE_MULT);
     scaleXNewSpin->SetValue(rsv.x);
+    scaleXNewSlider->SetRange(1, baseImageSize.GetWidth() * X_SCALE_MULT);
+    scaleXNewSlider->SetValue(rsv.x);
     scaleXOldValue->SetLabel(std::to_string(rsv.x));
 
-    scaleYNewSpin->SetRange(-(int)(rsv.y * yScaleMult), rsv.y * yScaleMult);
+    scaleYNewSpin->SetRange(1, baseImageSize.GetHeight() * Y_SCALE_MULT);
     scaleYNewSpin->SetValue(rsv.y);
+    scaleYNewSlider->SetRange(1, baseImageSize.GetHeight() * Y_SCALE_MULT);
+    scaleYNewSlider->SetValue(rsv.y);
     scaleYOldValue->SetLabel(std::to_string(rsv.y));
 }
 
@@ -140,6 +154,9 @@ void IRSF::BindEventHandlers()
         this,
         ID_ON_NEW_Y_SCALE_CHANGE
     );
+    Bind(wxEVT_SLIDER, &IRSF::OnAngleSliderChange, this, ID_ANGLE_SLIDER);
+    Bind(wxEVT_SLIDER, &IRSF::OnNewScaleXSliderChange, this, ID_NEW_X_SLIDER);
+    Bind(wxEVT_SLIDER, &IRSF::OnNewScaleYSliderChange, this, ID_NEW_Y_SLIDER);
 }
 
 void IRSF::PerformProcessing()
@@ -174,15 +191,42 @@ void IRSF::OnApplyRotateScale(wxCommandEvent& WXUNUSED(event))
 
 void IRSF::OnAngleSpinChange(wxSpinEvent& WXUNUSED(event))
 {
+    UpdateValue(angleSpin, angleSlider);
+    IfEnableLivePreviewPerformProcessing();
+}
+
+void IRSF::OnAngleSliderChange(wxCommandEvent& WXUNUSED(event))
+{
+    UpdateValue(angleSlider, angleSpin);
     IfEnableLivePreviewPerformProcessing();
 }
 
 void IRSF::OnNewScaleXSpinChange(wxSpinEvent& WXUNUSED(event))
 {
+    UpdateValue(scaleXNewSpin, scaleXNewSlider);
+    IfEnableLivePreviewPerformProcessing();
+}
+
+void IRSF::OnNewScaleXSliderChange(wxCommandEvent& WXUNUSED(event))
+{
+    UpdateValue(scaleXNewSlider, scaleXNewSpin);
     IfEnableLivePreviewPerformProcessing();
 }
 
 void IRSF::OnNewScaleYSpinChange(wxSpinEvent& WXUNUSED(event))
 {
+    UpdateValue(scaleYNewSpin, scaleYNewSlider);
     IfEnableLivePreviewPerformProcessing();
+}
+
+void IRSF::OnNewScaleYSliderChange(wxCommandEvent& WXUNUSED(event))
+{
+    UpdateValue(scaleYNewSlider, scaleYNewSpin);
+    IfEnableLivePreviewPerformProcessing();
+}
+
+template <typename T, typename F>
+void IRSF::UpdateValue(T* from, F* to)
+{
+    to->SetValue(from->GetValue());
 }
