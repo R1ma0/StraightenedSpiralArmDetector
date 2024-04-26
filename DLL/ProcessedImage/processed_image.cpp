@@ -11,6 +11,11 @@ cv::Size ProcessedImage::GetImageSize()
     return image.size();
 }
 
+wxSize ProcessedImage::GetImageSizeWx()
+{
+    return wxSize(image.size().width, image.size().height);
+}
+
 int ProcessedImage::GetRotationAngleDegrees() const
 {
     return rotationAngleDegrees;

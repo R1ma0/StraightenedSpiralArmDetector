@@ -20,6 +20,7 @@ private:
 public:
     cv::Mat GetProcessedImage();
     cv::Size GetImageSize();
+    wxSize GetImageSizeWx();
     int GetRotationAngleDegrees() const;
     bool LoadSrcImage(const std::string*);
     bool SaveImage(const std::string);
