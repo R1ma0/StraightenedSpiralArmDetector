@@ -38,24 +38,23 @@ void AZSMFC::RunDetectorator()
 void AZSMFC::Compute(AdaptiveZhangSuenParameters azsmParams, wxActivityIndicator* actInd)
 {   
     AdaptiveZhangSuenMethod* azsm = new AdaptiveZhangSuenMethod();
-    cv::Mat img = procImage->GetProcessedImage();
-    cv::Mat dst;
-    cv::cvtColor(img, dst, cv::COLOR_RGB2GRAY);
+    cv::Mat* img = new cv::Mat(procImage->GetProcessedImage());
+    cv::cvtColor(*img, *img, cv::COLOR_RGB2GRAY);
 
-    img = azsm->execute(dst, azsmParams);
+    *img = azsm->execute(*img, azsmParams);
 
     // If the dialog has been closed up to this point, the program will close
     // TO DO: fix that!
 
-    procImage->SetProcessedImage(img);
-    cv::cvtColor(img, dst, cv::COLOR_GRAY2RGB);
-    bitmap->SetBitmap(wxBitmap(MatToWxImage(&dst)));
+    cv::cvtColor(*img, *img, cv::COLOR_GRAY2RGB);
+    bitmap->SetBitmap(wxBitmap(MatToWxImage(img)));
 
     actInd->Stop();
     actInd->Hide();
     EnableDialogComponents(true);
 
     wxDELETE(azsm);
+    wxDELETE(img);
 }
 
 void AZSMFC::EnableDialogComponents(bool state)

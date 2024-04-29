@@ -33,11 +33,15 @@ private:
     wxStaticText* imgCompressPercentageLabel;
     wxStaticText* gaussBlockSizeLabel;
     wxButton* computeBtn;
+    wxCheckBox* enableLivePreviewCB;
     int gbsOldValue;
+    bool isEnableLivePreview = false;
     void CreateControls();
     void BindEventHandlers();
     void OnRunDetectorator(wxCommandEvent&);
     void OnSetGaussBlockSize(wxCommandEvent&);
+    void OnEnableLivePreview(wxCommandEvent&);
+    void OnSpinValuesChange(wxSpinEvent&);
 public:
     AZSMCF(IController*);
     ~AZSMCF();
