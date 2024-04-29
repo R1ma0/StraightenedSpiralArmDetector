@@ -18,6 +18,8 @@ private:
     cv::Mat baseImage;
     int rotationAngleDegrees = 0;
 public:
+    ProcessedImage();
+    ProcessedImage(ProcessedImage*);
     cv::Mat GetProcessedImage();
     cv::Size GetImageSize();
     wxSize GetImageSizeWx();
