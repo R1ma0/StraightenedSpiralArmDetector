@@ -1,6 +1,13 @@
 #include "pch.h"
 #include "processed_image.hpp"
 
+ProcessedImage::ProcessedImage() {}
+
+ProcessedImage::ProcessedImage(ProcessedImage* img)
+{
+    image = cv::Mat(img->GetProcessedImage());
+}
+
 cv::Mat ProcessedImage::GetProcessedImage()
 {
     return image;
@@ -9,6 +16,11 @@ cv::Mat ProcessedImage::GetProcessedImage()
 cv::Size ProcessedImage::GetImageSize()
 {
     return image.size();
+}
+
+wxSize ProcessedImage::GetImageSizeWx()
+{
+    return wxSize(image.size().width, image.size().height);
 }
 
 int ProcessedImage::GetRotationAngleDegrees() const

@@ -29,7 +29,7 @@ void AZSMCF::CreateControls()
     );
     gridSizer->Add(binaryThreshValueLabel, gridSizerFlags);
 
-    binaryThreshValueSpin = new wxSpinCtrl(this);
+    binaryThreshValueSpin = new wxSpinCtrl(this, ID_AZSM_BTV_SPIN);
     binaryThreshValueSpin->SetRange(0, 255);
     binaryThreshValueSpin->SetValue(125);
     gridSizer->Add(binaryThreshValueSpin, gridSizerFlags);
@@ -39,7 +39,7 @@ void AZSMCF::CreateControls()
     );
     gridSizer->Add(gaussConstLabel, gridSizerFlags);
 
-    gaussConstSpin = new wxSpinCtrl(this);
+    gaussConstSpin = new wxSpinCtrl(this, ID_AZSM_GC_SPIN);
     gaussConstSpin->SetRange(-20, 20);
     gaussConstSpin->SetValue(0);
     gridSizer->Add(gaussConstSpin, gridSizerFlags);
@@ -49,7 +49,7 @@ void AZSMCF::CreateControls()
     );
     gridSizer->Add(imgCompressPercentageLabel, gridSizerFlags);
 
-    imgCompressPercentageSpin = new wxSpinCtrl(this);
+    imgCompressPercentageSpin = new wxSpinCtrl(this, ID_AZSM_ICP_SPIN);
     imgCompressPercentageSpin->SetRange(1, 99);
     imgCompressPercentageSpin->SetValue(20);
     gridSizer->Add(imgCompressPercentageSpin, gridSizerFlags);
@@ -64,7 +64,12 @@ void AZSMCF::CreateControls()
     gaussBlockSizeSpin->SetValue(3);
     gridSizer->Add(gaussBlockSizeSpin, gridSizerFlags);
 
-    gridSizer->Add(new wxStaticText(this, -1, wxT("")), gridSizerFlags);
+    enableLivePreviewCB = new wxCheckBox(
+        this, 
+        ID_ENABLE_LIVE_PREVIEW, 
+        _("Live Preview")
+    );
+    gridSizer->Add(enableLivePreviewCB, gridSizerFlags);
 
     computeBtn = new wxButton(
         this, ID_RUN_DETECTORATOR, _("Process")
@@ -79,6 +84,15 @@ void AZSMCF::BindEventHandlers()
 {
     Bind(wxEVT_BUTTON, &AZSMCF::OnRunDetectorator, this, ID_RUN_DETECTORATOR);
     Bind(wxEVT_SPINCTRL, &AZSMCF::OnSetGaussBlockSize, this, ID_AZSM_GBS_SPIN);
+    Bind(wxEVT_SPINCTRL, &AZSMCF::OnSpinValuesChange, this, ID_AZSM_BTV_SPIN);
+    Bind(wxEVT_SPINCTRL, &AZSMCF::OnSpinValuesChange, this, ID_AZSM_ICP_SPIN);
+    Bind(wxEVT_SPINCTRL, &AZSMCF::OnSpinValuesChange, this, ID_AZSM_GC_SPIN);
+    Bind(
+        wxEVT_CHECKBOX,
+        &AZSMCF::OnEnableLivePreview,
+        this,
+        ID_ENABLE_LIVE_PREVIEW
+    );
 }
 
 void AZSMCF::OnSetGaussBlockSize(wxCommandEvent& WXUNUSED(event))
@@ -86,6 +100,11 @@ void AZSMCF::OnSetGaussBlockSize(wxCommandEvent& WXUNUSED(event))
     gaussBlockSizeSpin->SetValue(
         CheckOddValue(gaussBlockSizeSpin->GetValue(), &gbsOldValue)
     );
+
+    if (isEnableLivePreview)
+    {
+        CastAZSMFC->RunDetectorator();
+    }
 }
 
 void AZSMCF::OnRunDetectorator(wxCommandEvent& WXUNUSED(event))
@@ -104,4 +123,18 @@ void AZSMCF::SetEnableComponents(bool state)
     gaussConstLabel->Enable(state);
     imgCompressPercentageLabel->Enable(state);
     gaussBlockSizeLabel->Enable(state);
+    enableLivePreviewCB->Enable(state);
+}
+
+void AZSMCF::OnEnableLivePreview(wxCommandEvent& WXUNUSED(event))
+{
+    isEnableLivePreview = enableLivePreviewCB->IsChecked() ? true : false;
+}
+
+void AZSMCF::OnSpinValuesChange(wxSpinEvent& WXUNUSED(event))
+{
+    if (isEnableLivePreview)
+    {
+        CastAZSMFC->RunDetectorator();
+    }
 }

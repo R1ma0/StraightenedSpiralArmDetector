@@ -39,3 +39,8 @@ RotateScaleValues IRSFC::GetRotateScaleValues()
 
     return rsv;
 }
+
+wxSize IRSFC::GetBaseImageSize()
+{
+    return procImage->GetImageSizeWx();
+}
