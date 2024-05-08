@@ -70,6 +70,7 @@ void AZSMCF::CreateControls()
         _("Live Preview")
     );
     gridSizer->Add(enableLivePreviewCB, gridSizerFlags);
+    enableLivePreviewCB->Hide();
 
     computeBtn = new wxButton(
         this, ID_RUN_DETECTORATOR, _("Process")

@@ -13,6 +13,11 @@ cv::Mat ProcessedImage::GetProcessedImage()
     return image;
 }
 
+cv::Mat ProcessedImage::GetBaseImage()
+{
+    return baseImage;
+}
+
 cv::Size ProcessedImage::GetImageSize()
 {
     return image.size();

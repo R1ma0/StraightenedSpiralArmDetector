@@ -38,10 +38,11 @@ void AZSMFC::RunDetectorator()
 void AZSMFC::Compute(AdaptiveZhangSuenParameters azsmParams, wxActivityIndicator* actInd)
 {   
     AdaptiveZhangSuenMethod* azsm = new AdaptiveZhangSuenMethod();
-    cv::Mat* img = new cv::Mat(procImage->GetProcessedImage());
+    cv::Mat* img = new cv::Mat(procImage->GetBaseImage());
     cv::cvtColor(*img, *img, cv::COLOR_RGB2GRAY);
 
     *img = azsm->execute(*img, azsmParams);
+    procImage->SetProcessedImage(*img);
 
     // If the dialog has been closed up to this point, the program will close
     // TO DO: fix that!

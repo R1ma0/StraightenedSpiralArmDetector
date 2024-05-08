@@ -21,6 +21,7 @@ public:
     ProcessedImage();
     ProcessedImage(ProcessedImage*);
     cv::Mat GetProcessedImage();
+    cv::Mat GetBaseImage();
     cv::Size GetImageSize();
     wxSize GetImageSizeWx();
     int GetRotationAngleDegrees() const;
