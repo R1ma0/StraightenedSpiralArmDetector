@@ -16,12 +16,14 @@ class SSAD_PROCESSED_IMG_API ProcessedImage
 private:
     cv::Mat image;
     cv::Mat baseImage;
+    cv::Mat rotatedImg;
     int rotationAngleDegrees = 0;
 public:
     ProcessedImage();
     ProcessedImage(ProcessedImage*);
     cv::Mat GetProcessedImage();
     cv::Mat GetBaseImage();
+    cv::Mat GetRotatedImage();
     cv::Size GetImageSize();
     wxSize GetImageSizeWx();
     int GetRotationAngleDegrees() const;

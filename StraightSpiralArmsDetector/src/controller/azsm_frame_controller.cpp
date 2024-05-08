@@ -38,7 +38,7 @@ void AZSMFC::RunDetectorator()
 void AZSMFC::Compute(AdaptiveZhangSuenParameters azsmParams, wxActivityIndicator* actInd)
 {   
     AdaptiveZhangSuenMethod* azsm = new AdaptiveZhangSuenMethod();
-    cv::Mat* img = new cv::Mat(procImage->GetBaseImage());
+    cv::Mat* img = new cv::Mat(procImage->GetRotatedImage());
     cv::cvtColor(*img, *img, cv::COLOR_RGB2GRAY);
 
     *img = azsm->execute(*img, azsmParams);

@@ -25,7 +25,7 @@ void IRSFC::SetRotateScaleValues(RotateScaleValues rsv)
         procImage->RotateImage(rsv.angle);
     }
 
-    cv::Mat image = procImage->GetProcessedImage();
+    cv::Mat image = procImage->GetRotatedImage();
     bitmap->SetBitmap(wxBitmap(MatToWxImage(&image)));
 }
 
