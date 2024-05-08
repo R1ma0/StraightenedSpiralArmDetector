@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-22 20:25+0300\n"
+"POT-Creation-Date: 2024-05-08 23:15+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,7 +35,7 @@ msgstr ""
 msgid "Application language"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:89
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:104
 msgid "Apply"
 msgstr ""
 
@@ -43,15 +43,15 @@ msgstr ""
 msgid "Binary threshold:"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:72
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:77
 msgid "Current height:"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:37
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:36
 msgid "Current value:"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:58
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:60
 msgid "Current width:"
 msgstr ""
 
@@ -109,6 +109,11 @@ msgstr ""
 msgid "Increase the size of the image in the preview window"
 msgstr ""
 
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:97
+#: ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp:70
+msgid "Live Preview"
+msgstr ""
+
 #: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:95
 msgid "Max"
 msgstr ""
@@ -137,7 +142,7 @@ msgstr ""
 msgid "Preparation..."
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp:70
+#: ..\StraightSpiralArmsDetector\src\view\azsm_control_frame.cpp:76
 #: ..\StraightSpiralArmsDetector\src\view\azsm_multiple_processing_frame.cpp:218
 msgid "Process"
 msgstr ""
@@ -154,7 +159,7 @@ msgstr ""
 msgid "Reduce the image size in the preview window"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:31
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:30
 msgid "Rotation"
 msgstr ""
 
@@ -178,15 +183,15 @@ msgstr ""
 msgid "Save the processed images to..."
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:78
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:83
 msgid "Set height:"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:43
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:42
 msgid "Set value:"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:64
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:66
 msgid "Set width:"
 msgstr ""
 
@@ -206,7 +211,7 @@ msgstr ""
 msgid "Stop"
 msgstr ""
 
-#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:52
+#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:54
 msgid "Stretch"
 msgstr ""
 
@@ -260,13 +265,4 @@ msgstr ""
 
 #: ..\StraightSpiralArmsDetector\src\view\app_main_window.cpp:53
 msgid "Zoom out\tCtrl--"
-msgstr ""
-
-#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:49
-msgid "degrees"
-msgstr ""
-
-#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:70
-#: ..\StraightSpiralArmsDetector\src\view\image_rotate_scale_frame.cpp:84
-msgid "pixels"
 msgstr ""
