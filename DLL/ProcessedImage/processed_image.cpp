@@ -13,14 +13,24 @@ cv::Mat ProcessedImage::GetProcessedImage()
     return image;
 }
 
+cv::Mat ProcessedImage::GetBaseImage()
+{
+    return baseImage;
+}
+
+cv::Mat ProcessedImage::GetRotatedImage()
+{
+    return rotatedImg;
+}
+
 cv::Size ProcessedImage::GetImageSize()
 {
-    return image.size();
+    return rotatedImg.size();
 }
 
 wxSize ProcessedImage::GetImageSizeWx()
 {
-    return wxSize(image.size().width, image.size().height);
+    return wxSize(rotatedImg.size().width, rotatedImg.size().height);
 }
 
 int ProcessedImage::GetRotationAngleDegrees() const
@@ -53,6 +63,7 @@ bool ProcessedImage::LoadSrcImage(const std::string* path)
     }
 
     baseImage = cv::Mat(image);
+    rotatedImg = cv::Mat(image);
 
     return false;
 }
@@ -83,12 +94,12 @@ void ProcessedImage::RotateImage(int angle)
     matrix.at<double>(0, 2) += bbox.width / 2.0 - img.cols / 2.0;
     matrix.at<double>(1, 2) += bbox.height / 2.0 - img.rows / 2.0;
 
-    cv::warpAffine(img, image, matrix, bbox.size());
+    cv::warpAffine(img, rotatedImg, matrix, bbox.size());
 
     rotationAngleDegrees = angle;
 }
 
 void ProcessedImage::ResizeImage(int width, int height)
 {
-    cv::resize(image, image, cv::Size(width, height), cv::INTER_LINEAR);
+    cv::resize(rotatedImg, rotatedImg, cv::Size(width, height), cv::INTER_LINEAR);
 }

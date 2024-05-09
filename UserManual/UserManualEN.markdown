@@ -6,8 +6,8 @@ The software is designed to simplify the processing of spiral galaxy patterns to
 
 The software is primarily intended for use by the scientific community in conducting research on the detection of vertex spiral galaxies.
 
-    Manual version v1.0.0
-    Programme version v1.1.0
+    Manual version v1.1.0
+    Programme version v2.4.0
 
 # Table of Contents
 
@@ -21,7 +21,9 @@ The software is primarily intended for use by the scientific community in conduc
   - [Processing menu.](#menu_proc)
   - [Preview window.](#preview_img)
 - [Skeletonisation Algorithms.](#skeleton_algos)
-  - [Adaptive Zonga-Suen](#adapt_zhang_suen)
+  - [Adaptive Zhang-Suen](#adapt_zhang_suen)
+- [Multiple processing algorithms](#mult_algos)
+  - [Adaptive Zhang-Suen](#mult_zhang_suen)
 - [Plain view.](#to_plain_view)
 - [Glossary.](#glossary)
 - [Supplementary materials.](#additions)
@@ -31,13 +33,14 @@ The software is primarily intended for use by the scientific community in conduc
 - Saving images in PNG, JPG, JPEG formats.
 - Bringing an image to a floating view (rotate and stretch).
 - Selection of rows by *Adaptive method of skeletonisation Zong-Sun*.
+Multiple image processing by *Adaptive Zong-Sun skeletonisation method*.
 - Interface language: Russian, English.
 
 # <a name="system_req">System Requirements</a>
 
 Minimum configuration requirements *[PC](#glossary_3)*.
 - Operating system: Windows 10.
-- Free space on the hard disc: 500 MB.
+- Free space on the hard disc: 250 MB.
 - RAM capacity: 1 GB.
 - Processor frequency: 2.3 GHz.
 - Number of processor cores: 2.
@@ -87,7 +90,7 @@ The following actions are available in the *[Launcher](#glossary_4)* window.
 
 - **Rotate and Stretch** - brings the image to *[flat view](#glossary_6)*. Available after the image has been loaded.
 - **Skeletonisation Algorithms** - ready-made sets of algorithms for processing an image by *[skeletonisation](#glossary_7)*.
-- **Multiple Image Processing** - expected to be implemented in the future.
+- **Multiple Image Processing** - ready sets of algorithms for multiple image processing by different methods..
 
 ## <a name="preview_img">Preview window</a>
 
@@ -118,6 +121,34 @@ The settings window of the Zong-Sun method consists of the following items.
 - **Gauss block size value (odd)** - used to specify the number of neighbouring pixels for threshold calculation.
 - **Process** - starts image processing with specified parameters.
 
+# <a name="mult_algos">Multiple processing algorithms</a>
+
+## <a name="mult_zhang_suen">Adaptive Zhang-Suen</a>
+
+The multiple image processing window of the Zonga-Sun meotod consists of the following elements.
+
+![ZhangSuenMultProc](imgEN/8_mult_proc.PNG "Multiple processing window using the Zong-Sun method")
+
+- **Take the source images from** - path to the folder from which images will be uploaded for processing.
+- **Save the processed images to** - path to the folder where images will be saved for processing.
+- **Parameter** - column containing names of processing parameters.
+- **Min** - column containing minimum values of parameters.
+- **Max** - column in which the maximum values of parameters are specified.
+- **Step** - column, in which the step of increment of processing parameter value is indicated.
+- **Binary threshold** - *see. [Adaptive Zhang-Suen](#adapt_zhang_suen)*.
+- **Gaussian constant** - *see. [Adaptive Zhang-Suen](#adapt_zhang_suen)*.
+- **Image compress percentage** - *see. [Adaptive Zhang-Suen](#adapt_zhang_suen)*.
+- **Gauss block size** - *see. [Adaptive Zhang-Suen](#adapt_zhang_suen)*.
+- **Process** - starts the multiple processing process with the specified parameters.
+
+After the processing starts, the following items will be displayed and the remaining items will become inaccessible.
+
+![ZhangSuenMultProcExec](imgEN/9_mult_proc_exec.PNG "Process of processing multiple images")
+
+- **Progress bar** - visual display of the number of processed images.
+- **Counter** - numerical display of the number of processed images.
+- **Stop** - button to stop processing.
+
 # <a name="to_plain_view">Bringing it to the "flat" view</a>
 
 The ToPlainView window consists of the following items.
@@ -130,6 +161,7 @@ The ToPlainView window consists of the following items.
 - **Set Width** - enter a new image width.
 - **Current Height** - displays the current height of the image.
 - **Set Height** - enter the new height of the image.
+- **Live Preview** - processing mode when all changes are immediately displayed on the screen without the need to press the *Apply* button.
 - **Apply** - applies the entered values to the loaded image.
 
 # <a name="glossary">Glossary</a>
