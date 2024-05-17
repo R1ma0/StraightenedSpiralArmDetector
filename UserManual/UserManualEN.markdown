@@ -1,12 +1,12 @@
 # User's Manual
 
-This manual provides general information and operating instructions for software for processing astronomical images of galaxies with complex spiral structure - ***"Straight spiral arm detector" (SSAD)***.
+This manual provides general information and operating instructions for software for processing astronomical images of galaxies with complex spiral structure - ***"Straightened spiral arm detector" (SSAD)***.
 
 The software is designed to simplify the processing of spiral galaxy patterns to extract straight arm segments (*[rows](#glossary_2)*), partially or fully automating the operations associated with the process.
 
 The software is primarily intended for use by the scientific community in conducting research on the detection of vertex spiral galaxies.
 
-    Manual version v1.1.0
+    Manual version v1.2.0
     Programme version v2.4.0
 
 # Table of Contents
@@ -19,7 +19,6 @@ The software is primarily intended for use by the scientific community in conduc
   - [File menu.](#menu_file)
   - [View menu.](#menu_view)
   - [Processing menu.](#menu_proc)
-  - [Preview window.](#preview_img)
 - [Skeletonisation Algorithms.](#skeleton_algos)
   - [Adaptive Zhang-Suen](#adapt_zhang_suen)
 - [Multiple processing algorithms](#mult_algos)
@@ -27,6 +26,8 @@ The software is primarily intended for use by the scientific community in conduc
 - [Plain view.](#to_plain_view)
 - [Glossary.](#glossary)
 - [Supplementary materials.](#additions)
+
+<div style="page-break-after: always;"></div>
 
 # <a name="prog_func">Programme functions</a>
 - Loading images in formats: PNG, JPG, JPEG.
@@ -44,6 +45,8 @@ Minimum configuration requirements *[PC](#glossary_3)*.
 - RAM capacity: 1 GB.
 - Processor frequency: 2.3 GHz.
 - Number of processor cores: 2.
+
+<div style="page-break-after: always;"></div>
 
 # <a name="installation">Installation of the programme</a>
 
@@ -66,6 +69,8 @@ The following actions are available in the *[Launcher](#glossary_4)* window.
 - **Reset** - resets the set parameters to default values (you must save to apply).
 - **Manual** - opens this manual in a browser window.
 - **Start** - starts the main programme.
+
+<div style="page-break-after: always;"></div>
 
 # <a name="main_win">Main window of the programme</a>
 
@@ -92,9 +97,7 @@ The following actions are available in the *[Launcher](#glossary_4)* window.
 - **Skeletonisation Algorithms** - ready-made sets of algorithms for processing an image by *[skeletonisation](#glossary_7)*.
 - **Multiple Image Processing** - ready sets of algorithms for multiple image processing by different methods..
 
-## <a name="preview_img">Preview window</a>
-
-![PreviewImg](imgEN/5_preview_img.PNG "Preview window")
+<div style="page-break-after: always;"></div>
 
 # <a name="skeleton_algos">Skeletonisation algorithms</a>
 
@@ -121,13 +124,15 @@ The settings window of the Zong-Sun method consists of the following items.
 - **Gauss block size value (odd)** - used to specify the number of neighbouring pixels for threshold calculation.
 - **Process** - starts image processing with specified parameters.
 
+<div style="page-break-after: always;"></div>
+
 # <a name="mult_algos">Multiple processing algorithms</a>
 
 ## <a name="mult_zhang_suen">Adaptive Zhang-Suen</a>
 
 The multiple image processing window of the Zonga-Sun meotod consists of the following elements.
 
-![ZhangSuenMultProc](imgEN/8_mult_proc.PNG "Multiple processing window using the Zong-Sun method")
+<img src="imgRU/8_mult_proc.PNG" alt="ZhangSuenMultProc" width="80%"/>
 
 - **Take the source images from** - path to the folder from which images will be uploaded for processing.
 - **Save the processed images to** - path to the folder where images will be saved for processing.
@@ -143,11 +148,13 @@ The multiple image processing window of the Zonga-Sun meotod consists of the fol
 
 After the processing starts, the following items will be displayed and the remaining items will become inaccessible.
 
-![ZhangSuenMultProcExec](imgEN/9_mult_proc_exec.PNG "Process of processing multiple images")
+<img src="imgRU/9_mult_proc_exec.PNG" alt="ZhangSuenMultProcExec" width="80%"/>
 
 - **Progress bar** - visual display of the number of processed images.
 - **Counter** - numerical display of the number of processed images.
 - **Stop** - button to stop processing.
+
+<div style="page-break-after: always;"></div>
 
 # <a name="to_plain_view">Bringing it to the "flat" view</a>
 
@@ -163,6 +170,8 @@ The ToPlainView window consists of the following items.
 - **Set Height** - enter the new height of the image.
 - **Live Preview** - processing mode when all changes are immediately displayed on the screen without the need to press the *Apply* button.
 - **Apply** - applies the entered values to the loaded image.
+
+<div style="page-break-after: always;"></div>
 
 # <a name="glossary">Glossary</a>
 
@@ -183,6 +192,8 @@ The ToPlainView window consists of the following items.
 
 > ### <a name="glossary_7">*Skeletonisation*</a>
 > It makes it possible to represent a binary image as a set of thin lines whose mutual location, size and shape adequately describe the size, shape and orientation in space of the corresponding image regions.
+
+<div style="page-break-after: always;"></div>
 
 # <a name="additions">Supplementary materials</a>
 
