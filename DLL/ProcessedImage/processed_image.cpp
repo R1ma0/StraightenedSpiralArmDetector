@@ -41,6 +41,27 @@ int ProcessedImage::GetRotationAngleDegrees() const
 void ProcessedImage::SetProcessedImage(cv::Mat img)
 {
     image = img;
+    isImageChanged = true;
+}
+
+void ProcessedImage::SetImageRotated()
+{
+    isImageRotated = true;
+}
+
+void ProcessedImage::SetImageChanged()
+{
+    isImageChanged = true;
+}
+
+bool ProcessedImage::IsImageChanged() const
+{
+    return isImageChanged;
+}
+
+bool ProcessedImage::IsImageRotated() const
+{
+    return isImageRotated;
 }
 
 bool ProcessedImage::LoadSrcImage(const std::string* path)
@@ -65,14 +86,32 @@ bool ProcessedImage::LoadSrcImage(const std::string* path)
     baseImage = cv::Mat(image);
     rotatedImg = cv::Mat(image);
 
+    isImageChanged = false;
+    isImageRotated = false;
+
     return false;
 }
 
 bool ProcessedImage::SaveImage(const std::string path)
 {
-    cv::cvtColor(image, image, cv::COLOR_RGB2BGR); 
+    cv::Mat img;
 
-    if (cv::imwrite(path, image)) return 1;
+    if (isImageChanged)
+    {
+        img = image;
+    }
+    else if (!isImageChanged && isImageRotated)
+    {
+        img = rotatedImg;
+    }
+    else
+    {
+        img = baseImage;
+    }
+
+    cv::cvtColor(img, img, cv::COLOR_RGB2BGR); 
+
+    if (cv::imwrite(path, img)) return 1;
     else return 0;
 }
 
@@ -97,9 +136,11 @@ void ProcessedImage::RotateImage(int angle)
     cv::warpAffine(img, rotatedImg, matrix, bbox.size());
 
     rotationAngleDegrees = angle;
+    isImageRotated = true;
 }
 
 void ProcessedImage::ResizeImage(int width, int height)
 {
     cv::resize(rotatedImg, rotatedImg, cv::Size(width, height), cv::INTER_LINEAR);
+    isImageRotated = true;
 }
