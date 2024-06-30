@@ -464,3 +464,5 @@ FodyWeavers.xsd
 *.exe
 *.out
 *.app
+
+!/Screenshots/*
